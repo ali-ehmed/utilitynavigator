@@ -84,10 +84,12 @@ Rails.application.configure do
   config.action_mailer.smtp_settings = {
     address: "smtp.gmail.com",
     port: 587,
-    domain: UtilityNavigator::Application.secrets.domain_name,
+    domain: "designhenge.com",
     authentication: "plain",
     enable_starttls_auto: true,
-    user_name: UtilityNavigator::Application.secrets.user_name,
-    password: UtilityNavigator::Application.secrets.password
+    user_name: "ali.ahmed.cs2016@gmail.com",
+    password: "Gumball2016"
   }
+
+  # config.action_mailer.default_url_options = { host: 'utility-navigator.herokuapp.com', port: 3000 }
 end
