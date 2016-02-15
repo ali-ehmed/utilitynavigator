@@ -80,7 +80,7 @@ Rails.application.configure do
   config.action_mailer.smtp_settings = {
     :address   => "smtp.mandrillapp.com",
     :port      => 25,
-    :user_name => UtilityNavigator::Application.secrets.mandrill_username,
-    :password  => UtilityNavigator::Application.secrets.mandrill_key
+    :user_name => "ali.ahmed.cs2016@gmail.com",
+    :password  => "aliahmed123"
   }
 end
