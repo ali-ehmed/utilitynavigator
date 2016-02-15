@@ -47,32 +47,30 @@
           </div>
           <div class="panel-body">
             <h4>ENTER YOUR ADDRESS</h4>
-            <div class="search-inputs">
-              <ul class="list-inline">
-                <li class="col-md-3 col-xs-12">
-                  <div class="form-group">
-                    <%= text_field_tag :address, params[:address], class: "col-md-3 form-control", placeholder: "Street Address*" %>
-                  </div>
-                </li>
-                <li class="col-md-3 col-xs-12">
-                  <div class="form-group">
-                    <%= text_field_tag :apt, params[:apt], class: "col-md-3 form-control", placeholder: "Apt#" %>
-                  </div>
-                </li>
-                <li class="col-md-3 col-xs-12">
-                  <div class="form-group">
-                    <%= text_field_tag :zip, params[:zip], class: "col-md-3 form-control", placeholder: "Zip Code*" %>
-                  </div>
-                </li>
-                <li class="col-md-3 col-xs-12">
-                  <div class="form-group">
-                    <%= text_field_tag :state, params[:state], class: "col-md-3 form-control", placeholder: "State*" %>
-                  </div>
-                </li>
-              </ul>
-            </div>
+            <ul class="list-inline">
+              <li class="col-md-3 col-xs-12">
+                <div class="form-group">
+                  <%= text_field_tag :address, params[:address], class: "col-md-3 form-control", placeholder: "Street Address*" %>
+                </div>
+              </li>
+              <li class="col-md-3 col-xs-12">
+                <div class="form-group">
+                  <%= text_field_tag :apt, params[:apt], class: "col-md-3 form-control", placeholder: "Apt#" %>
+                </div>
+              </li>
+              <li class="col-md-3 col-xs-12">
+                <div class="form-group">
+                  <%= text_field_tag :zip, params[:zip], class: "col-md-3 form-control", placeholder: "Zip Code*" %>
+                </div>
+              </li>
+              <li class="col-md-3 col-xs-12">
+                <div class="form-group">
+                  <%= text_field_tag :state, params[:state], class: "col-md-3 form-control", placeholder: "State*" %>
+                </div>
+              </li>
+            </ul>
 
-            <a href="#" class="btn btn-default">FIND DEALS &amp; OFFERS</a>
+            <a href="#" class="btn btn-default search-btn">FIND DEALS &amp; OFFERS</a>
           </div>
         </div>
       <% end %>
