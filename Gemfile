@@ -14,6 +14,14 @@ group :development do
   gem 'web-console', '~> 2.0'
   gem 'spring'
 end
+
+gem 'devise'
+gem 'annotate'
+gem 'momentjs-rails', '>= 2.9.0'
+gem 'bootstrap3-datetimepicker-rails', '~> 4.17.37'
+gem 'jquery-ui-rails'
+gem 'best_in_place', '~> 3.0.1'
+
 # Webservers
 gem "passenger"
 gem 'bootstrap-sass'
@@ -26,6 +34,7 @@ group :development do
   gem 'hub', :require=>nil
   gem 'quiet_assets'
   gem 'rails_layout'
+  gem "letter_opener"
 end
 
 gem 'rails_12factor', group: :production
