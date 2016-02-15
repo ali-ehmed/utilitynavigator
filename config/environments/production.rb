@@ -81,9 +81,12 @@ Rails.application.configure do
   config.action_mailer.raise_delivery_errors = true
 
   config.action_mailer.smtp_settings = {
-    :address   => "smtp.mandrillapp.com",
-    :port      => 25,
-    :user_name => "ali.ahmed.cs2016@gmail.com",
-    :password  => "aliahmed123"
+    address: "smtp.gmail.com",
+    port: 587,
+    domain: "designhenge.com",
+    authentication: "plain",
+    enable_starttls_auto: true,
+    user_name: "ali.ahmed.cs2016@gmail.com",
+    password: "Gumball2016"
   }
 end
