@@ -40,21 +40,38 @@
 <div id="visitors">
   <div class="row">
     <div class="col-md-6 col-md-offset-1">
-      <%= form_tag "#", method: :get do %>
+      <%= form_tag "#", method: :get, class: "form-inline" do %>
         <div class="panel panel-info">
           <div class="panel-heading">
             <h4><i class="fa fa-fw fa-compress"></i> Compare and Choose Your TV, Internet and Phone Services</h4>
           </div>
           <div class="panel-body">
             <h4>ENTER YOUR ADDRESS</h4>
-            <ul class="list-inline">
-              <li>
-                <%= text_field_tag :address, params[:address], class: "form-control", placeholder: "Street Address" %>
-              </li>
-              <li>
-                <%= text_field_tag :zip, params[:zip], class: "form-control", placeholder: "Zip Code" %>
-              </li>
-            </ul>
+            <div class="search-inputs">
+              <ul class="list-inline">
+                <li class="col-md-3 col-xs-12">
+                  <div class="form-group">
+                    <%= text_field_tag :address, params[:address], class: "col-md-3 form-control", placeholder: "Street Address*" %>
+                  </div>
+                </li>
+                <li class="col-md-3 col-xs-12">
+                  <div class="form-group">
+                    <%= text_field_tag :apt, params[:apt], class: "col-md-3 form-control", placeholder: "Apt#" %>
+                  </div>
+                </li>
+                <li class="col-md-3 col-xs-12">
+                  <div class="form-group">
+                    <%= text_field_tag :zip, params[:zip], class: "col-md-3 form-control", placeholder: "Zip Code*" %>
+                  </div>
+                </li>
+                <li class="col-md-3 col-xs-12">
+                  <div class="form-group">
+                    <%= text_field_tag :state, params[:state], class: "col-md-3 form-control", placeholder: "State*" %>
+                  </div>
+                </li>
+              </ul>
+            </div>
+
             <a href="#" class="btn btn-default">FIND DEALS &amp; OFFERS</a>
           </div>
         </div>
