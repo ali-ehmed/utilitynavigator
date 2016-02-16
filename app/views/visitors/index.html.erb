@@ -1,101 +1,63 @@
-<!-- Header Carousel -->
-<!-- <header id="myCarousel" class="carousel slide"> -->
-  <!-- Indicators -->
-  <!-- <ol class="carousel-indicators">
-    <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-    <li data-target="#myCarousel" data-slide-to="1"></li>
-    <li data-target="#myCarousel" data-slide-to="2"></li>
-  </ol> -->
+<div class="landing">
+  <div id="search-deals">
+    <div class="row">
+      <div class="col-md-6 col-md-offset-1">
+        <%= form_tag "#", method: :get, class: "form-inline" do %>
+          <div class="panel panel-info">
+            <div class="panel-heading">
+              <h4><i class="fa fa-fw fa-compress"></i> Compare and Choose Your TV, Internet and Phone Services</h4>
+            </div>
+            <div class="panel-body">
+              <h4>ENTER YOUR ADDRESS</h4>
+              <ul class="list-inline">
+                <li class="col-md-3 col-xs-12">
+                  <div class="form-group">
+                    <%= text_field_tag :address, params[:address], class: "col-md-3 form-control", placeholder: "Street Address*" %>
+                  </div>
+                </li>
+                <li class="col-md-3 col-xs-12">
+                  <div class="form-group">
+                    <%= text_field_tag :apt, params[:apt], class: "col-md-3 form-control", placeholder: "Apt#" %>
+                  </div>
+                </li>
+                <li class="col-md-3 col-xs-12">
+                  <div class="form-group">
+                    <%= text_field_tag :zip, params[:zip], class: "col-md-3 form-control", placeholder: "Zip Code*" %>
+                  </div>
+                </li>
+                <li class="col-md-3 col-xs-12">
+                  <div class="form-group">
+                    <%= text_field_tag :state, params[:state], class: "col-md-3 form-control", placeholder: "State*" %>
+                  </div>
+                </li>
+              </ul>
 
-  <!-- Wrapper for slides -->
-  <!-- <div class="carousel-inner">
-    <div class="item active">
-      <div class="fill" style="background-image:url('http://placehold.it/1900x1080&text=Slide One');"></div>
-      <div class="carousel-caption">
-        <h2>Caption 1</h2>
+              <a href="#" class="btn btn-danger search-btn">Find Deals &amp; Offers</a>
+            </div>
+          </div>
+        <% end %>
       </div>
-    </div>
-    <div class="item">
-      <div class="fill" style="background-image:url('http://placehold.it/1900x1080&text=Slide Two');"></div>
-      <div class="carousel-caption">
-        <h2>Caption 2</h2>
-      </div>
-    </div>
-    <div class="item">
-      <div class="fill" style="background-image:url('http://placehold.it/1900x1080&text=Slide Three');"></div>
-      <div class="carousel-caption">
-        <h2>Caption 3</h2>
-      </div>
-    </div>
-  </div> -->
-
-  <!-- Controls -->
-  <!-- <a class="left carousel-control" href="#myCarousel" data-slide="prev">
-    <span class="icon-prev"></span>
-  </a>
-  <a class="right carousel-control" href="#myCarousel" data-slide="next">
-    <span class="icon-next"></span>
-  </a> -->
-<!-- </header> -->
-<div id="visitors">
-  <div class="row">
-    <div class="col-md-6 col-md-offset-1">
-      <%= form_tag "#", method: :get, class: "form-inline" do %>
-        <div class="panel panel-info">
+      <div class="col-md-4">
+        <div class="panel panel-default">
           <div class="panel-heading">
-            <h4><i class="fa fa-fw fa-compress"></i> Compare and Choose Your TV, Internet and Phone Services</h4>
+            <strong>TWS Authorized Dealers</strong>
           </div>
           <div class="panel-body">
-            <h4>ENTER YOUR ADDRESS</h4>
-            <ul class="list-inline">
-              <li class="col-md-3 col-xs-12">
-                <div class="form-group">
-                  <%= text_field_tag :address, params[:address], class: "col-md-3 form-control", placeholder: "Street Address*" %>
-                </div>
-              </li>
-              <li class="col-md-3 col-xs-12">
-                <div class="form-group">
-                  <%= text_field_tag :apt, params[:apt], class: "col-md-3 form-control", placeholder: "Apt#" %>
-                </div>
-              </li>
-              <li class="col-md-3 col-xs-12">
-                <div class="form-group">
-                  <%= text_field_tag :zip, params[:zip], class: "col-md-3 form-control", placeholder: "Zip Code*" %>
-                </div>
-              </li>
-              <li class="col-md-3 col-xs-12">
-                <div class="form-group">
-                  <%= text_field_tag :state, params[:state], class: "col-md-3 form-control", placeholder: "State*" %>
-                </div>
-              </li>
-            </ul>
-
-            <a href="#" class="btn btn-default search-btn">FIND DEALS &amp; OFFERS</a>
-          </div>
-        </div>
-      <% end %>
-    </div>
-    <div class="col-md-4">
-      <div class="panel panel-default">
-        <div class="panel-heading">
-          <strong>TWS Authorized Dealers</strong>
-        </div>
-        <div class="panel-body">
-          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-            tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-            quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-            consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-            cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-            proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+              quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+              consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+              cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+              proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+            </p>
           </div>
         </div>
       </div>
     </div>
-
-    <!-- Page Content -->
-    <div class="container">
-
-      <!-- Marketing Icons Section -->
+  </div>
+  <!-- Page Content -->
+  <div class="container">
+    <!-- Marketing Icons Section -->
+    <div class="section-1">
       <div class="row">
         <div class="col-lg-12">
           <h1 class="page-header text-center">
@@ -149,93 +111,116 @@
         </div>
       </div>
       <!-- /.row -->
+    </div>
+    
 
-      <!-- Portfolio Section -->
+    <!-- Portfolio Section -->
+    <div class="section-2">
       <div class="row">
         <div class="col-lg-12">
           <h2 class="page-header text-center">How Does It Work</h2>
         </div>
-        <div class="col-md-4 col-sm-6">
-          <%= link_to page_path('portfolio-item') do %>
-          <img class="img-responsive img-portfolio img-hover" src="http://placehold.it/700x450" alt="">
-          <% end %>
+        <div class="col-md-4 col-sm-6 text-center">
+          <i class="fa fa-home icon"></i>
+          <p>
+            01. Enter your Address
+          </p>
+          <strong>We'll find the providers available in your area.</strong>
         </div>
-        <div class="col-md-4 col-sm-6">
-          <%= link_to page_path('portfolio-item') do %>
-          <img class="img-responsive img-portfolio img-hover" src="http://placehold.it/700x450" alt="">
-          <% end %>
+        <div class="col-md-4 col-sm-6 text-center">
+          <i class="fa fa-globe icon"></i>
+          <p>
+            02. Choose an Offer
+          </p>
+          <strong>Whether you want a triple-service bundle or standalone TV. We have it.</strong>
         </div>
-        <div class="col-md-4 col-sm-6">
-          <%= link_to page_path('portfolio-item') do %>
-          <img class="img-responsive img-portfolio img-hover" src="http://placehold.it/700x450" alt="">
-          <% end %>
-        </div>
-        <div class="col-md-4 col-sm-6">
-          <%= link_to page_path('portfolio-item') do %>
-          <img class="img-responsive img-portfolio img-hover" src="http://placehold.it/700x450" alt="">
-          <% end %>
-        </div>
-        <div class="col-md-4 col-sm-6">
-          <%= link_to page_path('portfolio-item') do %>
-          <img class="img-responsive img-portfolio img-hover" src="http://placehold.it/700x450" alt="">
-          <% end %>
-        </div>
-        <div class="col-md-4 col-sm-6">
-          <%= link_to page_path('portfolio-item') do %>
-          <img class="img-responsive img-portfolio img-hover" src="http://placehold.it/700x450" alt="">
-          <% end %>
+        <div class="col-md-4 col-sm-6 text-center">
+          <i class="fa fa-mobile icon"></i>
+          <p>
+            03. Place your service request
+          </p>
+          <strong>We'll help you to have the best service package for you.</strong>
         </div>
       </div>
-      <!-- /.row -->
-
-      <!-- Features Section -->
-      <div class="row">
-        <div class="col-lg-12">
-          <h2 class="page-header">Modern Business Features</h2>
-        </div>
-        <div class="col-md-6">
-          <p>The Modern Business template by Start Bootstrap includes:</p>
-          <ul>
-            <li><strong>Bootstrap v3.2.0</strong>
-            </li>
-            <li>jQuery v1.11.0</li>
-            <li>Font Awesome v4.1.0</li>
-            <li>Working PHP contact form with validation</li>
-            <li>Unstyled page elements for easy customization</li>
-            <li>17 HTML pages</li>
-          </ul>
-          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corporis, omnis doloremque non cum id reprehenderit, quisquam totam aspernatur tempora minima unde aliquid ea culpa sunt. Reiciendis quia dolorum ducimus unde.</p>
-        </div>
-        <div class="col-md-6">
-          <img class="img-responsive" src="http://placehold.it/700x450" alt="">
-        </div>
-      </div>
-      <!-- /.row -->
-
-      <hr>
-
-      <!-- Call to Action Section -->
-      <div class="well">
-        <div class="row">
-          <div class="col-md-8">
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Molestias, expedita, saepe, vero rerum deleniti beatae veniam harum neque nemo praesentium cum alias asperiores commodi.</p>
-          </div>
-          <div class="col-md-4">
-            <a class="btn btn-lg btn-default btn-block" href="#">Call to Action</a>
-          </div>
-        </div>
-      </div>
-
     </div>
-    <!-- /.container -->
+    <!-- /.row -->
+  </div>
+  <!-- /.container -->
+  <div class="section-3">
+    <!-- Features Section -->
+    <div class="row">
+      <div class="col-lg-12">
+        <span>
+          Get TV your way, starting, now. Call now (Toll Free)
+        </span>
+        <br />
+        <small>866-978-7294</small>
+      </div>
+    </div>
+    <!-- /.row -->
+  </div>
 
-    <!-- Script to Activate the Carousel -->
-    <script>
-      $(document).on('ready', function () {
-        $('.carousel').carousel({
-      interval: 1000 //changes the speed
-    })
-      });
-    </script>
+  <div class="container">
+    <div class="section-4">
+      <h1 class="page-header text-center">
+        Don't Compromise on your Speed
+      </h1>
+      <div class="row">
+        <div class="col-md-6">
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+          tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+          quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+          consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+          cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+          proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+        </div>
+        <div class="col-md-6 text-center">
+          <i class="fa fa-tachometer icon"></i>
+        </div>
+      </div>
+      <h1 class="page-header text-center">
+        Crystal Clear HD Cabel
+      </h1>
+      <div class="row">
+        <div class="col-md-6">
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+          tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+          quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+          consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+          cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+          proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+        </div>
+        <div class="col-md-6 text-center">
+          <i class="fa fa-desktop icon"></i>
+        </div>
+      </div>
+      <h1 class="page-header text-center">
+        Call without Boundries
+      </h1>
+      <div class="row">
+        <div class="col-md-6">
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+          tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+          quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+          consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+          cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+          proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+        </div>
+        <div class="col-md-6 text-center">
+          <i class="fa fa-mobile mobile-icon"></i>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
+
+
+<!-- Script to Activate the Carousel -->
+<script>
+//   $(document).on('ready', function () {
+//     $('.carousel').carousel({
+//       interval: 1000 //changes the speed
+//     })
+//   });
+</script>
 
