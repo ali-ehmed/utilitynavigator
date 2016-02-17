@@ -14,7 +14,9 @@
 						quis nostrud exercitation ullamco laboris nisi ut aliquip ex.</p>
 					</div>
 					<div class="col-md-3">
-						<a class="btn btn-lg btn-warning btn-block" href="#">Request Call Back</a>
+						<button type="button" class="btn btn-lg btn-warning btn-block" data-toggle="modal" data-target="#call_back">
+							Request Call Back
+						</button>
 					</div>
 				</div>
 				<hr />
@@ -27,4 +29,6 @@
 		</div>
 	</div>
 </footer>
+
+<%= render partial: "shared/call_back_form" %>
 

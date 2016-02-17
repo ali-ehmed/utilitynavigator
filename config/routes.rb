@@ -3,5 +3,6 @@ Rails.application.routes.draw do
   ActiveAdmin.routes(self)
   
   devise_for :users
-  root to: 'visitors#index'
+  resources :call_back, only: [:create]
+  root to: 'landings#index'
 end

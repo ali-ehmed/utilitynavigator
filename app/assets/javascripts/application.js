@@ -12,6 +12,33 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require bootstrap-notify
 //= require turbolinks
 //= require bootstrap-sprockets
+//= require moment
+//= require bootstrap-datetimepicker
 //= require_tree .
+
+$(document).ready(function(){
+	// $(".alert-message").addClass("in");
+
+	// /* swap open/close side menu icons */
+	// $('[data-toggle=collapse]').click(function(){
+	//   	// toggle icon
+	//   	$(this).find("i").toggleClass("glyphicon-chevron-right glyphicon-chevron-down");
+	// });
+
+	// Notify
+	$.notifyDefaults({
+		allow_dismiss: true,
+		z_index: 10000,
+		offset: {
+			y: 50,
+			x: 33
+		},
+		placement: {
+			from: "top",
+			align: "right"
+		}
+	});
+});

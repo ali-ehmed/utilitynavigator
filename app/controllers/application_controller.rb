@@ -3,6 +3,9 @@ class ApplicationController < ActionController::Base
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
 
+  include ActionView::Helpers::TagHelper
+  include ActionView::Context
+
   before_action :make_action_mailer_use_request_host_and_protocol
 
   private
