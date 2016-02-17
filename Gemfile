@@ -8,6 +8,8 @@ gem 'jquery-rails'
 gem 'turbolinks'
 gem 'jbuilder', '~> 2.0'
 gem 'figaro'
+gem 'sprockets-rails', '~> 3.0', '>= 3.0.1'
+gem 'activeadmin', github: 'activeadmin'
 group :development, :test do
   gem 'byebug'
 end

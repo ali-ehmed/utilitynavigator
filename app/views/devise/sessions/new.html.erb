@@ -10,10 +10,10 @@
 						<fieldset>
 							<div class="row">
 								<div class="center-block">
-									<img class="profile-img"
-									src="https://lh5.googleusercontent.com/-b0-k99FZlyE/AAAAAAAAAAI/AAAAAAAAAAA/eu7opA4byxI/photo.jpg?sz=120" alt="">
+									<%= image_tag("user-login.png", class: "profile-img") %>
 								</div>
 							</div>
+							<br />
 							<div class="row">
 								<div class="col-sm-12 col-md-10  col-md-offset-1 ">
 									<div class="form-group">
@@ -50,6 +50,5 @@
 			</div>
 		</div>
 	</div>
+	<%= render "devise/shared/links" %>
 </div>
-
-<%= render "devise/shared/links" %>
