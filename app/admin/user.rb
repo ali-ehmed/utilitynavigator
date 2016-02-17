@@ -10,7 +10,11 @@ ActiveAdmin.register User do
     column :sign_in_count
     column :created_at
     column :confirm_user do |user|
-      link_to "Confirm", confirm_user_admin_user_path(user), method: :put
+      if user.confirmed?
+        status_tag 'active', :ok, label: 'Confirmed'
+      else
+        link_to "Confirm", confirm_user_admin_user_path(user), method: :put, data: { confirm: "Confirm this user?" }
+      end
     end
     actions
   end
