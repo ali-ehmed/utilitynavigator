@@ -97,8 +97,8 @@ Rails.application.configure do
     address:              'smtp.gmail.com',
     port:                 587,
     domain:               'designhenge.com',
-    user_name:            'test@designhenge.com',
-    password:             'TESTing123',
+    user_name:            'ali.ahmed.cs2016@gmail.com',
+    password:             'Gumball2016',
     authentication:       'plain',
     enable_starttls_auto: true  
   }
