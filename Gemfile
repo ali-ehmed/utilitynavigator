@@ -12,9 +12,6 @@ gem 'sprockets-rails', '~> 3.0', '>= 3.0.1'
 gem 'activeadmin', github: 'activeadmin'
 gem "font-awesome-rails"
 
-gem 'momentjs-rails', '>= 2.9.0'
-gem 'bootstrap3-datetimepicker-rails', '~> 4.17.37'
-gem 'jquery-ui-rails'
 group :development, :test do
   gem 'byebug'
 end
@@ -32,10 +29,12 @@ gem 'best_in_place', '~> 3.0.1'
 
 # Webservers
 gem "passenger"
+
 gem 'bootstrap-sass'
 gem 'high_voltage'
 gem 'pg'
 gem 'simple_form'
+
 group :development do
   gem 'better_errors'
   gem 'binding_of_caller', :platforms=>[:mri_21]

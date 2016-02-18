@@ -1,6 +1,5 @@
 class CreateActiveAdminComments < ActiveRecord::Migration
   def self.up
-    drop_table :active_admin_comments
     create_table :active_admin_comments do |t|
       t.string :namespace
       t.text   :body
