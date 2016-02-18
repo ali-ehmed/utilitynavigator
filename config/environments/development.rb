@@ -43,5 +43,5 @@ Rails.application.configure do
   config.action_mailer.delivery_method = :letter_opener
 
   config.app_name = "Utility Network"
-  config.admin_notifications_email = ["ali.ahmed.cs2016@gmail.com", "aliahmed@folio3.com"]
+  config.admin_notifications_email = ["admin@example.com"]
 end
