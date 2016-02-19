@@ -1,4 +1,4 @@
-class Admin::Service
+class Admin
   def call
     admin = AdminUser.find_or_create_by!(email: Rails.application.secrets.admin_email) do |admin|
       admin.password = Rails.application.secrets.admin_password
