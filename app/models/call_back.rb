@@ -17,7 +17,7 @@
 
 class CallBack < ActiveRecord::Base
 
-	validates :first_name, :last_name, :email, :phone_no, :state, :zip, :preferred_time, presence: true
+	validates :first_name, :last_name, :email, :address, :phone_no, :state, :zip, :preferred_time, presence: true
 	validates_format_of :email,:with => Devise::email_regexp
 
 	SUCCESS = "Thank you for requesting a call. Our provider soon will contact you on your entered phone number."
