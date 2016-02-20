@@ -29,12 +29,12 @@ window.requestCallback = (event) ->
     console.log 'Something went wrong'
 
 dismissForm = ->
-	$("#call_back").on "hidden.bs.modal", ->
-		$(@).find("input[type='text'],textarea,input[type='email'],input[type='tel']").val("")
+  $("#call_back").on "hidden.bs.modal", ->
     $(@).find("input[type='submit']").text("Submit")
+    $(@).find("input[type='text'],textarea,input[type='email'],input[type='tel']").val("")
 
 $(document).on "ready page:change", ->
-	dismissForm()
+  dismissForm()
 
-	$("#call_timings").datetimepicker
+  $("#call_timings").datetimepicker
     format: 'hh:mm A'
