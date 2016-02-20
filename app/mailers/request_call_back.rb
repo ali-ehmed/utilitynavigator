@@ -1,5 +1,5 @@
 class RequestCallBack < ApplicationMailer
-	default from: "ali.ahmed.cs2014@gmail.com" 
+	default from: "test@designhenge.com" 
   # Subject can be set in your I18n file at config/locales/en.yml
   # with the following lookup:
   #
