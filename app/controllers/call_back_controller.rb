@@ -12,6 +12,6 @@ class CallBackController < ApplicationController
 	private
 
 	def call_back_params
-		params.require(:call_back).permit(:first_name, :last_name, :email, :phone_no, :addres, :zip, :state, :preferred_time)
+		params.require(:call_back).permit(:first_name, :last_name, :email, :phone_no, :address, :zip, :state, :preferred_time)
 	end
 end
