@@ -12,4 +12,6 @@
 class ProductProviderPreference < ActiveRecord::Base
 	belongs_to :provider
 	belongs_to :additional_field_weight
+
+	scope :preferences_of_product, -> (product_id) { joins(:additional_field_weight).where("additional_field_weights.product_id = ?", product_id) }
 end

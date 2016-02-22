@@ -1,0 +1,25 @@
+<%= form_tag admin_packages_path(product_ids: @product_ids), method: :post do %>
+	<% for product in @products do %>
+		<fieldset class="inputs">
+			<legend><span><%= product.name %></span></legend>
+			<ol>
+				<% @provider_preferences.joins(:additional_field_weight).where("additional_field_weights.product_id = ?", product.id).each do |preference| %>
+					<li class="string input optional stringish" id="package_name_input">
+						<label for="provider_name" class="label">
+							<%= preference.additional_field_weight.additional_weight %>
+						</label>
+						<% if preference.additional_field_weight.additional_weight == "Premiums" %>
+							<%= select_tag "#{preference.additional_field_weight.to_field}[]", options_for_select(PackageBundle::PREMIUMS.map{|m| m}), prompt: "--Select Premiums--", multiple: true %>
+						<% elsif preference.additional_field_weight.additional_weight == "Charter tv spectrum" %>
+							<%= select_tag preference.additional_field_weight.to_field, options_for_select(PackageBundle::TV_SPECTRUM.map{|m| m}), prompt: "--Select Tv Spectrum--" %>
+						<% else %>
+							<%= text_field_tag preference.additional_field_weight.to_field %>
+						<% end %>
+					</li>
+				<% end %>
+			</ol>
+		</fieldset>	
+	<% end %>
+	<%= button_tag "Create Package", type: :submit %>
+	<%= link_to "Cancel", admin_packages_path %>
+<% end %>

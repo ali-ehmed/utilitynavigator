@@ -13,6 +13,13 @@ ActiveAdmin.register Provider do
 #   permitted
 # end
 
+	index do
+    selectable_column
+    column :name
+    column :created_at
+    actions
+  end
+
 	controller do
 		def edit
 			@provider = Provider.find(params[:id])
@@ -31,13 +38,21 @@ ActiveAdmin.register Provider do
 		private
 
 		def provider_params
-			params.require(:provider).permit(:name, :additional_field_weight_ids => [])
+			params.require(:provider).permit(:name, :logo, :additional_field_weight_ids => [])
 		end
 	end
 
 	show do
 		attributes_table do
 			row :name
+
+			row :logo do
+				if provider.logo.present?
+        	image_tag provider.logo.url(:thumb)
+        else
+        	"N/A"
+        end
+      end
 
 			Product.only_preferenced.each do |product|
 				panel "Preferences for #{product.name.humanize}" do
@@ -63,6 +78,8 @@ ActiveAdmin.register Provider do
 
 	form do |f|
     f.inputs :name
+
+    f.inputs :logo
 
     field_weights_ids = f.object.additional_field_weight_ids || resource.product_provider_preferences.map(&:additional_field_weight_id).map(&:to_s)
     f.inputs "Additional Preferences" do

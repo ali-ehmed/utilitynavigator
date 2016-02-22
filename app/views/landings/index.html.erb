@@ -2,7 +2,7 @@
   <div id="search-deals">
     <div class="row">
       <div class="col-md-6 col-md-offset-1">
-        <%= form_tag root_path, method: :get, class: "form-inline" do %>
+        <%= form_tag package_bundles_path, method: :get, class: "form-inline" do %>
           <div class="panel panel-info">
             <div class="panel-heading">
               <h4><i class="fa fa-fw fa-compress"></i> Compare and Choose Your TV, Internet and Phone Services</h4>
@@ -22,7 +22,7 @@
                 </li>
                 <li class="col-md-3 col-xs-12 col-sm-3">
                   <div class="form-group">
-                    <%= text_field_tag :zip, params[:zip], class: "col-md-3 form-control", placeholder: "Zip Code*" %>
+                    <%= text_field_tag :zipcode, params[:zipcode], class: "col-md-3 form-control", placeholder: "Zip Code*" %>
                   </div>
                 </li>
                 <li class="col-md-3 col-xs-12 col-sm-3">
@@ -32,7 +32,7 @@
                 </li>
               </ul>
 
-              <a href="#" class="btn btn-danger search-btn">Find Deals &amp; Offers</a>
+              <%= submit_tag "Find Deals &amp; Offers".html_safe, class: "btn btn-danger search-btn" %>
             </div>
           </div>
         <% end %>

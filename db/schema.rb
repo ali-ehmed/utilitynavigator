@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160221160823) do
+ActiveRecord::Schema.define(version: 20160222213214) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -69,6 +69,14 @@ ActiveRecord::Schema.define(version: 20160221160823) do
     t.datetime "updated_at",     null: false
   end
 
+  create_table "package_bundles", force: :cascade do |t|
+    t.integer  "package_id"
+    t.integer  "product_id"
+    t.string   "field"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "package_types", force: :cascade do |t|
     t.string   "name"
     t.datetime "created_at", null: false
@@ -102,10 +110,21 @@ ActiveRecord::Schema.define(version: 20160221160823) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "provider_zipcodes", force: :cascade do |t|
+    t.string   "zipcode"
+    t.integer  "provider_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
   create_table "providers", force: :cascade do |t|
     t.string   "name"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",        null: false
+    t.datetime "updated_at",        null: false
+    t.string   "logo_file_name"
+    t.string   "logo_content_type"
+    t.integer  "logo_file_size"
+    t.datetime "logo_updated_at"
   end
 
   create_table "users", force: :cascade do |t|

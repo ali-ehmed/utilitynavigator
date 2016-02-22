@@ -11,4 +11,8 @@
 
 class AdditionalFieldWeight < ActiveRecord::Base
 	belongs_to :product
+
+	def to_field
+		additional_weight.underscore.gsub(" ", "_").to_sym
+	end
 end

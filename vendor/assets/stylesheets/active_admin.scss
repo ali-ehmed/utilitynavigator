@@ -17,15 +17,20 @@
 //   .status_tag { background: #6090DB; }
 
 #active_admin_content {
-	form {
-		select {
-	    width: calc(80% - 22px);
-	    border: 1px solid #c9d0d6;
-	    border-radius: 3px;
-	    font-size: 0.95em;
-	    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-	    outline: none;
-	    padding: 8px 10px 7px;
-		}
+	select {
+    width: calc(80% - 22px);
+    border: 1px solid #c9d0d6;
+    border-radius: 3px;
+    font-size: 0.95em;
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    outline: none;
+    padding: 8px 10px 7px;
+	}
+	.sidebar_section select {
+    width: 240px;
+	}
+	.filter_form_field.select_and_search select {
+    width: 108px;
 	}
 }
+

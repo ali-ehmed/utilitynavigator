@@ -11,6 +11,8 @@ gem 'figaro'
 gem 'sprockets-rails', '~> 3.0', '>= 3.0.1'
 gem 'activeadmin', github: 'activeadmin'
 gem "font-awesome-rails"
+gem "paperclip", git: "git://github.com/thoughtbot/paperclip.git"
+gem 'roo', '~> 2.1.0'
 
 group :development, :test do
   gem 'byebug'

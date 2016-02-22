@@ -19,4 +19,19 @@
 class Package < ActiveRecord::Base
 	belongs_to :provider
 	belongs_to :package_type
+
+	has_many :package_bundles
+	accepts_nested_attributes_for :package_bundles
+
+	attr_accessor :product_ids, :charter_tv_spectrum
+
+	validates_presence_of :provider_id
+
+	after_create :set_promotion_disclaimer
+
+	def set_promotion_disclaimer
+		if self.provider.short_name == "CHARTER" and self.charter_tv_spectrum
+			update_attribute(:promotion_disclaimer, "#{price} & #{self.charter_tv_spectrum}")
+		end
+	end
 end

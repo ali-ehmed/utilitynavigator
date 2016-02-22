@@ -42,3 +42,7 @@ Product.all.each do |product|
 		end
 	end
 end
+
+# File.open(File.join(directory, 'tws_zipcodes.csv'), 'w') do |f|
+#   f.puts "contents"
+# end
