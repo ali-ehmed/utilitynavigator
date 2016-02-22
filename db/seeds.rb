@@ -25,7 +25,7 @@ end
 
 puts "Creating Product additional fields"
 Product.all.each do |product|
-	case product.name
+	case product.name.downcase
 	when :cable.to_s
 		%w(no_of_channels no_of_hd_channels premiums charter_tv_spectrum).each do |field_weight|
 			AdditionalFieldWeight.find_or_initialize_by(additional_weight: field_weight.humanize) do |field|
@@ -42,5 +42,3 @@ Product.all.each do |product|
 		end
 	end
 end
-
-puts "Adding Provider Preferences"

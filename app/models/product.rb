@@ -11,4 +11,6 @@
 class Product < ActiveRecord::Base
 	has_many :additional_field_weights
 	accepts_nested_attributes_for :additional_field_weights, allow_destroy: true
+
+	scope :only_preferenced, -> { joins(:additional_field_weights).select(:name, :id).group("name", "id") }
 end

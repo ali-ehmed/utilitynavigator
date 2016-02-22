@@ -19,10 +19,12 @@ class Provider < ActiveRecord::Base
 	after_save :creating_preferences
 
 	def creating_preferences
-		@field_weight_ids = additional_field_weight_ids.reject { |c| c.empty? }
-		product_provider_preferences.destroy_all if product_provider_preferences.present?
-		
+		@field_weight_ids = additional_field_weight_ids
 		if @field_weight_ids.present?
+		@field_weight_ids = @field_weight_ids.reject { |c| c.empty? }
+		
+			product_provider_preferences.destroy_all if product_provider_preferences.present?
+		
 			logger.debug "#{@field_weight_ids}"
 			@field_weight_ids.each do |field_weight_id|
 				@preference = self.product_provider_preferences.build(additional_field_weight_id: field_weight_id)

@@ -39,11 +39,20 @@ ActiveAdmin.register Provider do
 		attributes_table do
 			row :name
 
-			panel 'Preferences' do
-				attributes_table_for provider do 
+			Product.only_preferenced.each do |product|
+				panel "Preferences for #{product.name.humanize}" do
 					provider.product_provider_preferences.each do |pref|
-						row "Field for #{pref.additional_field_weight.product.name.humanize}" do
-							pref.additional_field_weight.additional_weight
+						columns do
+							column max_width: "50px", min_width: "50px" do
+						    span "-"
+						  end
+						  column do
+						    if product.id == pref.additional_field_weight.product.id
+									span pref.additional_field_weight.additional_weight
+								else
+									span "N/A"
+								end
+						  end
 						end
 					end
 				end
@@ -55,7 +64,10 @@ ActiveAdmin.register Provider do
 	form do |f|
     f.inputs :name
 
-    f.input :additional_field_weight_ids, label: "Additional Preferences", as: :check_boxes, collection: AdditionalFieldWeight.all.map{|m| ["#{m.additional_weight} - (#{m.product.name.humanize})", m.id]}, :input_html => { :checked => false }
+    field_weights_ids = f.object.additional_field_weight_ids || resource.product_provider_preferences.map(&:additional_field_weight_id).map(&:to_s)
+    f.inputs "Additional Preferences" do
+  		f.input :additional_field_weight_ids, label: "Select Preferences", as: :check_boxes, collection: AdditionalFieldWeight.all.map{|m| ["#{m.additional_weight} - (#{m.product.name.humanize})", m.id, {:checked => field_weights_ids.reject { |c| c.empty? }.map(&:to_i).include?(m.id)}]}
+    end
 
     f.actions
   end
