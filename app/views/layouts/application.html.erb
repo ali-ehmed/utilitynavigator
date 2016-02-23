@@ -12,11 +12,10 @@
     <header>
       <%= render 'layouts/navigation' %>
     </header>
-    <div class="container">
+    <main>
       <%= render 'layouts/messages' %>
-    </div>
-
-    <%= yield %>
+      <%= yield %>
+    </main>
     <%= render 'layouts/footer' %>
   </body>
 </html>

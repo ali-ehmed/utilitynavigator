@@ -1,4 +1,4 @@
-<%= form_tag admin_provider_zipcodes_path, method: :post, multipart: true do %>
+<%= form_tag admin_provider_zipcodes_path, method: :post, multipart: true, onsubmit: "$provider_zipcodes.uploadZipcodes(event);" do %>
 	<fieldset class="inputs">
 		<legend><span>Import Zipcodes</span></legend>
 		<ol>
@@ -7,10 +7,19 @@
 				<%= select_tag :provider_id, options_for_select(Provider.all.map{|m| [m.name, m.id]}), prompt: "--Select Provider--" %>
 			</li>
 			<li>
+				<%= label_tag "ZipCode" %>
+				<%= text_field_tag :zipcode %>
+			</li>
+			<li>
+				<span style="margin-left: 20%;">
+					<strong>OR</strong>
+				</span>
+			</li>
+			<li>
 				<%= label_tag :upload_zipcodes %>
 				<%= file_field_tag :file %>
 			</li>
 		</ol>
 	</fieldset>
-	<%= submit_tag "Import" %>
+	<%= button_tag "Submit", type: :submit %>
 <% end %>

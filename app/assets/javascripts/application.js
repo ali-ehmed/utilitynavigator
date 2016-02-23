@@ -17,6 +17,7 @@
 //= require bootstrap-sprockets
 //= require moment
 //= require bootstrap-datetimepicker
+//= require jquery.cookie
 //= require_tree .
 
 $(document).ready(function(){

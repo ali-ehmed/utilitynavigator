@@ -20,12 +20,14 @@ class ProviderZipcode < ActiveRecord::Base
 		def import_zipcodes(file, provider)
 			spreadsheet = open_spreadsheet(file)
 			header = spreadsheet.row(1)
-			(2..spreadsheet.last_row).each do |row_id|
+			(2.upto(500)).each do |row_id|
 				row = Hash[[header, spreadsheet.row(row_id)].transpose]
 				provider_zipcode = provider.provider_zipcodes.find_by(:zipcode => row["zipcode"]) || provider.provider_zipcodes.build
 				provider_zipcode.zipcode = row["zipcode"].to_i
 				provider_zipcode.save!
 			end
+
+			logger.debug "Counting:-> #{provider.provider_zipcodes.length}"
 		end
 
 		def open_spreadsheet(file)

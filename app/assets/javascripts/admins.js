@@ -1,3 +1,5 @@
+//= require jquery.cookie
+
 window.$packages = {
 	enableProducts: function(elem) {
 		$("fieldset.package-products *").removeAttr("disabled");
@@ -112,14 +114,89 @@ window.$packages = {
 		} else if (elem.value && $package_type.value && $checked_boxes.length > 0) {
 			$packages.enableSubmission()
 		}
-	},
+	}
+}
+
+window.$provider_zipcodes = {
+	uploadZipcodes: function(event) {
+		event.preventDefault()
+  	$form = $(event.target)
+  	$submit_btn = $form.find("button[type='submit']")
+  	$submit_btn_val = $submit_btn.text()
+
+  	var data = new FormData();
+    $.each($form.serializeArray(), function(key, value)
+    {
+        data.append(value.name, value.value);
+        // console.log(value)
+    });
+
+    jQuery.each(jQuery('#file')[0].files, function(i, file) {
+		    data.append('file', file);
+		});
+
+
+  	$.ajax({
+		  type: $form.attr('method'),
+		  url: $form.attr('action'),
+		  data: data,
+		  mimeType: 'multipart/form-data',
+      processData: false,
+      cache: false,
+      contentType: false,
+      dataType: 'JSON',
+		  beforeSend: function() {
+		    $submit_btn.html('<i class=\'fa fa-circle-o-notch fa-spin\'></i> Requesting');
+		    $submit_btn.attr("disabled", "disabled").off('click');
+		    return
+		  },
+		  success: function(response) {
+	    	$.cookie("setFlash", '{"status": "'+response.status+'", "msg": "'+response.msg+'"}');
+
+	      var delay = 1000; //Your delay in milliseconds
+	      setTimeout(function(){ window.location = response.url; }, delay);
+		  }
+		}, {
+			complete: function() {
+				$submit_btn.text($submit_btn_val);
+				$submit_btn.removeAttr('disabled');
+				return
+			}
+		}
+		, {
+		  error: function(response) {
+		    return console.log('Something went wrong');
+		  }
+		});
+	}
+}
+
+$admin = {
 	init: function(){
 		$packages.disableSubmission()
+		$admin.settingFlash()
+	},
+	settingFlash: function() {
+		var getFlash = $.cookie("setFlash")
+		if(getFlash) {
+			var flash = $.parseJSON(''+ getFlash +'')
+			console.log(flash)
+			switch(flash.status) {
+				case "notice":
+					$(".flashes").html("<div class='flash flash_notice'>"+ flash.msg +"</div>");
+					$.removeCookie("setFlash");
+					break;
+				case "alert":
+					$(".flashes").html("<div class='flash flash_alert'>"+ flash.msg +"</div>");
+					$.removeCookie("setFlash")
+					break;
+			}
+		}
 	}
 }
 
 $(document).on("ready", function(){
 	// Initially products checkboxes are disabled for packages
 	$("fieldset.package-products *").attr("disabled", "disabled").off('click');
-	$packages.init()
+	$admin.init()
 })

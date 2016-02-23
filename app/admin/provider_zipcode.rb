@@ -21,13 +21,27 @@ ActiveAdmin.register ProviderZipcode do
 
   controller do
   	def create
-  		if params[:file].blank? or params[:provider_id].blank?
-  			redirect_to new_admin_provider_zipcode_path, flash: { alert: "Provider and File must be selected" }
+      logger.debug "---------_#{params}"
+  		if (params[:zipcode].blank? and params[:file].blank?) or params[:provider_id].blank?
+        render :json => { status: :alert, url: new_admin_provider_zipcode_path, msg: "Provider and File must be selected" }
   			return
   		end
-  		@provider = Provider.find(params[:provider_id])
-  		ProviderZipcode.import_zipcodes(params[:file], @provider)
-  		redirect_to admin_provider_zipcodes_path, notice: "Zipcodes Imported for #{@provider.name}"
+
+      if (params[:zipcode].present? and params[:file].present?)
+        render :json => { status: :alert, url: new_admin_provider_zipcode_path, msg: "Either enter a zipcode or upload a zipcode document" }
+        return
+      end
+
+      @provider = Provider.find(params[:provider_id])
+
+      if params[:zipcode].present?
+        provider_zipcode = @provider.provider_zipcodes.find_by(zipcode: params[:zipcode]) || @provider.provider_zipcodes.build(:zipcode => params[:zipcode])
+  		  provider_zipcode.save
+      else
+        ProviderZipcode.import_zipcodes(params[:file], @provider)
+      end
+
+      render :json => { status: :notice, url: admin_provider_zipcodes_path, msg: "Zipcodes Imported for #{@provider.name}" }
   	end
   end
 
