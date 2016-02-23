@@ -27,7 +27,7 @@ class ProviderZipcode < ActiveRecord::Base
 					end
 					provider_zipcode.save!
 
-					break if provider.provider_zipcodes.length == 500
+					break if provider.provider_zipcodes.length == 300
 					# if $. == 500
 				end
 				logger.debug CSV.readlines(file.path).size

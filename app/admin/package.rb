@@ -10,7 +10,13 @@ ActiveAdmin.register Package do
     column :installation_price
     column :provider
     column :package_type
-    column :promotion_disclaimer
+    column :promotion_disclaimer do |package|
+    	if package.provider.short_name == "CHARTER"
+    		package.promotion_disclaimer
+    	else
+    		"N/A"
+    	end
+    end
     column :created_at
     actions
   end

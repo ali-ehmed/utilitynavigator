@@ -34,4 +34,10 @@ class Package < ActiveRecord::Base
 			update_attribute(:promotion_disclaimer, "#{price} & #{self.charter_tv_spectrum}")
 		end
 	end
+
+	def upadting_content_to_html
+		if self.package_description
+			update_attribute(:package_description, self.package_description.html_safe)
+		end
+	end
 end

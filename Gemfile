@@ -14,12 +14,14 @@ gem "font-awesome-rails"
 gem "paperclip", git: "git://github.com/thoughtbot/paperclip.git"
 gem 'roo', '~> 2.1.0'
 
+
 group :development, :test do
   gem 'byebug'
 end
 group :development do
   gem 'web-console', '~> 2.0'
   gem 'spring'
+  gem "passenger"
 end
 
 gem 'devise'
@@ -30,7 +32,10 @@ gem 'jquery-ui-rails'
 gem 'best_in_place', '~> 3.0.1'
 
 # Webservers
-gem "passenger"
+group :production do
+	gem 'unicorn'
+	gem 'rails_12factor'
+end
 
 gem 'bootstrap-sass'
 gem 'high_voltage'
@@ -45,5 +50,3 @@ group :development do
   gem 'rails_layout'
   gem "letter_opener"
 end
-
-gem 'rails_12factor', group: :production
