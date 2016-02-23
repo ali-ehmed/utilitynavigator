@@ -1,4 +1,4 @@
-<%= simple_form_for [:admin, @package], url: product_bundles_admin_packages_path, method: :get do |f| %>
+<%= simple_form_for [:admin, @package], url: @url, method: @http_method do |f| %>
 	<fieldset class="inputs">
 		<legend><span>General Details of Package</span></legend>
 		<ol>
@@ -22,34 +22,36 @@
 			</li>
 		</ol>
 	</fieldset>
-	<fieldset class="inputs">
-		<legend><span>Select Provider &amp; Package Type</span></legend>
-		<ol>
-			<li>
-				<%= f.association :provider,:as => :select,:include_blank => "--Select--", input_html: { onchange: "$packages.validatingProvider(this);" } %>
-			</li>
-			<li>
-				<%= f.association :package_type,:as => :select,:include_blank => "--Select--", input_html: { onchange: "$packages.enableProducts(this);" } %>
-			</li>
-			<li>
-				<fieldset class="choices package-products">
-					<legend class="label"><label>Choose Products</label></legend>
-					<ol class="choices-group">
-						<li class="product-errors"></li>
-						<% Product.all.each do |product| %>
-							<li class="choice">
-								<%= check_box_tag "product_ids[]", product.id, false, onchange: "$packages.validatingProducts(this);" %> <%= product.name %>
-							</li>
-						<% end %>
-					</ol>
-				</fieldset>
-			</li>
-		</ol>
-	</fieldset>
+	<% if @package.new_record? %>
+		<fieldset class="inputs">
+			<legend><span>Select Provider &amp; Package Type</span></legend>
+			<ol>
+				<li>
+					<%= f.association :provider,:as => :select,:include_blank => "--Select--", input_html: { onchange: "$packages.validatingProvider(this);" } %>
+				</li>
+				<li>
+					<%= f.association :package_type,:as => :select,:include_blank => "--Select--", input_html: { onchange: "$packages.enableProducts(this);" } %>
+				</li>
+				<li>
+					<fieldset class="choices package-products">
+						<legend class="label"><label>Choose Products</label></legend>
+						<ol class="choices-group">
+							<li class="product-errors"></li>
+							<% Product.all.each do |product| %>
+								<li class="choice">
+									<%= check_box_tag "product_ids[]", product.id, false, onchange: "$packages.validatingProducts(this);" %> <%= product.name %>
+								</li>
+							<% end %>
+						</ol>
+					</fieldset>
+				</li>
+			</ol>
+		</fieldset>
+	<% end %>
 	<fieldset class="actions">
 		<ol>
 			<li class="action input_action " id="provider_submit_action">
-				<%= f.button :submit, "Continue" %>
+				<%= f.button :submit, @package.new_record? ? "Continue" : "Update Package" %>
 			</li>
 			<li class="cancel"><%= link_to "Cancel", admin_packages_path %></li>
 		</ol>

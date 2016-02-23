@@ -18,3 +18,7 @@ fieldset.package-products > legend {
 li.product-errors {
 	font-size: bold;
 }
+
+table td.fields, th.fields {
+  text-align: center;
+}

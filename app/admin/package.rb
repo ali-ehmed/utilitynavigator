@@ -1,4 +1,5 @@
 ActiveAdmin.register Package do
+	require 'json'
 
 	form partial: 'package_form'
 
@@ -19,6 +20,59 @@ ActiveAdmin.register Package do
     end
     column :created_at
     actions
+  end
+
+  show do
+    h3 package.package_name
+      attributes_table do
+	      row :price_info
+	      row :price
+	      row :installation_price
+	      row :promotion_disclaimer do |package|
+		    	if package.provider.short_name == "CHARTER"
+		    		package.promotion_disclaimer
+		    	else
+		    		"N/A"
+		    	end
+		    end
+		    row :monthly_fee_after_promotion
+    	end
+    
+    package.package_bundles.each do |bundle|
+    	hash = bundle.field.gsub("=>", ":")
+	 		requirements = JSON.parse(hash)
+
+    	unless requirements.blank?
+	    	panel bundle.product.name do
+
+	    		table_for bundle do
+				 		requirements.keys.map do |key|
+				 			column key, class: "fields" do
+				 				requirements[key]
+				 			end
+				 		end
+		      end
+
+	  		end
+	  	end
+    end
+  end
+
+
+
+  sidebar "Provider", only: :show do
+    attributes_table_for package do
+      row :provider
+      row :logo do |package|
+      	image_tag package.provider.logo.url(:thumb)
+      end
+    end
+  end
+
+  sidebar "Package Type", only: :show do
+    attributes_table_for package do
+      row :package_type
+    end
   end
 
 	controller do
@@ -57,8 +111,31 @@ ActiveAdmin.register Package do
 			end
 		end
 
+		def new
+			@package = Package.new
+			@url = product_bundles_admin_packages_path
+			@http_method = :get
+		end
+
+		def edit
+			@package = resource
+			@url = admin_package_path(resource)
+			@http_method = :put
+		end
+
+		def update
+			@package = resource
+			if resource.update_attributes(initialize_params)
+				redirect_to admin_packages_path, notice: "Pakage Updated"
+			else
+				flash[:alert] = "Something went wrong"
+				render :edit
+			end
+		end
+
 		def initialize_params
-			params.require(:package).permit(:provider_id)
+			params.require(:package).permit(:provider_id, :package_type_id, :price, :price_info, :package_description,
+																			:package_name, :promotion_disclaimer, :monthly_fee_after_promotion, :installation_price)
 		end
 	end
 

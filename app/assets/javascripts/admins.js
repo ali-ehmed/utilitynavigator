@@ -150,7 +150,7 @@ window.$provider_zipcodes = {
 		    return
 		  },
 		  success: function(response) {
-	    	$.cookie("setFlash", '{"status": "'+response.status+'", "msg": "'+response.msg+'"}');
+	    	$.cookie("setFlash", '{"status": "'+response.status+'", "msg": "'+response.msg+'"}', { path: window.location.pathname });
 
 	      var delay = 1000; //Your delay in milliseconds
 	      setTimeout(function(){ window.location = response.url; }, delay);
@@ -183,11 +183,11 @@ $admin = {
 			switch(flash.status) {
 				case "notice":
 					$(".flashes").html("<div class='flash flash_notice'>"+ flash.msg +"</div>");
-					$.removeCookie("setFlash");
+					$.removeCookie("setFlash", { path: ""+ window.location.pathname +"" });
 					break;
 				case "alert":
 					$(".flashes").html("<div class='flash flash_alert'>"+ flash.msg +"</div>");
-					$.removeCookie("setFlash")
+					$.removeCookie("setFlash", { path: ""+ window.location.pathname +""})
 					break;
 			}
 		}

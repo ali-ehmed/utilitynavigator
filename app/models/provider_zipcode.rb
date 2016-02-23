@@ -27,11 +27,12 @@ class ProviderZipcode < ActiveRecord::Base
 					end
 					provider_zipcode.save!
 
-					break if provider.provider_zipcodes.length == 300
+					break if provider.provider_zipcodes.length == 500
 					# if $. == 500
 				end
 				logger.debug CSV.readlines(file.path).size
 			else
+
 				spreadsheet = open_spreadsheet(file)
 				header = spreadsheet.row(1)
 				(2.upto(500)).each do |row_id|
@@ -39,6 +40,7 @@ class ProviderZipcode < ActiveRecord::Base
 					provider_zipcode = provider.provider_zipcodes.find_by(:zipcode => row["zipcode"].to_i) || provider.provider_zipcodes.build(:zipcode => row["zipcode"].to_i)
 					provider_zipcode.save!
 				end
+				
 			end
 			logger.debug "Counting:-> #{provider.provider_zipcodes.length}"
 		end
