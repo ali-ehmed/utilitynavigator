@@ -46,3 +46,5 @@ end
 # File.open(File.join(directory, 'tws_zipcodes.csv'), 'w') do |f|
 #   f.puts "contents"
 # end
+
+puts "Creating Packages"

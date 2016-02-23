@@ -128,7 +128,6 @@ window.$provider_zipcodes = {
     $.each($form.serializeArray(), function(key, value)
     {
         data.append(value.name, value.value);
-        // console.log(value)
     });
 
     jQuery.each(jQuery('#file')[0].files, function(i, file) {
@@ -158,7 +157,7 @@ window.$provider_zipcodes = {
 		  }
 		}, {
 			complete: function() {
-				$submit_btn.text($submit_btn_val);
+				$submit_btn.text("Submit");
 				$submit_btn.removeAttr('disabled');
 				return
 			}
