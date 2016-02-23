@@ -1,0 +1,24 @@
+fieldset.package-products {
+	padding: 11px 0px 11px 0px;
+  background: rgb(191, 191, 191);
+  border-radius: 5px;
+  cursor: no-drop;
+}
+fieldset.package-products > legend {
+  padding-left: 8px;			
+}
+
+.product-validate {
+  border: 2px solid #F56262 !important;
+  padding: 5px 0px 0px 5px !important;
+  margin-bottom: 5px;
+  margin-top: 5px;
+  border-radius: 3px;
+}
+li.product-errors {
+	font-size: bold;
+}
+
+table td.fields, th.fields {
+  text-align: center;
+}
