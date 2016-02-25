@@ -21,7 +21,6 @@ ActiveAdmin.register ProviderZipcode do
 
   controller do
   	def create
-      logger.debug "---------_#{params}"
   		if (params[:zipcode].blank? and params[:file].blank?) or params[:provider_id].blank?
         render :json => { status: :alert, url: new_admin_provider_zipcode_path, msg: "Provider and File must be selected" }
   			return

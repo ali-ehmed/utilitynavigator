@@ -1,0 +1,37 @@
+<div class="row">
+  <div class="col-md-8">
+    <%= form_tag package_bundles_path, method: :get, class: "form-inline" do %>
+      <div class="panel panel-search">
+        <div class="panel-body">
+          <h4 class="search-title">
+            <i class="fa fa-fw fa-compress"></i> Compare and Choose Your TV, Internet and Phone Services</h4>
+          <p>ENTER YOUR ADDRESS</p>
+          <ul class="list-inline">
+            <li class="col-md-3 col-sm-3 col-xs-12">
+              <div class="form-group">
+                <%= text_field_tag :address, params[:address], class: "col-md-3 form-control", placeholder: "Street Address*" %>
+              </div>
+            </li>
+            <li class="col-md-3 col-xs-12 col-sm-3">
+              <div class="form-group">
+                <%= text_field_tag :apt, params[:apt], class: "col-md-3 form-control", placeholder: "Apt#" %>
+              </div>
+            </li>
+            <li class="col-md-3 col-xs-12 col-sm-3">
+              <div class="form-group">
+                <%= text_field_tag :zipcode, params[:zipcode], class: "col-md-3 form-control", placeholder: "Zip Code*" %>
+              </div>
+            </li>
+            <li class="col-md-3 col-xs-12 col-sm-3">
+              <div class="form-group">
+                <%= text_field_tag :state, params[:state], class: "col-md-3 form-control", placeholder: "State*" %>
+              </div>
+            </li>
+          </ul>
+          <br />
+          <%= button_tag "Find Deals &amp; Offers".html_safe, type: :submit, class: "btn btn-block btn-danger search-btn" %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>

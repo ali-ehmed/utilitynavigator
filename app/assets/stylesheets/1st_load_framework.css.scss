@@ -45,3 +45,18 @@ section {
   @extend .row;
   margin-top: 20px;
   }
+
+.btn-un {
+  background-color: #9932cc;
+  color: #fff;
+  font-weight: bold;
+}
+
+.panel-un {
+  border-color: rgba(74, 6, 109, 0.78);
+  .panel-heading {
+    color: #FFFFFF;
+    background-color: rgba(168, 76, 214, 0.78);
+    border-color: rgba(74, 6, 109, 0.78);
+  }
+}

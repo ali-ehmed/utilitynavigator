@@ -1,0 +1,40 @@
+<div id="search-deals">
+    <div class="mobile-view">
+      <%= render partial: "shared/search_deals" %>
+    </div>
+    <div class="desktop-view">
+      <div id="myCarousel" class="carousel slide">  
+        <div class="carousel-inner">
+          <div class="item active">
+            <!--<img src="img/slider/Fotolia_30977559_XS.jpg" alt="slide 1">-->
+            <%= image_tag("twc-banner.png") %>
+            <div class="container">
+              <div class="carousel-caption">
+                <%= render partial: "shared/search_deals" %>
+              </div>
+            </div>
+          </div>
+          <div class="item">
+            <%= image_tag("cox-banner.png") %>
+            <div class="container">
+              <div class="carousel-caption">
+                <%= render partial: "shared/search_deals" %>
+              </div>
+            </div>
+          </div>
+          <div class="item">
+            <%= image_tag("charter-banner.png") %>
+            <div class="container">
+              <div class="carousel-caption">
+                <%= render partial: "shared/search_deals" %>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Controls -->
+        <a class="left carousel-control" href="#myCarousel" data-slide="prev"><span class="fa fa-chevron-left fa-2x"></span></a>
+        <a class="right carousel-control" href="#myCarousel" data-slide="next"><span class="fa fa-chevron-right fa-2x"></span></a>  
+      </div>
+    </div>
+    <!-- /.carousel -->
+  </div>

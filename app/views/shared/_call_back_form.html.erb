@@ -4,7 +4,7 @@
       <%= simple_form_for CallBack.new, url: call_back_index_path, method: :post, html: { onsubmit: "requestCallback(event);" } do |f |%>
         <div class="modal-header">
           <h4 class="modal-title" id="myModalLabel">
-            <div class="panel panel-warning">
+            <div class="panel panel-un">
               <div class="panel-heading">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                 <span>Feel free to Request a Call Back from us!</span>
@@ -67,7 +67,7 @@
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-          <%= button_tag "Submit", type: :submit, class: "btn btn-primary" %>
+          <%= button_tag "Submit", type: :submit, class: "btn btn-un" %>
         </div>
       <% end %>
     </div>
