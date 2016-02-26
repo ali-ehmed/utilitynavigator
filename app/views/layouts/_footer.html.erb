@@ -1,26 +1,31 @@
 <!-- Footer -->
 <footer>
-	<div class="well">
+	<div class="well application-footer">
 		<div class="row">
 			<div class="col-md-3">
-				<p class="footer-logo">Utility Navigator</p>
-				<strong>&copy; All Rights Reserved</strong>
+				<div class="footer-logo">
+					<p>
+						<%= link_to root_path do %>
+			        <%= image_tag "logo-footer.png" %>
+			      <% end %>
+					</p>
+					<strong>&copy; 2016 Utility Navigator. All Rights Reserved</strong>
+				</div>
+				
 			</div>
 			<div class="col-md-9">
 				<div class="row">
 					<div class="col-md-9">
-						<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-						tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-						quis nostrud exercitation ullamco laboris nisi ut aliquip ex.</p>
+						<p>We at Utility Navigators are committed to making your choice of TV/Internet/Phone a simple &amp; smooth decision. No more complex comparisons or long holds..!</p>
 					</div>
 					<div class="col-md-3">
-						<button type="button" data-controls-modal="call_back" data-backdrop="static" data-keyboard="false" class="btn btn-lg btn-warning btn-block" data-toggle="modal" data-target="#call_back">
+						<button type="button" data-controls-modal="call_back" data-backdrop="static" data-keyboard="false" class="btn btn-lg btn-warning btn-callback btn-block" data-toggle="modal" data-target="#call_back">
 							Request Call Back
 						</button>
 					</div>
 				</div>
 				<hr />
-				<ul class="list-inline">
+				<ul class="list-inline providers-link">
 					<li><a href="#">TWS</a></li>
 					<li><a href="#">COX</a></li>
 					<li><a href="#">CHARTER</a></li>

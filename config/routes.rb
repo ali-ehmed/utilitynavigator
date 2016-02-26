@@ -7,6 +7,10 @@ Rails.application.routes.draw do
   		get "show" => "package_bundles#show"
   	end
   end
+
+  %w(cox charter_spectrum twc).each do |proivder|
+    get proivder => "landings##{proivder}"
+  end
   
   devise_for :users
   resources :call_back, only: [:create]

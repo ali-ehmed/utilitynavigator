@@ -7,15 +7,51 @@ header {
 .landing {
 	#search-deals {
 
+		.panel-search {
+			border-color: #9932CC;
+
+			.panel-body {
+				padding: 38px;
+				color: #fff;
+				background-color: #9932CC;
+
+				h4.search-title { 
+					text-align: center;
+			    font-size: 22px;
+			    font-weight:bold;
+				}
+
+				ul {
+					margin-bottom: 32px;
+					// li {
+					// 	padding-left: 0px;
+    	// 			padding-right: 1px;
+
+    	// 			.form-control {
+    	// 				border-radius: 0px;
+    	// 			}
+					// }
+				}
+
+				.search-btn {
+					margin-top: 10px;
+					padding-top: 10px;
+    			padding-bottom: 10px;
+    			font-size: 18px;
+    			background-color: #640D8F;
+    			border-color: #3B144D;
+    			font-weight: bold;
+				}
+			}
+		}
+
 		@media (min-width: 768px) {
 			.form-inline .form-control {
 				width: 100%;
 			}
 		}
 
-		.search-btn {
-			margin-top: 10px;
-		}
+		
 
 		background-color: rgba(70, 68, 68, 0.71);
 		margin-top: -20px;
@@ -64,18 +100,32 @@ header {
 }
 
 footer {
-	p.footer-logo {
-		font-size: 2.3em;
-	}
-	hr { border-top-color: #D5D5D6; }
+	margin: 0px;
 
-	ul li {
-    padding-left: 4px !important;
-    padding-right: 9px !important;
-    border-right: 1px solid;
-	}
-	ul li:last-child {
-		border-right: 0px;
+	div.application-footer {
+		div.footer-logo {
+			text-align: center;
+			p { font-size: 2.3em; }
+		}
+		hr { border-top-color: #D3D9DF; }
+
+		ul li {
+	    padding-left: 4px !important;
+	    padding-right: 9px !important;
+	    border-right: 1px solid;
+		}
+		ul li:last-child {
+			border-right: 0px;
+		}
+
+		
+		margin-bottom: 0px;
+		background-color: #393939;
+		color: #D3D9DF;
+
+		ul.providers-link {
+			li > a { color: #fff; }
+		}
 	}
 }
 
@@ -92,3 +142,55 @@ footer {
 }
 
 .checkout { font-size: 24px; }
+
+
+// Navbar 
+nav.navbar-app {
+	background-color: #F8F8F8;
+  // border-color: #F8F8F8;
+  border: 0px;
+  .navbar-toggle .icon-bar {
+		background-color: #000;
+  }
+  a.navbar-brand {
+  	padding: 9px 0px 0px 0px;
+  	img { width: 65%; }
+  }
+
+  .navbar-nav > li > a:hover, .navbar-nav > li > a:focus {
+    color: #000;
+    background-color: transparent;
+	}
+
+	.navbar-nav > li > a {
+		padding-top: 21px;
+    padding-bottom: 19px;
+	}
+
+	.active-link { 
+		background-color: #9932CC; 
+		a { 
+			color: #fff; 
+			&:hover { color: #fff !important; }
+		}
+	}
+
+	li.active-link::after {
+		width: 0; 
+		height: 0; 
+		border-left: 5px solid transparent;
+		border-right: 5px solid transparent;
+
+		border-bottom: 5px solid black;
+	}
+
+	li.header-contact {
+		background-color: #87CEFA;
+    padding: 5px 40px 5px 40px;
+    color: #fff;
+    text-align: center;
+
+    span.contact-text { font-size: 10px; }
+    span.contact-no { font-size: 21px; }
+	}
+}
