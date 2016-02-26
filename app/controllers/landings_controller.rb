@@ -3,18 +3,25 @@ class LandingsController < ApplicationController
 	def index
 	end
 
+	def providers
+		
+	end
+
 	def twc
-		# simply redering index with twc
-		render :index
+		@provider_banner = "twc.png"
+		# simply redering providers with twc
+		render :providers
 	end
 
 	def cox
-		# simply redering index with cox
-		render :index
+		# simply redering providers with cox
+		@provider_banner = "cox.png"
+		render :providers
 	end
 
 	def charter_spectrum
-		# simply redering index with charter_spectrum
-		render :index
+		# simply redering providers with charter_spectrum
+		@provider_banner = "charter.png"
+		render :providers
 	end
 end
