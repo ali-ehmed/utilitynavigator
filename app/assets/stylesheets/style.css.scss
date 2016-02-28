@@ -455,6 +455,14 @@ nav.navbar-app {
 		background-color: #9932CC; 
 		a { 
 			color: #fff; 
+      font-weight: bold;
+      background-repeat: no-repeat;
+      background-position: center bottom;
+      background-position-y: 50px;
+
+      @media(max-width: 767px) {
+        background-image: none !important;
+      }
 			&:hover { color: #fff !important; }
 		}
 	}
