@@ -62,7 +62,6 @@ ActiveAdmin.register Package do
   end
 
 
-
   sidebar "Provider", only: :show do
     attributes_table_for package do
       row :provider
