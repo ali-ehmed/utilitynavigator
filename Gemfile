@@ -14,6 +14,7 @@ gem "font-awesome-rails"
 gem "paperclip", git: "git://github.com/thoughtbot/paperclip.git"
 gem 'roo', '~> 2.1.0'
 gem "wysiwyg-rails"
+gem "paperclip-dropbox", ">= 1.1.7"
 
 group :development, :test do
   gem 'byebug'

@@ -23,7 +23,13 @@ class Provider < ActiveRecord::Base
 	validates_presence_of :name
 	after_save :creating_preferences
 
-	has_attached_file :logo, styles: { medium: "300x300>", thumb: "100x100>" }, default_url: "/images/:style/missing.png"
+	# has_attached_file :logo, styles: { medium: "300x300>", thumb: "100x100>" }, default_url: "/images/:style/missing.png"
+  
+
+  has_attached_file :logo, styles: { medium: "300x300>", thumb: "100x100>" },
+    :storage => :dropbox,
+    :dropbox_credentials => Rails.root.join("config/initializers/dropbox.yml"),
+    :dropbox_visibility => 'public'
   validates_attachment_content_type :logo, content_type: /\Aimage\/.*\Z/
 
 	def creating_preferences
