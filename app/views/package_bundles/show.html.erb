@@ -1,58 +1,98 @@
-<div class="container">
-	
-	<% if @provider_zipcode.blank? %>
-		<div class="alert alert-danger">
-			<strong>Sorry!</strong> Currently, our packages are not available in your area.
+<div id="results-banner">
+	<div class="row">
+		<div class="col-md-6 address">
+			<strong>Offer Showing for:</strong>
+			<address><%= address(@attributes) %></address>
+			<i class="glyphicon glyphicon-edit"></i> Change Address
 		</div>
-	<% else %>
-		<div class="page-header">
-			<h1><%= pluralize(@packages.length, "Package") %> <small>found</small></h1>
+		<div class="col-md-6 companies">
+			<strong>Our Providers</strong>
+			<div class="row">
+				<ul class="list-inline">
+					<li class="col-md-3">
+						<%= image_tag("twc-logo.png") %>
+					</li>
+					<li class="col-md-3">
+						<%= image_tag("cox-logo.png") %>
+					</li>
+					<li class="col-md-3">
+						<%= image_tag("charter-logo.png") %>
+					</li>
+				</ul>
+			</div>
+			<div class="row">
+				<ul class="list-inline">
+					<li class="col-md-3 text-center">
+						(<%= @twc.count %>)
+					</li>
+					<li class="col-md-3 text-center">
+						(<%= @charter.count %>)
+					</li>
+					<li class="col-md-3 text-center">
+						(<%= @cox.count %>)
+					</li>
+				</ul>
+			</div>
 		</div>
-		<div class="well">
-			<% @packages.each do |package| %>
-				<div class="panel panel-default">
-					<div class="panel-heading">
-						<div class="panel-title">
-							<%= package.package_name %>
-						</div>
-					</div>
-					<div class="panel-body">
-						<div class="row">
-							<div class="col-md-3">
-								<%= image_tag @provider.logo.url(:thumb), class: "img-rounded img-responsive" %>
-							</div>
-							<div class="col-md-9">
+	</div>
+</div>
+<div id="package-details">
+	<div class="container">
+		<% if @provider_zipcode.blank? %>
+			<div class="alert alert-danger">
+				<strong>Sorry!</strong> Currently, our packages are not available in your area.
+			</div>
+		<% else %>
+			<!-- <div class="page-header">
+				<h1><%#= pluralize(@packages.length, "Package") %> <small>found</small></h1>
+			</div> -->
+			<div class="row">
+				<% @packages.each do |package| %>
+					<div class="col-md-6 col-sm-12">
+						<div class="panel panel-default">
+							<div class="panel-body">
 								<div class="row">
-									<div class="col-md-9">
-										<strong>Package Detail</strong>
-										<p>
+									<div class="col-md-9 col-sm-9">
+										<div class="row">
+											<div class="col-md-4 col-sm-4">
+												<%= image_tag @provider.logo.url(:thumb), class: "img-rounded img-responsive" %>
+											</div>
+											<div class="col-md-8 col-sm-8">
+												<label><%= package.package_name %></label>
+												<%= link_to "Plan Details", "#", class: "detail-link" %>
+											</div>
+										</div>
+										<p class="package-description">
 											<%= package.package_description.html_safe %>
 										</p>
+										<%= link_to "More Info & Promotions", "#", class: "detail-link" %>
+										<br />
+										<button class="btn btn-warning btn-lg choose-plan-btn">CHOOSE THIS PLAN</button>
+										
 									</div>
-									<div class="col-md-3">
-										<ul class="list-inline">
-											<li>
-												<span class="pricing label label-default"><%= package.package_type.name %></span>
-											</li>
-											<li class="pull-right">
-												<span class="pricing label label-default"><%= package.price %></span>
-											</li>
-										</ul>
-										<%= link_to "Checkout", "#", class: "btn btn-info btn-primary btn-block checkout" %>
+									<div class="col-md-3 col-sm-3">
+										<div class="price-info">
+											<strong>Starting at</strong>
+											<strong class="price"><%= package.price %></strong>
+											per month
+											<br />
+											<strong class="price-information"><%= package.price_info %></strong>
+										</div>
+										<div class="checkbox">
+			                <%= check_box_tag :compare, {:class => "styled"}  %>
+			                <label class="compare-label-checkbox">
+			                  COMPARE
+			                </label>
+			              </div>
 									</div>
 								</div>
 							</div>
 						</div>
 					</div>
-				</div>
-				<hr />
-			<% end %>
-		</div>
-		<% if @packages.present? %>
-		<% else %>
-			<div class="alert alert-warning">
-				<strong>Sorry!</strong> There are no packages available
+				<% end %>
 			</div>
 		<% end %>
-	<% end %>
+	</div>
 </div>
+
+

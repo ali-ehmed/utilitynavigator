@@ -1,13 +1,103 @@
 header {
 	margin-bottom: 20px;
 }
+//Package Details
+#package-details {
+  .price-info {
+    background:url("price-tag-search.png");
+    background-size: 100% auto;
+    min-height: 180px;
+    text-align: center;
+    padding: 13px 4px;
+    color: #fff;
+    border-radius: 4px 4px 0px 0px;
 
+    .price {
+      font-size: 27px;
+      line-height: 40px;
+    }
+    .price-information {
+      font-size: 8px;
+    }
+
+    @media(max-width: 768px) {
+      margin: 12px 0px;
+      padding: 21px 24px;
+      border-radius: 4px;
+
+      .price-information {
+        font-size: 15px;
+      }
+    }
+  }
+
+  p.package-description {
+    margin: 13px 0px;
+    line-height: 20px;
+  }
+
+  a.detail-link {
+    color: #9932cc;
+  }
+
+  button.choose-plan-btn {
+    color: #000;
+    background-color: #F1C40F;
+    border-color: #F1C40F;
+    font-weight: bold;
+    margin-top: 13px;
+    margin-left: 13px;
+  }
+
+  label.compare-label-checkbox {
+    padding-left: 6px;
+    font-weight: bold;
+  }
+}
+
+// Results
+#results-banner {
+  overflow-x: hidden;
+  color: #fff;
+  margin-bottom: 25px;
+  margin-top: -10px;
+
+  .address {
+    background-color: #9932cc;
+    padding: 35px 125px;
+
+    address {
+      margin-top: 9px;
+      margin-bottom: 8px;
+      border-bottom: 1px solid;
+    }
+  }
+  .companies {
+    background-color: #DF2B2B;
+    padding: 18.5px 25px;
+    @media (max-width: 768px) {
+      padding: 18.5px 125px;
+    }
+    ul {
+        margin-top: 12px;
+      li { 
+        width: 17%;
+        padding-left: 2px;
+        padding-right: 5px;
+        margin: 0px 6px;
+        img {
+          margin: 0;
+        }
+      }
+    }
+  }
+}
 // Visitors
 .landing {
 	.section-1 {
     overflow-x: hidden;
     background-color: #9932cc;
-    margin-top: -39px;
+    margin-top: -60px;
     padding: 20px 152px;
     color: #fff;
 
@@ -138,6 +228,14 @@ header {
         font-weight: bold;
         li {
           padding: 10px 12px;
+
+          span.package-filter {
+            background: url("filter-circle.png");
+            background-size: 100% auto;
+            padding: 2px 20px 0px 1px;
+            background-repeat: no-repeat;
+            margin: 0px -5px 0px -10px;
+          }
         }
       }
     }
@@ -151,6 +249,10 @@ header {
       font-size: 40px;
       font-weight: bold;
       color: #9932cc;
+      .per-month {
+        font-size: 14px;
+        font-weight: 500;
+      }
     }
     .package-button {
       margin-right: -15px;
@@ -165,6 +267,14 @@ header {
         border-color: #F1C40F;
       }
     }
+    .see-more-btn {
+      border-width: 3px;
+      font-weight: bold;  
+    }
+    .channel-comparison-link {
+      font-weight: bold;
+      color: rgba(0, 0, 0, 0.72);
+    }
   }
 }
 
@@ -172,16 +282,16 @@ header {
   #search-deals {
     form {
       position :absolute;
-      top: 103px;
-      left: 155px;
-      right: 243px;
+      top: 101px;
+      left: 145px;
+      right: 239px;
     }
     background-size: 100% auto !important;
 
     @media (max-width: 1024px) {
       form { position: static; }
       padding: 45px 10px 25px 10px;
-      background: rgba(17, 17, 17, 0.72) !important;
+      // background: rgba(17, 17, 17, 0.72) !important;
     }
   }
 }
@@ -198,6 +308,12 @@ header {
   }
 }
 
+// Popover search
+.search-form-popover-title {
+  color: #fff;
+  font-size: 18px;
+  font-weight: bold;
+}
 // Search
 #search-deals {
   .panel-search {
@@ -240,7 +356,6 @@ header {
   overflow-x: hidden;
   // padding: 53px 0px 34px 0px;
   padding-bottom: 34px;
-  min-height: 562px;
   background-size: 100% auto;
 
   @media (min-width: 1024px) {

@@ -58,14 +58,12 @@ ActiveAdmin.register Provider do
 				panel "Preferences for #{product.name.humanize}" do
 					provider.product_provider_preferences.each do |pref|
 						columns do
-							column max_width: "50px", min_width: "50px" do
-						    span "-"
-						  end
-						  column do
-						    if product.id == pref.additional_field_weight.product.id
+							if product.id == pref.additional_field_weight.product.id
+								column max_width: "50px", min_width: "50px" do
+							    span "-"
+							  end
+						  	column do
 									span pref.additional_field_weight.additional_weight
-								else
-									span "N/A"
 								end
 						  end
 						end

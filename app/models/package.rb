@@ -29,6 +29,10 @@ class Package < ActiveRecord::Base
 
 	after_create :set_promotion_disclaimer
 
+	scope :twc, -> { joins(:provider).where("providers.name = 'Time Warner'") }
+	scope :charter, -> { joins(:provider).where("providers.name = 'Charter Spectrum'") }
+	scope :cox, -> { joins(:provider).where("providers.name = 'COX'") }
+
 	def set_promotion_disclaimer
 		if self.provider.short_name == "CHARTER" and self.charter_tv_spectrum
 			update_attribute(:promotion_disclaimer, "#{price} & #{self.charter_tv_spectrum}")
@@ -39,5 +43,9 @@ class Package < ActiveRecord::Base
 		if self.package_description
 			update_attribute(:package_description, self.package_description.html_safe)
 		end
+	end
+
+	def price_info
+		read_attribute(:price_info).split("*")[1].strip if read_attribute(:price_info).include?("*")
 	end
 end

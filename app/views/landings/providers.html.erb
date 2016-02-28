@@ -1,6 +1,6 @@
 <div class="providers">
   <div class="providers-search">
-    <div id="search-deals" style="background: url('<%= asset_path(@provider_banner) %>');">
+    <div id="search-deals" style="background: url('<%= asset_path(@provider_banner) %>'); min-height: 504px;">
       <%= render partial: "shared/search_deals" %>
     </div>
   </div>
@@ -12,7 +12,7 @@
         <div class="col-md-4">
           <div class="panel panel-default">
             <div class="panel-body">
-              <div class="category-panel-title">Get more from your TV</div>
+              <div class="category-panel-title" style="margin-bottom: 45px;">Get more from your TV</div>
               <div class="category">TV</div>
               <p>
                 <label>FEATURES</label>
@@ -60,7 +60,7 @@
         <div class="col-md-4">
           <div class="panel panel-default">
             <div class="panel-body">
-              <div class="category-panel-title">The internet just got better</div>
+              <div class="category-panel-title" style="margin-bottom: 45px;">The internet just got better</div>
               <div class="category">Internet</div>
               <p>
                 <label>FEATURES</label>
@@ -199,10 +199,22 @@
     <div class="container">
       <div class="packages-category-name">
         <ul class="list-inline">
-          <li>TV</li>
-          <li>INTERNET</li>
-          <li>PHONE</li>
-          <li>BUNDLES</li>
+          <li>
+            TV
+            <span class="package-filter"></span>
+          </li>
+          <li>
+            INTERNET
+            <span class="package-filter"></span>
+          </li>
+          <li>
+            PHONE
+            <span class="package-filter"></span>
+          </li>
+          <li>
+            BUNDLES
+            <span class="package-filter"></span>
+          </li>
         </ul>
       </div>
       <div class="row">
@@ -213,7 +225,7 @@
                 STANDARD INTERNET
               </div>
               <div class="package-price">
-                $34
+                $34 <span class="per-month">/ month</span>
               </div>
               <ul class="list-unstyled">
                 <li>
@@ -226,10 +238,11 @@
                 </li>
               </ul>
               <div class="package-button">
-                <a href="#" class="btn btn-warning btn-block">Select offer</a>
+                <a href="#" class="btn btn-warning btn-block offer-btn">Select offer</a>
               </div>
             </div>
           </div>
+          <a href="#" class="channel-comparison-link">CHANNEL COMPARISON</a>
         </div>
         <div class="col-md-4">
           <div class="panel panel-default">
@@ -238,7 +251,7 @@
                 TURBO INTERNET
               </div>
               <div class="package-price">
-                $44
+                $44 <span class="per-month">/ month</span>
               </div>
               <ul class="list-unstyled">
                 <li>
@@ -251,7 +264,7 @@
                 </li>
               </ul>
               <div class="package-button">
-                <a href="#" class="btn btn-warning btn-block">Select offer</a>
+                <a href="#" class="btn btn-warning btn-block offer-btn">Select offer</a>
               </div>
             </div>
           </div>
@@ -263,7 +276,7 @@
                 EXTREME INTERNET
               </div>
               <div class="package-price">
-                $54
+                $54 <span class="per-month">/ month</span>
               </div>
               <ul class="list-unstyled">
                 <li>
@@ -276,10 +289,11 @@
                 </li>
               </ul>
               <div class="package-button">
-                <a href="#" class="btn btn-warning btn-block">Select offer</a>
+                <a href="#" class="btn btn-warning btn-block offer-btn">Select offer</a>
               </div>
             </div>
           </div>
+          <button class="btn btn-default pull-right see-more-btn">SEE MORE PACKAGES</button>
         </div>
       </div>
     </div>

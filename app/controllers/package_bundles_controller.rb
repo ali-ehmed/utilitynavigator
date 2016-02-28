@@ -5,13 +5,19 @@ class PackageBundlesController < ApplicationController
 		@provider_zipcode = ProviderZipcode.find_by(zipcode: @zipcode)
 		@packages = []
 
+		@attributes = {
+			address: params[:address],
+			zip: params[:zipcode],
+			apt: params[:apt],
+			state: params[:state]
+		}
+
+		@twc = Package.twc
+		@charter = Package.charter
+		@cox = Package.cox
+
 		if @provider_zipcode
-			# render :html => { template:  }
-			# render :json => { status: "not found" }
-			# return
-
 			@provider = @provider_zipcode.provider
-
 			@packages = @provider.packages
 		end
 
