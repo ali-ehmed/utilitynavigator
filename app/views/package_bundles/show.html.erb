@@ -55,7 +55,11 @@
 									<div class="col-md-9 col-sm-9">
 										<div class="row">
 											<div class="col-md-4 col-sm-4">
-												<%= image_tag @provider.logo.url(:thumb), class: "img-rounded img-responsive" %>
+												<% if @provider.logo.present?  %>
+													<%= image_tag @provider.logo.url(:medium), class: "img-rounded img-responsive" %>
+												<% else %>
+													<%= image_tag "No_Image_Available.png", class: "img-rounded img-responsive" %>
+												<% end %>
 											</div>
 											<div class="col-md-8 col-sm-8">
 												<label><%= package.package_name %></label>

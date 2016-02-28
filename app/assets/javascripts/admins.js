@@ -1,4 +1,26 @@
 //= require jquery.cookie
+//= require froala_editor.min.js
+//= require plugins/align.min.js
+//= require plugins/char_counter.min.js
+//= require plugins/code_beautifier.min.js
+//= require plugins/entities.min.js
+//= require plugins/font_family.min.js
+//= require plugins/font_size.min.js
+//= require plugins/fullscreen.min.js
+//= require plugins/image.min.js
+//= require plugins/image_manager.min.js
+//= require plugins/inline_style.min.js
+//= require plugins/line_breaker.min.js
+//= require plugins/link.min.js
+//= require plugins/lists.min.js
+//= require plugins/paragraph_format.min.js
+//= require plugins/paragraph_style.min.js
+//= require plugins/quick_insert.min.js
+//= require plugins/quote.min.js
+//= require plugins/save.min.js
+//= require plugins/table.min.js
+//= require plugins/url.min.js
+
 
 window.$packages = {
 	enableProducts: function(elem) {
@@ -198,4 +220,6 @@ $(document).on("ready", function(){
 	// Initially products checkboxes are disabled for packages
 	$("fieldset.package-products *").attr("disabled", "disabled").off('click');
 	$admin.init()
+
+	$('.package-content').froalaEditor()
 })

@@ -46,6 +46,8 @@ class Package < ActiveRecord::Base
 	end
 
 	def price_info
-		read_attribute(:price_info).split("*")[1].strip if read_attribute(:price_info).include?("*")
+		if read_attribute(:price_info)
+			read_attribute(:price_info).split("*")[1].strip if read_attribute(:price_info).include?("*")
+		end
 	end
 end

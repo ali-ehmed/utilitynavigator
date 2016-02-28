@@ -28,6 +28,9 @@ ActiveAdmin.register Package do
 	      row :price_info
 	      row :price
 	      row :installation_price
+	      row :package_description do |package|
+		    	package.package_description.html_safe
+		    end
 	      row :promotion_disclaimer do |package|
 		    	if package.provider.short_name == "CHARTER"
 		    		package.promotion_disclaimer
@@ -64,7 +67,11 @@ ActiveAdmin.register Package do
     attributes_table_for package do
       row :provider
       row :logo do |package|
-      	image_tag package.provider.logo.url(:thumb)
+      	if package.provider.logo.present?
+      		image_tag package.provider.logo.url(:thumb)
+      	else
+      		"N/A"
+      	end
       end
     end
   end

@@ -6,7 +6,11 @@
 				<%= f.input :package_name %>
 			</li>
 			<li class="string input optional stringish" id="package_description_input">
-				<%= f.input :package_description %>
+				<%= f.label :package_description %>
+			</li>
+			<li class="string input optional stringish" id="package_description_input">
+				
+				<%= f.input :package_description, input_html: { class: "package-content" } %>
 			</li>
 			<li class="string input optional stringish" id="package_price_info_input">
 				<%= f.input :price_info %>
