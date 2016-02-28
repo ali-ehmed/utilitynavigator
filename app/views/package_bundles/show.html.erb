@@ -8,20 +8,20 @@
 		<div class="col-md-6 companies">
 			<strong>Our Providers</strong>
 			<div class="row">
-				<ul class="list-inline">
-					<li class="col-md-3">
-						<%= image_tag("twc-logo.png") %>
+				<ul class="list-inline logos-list">
+					<li class="col-md-3 col-xs-12">
+						<%= image_tag("twc-search.png") %>
 					</li>
-					<li class="col-md-3">
-						<%= image_tag("cox-logo.png") %>
+					<li class="col-md-3 col-xs-12">
+						<%= image_tag("cox-search.png") %>
 					</li>
-					<li class="col-md-3">
-						<%= image_tag("charter-logo.png") %>
+					<li class="col-md-3 col-xs-12">
+						<%= image_tag("charter-search.png") %>
 					</li>
 				</ul>
 			</div>
 			<div class="row">
-				<ul class="list-inline">
+				<ul class="list-inline provider-count-list">
 					<li class="col-md-3 text-center">
 						(<%= @twc.count %>)
 					</li>
@@ -38,14 +38,11 @@
 </div>
 <div id="package-details">
 	<div class="container">
-		<% if @provider_zipcode.blank? %>
+		<% if @provider_zipcode.blank? or @packages.blank? %>
 			<div class="alert alert-danger">
 				<strong>Sorry!</strong> Currently, our packages are not available in your area.
 			</div>
 		<% else %>
-			<!-- <div class="page-header">
-				<h1><%#= pluralize(@packages.length, "Package") %> <small>found</small></h1>
-			</div> -->
 			<div class="row">
 				<% @packages.each do |package| %>
 					<div class="col-md-6 col-sm-12">
@@ -61,6 +58,7 @@
 													<%= image_tag "No_Image_Available.png", class: "img-rounded img-responsive" %>
 												<% end %>
 											</div>
+											<div class="form-group"></div>
 											<div class="col-md-8 col-sm-8">
 												<label><%= package.package_name %></label>
 												<%= link_to "Plan Details", "#", class: "detail-link" %>

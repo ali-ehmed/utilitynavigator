@@ -61,7 +61,7 @@ header {
   color: #fff;
   margin-bottom: 25px;
   margin-top: -10px;
-
+  
   .address {
     background-color: #9932cc;
     padding: 35px 125px;
@@ -74,10 +74,8 @@ header {
   }
   .companies {
     background-color: #DF2B2B;
-    padding: 18.5px 25px;
-    @media (max-width: 768px) {
-      padding: 18.5px 125px;
-    }
+    padding: 18px 25px;
+    
     ul {
         margin-top: 12px;
       li { 
@@ -87,6 +85,30 @@ header {
         margin: 0px 6px;
         img {
           margin: 0;
+        }
+      }
+    }
+  }
+
+  @media (max-width: 769px) {
+    font-size: 21px;
+    .companies {
+      padding: 18px 125px;
+      .logos-list {
+        li {
+          width: 100%;
+          margin: 5px 30px;
+        }
+      }
+    }
+  }
+
+  @media (min-width: 768px) and (max-width: 768px) {
+    .companies {
+      .logos-list, .provider-count-list {
+        li {
+          width: 22%;
+          margin: 5px 30px;
         }
       }
     }
