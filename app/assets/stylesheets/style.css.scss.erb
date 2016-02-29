@@ -4,7 +4,7 @@ header {
 //Package Details
 #package-details {
   .price-info {
-    background:url("price-tag-search.png");
+    background:url(<%= "price-tag-search.png" %>);
     background-size: 100% auto;
     min-height: 180px;
     text-align: center;
@@ -71,29 +71,22 @@ header {
       margin-bottom: 8px;
       border-bottom: 1px solid;
     }
+
+    a.change-address-link {
+      color: #fff;
+    }
   }
   .companies {
     background-color: #DF2B2B;
-    padding: 18px 25px;
-    
-    ul {
-        margin-top: 12px;
-      li { 
-        width: 17%;
-        padding-left: 2px;
-        padding-right: 5px;
-        margin: 0px 6px;
-        img {
-          margin: 0;
-        }
-      }
-    }
+    padding: 35px 25px;
+    height: 148px;
   }
 
   @media (max-width: 769px) {
     font-size: 21px;
     .companies {
-      padding: 18px 125px;
+      height: auto;
+      padding: 35px 125px;
       .logos-list {
         li {
           width: 100%;
@@ -105,6 +98,7 @@ header {
 
   @media (min-width: 768px) and (max-width: 768px) {
     .companies {
+      padding: 35px 125px;
       .logos-list, .provider-count-list {
         li {
           width: 22%;
@@ -252,7 +246,7 @@ header {
           padding: 10px 12px;
 
           span.package-filter {
-            background: url("filter-circle.png");
+            background: url(<%= "filter-circle.png" %>);
             background-size: 100% auto;
             padding: 2px 20px 0px 1px;
             background-repeat: no-repeat;

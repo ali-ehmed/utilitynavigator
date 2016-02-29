@@ -3,36 +3,24 @@
 		<div class="col-md-6 address">
 			<strong>Offer Showing for:</strong>
 			<address><%= address(@attributes) %></address>
-			<i class="glyphicon glyphicon-edit"></i> Change Address
+			<i class="glyphicon glyphicon-edit"></i> <%= link_to "Change Address", :back, class: "change-address-link" %>
 		</div>
 		<div class="col-md-6 companies">
 			<strong>Our Providers</strong>
-			<div class="row">
-				<ul class="list-inline logos-list">
-					<li class="col-md-3 col-xs-12">
+				<ul class="list-inline">
+					<li class="text-center">
 						<%= image_tag("twc-search.png") %>
-					</li>
-					<li class="col-md-3 col-xs-12">
-						<%= image_tag("cox-search.png") %>
-					</li>
-					<li class="col-md-3 col-xs-12">
-						<%= image_tag("charter-search.png") %>
-					</li>
-				</ul>
-			</div>
-			<div class="row">
-				<ul class="list-inline provider-count-list">
-					<li class="col-md-3 text-center">
 						(<%= @twc.count %>)
 					</li>
-					<li class="col-md-3 text-center">
+					<li class="text-center">
+						<%= image_tag("cox-search.png") %>
 						(<%= @charter.count %>)
 					</li>
-					<li class="col-md-3 text-center">
+					<li class="text-center">
+						<%= image_tag("charter-search.png") %>
 						(<%= @cox.count %>)
 					</li>
 				</ul>
-			</div>
 		</div>
 	</div>
 </div>
