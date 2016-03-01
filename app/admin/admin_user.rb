@@ -1,5 +1,7 @@
 ActiveAdmin.register AdminUser do
-  menu false
+  menu  false
+  # :if => proc { current_admin_user.super_admin == false } 
+
   permit_params :email, :password, :password_confirmation
 
   index do

@@ -12,7 +12,7 @@ Rails.application.routes.draw do
     get proivder => "landings##{proivder}"
   end
   
-  devise_for :users
+  # devise_for :users
   resources :call_back, only: [:create]
   root to: 'landings#index'
 end

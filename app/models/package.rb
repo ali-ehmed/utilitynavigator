@@ -33,6 +33,8 @@ class Package < ActiveRecord::Base
 	scope :charter, -> { joins(:provider).where("providers.name = 'Charter Spectrum'") }
 	scope :cox, -> { joins(:provider).where("providers.name = 'COX'") }
 
+	CABLE_TV = ["Primary TV", "2nd TV", "3rd TV", "4th TV"]
+
 	def set_promotion_disclaimer
 		if self.provider.short_name == "CHARTER" and self.charter_tv_spectrum
 			update_attribute(:promotion_disclaimer, "#{price} & #{self.charter_tv_spectrum}")

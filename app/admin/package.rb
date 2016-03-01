@@ -6,12 +6,11 @@ ActiveAdmin.register Package do
 	index do
     selectable_column
     column :package_name
-    column :price_info
     column :price
     column :installation_price
     column :provider
     column :package_type
-    column :promotion_disclaimer do |package|
+    column "Disclaimer" do |package|
     	if package.provider.short_name == "CHARTER"
     		package.promotion_disclaimer
     	else
@@ -51,7 +50,7 @@ ActiveAdmin.register Package do
 	    		table_for bundle do
 				 		requirements.keys.map do |key|
 				 			column key, class: "fields" do
-				 				requirements[key]
+				 				if requirements[key].kind_of?(Array) then requirements[key].join(", ") else requirements[key] end
 				 			end
 				 		end
 		      end
@@ -84,7 +83,9 @@ ActiveAdmin.register Package do
 	controller do
 		def create
 			@package = Package.new(session[:package_params])
-			@package.charter_tv_spectrum = params[:charter_tv_spectrum]
+			package_bundle_params = session[:package_bundles_params]
+
+			@package.charter_tv_spectrum = package_bundle_params["charter_tv_spectrum"]
 			if @package.save
 				@product_ids = params[:product_ids].map(&:to_i)
 				@products = Product.where("id in (?)", @product_ids)
@@ -97,20 +98,31 @@ ActiveAdmin.register Package do
 					@provider_preferences.preferences_of_product(product.id).each do |preference|
 						bundle_keys_by_product << preference.additional_field_weight.to_field.to_s
 					end
-					new_params = params.select {|k,v| bundle_keys_by_product.include?(k) }
+
+					package_bundle_params = package_bundle_params.select {|k,v| bundle_keys_by_product.include?(k) }
 					# params.select_keys(bundle_keys_by_product)
 
-					logger.debug "-----#{new_params}-----"
+					logger.debug "-----#{package_bundle_params}-----"
 					logger.debug "-----#{bundle_keys_by_product}-----"
 
 					@package.package_bundles.build do |package_bundle|
 						package_bundle.product_id = product.id
-						package_bundle.field = new_params
+						package_bundle.field = package_bundle_params
+						case product.name.downcase
+						when "cable"
+							package_bundle.checkout_fields = params[:cable]
+						when "internet"
+							package_bundle.checkout_fields = params[:internet]
+						else
+							package_bundle.checkout_fields = params[:phone]
+						end
 						package_bundle.save
 					end
 
 					logger.debug "=====#{@package.package_bundles.inspect}======"
 				end
+
+
 				redirect_to admin_packages_path, notice: "Package Created"
 			else
 				render :product_bundles, flash: { alert: "Something went wrong while creating a new package" }
@@ -169,6 +181,18 @@ ActiveAdmin.register Package do
 			return
 		end
 	 	respond_to do |format|
+			format.html
+		end
+	end
+
+
+	collection_action :ordering_items, method: :get do
+		session[:package_bundles_params] = params
+		@product_ids = params[:product_ids].map(&:to_i)
+		@products = Product.where("id in (?)", @product_ids)
+		@provider = Provider.find(params[:provider_id])
+
+		respond_to do |format|
 			format.html
 		end
 	end

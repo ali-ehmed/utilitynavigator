@@ -30,13 +30,33 @@ Product.all.each do |product|
 		%w(no_of_channels no_of_hd_channels premiums charter_tv_spectrum).each do |field_weight|
 			AdditionalFieldWeight.find_or_initialize_by(additional_weight: field_weight.humanize) do |field|
 				field.product_id = product.id
-				field.save
+				if field_weight == "charter_tv_spectrum"
+					field.field_type = "Select"
+					value_arr = []
+					PackageBundle::TV_SPECTRUM.each do |values|
+						value_arr.push values
+					end
+					field.value = "#{value_arr}"
+				elsif field_weight == "premiums"
+					field.field_type = "Select Multiple"
+					value_arr = []
+					PackageBundle::PREMIUMS.each do |values|
+						value_arr.push values
+					end
+					field.value = "#{value_arr}"
+				else
+					field.field_type = "String"
+				end
+				field.save!
 			end
 		end
+
+		# %(enhanced_dvr_box 1_additional_hd dta dvr_box)
 	when :internet.to_s
 		%w(download_speed upload_speed antivirus_protection email_accounts).each do |field_weight|
 			AdditionalFieldWeight.find_or_initialize_by(additional_weight: field_weight.humanize) do |field|
 				field.product_id = product.id
+				field.field_type = "String"
 				field.save
 			end
 		end
