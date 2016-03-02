@@ -6,6 +6,12 @@
 				<% count += 1 %>
 				<ol>
 					<li>
+						<label for="is_required" class="label">
+							Is Required
+						</label>
+						<%= ff.select "is_required_#{count}", options_for_select(["Required", "Optional", "Free"]) %>
+					</li>
+					<li>
 						<label for="<%= cable_tv.underscore %>" class="label">
 							Enhanced DVR Box
 						</label>
@@ -23,6 +29,14 @@
 						</label>
 						<%= ff.text_field "dta_#{count}" %>
 					</li>
+					<% if Package::CABLE_TV.last == cable_tv %>
+						<li>
+							<label for="provider_name" class="label">
+								4th TV Install
+							</label>
+							<%= ff.text_field "4th_tv_install_#{count}" %>
+						</li>
+					<% end %>
 				</ol>
 			<% end %>
 		</li>

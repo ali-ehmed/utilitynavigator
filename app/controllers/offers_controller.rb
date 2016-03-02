@@ -1,16 +1,4 @@
-# == Schema Information
-#
-# Table name: package_bundles
-#
-#  id         :integer          not null, primary key
-#  package_id :integer
-#  product_id :integer
-#  field      :string
-#  created_at :datetime         not null
-#  updated_at :datetime         not null
-#
-
-class PackageBundlesController < ApplicationController
+class OffersController < ApplicationController
 	def show
 		@zipcode = params[:zipcode]
 
@@ -30,9 +18,7 @@ class PackageBundlesController < ApplicationController
 
 		if @provider_zipcode
 			@provider = @provider_zipcode.provider
-			@packages = @provider.packages
+			@packages = @provider.packages.paginate(:page => params[:page], :per_page => 5)
 		end
-
-		
 	end
 end

@@ -2,9 +2,10 @@ Rails.application.routes.draw do
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
 
-  resources :package_bundles, only: :index do 
+  resources :offers, only: :index do
+    resources :checkout, controller: 'offers/checkout'
   	collection do
-  		get "show" => "package_bundles#show"
+  		get "show" => "offers#show"
   	end
   end
 

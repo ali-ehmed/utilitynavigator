@@ -1,0 +1,21 @@
+<div class="container">
+	<% case product.name.downcase %>
+	<% when "cable" %>
+		<% fields = get_in_hash(@package_bundles.find_by_product_id(product.id).checkout_fields) %>
+		<%= fields %>
+		
+		<h3>Please configure your TV, Internet &amp; Home Phone Services</h3>
+		<h4>For TV #1, you will build the following options (Primary TV) - <%= fields["is_required_1"] %></h4>
+		<% if fields["is_required_1"] == "Required" %>
+			<%= hidden_field_tag :dvr_box_1, fields["dvr_box_1"] %>
+			<%= hidden_field_tag :additional_hd_1, fields["additional_hd_1"] %>
+			<%= hidden_field_tag :dta_1, fields["dta_1"] %>
+		<% else %>
+			<% if fields["dvr_box_1"].downcase != "included" %>
+				<%= check_box_tag :dvr_box_1, fields["dvr_box_1"] %>
+			<% end %>
+		<% end %>
+	<% when "internet" %>
+	<% else %>
+	<% end %>
+</div>

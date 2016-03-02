@@ -4,29 +4,31 @@
 	<% end %>
 	<%= hidden_field_tag "provider_id", @provider.id %>
 	<% for product in @products do %>
-		<fieldset class="inputs">
-			<legend><span><%= product.name %></span></legend>
-			<ol>
-				<% @provider_preferences.joins(:additional_field_weight).where("additional_field_weights.product_id = ?", product.id).each do |preference| %>
-					<li class="string input optional stringish" id="package_name_input">
-						<label for="provider_name" class="label">
-							<%= preference.additional_field_weight.additional_weight %>
-						</label>
-						<% if preference.additional_field_weight.field_type == "Select Multiple" %>
+		<% if @provider_preferences.preferences_of_product(product.id).present? %>
+			<fieldset class="inputs">
+				<legend><span><%= product.name %></span></legend>
+				<ol>
+					<% @provider_preferences.preferences_of_product(product.id).each do |preference| %>
+						<li class="string input optional stringish" id="package_name_input">
+							<label for="provider_name" class="label">
+								<%= preference.additional_field_weight.additional_weight %>
+							</label>
+							<% if preference.additional_field_weight.field_type == "Select Multiple" %>
 
-							<%= select_tag "#{preference.additional_field_weight.to_field}[]", options_for_select(preference.additional_field_weight.get_values.map{|m| m}), prompt: "--Select #{preference.additional_field_weight.additional_weight.pluralize}--", multiple: true %>
-							
-						<% elsif preference.additional_field_weight.field_type == "Select" %>
+								<%= select_tag "#{preference.additional_field_weight.to_field}[]", options_for_select(preference.additional_field_weight.get_values.map{|m| m}), prompt: "--Select #{preference.additional_field_weight.additional_weight.pluralize}--", multiple: true %>
+								
+							<% elsif preference.additional_field_weight.field_type == "Select" %>
 
-							<%= select_tag preference.additional_field_weight.to_field, options_for_select(preference.additional_field_weight.get_values.map{|m| m}), prompt: "--Select #{preference.additional_field_weight.additional_weight.humanize}--" %>
+								<%= select_tag preference.additional_field_weight.to_field, options_for_select(preference.additional_field_weight.get_values.map{|m| m}), prompt: "--Select #{preference.additional_field_weight.additional_weight.humanize}--" %>
 
-						<% else %>
-							<%= text_field_tag preference.additional_field_weight.to_field %>
-						<% end %>
-					</li>
-				<% end %>
-			</ol>
-		</fieldset>	
+							<% else %>
+								<%= text_field_tag preference.additional_field_weight.to_field %>
+							<% end %>
+						</li>
+					<% end %>
+				</ol>
+			</fieldset>
+		<% end %>
 	<% end %>
 	<%= button_tag "Next", type: :submit %>
 	<%= link_to "Cancel", admin_packages_path %>

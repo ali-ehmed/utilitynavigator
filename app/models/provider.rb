@@ -26,7 +26,7 @@ class Provider < ActiveRecord::Base
 	# has_attached_file :logo, styles: { medium: "300x300>", thumb: "100x100>" }, default_url: "/images/:style/missing.png"
   
 
-  has_attached_file :logo, styles: { medium: "300x300>", thumb: "100x100>" },
+  has_attached_file :logo, styles: { medium: "400x400>", thumb: "100x100>" },
     :storage => :dropbox,
     :dropbox_credentials => Rails.root.join("config/initializers/dropbox.yml"),
     :dropbox_visibility => 'public'
@@ -49,5 +49,13 @@ class Provider < ActiveRecord::Base
 
 	def short_name
 		name.upcase.split(" ").first
+	end
+
+	def acronym
+		if short_name == "TIME"
+			"twc"
+		else
+			short_name.downcase
+		end
 	end
 end

@@ -6,6 +6,12 @@
 				<% count += 1 %>
 				<ol>
 					<li>
+						<label for="is_required" class="label">
+							Is Required
+						</label>
+						<%= ff.select "is_required_#{count}", options_for_select(["Required", "Optional", "Free"]) %>
+					</li>
+					<li>
 						<label for="provider_name" class="label">
 							DVR Box &amp; Service 
 						</label>

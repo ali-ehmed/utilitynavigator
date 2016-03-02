@@ -1,0 +1,55 @@
+<div class="extra_equiptments">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-12 col-sm-12">
+				<h2 class="page-header">
+					<%= @package.provider.name %> <small><%= @package.package_name %></small>
+				</h2>
+				<div class="panel panel-default">
+					<div class="panel-body">
+						<% @products.each do |product| %>
+							<div class="well">
+								<strong><%= product.name %></strong>
+							</div>
+							<%= render partial: "#{@package.provider.acronym}_equiptments", locals: { product: product } %>
+						<% end %>
+					</div>
+				</div>
+			</div>
+			<!-- <div class="col-md-3 col-sm-3">
+				<div class="panel panel-default">
+					<div class="panel-heading">
+						<div class="panel-title">
+							<ul class="list-inline">
+								<li>Plan Summary</li>
+								<li class="pull-right">
+									<%= link_to "Change Plan", :back %>
+								</li>
+							</ul>
+						</div>
+					</div>
+					<div class="panel-body">
+						<ul class="list-unstyled">
+							<li>
+								<%#= image_tag @package.provider.logo.url(:medium), class: "img-rounded img-responsive" %>
+							</li>
+							<hr />
+							<li>
+								<ul class="list-inline package_name">
+									<li><%#= @package.package_name %></li>
+									<li class="pull-right">
+										<%#= @package.price %>
+									</li>
+								</ul>
+							</li>
+							<hr />
+							<li></li>
+						</ul>
+					</div>
+					<div class="panel-footer"></div>
+				</div>
+			</div> -->
+		</div>
+	</div>
+</div>
+	

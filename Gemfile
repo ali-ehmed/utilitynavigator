@@ -15,6 +15,8 @@ gem "paperclip", git: "git://github.com/thoughtbot/paperclip.git"
 gem 'roo', '~> 2.1.0'
 gem "wysiwyg-rails"
 gem "paperclip-dropbox", ">= 1.1.7"
+gem 'will_paginate-bootstrap'
+gem 'wicked'
 
 group :development, :test do
   gem 'byebug'

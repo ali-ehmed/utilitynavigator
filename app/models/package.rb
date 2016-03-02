@@ -25,6 +25,10 @@ class Package < ActiveRecord::Base
 
 	attr_accessor :product_ids, :charter_tv_spectrum
 
+	cattr_accessor :checkout_steps do
+		[:extra_equiptments, :payments]
+	end
+
 	validates_presence_of :provider_id
 
 	after_create :set_promotion_disclaimer

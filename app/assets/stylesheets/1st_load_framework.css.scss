@@ -60,3 +60,11 @@ section {
     border-color: rgba(74, 6, 109, 0.78);
   }
 }
+
+.pagination > .active > a, .pagination > .active > a:hover, .pagination > .active > a:focus, .pagination > .active > span, .pagination > .active > span:hover, .pagination > .active > span:focus {
+  background-color: #9932CC;
+  border-color: #702496;
+}
+.pagination > li > a, .pagination > li > span {
+  color: #9932CC;
+}
