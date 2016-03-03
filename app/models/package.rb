@@ -30,6 +30,7 @@ class Package < ActiveRecord::Base
 	end
 
 	validates_presence_of :provider_id
+	validates :price_info, length: { maximum: 80 }
 
 	after_create :set_promotion_disclaimer
 
@@ -53,7 +54,11 @@ class Package < ActiveRecord::Base
 
 	def price_info
 		if read_attribute(:price_info)
-			read_attribute(:price_info).split("*")[1].strip if read_attribute(:price_info).include?("*")
+			if read_attribute(:price_info).include?("*")
+				read_attribute(:price_info).split("*")[1].strip 
+			else
+				read_attribute(:price_info).strip 
+			end
 		end
 	end
 end

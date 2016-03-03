@@ -1,21 +1,416 @@
-<div class="container">
+<div class="">
 	<% case product.name.downcase %>
 	<% when "cable" %>
 		<% fields = get_in_hash(@package_bundles.find_by_product_id(product.id).checkout_fields) %>
-		<%= fields %>
+		<%#= fields %>
 		
 		<h3>Please configure your TV, Internet &amp; Home Phone Services</h3>
-		<h4>For TV #1, you will build the following options (Primary TV) - <%= fields["is_required_1"] %></h4>
-		<% if fields["is_required_1"] == "Required" %>
-			<%= hidden_field_tag :dvr_box_1, fields["dvr_box_1"] %>
-			<%= hidden_field_tag :additional_hd_1, fields["additional_hd_1"] %>
-			<%= hidden_field_tag :dta_1, fields["dta_1"] %>
-		<% else %>
-			<% if fields["dvr_box_1"].downcase != "included" %>
-				<%= check_box_tag :dvr_box_1, fields["dvr_box_1"] %>
-			<% end %>
+		<h4>For TV #1, you will build the following options (Primary TV)</h4>
+		<ul>
+			<li>
+				<div class="checkbox">
+          <%= check_box_tag :dvr_box_1, fields["dvr_box_1"], false, {:class => "styled"}  %>
+          <label class="label-checkbox">
+            DVR Box
+          </label>
+        </div>
+			</li>
+			<li>
+				<div class="checkbox">
+          <%= check_box_tag :additional_hd_1, fields["additional_hd_1"], false, {:class => "styled"}  %>
+          <label class="label-checkbox">
+            1 Additional TV
+          </label>
+        </div>
+			</li>
+			<li>
+				<div class="checkbox">
+          <%= check_box_tag :dta_1, fields["dta_1"], false, {:class => "styled"}  %>
+          <label class="label-checkbox">
+            DTA Box
+          </label>
+        </div>
+			</li>
+		</ul>
+		<!-- Second TV -->
+		<h4>For TV #2, you will build the following options (Second TV)</h4>
+		<ul>
+			<li>
+				<div class="checkbox">
+          <%= check_box_tag :dvr_box_2, fields["dvr_box_2"], false, {:class => "styled"}  %>
+          <label class="label-checkbox">
+            DVR Box
+          </label>
+        </div>
+			</li>
+			<li>
+				<div class="checkbox">
+          <%= check_box_tag :additional_hd_2, fields["additional_hd_2"], false, {:class => "styled"}  %>
+          <label class="label-checkbox">
+            1 Additional TV
+          </label>
+        </div>
+			</li>
+			<li>
+				<div class="checkbox">
+          <%= check_box_tag :dta_2, fields["dta_2"], false, {:class => "styled"}  %>
+          <label class="label-checkbox">
+            DTA Box
+          </label>
+        </div>
+			</li>
+		</ul>
+		<!-- Third TV -->
+		<h4>For TV #3, you will build the following options (Third TV)</h4>
+		<ul>
+			<li>
+				<div class="checkbox">
+          <%= check_box_tag :dvr_box_3, fields["dvr_box_3"], false, {:class => "styled"}  %>
+          <label class="label-checkbox">
+            DVR Box
+          </label>
+        </div>
+			</li>
+			<li>
+				<div class="checkbox">
+          <%= check_box_tag :additional_hd_3, fields["additional_hd_3"], false, {:class => "styled"}  %>
+          <label class="label-checkbox">
+            1 Additional TV
+          </label>
+        </div>
+			</li>
+			<li>
+				<div class="checkbox">
+          <%= check_box_tag :dta_3, fields["dta_3"], false, {:class => "styled"}  %>
+          <label class="label-checkbox">
+            DTA Box
+          </label>
+        </div>
+			</li>
+		</ul>
+		<!-- Fourth TV -->
+		<h4>For TV #4, you will build the following options (Fourth TV)</h4>
+		<ul>
+			<li>
+				<div class="checkbox">
+          <%= check_box_tag :dvr_box_4, fields["dvr_box_4"], false, {:class => "styled"}  %>
+          <label class="label-checkbox">
+            DVR Box
+          </label>
+        </div>
+			</li>
+			<li>
+				<div class="checkbox">
+          <%= check_box_tag :additional_hd_4, fields["additional_hd_4"], false, {:class => "styled"}  %>
+          <label class="label-checkbox">
+            1 Additional TV
+          </label>
+        </div>
+			</li>
+			<li>
+				<div class="checkbox">
+          <%= check_box_tag :dta_4, fields["dta_4"], false, {:class => "styled"}  %>
+          <label class="label-checkbox">
+            DTA Box
+          </label>
+        </div>
+			</li>
+		</ul>
+		<!-- Details -->
+		<h4>
+			(<a role="button" data-toggle="collapse" href="#collapseDetailsTV" aria-expanded="false" aria-controls="collapseExample">Click for more details</a>)
+		</h4>
+		<div class="collapse" id="collapseDetailsTV">
+		  <div class="well">
+		    <ol>
+		    	<li>
+		    		<strong>4th Outlet Activation Fee</strong>
+		    	</li>
+		    	<li>
+		    		<strong>Enhanced DVR Box &amp; Service</strong>
+		    		<p>
+		    			<small>
+		    				Record and play programs on just one TV, up to 6 programs at once. With 1 TB of storage, you can store up to 150+ hours of HD programming. Manage recordings away from home with TWC TV®.
+		    			</small>
+		    		</p>
+		    	</li>
+		    	<li>
+		    		<strong>Primary HD Box</strong>
+		    		<p>
+		    			<small>
+		    				Watch programming in high definition and digital programming. Access to the Guide, Start Over®, Look Back®, Parental Controls, On Demand and Pay Per View
+		    			</small>
+		    		</p>
+		    	</li>
+		    	<li>
+		    		<strong>DTA Box</strong>
+		    		<p>
+		    			<small>
+		    				Watch Standard channels that are in your subscribed TV Plan
+		    			</small>
+		    		</p>
+		    	</li>
+		    </ol>
+		  </div>
+		</div>
+		<!-- More Fun with More Entertainment  -->
+		<% if fields["more_fun_with_more_entertainment"].downcase == "required" %>
+			<h3>More Fun with More Entertainment</h3>
+			<ul>
+				<li>
+					<div class="checkbox">
+	          <%= check_box_tag :hbo, 15, false, {:class => "styled"}  %>
+	          <label class="label-checkbox">
+	            HBO ($15.00 monthly)
+	          </label>
+	        </div>
+				</li>
+				<li>
+					<div class="checkbox">
+	          <%= check_box_tag :cinemax, 9.99, false, {:class => "styled"}  %>
+	          <label class="label-checkbox">
+	            Cinemax ($9.99 monthly)
+	          </label>
+	        </div>
+				</li>
+				<li>
+					<div class="checkbox">
+	          <%= check_box_tag :showtime, 9.99, false, {:class => "styled"}  %>
+	          <label class="label-checkbox">
+	            Showtime ($9.99 monthly)
+	          </label>
+	        </div>
+				</li>
+				<li>
+					<div class="checkbox">
+	          <%= check_box_tag :movie_channel, 9.99, false, {:class => "styled"}  %>
+	          <label class="label-checkbox">
+	            The Movie Channel ($9.99 monthly)
+	          </label>
+	          Catch critically acclaimed original series and Hollywood blockbusters!
+	        </div>
+				</li>
+				<li>
+					<div class="checkbox">
+	          <%= check_box_tag :starz, 9.99, false, {:class => "styled"}  %>
+	          <label class="label-checkbox">
+	            Starz ($9.99 monthly)
+	          </label>
+	          <p>
+	          	STARZ® and STARZ® Play offer 300+ movies every month on six channels and deliver breakthrough original programming
+	          </p>
+	        </div>
+				</li>
+			</ul>
 		<% end %>
+		<!-- More Entertainment for every one  -->
+		<% if fields["more_fun_for_everyone"].downcase == "required" %>
+			<h3>More Entertainment for Everyone</h3>
+			<ul>
+				<li>
+					<div class="checkbox">
+	          <%= check_box_tag :twc_sports, 10.00, false, {:class => "styled"}  %>
+	          <label class="label-checkbox">
+	            TWC Sports Pass ($10.00 monthly)
+	          </label>
+	          <p>
+	          	Get more games, events and exclusive online content with more than a dozen popular sports channels like NFL RedZone, FOX Soccer Plus, CBS Sports Network and Tennis Channel.
+	          </p>
+	        </div>
+				</li>
+				<li>
+					<div class="checkbox">
+	          <%= check_box_tag :disney_on_demand, 3.99, false, {:class => "styled"}  %>
+	          <label class="label-checkbox">
+	            Disney On Demand ($3.99 monthly)
+	          </label>
+	          <p>
+	          	Kids will love having access anytime to the most popular Disney Channel® and Playhouse Disney series. Plus, watch original movies and series up to one week before they air on Disney Channel.
+	          </p>
+	        </div>
+				</li>
+				<li>
+					<div class="checkbox">
+	          <%= check_box_tag :twc_movie_pass, 10.00, false, {:class => "styled"}  %>
+	          <label class="label-checkbox">
+	            TWC Movie Pass ($10.00 monthly)
+	          </label>
+	          <p>
+	          	Includes Encore, Fox Movie Channel, Sundance and more!
+	          </p>
+	        </div>
+				</li>
+				<li>
+					<div class="checkbox">
+	          <%= check_box_tag :hd_pass, 6.95, false, {:class => "styled"}  %>
+	          <label class="label-checkbox">
+	            HD Pass ($6.95 monthly)
+	          </label>
+	          <p>
+	          	Expand your HD experience with a wide range of programming from Smithsonian HD, MAV TV HD, MGM HD and Universal HD.
+	          </p>
+	        </div>
+				</li>
+			</ul>
+		<% end %>
+		<h3>More Spanish Entertainment for Everyone</h3>
+		<ul>
+			<li>
+				<div class="checkbox">
+          <%= check_box_tag :spanish_programming, 5.00, false, {:class => "styled"}  %>
+          <label class="label-checkbox">
+            Spanish Programming ($5.00 Monthly)
+          </label>
+          <p>
+          	More than 40 Spanish-language channels, including Discovery Espanol, ESPN Deportes HD and Mun2.
+          </p>
+        </div>
+			</li>
+		</ul>
+		<hr />
 	<% when "internet" %>
+		<% fields = get_in_hash(@package_bundles.find_by_product_id(product.id).checkout_fields) %>
+		<%#= fields %>
+		<h3>Modem</h3>
+		<% if fields["modem"].downcase == "included" %>
+			Modem is included in this package
+		<% else %>
+			<ul>
+				<li>
+					<div class="radio">
+	          <%= radio_button_tag fields["modem"], 10.00, false, {id: "modem_with"}  %>
+	          <label class="label-checkbox" for="modem_with">
+	            Internet plan requires modem to connect internet service ($<%= fields["modem"] %>/Monthly)
+	          </label>
+	        </div>
+				</li>
+				<li>
+					<div class="radio">
+	          <%= radio_button_tag :modem, 0, false, {id: "modem_own"}  %>
+	          <label class="label-checkbox" for="modem_own">
+	            I’ll use my own internet modem ($0)
+	          </label>
+	        </div>
+				</li>
+			</ul>
+			<div class="alert alert-info">
+				<strong>Please Note:</strong>
+				<p>
+					Time Warner Cable does not sell modems. If you don't have a modem when we install your Internet service, we'll install an Internet Modem for you. The standard monthly modem rate (above) will apply.)
+				</p>
+			</div>
+		<% end %>
+
+		<h3>WiFi Service &amp; Equipment</h3>
+		<% if fields["wifi"].downcase == "included" %>
+			WiFi Service is included in this package
+		<% else %>
+			<ul>
+				<li>
+					<div class="radio">
+	          <%= radio_button_tag :wifi, fields["wifi"], false, {id: "wifi_with"}  %>
+	          <label class="label-checkbox" for="wifi_with">
+	            Yes, I want to add home WiFi ($<%= fields["wifi"] %>)
+	          </label>
+	        </div>
+				</li>
+				<li>
+					<div class="radio">
+	          <%= radio_button_tag :wifi, 0, false, {id: "wifi_own"}  %>
+	          <label class="label-checkbox" for="wifi_own">
+	            I’ll use my own wireless router ($0)
+	          </label>
+	        </div>
+				</li>
+			</ul>
+			<div class="alert alert-info">
+				<strong>Please Note:</strong>
+				<p>
+					Time Warner Cable does not sell modems. If you don't have a modem when we install your Internet service, we'll install an Internet Modem for you. The standard monthly modem rate (above) will apply.)
+				</p>
+			</div>
+		<% end %>
+		<hr />
 	<% else %>
+		<% fields = get_in_hash(@package_bundles.find_by_product_id(product.id).checkout_fields) %>
+		<%#= fields %>
+		<h3>PHONE</h3>
+		<ul>
+			<li>
+				<div class="checkbox">
+          <%= check_box_tag :new_phone_number, fields["new_phone_number"], false, {:class => "styled"}  %>
+          <label class="label-checkbox">
+            New Phone Number 
+          </label>
+          <p>
+          	Get a new phone number with Time Warner Cable Home Phone and avoid the waiting time to have your existing number ported. Activation Fees vary by market.
+          </p>
+        </div>
+			</li>
+			<li>
+				<div class="checkbox">
+          <%= check_box_tag :transfer_phone_number, fields["transfer_phone_number"], false, {:class => "styled"}  %>
+          <label class="label-checkbox">
+            Transfer Phone Number 
+          </label>
+          <p>
+          	Keep your old phone number when you switch to Time Warner Home Phone service. Activation Fees vary by market.
+          </p>
+        </div>
+			</li>
+		</ul>
+		<h3>Please select your additional phone plans</h3>
+		<ul>
+			<li>
+				<div class="checkbox">
+          <%= check_box_tag :international_one_price, fields["international_one_price"], false, {:class => "styled"}  %>
+          <label class="label-checkbox">
+            INTERNATIONAL ONEPRICE ($19.95 monthly)
+          </label>
+          <p>
+          	You can call up to 1,000 minutes a month to land-line phones in over 100 countries and cellphones in 14 countries. International OnePrice® gives you low rates after the 1,000 minutes are used.
+          </p>
+        </div>
+			</li>
+			<li>
+				<div class="checkbox">
+          <%= check_box_tag :sign_up_global_penny, fields["global_penny_plan"], false, {:class => "styled"}  %>
+          <label class="label-checkbox">
+            Sign up for the Global Penny Phone Plan ($<%= fields["global_penny_plan"] %> monthly)  
+          </label>
+          <p>
+          	Our pay-as-you-go plan gives you penny per minute rates to over 40 countries and highly competitive rates to everywhere else. And it is free for 12 months when you sign up for any Triple Play package.
+          </p>
+        </div>
+			</li>
+		</ul>
+		<h3>Please select your additional phone options</h3>
+		<ul>
+			<li>
+				<div class="checkbox">
+          <%= check_box_tag :voice_mail, fields["voice_mail"], false, {:class => "styled"}  %>
+          <label class="label-checkbox">
+            Sign up for the Global Penny Phone Plan ($<%= fields["voice_mail"] %> monthly)  
+          </label>
+          <p>
+          	Our pay-as-you-go plan gives you penny per minute rates to over 40 countries and highly competitive rates to everywhere else. And it is free for 12 months when you sign up for any Triple Play package.
+          </p>
+        </div>
+			</li>
+		</ul>
 	<% end %>
+
+	<h3>Installation</h3>
+	<%#= fields %>
+	<ul>
+		<li>
+			<div class="checkbox">
+        <%= check_box_tag :installation, package.installation_price.downcase == "free" ? "" : package.installation_price, false, {:class => "styled"}  %>
+        <label class="label-checkbox">
+          Schedule an appointment for a technician to install my services (<%= package.installation_price %>) 
+        </label>
+      </div>
+		</li>
+	</ul>
 </div>
+

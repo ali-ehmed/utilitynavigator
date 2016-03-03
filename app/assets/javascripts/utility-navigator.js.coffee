@@ -24,9 +24,26 @@ offerSearchNotice = ->
 
  $(document).on 'click', (e) ->
  	$(".search-form-popover-title").closest(".popover").popover("hide")
+
+scrollingReviewNote = ->
+	(($) ->
+	  element = $('.follow-equiptments')
+	  if element.length
+		  originalY = element.offset().top
+		  # Space between element and top of screen (when scrolling)
+		  topMargin = 80
+		  # Should probably be set in CSS; but here just for emphasis
+		  element.css 'position', 'relative'
+		  $(window).on 'scroll', (event) ->
+		    scrollTop = $(window).scrollTop()
+		    element.stop(false, false).animate { top: if scrollTop < originalY then 0 else scrollTop - originalY + topMargin }, 300
+		    return
+		  return
+	) jQuery
  	
 $(document).on 'page:change', ->
 	navbarActiveLink()
 	offerSearchNotice()
+	scrollingReviewNote() if navigator.userAgent.toLowerCase().indexOf("mobile") == -1
 
 	$('[data-toggle="popover"]').popover()

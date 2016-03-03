@@ -3,12 +3,17 @@ header {
 }
 //Package Details
 #package-details {
+  .packages {
+    height: 405px;
+    overflow-y: scroll;
+  }
+  
   .price-info {
     background:url(<%= asset_path("price-tag-search.png") %>);
     background-size: 100% auto;
-    min-height: 180px;
+    min-height: 173px;
     text-align: center;
-    padding: 13px 4px;
+    padding: 13px 0px;
     color: #fff;
     border-radius: 4px 4px 0px 0px;
 
@@ -47,11 +52,6 @@ header {
     font-weight: bold;
     margin-top: 13px;
     margin-left: 13px;
-  }
-
-  label.compare-label-checkbox {
-    padding-left: 6px;
-    font-weight: bold;
   }
 }
 
@@ -501,6 +501,12 @@ nav.navbar-app {
     span.contact-text { font-size: 10px; }
     span.contact-no { font-size: 21px; }
 	}
+}
+
+// Checkbox Label
+label.label-checkbox {
+  padding-left: 6px;
+  font-weight: bold;
 }
 
 // Extra Equiptments

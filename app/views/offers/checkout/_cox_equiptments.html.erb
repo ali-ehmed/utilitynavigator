@@ -1,0 +1,825 @@
+<div class="">
+	<% case product.name.downcase %>
+	<% when "cable" %>
+		<% fields = get_in_hash(@package_bundles.find_by_product_id(product.id).checkout_fields) %>
+		<%#= fields %>
+		
+		<h3>Please configure your TV, Internet &amp; Home Phone Services</h3>
+		<h4>For TV #1, you will build the following options (Primary TV)</h4>
+		<ul>
+			<% if fields["contour_record_dvr_1"].present? %>
+				<li>
+					<% if fields["contour_record_dvr_1"].downcase == "included" %>
+						Contour Record 6 HD-DVR Receiver (<%= fields["contour_record_dvr_1"] %>)
+					<% else %>
+						<div class="checkbox">
+		          <%= check_box_tag :contour_record_dvr_1, fields["contour_record_dvr_1"], false, {:class => "styled"}  %>
+		          <label class="label-checkbox">
+		            Contour Record 6 HD-DVR Receiver $<%= fields["contour_record_dvr_1"] %>
+		          </label>
+		        </div>
+	        <% end %>
+				</li>
+			<% end %>
+			<% if fields["contour_hd_dvr_1"].present? %>
+				<li>
+					<% if fields["contour_hd_dvr_1"].downcase == "included" %>
+						Contour HD-DVR Receiver (<%= fields["contour_hd_dvr_1"] %>)
+					<% else %>
+						<div class="checkbox">
+		          <%= check_box_tag :contour_hd_dvr_1, fields["contour_hd_dvr_1"], false, {:class => "styled"}  %>
+		          <label class="label-checkbox">
+		            Contour HD-DVR Receiver $<%= fields["contour_hd_dvr_1"] %>
+		          </label>
+		        </div>
+	        <% end %>
+				</li>
+			<% end %>
+			<% if fields["contour_hd_receiver_1"].present? %>
+				<li>
+					<% if fields["contour_hd_receiver_1"].downcase == "included" %>
+						Contour HD Receiver (<%= fields["contour_hd_receiver_1"] %>)
+					<% else %>
+						<div class="checkbox">
+		          <%= check_box_tag :contour_hd_receiver_1, fields["contour_hd_receiver_1"], false, {:class => "styled"}  %>
+		          <label class="label-checkbox">
+		            Contour HD Receiver $<%= fields["contour_hd_receiver_1"] %>
+		          </label>
+		        </div>
+	        <% end %>
+				</li>
+			<% end %>
+			<% if fields["mini_box_1"].present? %>
+				<li>
+					<% if fields["mini_box_1"].downcase == "mini_box_1" %>
+						Mini Box (<%= fields["mini_box_1"] %>)
+					<% else %>
+						<div class="checkbox">
+		          <%= check_box_tag :mini_box_1, fields["mini_box_1"], false, {:class => "styled"}  %>
+		          <label class="label-checkbox">
+		            Mini Box $<%= fields["mini_box_1"] %>
+		          </label>
+		        </div>
+	        <% end %>
+				</li>
+			<% end %>
+			<% if fields["cable_card_1"].present? %>
+				<li>
+					<% if fields["cable_card_1"].downcase == "cable_card_1" %>
+						Cable Card (<%= fields["cable_card_1"] %>)
+					<% else %>
+						<div class="checkbox">
+		          <%= check_box_tag :cable_card_1, fields["cable_card_1"], false, {:class => "styled"}  %>
+		          <label class="label-checkbox">
+		            Cable Card $<%= fields["cable_card_1"] %>
+		          </label>
+		        </div>
+	        <% end %>
+				</li>
+			<% end %>
+		</ul>
+		<!-- Second TV -->
+		<h4>For TV #2, you will build the following options (Second TV)</h4>
+		<ul>
+			<% if fields["contour_record_dvr_2"].present? %>
+				<li>
+					<% if fields["contour_record_dvr_2"].downcase == "included" %>
+						Contour Record 6 HD-DVR Receiver (<%= fields["contour_record_dvr_2"] %>)
+					<% else %>
+						<div class="checkbox">
+		          <%= check_box_tag :contour_record_dvr_2, fields["contour_record_dvr_2"], false, {:class => "styled"}  %>
+		          <label class="label-checkbox">
+		            Contour Record 6 HD-DVR Receiver $<%= fields["contour_record_dvr_2"] %>
+		          </label>
+		        </div>
+	        <% end %>
+				</li>
+			<% end %>
+			<% if fields["contour_hd_dvr_2"].present? %>
+				<li>
+					<% if fields["contour_hd_dvr_2"].downcase == "included" %>
+						Contour HD-DVR Receiver (<%= fields["contour_hd_dvr_2"] %>)
+					<% else %>
+						<div class="checkbox">
+		          <%= check_box_tag :contour_hd_dvr_2, fields["contour_hd_dvr_2"], false, {:class => "styled"}  %>
+		          <label class="label-checkbox">
+		            Contour HD-DVR Receiver $<%= fields["contour_hd_dvr_2"] %>
+		          </label>
+		        </div>
+	        <% end %>
+				</li>
+			<% end %>
+			<% if fields["contour_hd_receiver_2"].present? %>
+				<li>
+					<% if fields["contour_hd_receiver_2"].downcase == "included" %>
+						Contour HD Receiver (<%= fields["contour_hd_receiver_2"] %>)
+					<% else %>
+						<div class="checkbox">
+		          <%= check_box_tag :contour_hd_receiver_2, fields["contour_hd_receiver_2"], false, {:class => "styled"}  %>
+		          <label class="label-checkbox">
+		            Contour HD Receiver $<%= fields["contour_hd_receiver_2"] %>
+		          </label>
+		        </div>
+	        <% end %>
+				</li>
+			<% end %>
+			<% if fields["mini_box_1"].present? %>
+				<li>
+					<% if fields["mini_box_2"].downcase == "included" %>
+						Mini Box (<%= fields["mini_box_2"] %>)
+					<% else %>
+						<div class="checkbox">
+		          <%= check_box_tag :mini_box_2, fields["mini_box_2"], false, {:class => "styled"}  %>
+		          <label class="label-checkbox">
+		            Mini Box $<%= fields["mini_box_2"] %>
+		          </label>
+		        </div>
+	        <% end %>
+				</li>
+			<% end %>
+			<% if fields["cable_card_2"].present? %>
+				<li>
+					<% if fields["cable_card_1"].downcase == "included" %>
+						Cable Card (<%= fields["cable_card_1"] %>)
+					<% else %>
+						<div class="checkbox">
+		          <%= check_box_tag :cable_card_2, fields["cable_card_2"], false, {:class => "styled"}  %>
+		          <label class="label-checkbox">
+		            Cable Card $<%= fields["cable_card_2"] %>
+		          </label>
+		        </div>
+	        <% end %>
+				</li>
+			<% end %>
+		</ul>
+		<!-- Third TV -->
+		<h4>For TV #3, you will build the following options (Third TV)</h4>
+		<ul>
+			<% if fields["contour_record_dvr_3"].present? %>
+				<li>
+					<% if fields["contour_record_dvr_3"].downcase == "included" %>
+						Contour Record 6 HD-DVR Receiver (<%= fields["contour_record_dvr_3"] %>)
+					<% else %>
+						<div class="checkbox">
+		          <%= check_box_tag :contour_record_dvr_3, fields["contour_record_dvr_3"], false, {:class => "styled"}  %>
+		          <label class="label-checkbox">
+		            Contour Record 6 HD-DVR Receiver $<%= fields["contour_record_dvr_3"] %>
+		          </label>
+		        </div>
+	        <% end %>
+				</li>
+			<% end %>
+			<% if fields["contour_hd_dvr_3"].present? %>
+				<li>
+					<% if fields["contour_hd_dvr_3"].downcase == "included" %>
+						Contour HD-DVR Receiver (<%= fields["contour_hd_dvr_3"] %>)
+					<% else %>
+						<div class="checkbox">
+		          <%= check_box_tag :contour_hd_dvr_3, fields["contour_hd_dvr_3"], false, {:class => "styled"}  %>
+		          <label class="label-checkbox">
+		            Contour HD-DVR Receiver $<%= fields["contour_hd_dvr_3"] %>
+		          </label>
+		        </div>
+	        <% end %>
+				</li>
+			<% end %>
+			<% if fields["contour_hd_receiver_3"].present? %>
+				<li>
+					<% if fields["contour_hd_receiver_3"].downcase == "included" %>
+						Contour HD Receiver (<%= fields["contour_hd_receiver_3"] %>)
+					<% else %>
+						<div class="checkbox">
+		          <%= check_box_tag :contour_hd_receiver_3, fields["contour_hd_receiver_3"], false, {:class => "styled"}  %>
+		          <label class="label-checkbox">
+		            Contour HD Receiver $<%= fields["contour_hd_receiver_3"] %>
+		          </label>
+		        </div>
+	        <% end %>
+				</li>
+			<% end %>
+			<% if fields["mini_box_3"].present? %>
+				<li>
+					<% if fields["mini_box_3"].downcase == "included" %>
+						Mini Box (<%= fields["mini_box_3"] %>)
+					<% else %>
+						<div class="checkbox">
+		          <%= check_box_tag :mini_box_3, fields["mini_box_3"], false, {:class => "styled"}  %>
+		          <label class="label-checkbox">
+		            Mini Box $<%= fields["mini_box_3"] %>
+		          </label>
+		        </div>
+	        <% end %>
+				</li>
+			<% end %>
+			<% if fields["cable_card_3"].present? %>
+				<li>
+					<% if fields["cable_card_3"].downcase == "included" %>
+						Cable Card (<%= fields["cable_card_3"] %>)
+					<% else %>
+						<div class="checkbox">
+		          <%= check_box_tag :cable_card_3, fields["cable_card_3"], false, {:class => "styled"}  %>
+		          <label class="label-checkbox">
+		            Cable Card $<%= fields["cable_card_3"] %>
+		          </label>
+		        </div4
+	        <% end %>
+				</li>
+			<% end %>
+		</ul>
+		<!-- Fourth TV -->
+		<h4>For TV #4, you will build the following options (Fourth TV)</h4>
+		<ul>
+			<% if fields["contour_record_dvr_4"].present? %>
+				<li>
+					<% if fields["contour_record_dvr_4"].downcase == "included" %>
+						Contour Record 6 HD-DVR Receiver (<%= fields["contour_record_dvr_4"] %>)
+					<% else %>
+						<div class="checkbox">
+		          <%= check_box_tag :contour_record_dvr_4, fields["contour_record_dvr_4"], false, {:class => "styled"}  %>
+		          <label class="label-checkbox">
+		            Contour Record 6 HD-DVR Receiver $<%= fields["contour_record_dvr_4"] %>
+		          </label>
+		        </div>
+	        <% end %>
+				</li>
+			<% end %>
+			<% if fields["contour_hd_dvr_4"].present? %>
+				<li>
+					<% if fields["contour_hd_dvr_4"].downcase == "included" %>
+						Contour HD-DVR Receiver (<%= fields["contour_hd_dvr_4"] %>)
+					<% else %>
+						<div class="checkbox">
+		          <%= check_box_tag :contour_hd_dvr_4, fields["contour_hd_dvr_4"], false, {:class => "styled"}  %>
+		          <label class="label-checkbox">
+		            Contour HD-DVR Receiver $<%= fields["contour_hd_dvr_4"] %>
+		          </label>
+		        </div>
+	        <% end %>
+				</li>
+			<% end %>
+			<% if fields["contour_hd_receiver_4"].present? %>
+				<li>
+					<% if fields["contour_hd_receiver_4"].downcase == "included" %>
+						Contour HD Receiver (<%= fields["contour_hd_receiver_4"] %>)
+					<% else %>
+						<div class="checkbox">
+		          <%= check_box_tag :contour_hd_receiver_4, fields["contour_hd_receiver_4"], false, {:class => "styled"}  %>
+		          <label class="label-checkbox">
+		            Contour HD Receiver $<%= fields["contour_hd_receiver_4"] %>
+		          </label>
+		        </div>
+	        <% end %>
+				</li>
+			<% end %>
+			<% if fields["mini_box_4"].present? %>
+				<li>
+					<% if fields["mini_box_4"].downcase == "included" %>
+						Mini Box (<%= fields["mini_box_4"] %>)
+					<% else %>
+						<div class="checkbox">
+		          <%= check_box_tag :mini_box_4, fields["mini_box_4"], false, {:class => "styled"}  %>
+		          <label class="label-checkbox">
+		            Mini Box $<%= fields["mini_box_4"] %>
+		          </label>
+		        </div>
+	        <% end %>
+				</li>
+			<% end %>
+			<% if fields["cable_card_4"].present? %>
+				<li>
+					<% if fields["cable_card_4"].downcase == "included" %>
+						Cable Card (<%= fields["cable_card_4"] %>)
+					<% else %>
+						<div class="checkbox">
+		          <%= check_box_tag :cable_card_4, fields["cable_card_4"], false, {:class => "styled"}  %>
+		          <label class="label-checkbox">
+		            Cable Card $<%= fields["cable_card_4"] %>
+		          </label>
+		        </div>
+	        <% end %>
+				</li>
+			<% end %>
+		</ul>
+		<!-- Details -->
+		<h4>
+			(<a role="button" data-toggle="collapse" href="#collapseDetailsTV" aria-expanded="false" aria-controls="collapseExample">Click for more details</a>)
+		</h4>
+		<div class="collapse" id="collapseDetailsTV">
+		  <div class="well">
+		    <ol>
+		    	<li>
+		    		<strong>Contour Record 6 HD-DVR</strong>
+		    		<p>
+		    			<small>
+		    				Record 6 HD-DVR Receiver - Record 6 shows at once and store 1,000 with the Contour Record 6 HD-DVR Receiver. Store all of your favorites, watch recorded shows on any TV in the house, start watching a recorded show in one room and resume watching it in another. All with one DVR. Record 6 Whole Home DVR Service - Record 6 Whole Home DVR Service is required to use your Record 6 Whole Home DVR.
+		    			</small>
+		    		</p>
+		    	</li>
+		    	<li>
+		    		<strong>Contour HD-DVR Receiver</strong>
+		    		<p>
+		    			<small>
+		    				Contour HD-DVR Receiver - Automatically record a game, event or show, multiple episodes or an entire season of your favorite series. Pause and rewind live TV. Record one show while watching another or record two shows at once. The Contour DVR has up to 6 times the storage of our standard HD-DVR. Schedule your DVR from anywhere, anytime using your mobile device.
+		    			</small>
+		    		</p>
+		    		<p>
+		    			<small>
+		    				Record 2 DVR Service - DVR (Digital Video Recorder) Service is required to use your Record 2 HD-DVR Receiver.
+		    			</small>
+		    		</p>
+		    	</li>
+		    	<li>
+		    		<strong>Contour HD Receiver</strong>
+		    		<p>
+		    			<small>
+		    				Add up to 7 additional HD Receivers to your Contour Record 6 DVR Receiver and get our advanced program guide with personalized recommendations plus the ability to pause, record or watch recorded programs on any TV in your home.
+		    			</small>
+		    		</p>
+		    	</li>
+		    	<li>
+		    		<strong>Mini Box</strong>
+		    		<p>
+		    			<small>
+		    				N/A
+		    			</small>
+		    		</p>
+		    	</li>
+		    	<li>
+		    		<strong>Cable Card</strong>
+		    		<p>
+		    			<small>
+		    				A CableCARD is a digital cable decoder that's about the size of a credit card. It fits directly into a slot on select digital-cable-ready TVs. Renting this box-free alternative lets you watch digital channels without a set-top box. Please note: This requires a CableCARD ready device (such as a TiVo) or CableCARD ready Television set.
+		    			</small>
+		    		</p>
+		    	</li>
+		    </ol>
+		  </div>
+		</div>
+		<!-- Premiumns  -->
+		<% if fields["premiums"].downcase == "required" %>
+			<h3>Premium Movie Channels</h3>
+			<p>
+				<small>
+					<strong>Note:</strong> 
+					Special Offer! Pick 1 premium for $10/mo, 2 premiums for $15/mo, 3 premiums for $20/mo, or 4 premiums for $25/mo for 6 months! Order Showtime today and get $25 cash back! See details at 
+					<a href="http://www.showtimecoxrebate.com/" target="_blank">http://www.showtimecoxrebate.com/</a>
+				</small>
+			</p>
+			<ul>
+				<li>
+					<div class="checkbox">
+	          <%= check_box_tag :hbo, 15, false, {:class => "styled"}  %>
+	          <label class="label-checkbox">
+	            HBO ($15.00 monthly)
+	          </label>
+	          <p>
+	          	The most original and innovative shows are on HBO. Keep up with the most talked-about programs on television and bring the biggest blockbusters into your living room with HBO.
+	          </p>
+	        </div>
+				</li>
+				<li>
+					<div class="checkbox">
+	          <%= check_box_tag :cinemax, 9.99, false, {:class => "styled"}  %>
+	          <label class="label-checkbox">
+	            Cinemax ($9.99 monthly)
+	          </label>
+	          <p>
+	          	Cinemax has you covered with the best Hollywood hits and action-packed original series.
+	          </p>
+	        </div>
+				</li>
+				<li>
+					<div class="checkbox">
+	          <%= check_box_tag :showtime, 9.99, false, {:class => "styled"}  %>
+	          <label class="label-checkbox">
+	            Showtime ($9.99 monthly)
+	          </label>
+	          <p>
+	          	With the hottest Original Series, sports and movies anywhere, Showtime® is premium entertainment at its best.
+	          </p>
+	        </div>
+				</li>
+				<li>
+					<div class="checkbox">
+	          <%= check_box_tag :starz, 9.99, false, {:class => "styled"}  %>
+	          <label class="label-checkbox">
+	            Starz ($9.99 monthly)
+	          </label>
+	          <p>
+	          	Contemporary hit movies, original series and documentaries on six premium channels, most available in HD and On Demand.
+	          </p>
+	        </div>
+				</li>
+			</ul>
+		<% end %>
+		<!-- TV Paks  -->
+		<% if fields["tv_paks"].downcase == "required" %>
+			<h3>TV Paks</h3>
+			<p>
+				<small>
+					<strong>Note:</strong> 
+					Special Offer! Order the Movie Pak today and get $25 cash back! See details at 
+					<a href="http://www.starz.com/encoreoffers" target="_blank">http://www.starz.com/encoreoffers</a>
+				</small>
+			</p>
+			<ul>
+				<li>
+					<div class="checkbox">
+	          <%= check_box_tag :variety_pak, 11.50, false, {:class => "styled"}  %>
+	          <label class="label-checkbox">
+	            Variety Pak ($11.50)
+	          </label>
+	          <p>
+	          	Get access to dozens of our most popular networks and get the best in lifestyle and special-interest programming. You'll be able to watch channels like Disney Jr, Disney XD, Nick Toons, VH1 Classic, MTV2, Hallmark Channel, Oxygen, Cooking Channel, BBC America.
+	          </p>
+	        </div>
+				</li>
+				<li>
+					<div class="checkbox">
+	          <%= check_box_tag :disney_on_demand, 11.00, false, {:class => "styled"}  %>
+	          <label class="label-checkbox">
+	            Movie Pak ($11.00 monthly)
+	          </label>
+	          <p>
+	          	With some of our most popular movie channels, including Encore, you're sure to find entertainment to suit your mood. Enjoy channels such as ENCORE, Sundance, Epix, Fox Movie Channel.
+	          </p>
+	        </div>
+				</li>
+				<li>
+					<div class="checkbox">
+	          <%= check_box_tag :twc_movie_pass, 10.00, false, {:class => "styled"}  %>
+	          <label class="label-checkbox">
+	            Sports and Information Pak ($10.00 monthly)
+	          </label>
+	          <p>
+	          	Stay up-to-date with your favorite teams with sports and informational programming, including channels like.
+	          </p>
+	        </div>
+				</li>
+				<li>
+					<div class="checkbox">
+	          <%= check_box_tag :hd_pass, 6.95, false, {:class => "styled"}  %>
+	          <label class="label-checkbox">
+	            Sports Pak 2 ($6.95 monthly)
+	          </label>
+	          <p>
+	          	Even more of your favorite sports with the best football coverage and exciting outdoor adventures, including channels like NFL Redzone, NBC Universal Sports, Outside TV, World Fishing Network and other great sports networks.
+	          </p>
+	        </div>
+				</li>
+				<li>
+					<div class="checkbox">
+	          <%= check_box_tag :hd_pass, 6.95, false, {:class => "styled"}  %>
+	          <label class="label-checkbox">
+	            Latino Pak ($6.95 monthly)
+	          </label>
+	          <p>
+	          	Promotional Price: $5.00/mo
+	          </p>
+	          <p>
+							The Latino Pak provides nine channels that offer the best in Spanish language programming, including Telefutura, Galavision, Discovery en Español, CNN en Español, FOX Deportes, ESPN Deportes, Tr3s, Azteca, GolTV. Latino Pak available for additional charge with minimum of Contour TV.
+	          </p>
+	          <p>
+	          	<div class="alert alert-info">
+	          		<strong>DISCOUNT: Latino Pak for $5/mo for 6 months for 6 months!</strong>
+	          	</div>
+	          </p>
+	        </div>
+				</li>
+			</ul>
+		<% end %>
+		<hr />
+	<% when "internet" %>
+		<% fields = get_in_hash(@package_bundles.find_by_product_id(product.id).checkout_fields) %>
+		<%#= fields %>
+		<% if fields["internet_equiptment"].downcase == "required" %>
+			<h3>Internet Equipment</h3>
+			<ul>
+				<li>
+					<div class="checkbox">
+	          <%= check_box_tag :wifi_internet_telephone_modem, 6.99, false, {:class => "styled"}  %>
+	          <label class="label-checkbox">
+	            WiFi Internet &amp; Telephone Modem - Rent, ($6.99/Monthly)
+	          </label>
+	          <p>
+	          	All-in-one Telephone adapter, DOCSIS 3.0 modem and Wireless 802.11N Router. The latest home networking technology in one, easy-to-setup device.
+	          </p>
+	        </div>
+				</li>
+				<li>
+					<div class="checkbox">
+	          <%= check_box_tag :internet_and_telephone_modem, 0, false, {:class => "styled"}  %>
+	          <label class="label-checkbox">
+	            Internet &amp; Telephone Modem, (Free)
+	          </label>
+	          <p>
+	          	You can use your new Internet-Phone modem to connect to the Internet. Select this option to use the DOCSIS 3 Modem that Cox provides.
+	          </p>
+	        </div>
+				</li>
+			</ul>
+		<% end %>
+
+		
+		<% if fields["cox_teck_solutions"].downcase == "required" %>
+			<h3>Cox Tech Solutions</h3>
+			<p>
+				<small>
+					Online Only! Subscribe to Cox Tech Solutions online at a special monthly rate and we'll waive the $99.99 one-time PC Tune-Up fee! Cox Tech Solutions allows you to stay up and running with unlimited 24/7 premium tech support for your PC, laptop and tablet devices.
+				</small>
+			</p>
+			<ul>
+				<li>
+					<div class="radio">
+	          <%= radio_button_tag :cox_tech_solutions, 14.99, false, {id: "cox_solution_1"}  %>
+	          <label class="label-checkbox" for="cox_solution_1">
+	            Multi-device support, $14.99 - Promotional Price: $5.00/mo
+	          </label>
+	          <p>
+	          	Cox Tech Solutions (CTS) is your personal IT concierge, available 24/7 for support, training and advice. It's designed to help you get the most out of your in-home technology by providing real-time diagnoses and resolutions for PC crashes, virus removal, home network support, training, technology education and much more. This option covers up to four devices, including PCs, tablets and laptops.
+	          </p>
+	          <p>
+	          	<div class="alert alert-info">
+	          		<strong>DISCOUNT:</strong> Multi Device Support - $9.99/mo for 24 months for 24 months!
+	          	</div>
+	          </p>
+	        </div>
+				</li>
+				<li>
+					<div class="radio">
+	          <%= radio_button_tag :cox_tech_solutions, 9.99, false, {id: "cox_solution_2"}  %>
+	          <label class="label-checkbox" for="cox_solution_2">
+	            Single device support, $9.99 - Promotional Price: $3.00/mo
+	          </label>
+	          <p>
+	          	ox Tech Solutions (CTS) is your personal IT concierge, available 24/7 for support, training and advice. It's designed to help you get the most out of your in-home technology by providing real-time diagnoses and resolutions for PC crashes, virus removal, home network support, training, technology education and much more. This option covers a single device, including a PC, tablet or laptop.
+	          </p>
+	          <p>
+	          	<div class="alert alert-info">
+	          		<strong>DISCOUNT:</strong> Single Device Support - $6.99/mo for 24 mos for 24 months!
+	          	</div>
+	          </p>
+	        </div>
+				</li>
+				<li>
+					<div class="radio">
+	          <%= radio_button_tag :cox_tech_solutions, 0, false, {id: "cox_solution_none"}  %>
+	          <label class="label-checkbox" for="cox_solution_none">
+	            None
+	          </label>
+	          <p>
+	          	I don't want Cox Tech Solutions
+	          </p>
+	        </div>
+				</li>
+			</ul>
+		<% end %>
+		<hr />
+	<% else %>
+		<% fields = get_in_hash(@package_bundles.find_by_product_id(product.id).checkout_fields) %>
+		<%#= fields %>
+		<% if fields["long_distance"].downcase == "required" %>
+			<h3>Long Distance</h3>
+			<ul>
+				<li>
+					<div class="checkbox">
+	          <%= check_box_tag :long_distance, 4.99, false, {:class => "styled"}  %>
+	          <label class="label-checkbox">
+	            Simply 5 Long Distance, $4.99
+	          </label>
+	          <p>
+	          	Talk it up with friends and family across the country for just 5 cents per minute - far less than the standard long distance rate!
+	          </p>
+	        </div>
+				</li>
+				<li>
+					<div class="checkbox">
+	          <%= check_box_tag :cox_long_distance, 0.18, false, {:class => "styled"}  %>
+	          <label class="label-checkbox">
+	            Cox Long Distance
+	          </label>
+	          <p>
+	          	With Cox Long Distance, you pay just $0.18/min.
+	          </p>
+	        </div>
+				</li>
+			</ul>
+		<% end %>
+		<% if fields["calling_features"].downcase == 'required' %>
+			<h3>Additional Calling Features</h3>
+			<ul>
+				<li>
+					<div class="checkbox">
+	          <%= check_box_tag :calling_features, 6.99, false, {:class => "styled"}  %>
+	          <label class="label-checkbox">
+	            Voice Mail, ($6.99/Month)
+	          </label>
+	          <p>
+	          	Voicemail - Never miss an important message again..
+	          </p>
+	        </div>
+				</li>
+			</ul>
+		<% end %>
+
+		<% if fields["international_calling_plan"].downcase == 'required' %>
+			<h3>International Calling Plan</h3>
+			<ul>
+				<li>
+					<div class="checkbox">
+	          <%= check_box_tag :international_calling_plan, 2.99, false, {:class => "styled"}  %>
+	          <label class="label-checkbox">
+	            Simply Worldwide, ($2.99 monthly)
+	          </label>
+	          <p>
+	          	Simply Worldwide is simply a great deal. For a low monthly fee, enjoy a rate of just 70-80 (Mexico) cents per minute to over of the most called countries.
+	          </p>
+	        </div>
+				</li>
+			</ul>
+		<% end %>
+		<% if fields["mexico_calling_plan"].downcase == 'required' %>
+			<h3>Mexico Calling Plans</h3>
+			<ul>
+				<li>
+					<div class="checkbox">
+	          <%= check_box_tag :mexico_calling_plan, 7.99, false, {:class => "styled"}  %>
+	          <label class="label-checkbox">
+	             Mi Mexico 200, ($7.99 Monthly)
+	          </label>
+	          <p>
+	          	Save more on calls to Mexico. Get 200 minutes to use any time on calls to landline phones in Mexico. Plus, get a low rate of 4 cents per minute for any minutes you use over 200.
+	          </p>
+	        </div>
+				</li>
+			</ul>
+		<% end %>
+		<% if fields["directory_listing"].downcase == 'required' %>
+			<h3>Directory Listing</h3>
+			<p>
+				<small>
+					How would you like your name to appear in the phone directory? Don't worry, you'll have a chance to review and make edits on the Order Summary page.
+				</small>
+			</p>
+			<ul>
+				<li>
+					<div class="radio">
+	          <%= radio_button_tag :directory_listing, false, false, {:id => "directory_listing"}  %>
+	          <label class="label-checkbox" for="directory_listing">
+	            Published Directory Listing
+	          </label>
+	          <p>
+	          	Show my name, number and address in the White Pages and 411 listing
+	          </p>
+	        </div>
+				</li>
+				<li>
+					<div class="radio">
+	          <%= radio_button_tag :directory_listing, false, false, {:id => "name_and_number"}  %>
+	          <label class="label-checkbox" for="name_and_number">
+	            Name and Number Only Directory Listing
+	          </label>
+	          <p>
+	          	Show my name, number and address in the White Pages and 411 listing
+	          </p>
+	        </div>
+				</li>
+				<li>
+					<div class="radio">
+	          <%= radio_button_tag :directory_listing, 3.50, false, {:id => "name_and_number_411"}  %>
+	          <label class="label-checkbox" for="name_and_number_411">
+	            Name and Number in 411 Directory Listing, ($3.50 monthly)
+	          </label>
+	          <p>
+	          	Show just my name and number in the 411 Listing
+	          </p>
+	        </div>
+				</li>
+				<li>
+					<div class="radio">
+	          <%= radio_button_tag :directory_listing, 4.00, false, {:id => "non_published_directory"}  %>
+	          <label class="label-checkbox" for="non_published_directory">
+	            Non Published Directory Listing, ($4.00 monthly)
+	          </label>
+	          <p>
+	          	Don't list me in the White Pages or 411 Listing
+	          </p>
+	        </div>
+				</li>
+			</ul>
+		<% end %>
+		<% if fields["telephone_outlet_installation"].downcase == 'required' %>
+			<h3>Telephone Outlet(s) Installation</h3>
+			<p>
+				<small>
+					Do you need any additional Telephone Outlets for your home?
+				</small>
+			</p>
+			<ul>
+				<li>
+					<div class="checkbox">
+	          <%= check_box_tag :outlet_install, 20.00, false, {:class => "styled"}  %>
+	          <label class="label-checkbox">
+	             Outlet Installation, ($20.00 monthly)
+	          </label>
+	          <p>
+	          	Installation of additional phone jack wired and installed
+	          </p>
+	        </div>
+				</li>
+			</ul>
+		<% end %>
+		<% if fields["telephone_no_porting"].downcase == 'required' %>
+			<h3>Would you like to keep your current number?</h3>
+			<p>
+				<small>
+					Do you need any additional Telephone Outlets for your home?
+				</small>
+			</p>
+			<ul>
+				<li>
+					<div class="radio">
+	          <%= radio_button_tag :current_telephone_number, false, false, {id: "current_telephone_number_1"}  %>
+	          <label class="label-checkbox" for="current_telephone_number_1">
+	            I want to keep my current telephone number
+	          </label>
+	          <p>
+	          	I want to keep my current telephone number to use with my new Cox telephone service.
+	          </p>
+	        </div>
+				</li>
+				<li>
+					<div class="radio">
+	          <%= radio_button_tag :current_telephone_number, false, false, {id: "current_telephone_number_2"}  %>
+	          <label class="label-checkbox" for="current_telephone_number_2">
+	            Please provide me with a new telephone number
+	          </label>
+	          <p>
+	          	Your new number will be provided upon installation.
+	          </p>
+	        </div>
+				</li>
+			</ul>
+		<% end %>
+		<% if fields["directory_name"].downcase == 'required' %>
+			<h3>Directory Listing </h3>
+			<p>
+				What name would you like your directory listing to be under?
+			</p>
+			<ul>
+				<li>
+					<label>Enter Name:</label>
+					<%= text_field_tag :directory_entered_name, params[:directory_entered_name], class: "form-control" %>
+				</li>
+			</ul>
+		<% end %>
+		<% if fields["cox_service_protection_plan"].downcase == 'required' %>
+			<h3>Cox Service Protection Plan </h3>
+			<ul>
+				<li>
+					<div class="checkbox">
+	          <%= check_box_tag :cox_service_protection_plan, 6.99, false, {:class => "styled"}  %>
+	          <label class="label-checkbox">
+	             Cox Service Protection Plan, $6.99
+	          </label>
+	          <p>
+	          	Get peace of mind knowing that the wiring for your Cox TV, Internet and Phone service is protected.
+	          </p>
+	          <p>
+	          	Cox Service Protection Plan (CSPP) covers the repair of all cabling and phone wiring in your home, including outlets and jacks, and inspection of your home wiring to ensure that it is up to Cox standards. CSPP covers replacing and repairing defective cable industry standard wiring (coax, splitters, fittings and telephone wiring), running from the outside of the home to the back of the digital receiver, TV, modem or telephone outlet. CSPP does not cover customer education calls, failed self-activations, and substandard wiring or splitters. Examples of customer education that is not included in CSPP service include TV on the wrong input, setup of non-Cox equipment, and incorrect hookup after moving or adding new equipment. Some restrictions apply.
+	          </p>
+	        </div>
+				</li>
+			</ul>
+		<% end %>
+		<% if fields["service_agreement"].downcase == 'yes' %>
+			<p>
+				<div class="alert alert-warning">
+					You can change the service agreement term to better fit your needs. This term will apply to all selected services. Any change to your service term may alter your package, bundle pricing or discounts. Save more on your monthly cost by selecting a longer service agreement term.
+				</div>
+			</p>
+			<ul>
+				<li>
+					<div class="radio">
+	          <%= radio_button_tag :service_agreement, false, false, {id: "service_agreement_lock"}  %>
+	          <label class="label-checkbox" for="service_agreement_lock">
+	            Don't lock in my rate
+	          </label>
+	        </div>
+				</li>
+				<li>
+					<div class="radio">
+	          <%= radio_button_tag :service_agreement, false, false, {id: "service_agreement_lock_24"}  %>
+	          <label class="label-checkbox" for="service_agreement_lock_24">
+	            Lock in my rate for 24 months
+	          </label>
+	          <p>
+	          	Price Lock Guarantee lets you lock in the regular rates on Cox TV, Internet and Phone services for 24 months. The rates for your services will not increase above the price lock rate when you agree to keep your main services (TV, Internet and/or Phone) for the 24 months. What's covered and not covered Price Lock Guarantee is offered on TV, Internet and Phone services plus their features, such as a premium channel or voice mail. Price Lock Guarantee does not apply to charges for equipment (such as a receiver or modem), per use items (like a movie rental) and fees for non-services (like taxes and surcharges) which may change.
+	          </p>
+	        </div>
+				</li>
+			</ul>
+		<% end %>
+	<% end %>
+</div>
+

@@ -1,55 +1,93 @@
 <div class="extra_equiptments">
 	<div class="container">
-		<div class="row">
-			<div class="col-md-12 col-sm-12">
-				<h2 class="page-header">
-					<%= @package.provider.name %> <small><%= @package.package_name %></small>
-				</h2>
-				<div class="panel panel-default">
-					<div class="panel-body">
-						<% @products.each do |product| %>
-							<div class="well">
-								<strong><%= product.name %></strong>
-							</div>
-							<%= render partial: "#{@package.provider.acronym}_equiptments", locals: { product: product } %>
-						<% end %>
-					</div>
-				</div>
-			</div>
-			<!-- <div class="col-md-3 col-sm-3">
-				<div class="panel panel-default">
-					<div class="panel-heading">
-						<div class="panel-title">
-							<ul class="list-inline">
-								<li>Plan Summary</li>
-								<li class="pull-right">
-									<%= link_to "Change Plan", :back %>
+		<%= form_tag offer_checkout_path(@package, Package.checkout_steps.last.to_s), method: :get do %>
+			<div class="row">
+				<div class="col-md-9 col-sm-9">
+					<blockquote>
+					  <h2 class="page-header" style="margin: 20px 0 20px;">
+							<%= @package.provider.name %> <small><%= @package.package_name %></small>
+						</h2>
+					  <footer>What would you like to take for your extra equiptments?</footer>
+					</blockquote>
+					<div class="panel panel-default">
+						<div class="panel-body">
+							<% @products.each do |product| %>
+								<div class="bs-callout bs-callout-danger" id="callout-collapse-dependency">
+									<h4><%= product.name %></h4> 
+									<p>Here are some extra items for <strong><%= product.name %></strong>.</p> 
+								</div>
+								<%= render partial: "#{@package.provider.acronym}_equiptments", locals: { product: product, package: @package } %>
+							<% end %>
+
+							<h3>Installation</h3>
+							<ul>
+								<li>
+									<div class="checkbox">
+						        <%= check_box_tag :installation, @package.installation_price.downcase == "free" ? "" : @package.installation_price, false, {:class => "styled"}  %>
+						        <label class="label-checkbox">
+						          Schedule an appointment for a technician to install my services (<%= @package.installation_price %>) 
+						        </label>
+						      </div>
 								</li>
 							</ul>
 						</div>
 					</div>
-					<div class="panel-body">
-						<ul class="list-unstyled">
-							<li>
-								<%#= image_tag @package.provider.logo.url(:medium), class: "img-rounded img-responsive" %>
-							</li>
-							<hr />
-							<li>
-								<ul class="list-inline package_name">
-									<li><%#= @package.package_name %></li>
+				</div>
+				<div class="col-md-3 col-sm-3 follow-equiptments">
+					<div class="panel panel-default">
+						<div class="panel-heading">
+							<div class="panel-title">
+								<ul class="list-inline">
+									<li>Plan Summary</li>
 									<li class="pull-right">
-										<%#= @package.price %>
+										<%= link_to "Change Plan", :back %>
 									</li>
 								</ul>
-							</li>
-							<hr />
-							<li></li>
-						</ul>
+							</div>
+						</div>
+						<div class="panel-body">
+							<ul class="list-unstyled">
+								<li>
+									<%= provider_logo(@package.provider) %>
+								</li>
+								<hr />
+								<li>
+									<dl class="dl-horizontal">
+									  <dt>
+									  	Package Price
+									  </dt>
+									  <dd><%= number_to_currency(@package.price) %></dd>
+									  <dt>
+									  	Installation Price
+									  </dt>
+									  <dd><%= number_to_currency(@package.installation_price) %></dd>
+									  <dt>
+									  	Extra Equiptment Price
+									  </dt>
+									  <dd class="extra_equiptment">
+									  	$<span class="value">0</span>
+									  </dd>
+									</dl>
+								</li>
+							</ul>
+						</div>
+						<div class="panel-footer">
+							<ul class="list-inline">
+								<li>
+									Total
+								</li>
+								<li class="pull-right">
+									<span class="label label-success">
+							  		<%= number_to_currency(@package.price) %>
+							  	</span>
+								</li>
+							</ul>
+						</div>
 					</div>
-					<div class="panel-footer"></div>
 				</div>
-			</div> -->
-		</div>
+			</div>
+			<%= button_tag "Continue to Payment", type: :submit, class: "btn btn-un btn-lg" %>
+		<% end %>
 	</div>
 </div>
 	

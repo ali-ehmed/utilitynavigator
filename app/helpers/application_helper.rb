@@ -11,4 +11,15 @@ module ApplicationHelper
 		hash = fields.gsub("=>", ":")
  		return JSON.parse(hash)
 	end
+
+	def provider_logo(provider)
+		@provider = provider
+		if @provider.twc?
+			image_tag "twc-logo.png", class: "img-rounded img-responsive"
+		elsif @provider.charter?
+			image_tag "charter-logo.png", class: "img-rounded img-responsive"
+		else
+			image_tag "cox-logo.png", class: "img-rounded img-responsive"
+		end
+	end
 end

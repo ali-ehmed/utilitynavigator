@@ -5,12 +5,12 @@
 				<h3><%= cable_tv %></h3>
 				<% count += 1 %>
 				<ol>
-					<li>
+					<!-- <li>
 						<label for="is_required" class="label">
 							Is Required
 						</label>
-						<%= ff.select "is_required_#{count}", options_for_select(["Required", "Optional", "Free"]) %>
-					</li>
+						<%#= ff.select "is_required_#{count}", options_for_select(["Required", "Optional", "Free"]) %>
+					</li> -->
 					<li>
 						<label for="<%= cable_tv.underscore %>" class="label">
 							Enhanced DVR Box
@@ -116,7 +116,7 @@
 			<label class="label">
 				Golbal penny plan
 			</label>
-			<%= ff.text_field :golbal_penny_plan %>
+			<%= ff.text_field :global_penny_plan %>
 		</li>
 	<% end %>
 <% end %>

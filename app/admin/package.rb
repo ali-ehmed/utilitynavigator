@@ -65,10 +65,12 @@ ActiveAdmin.register Package do
     attributes_table_for package do
       row :provider
       row :logo do |package|
-      	if package.provider.logo.present?
-      		image_tag package.provider.logo.url(:thumb)
+      	if package.provider.twc?
+      		image_tag "twc-logo.png", width: "70%"
+      	elsif package.provider.charter?
+    			image_tag "charter-logo.png", width: "70%"
       	else
-      		"N/A"
+      		image_tag "cox-logo.png", width: "70%"
       	end
       end
     end
@@ -98,16 +100,16 @@ ActiveAdmin.register Package do
 					@provider_preferences.preferences_of_product(product.id).each do |preference|
 						bundle_keys_by_product << preference.additional_field_weight.to_field.to_s
 					end
-
-					package_bundle_params = package_bundle_params.select {|k,v| bundle_keys_by_product.include?(k) }
+					bundle_params = "" 
+					bundle_params = package_bundle_params.select {|k,v| bundle_keys_by_product.include?(k) }
 					# params.select_keys(bundle_keys_by_product)
 
-					logger.debug "-----#{package_bundle_params}-----"
+					logger.debug "-----#{bundle_params}-----"
 					logger.debug "-----#{bundle_keys_by_product}-----"
 
 					@package.package_bundles.build do |package_bundle|
 						package_bundle.product_id = product.id
-						package_bundle.field = package_bundle_params
+						package_bundle.field = bundle_params
 						case product.name.downcase
 						when "cable"
 							package_bundle.checkout_fields = params[:cable]
@@ -143,10 +145,12 @@ ActiveAdmin.register Package do
 
 		def update
 			@package = resource
+			@http_method = :put
 			if resource.update_attributes(initialize_params)
 				redirect_to admin_packages_path, notice: "Pakage Updated"
 			else
-				flash[:alert] = "Something went wrong"
+				flash[:alert] = "Review errors below"
+				
 				render :edit
 			end
 		end
