@@ -168,7 +168,7 @@ ActiveAdmin.register Package do
 		@package = Package.new(initialize_params)
 		logger.debug "--#{initialize_params}"
 		if !@package.valid?
-			redirect_to new_admin_package_path, flash: { alert: "Provider can't be blank?" }
+			redirect_to new_admin_package_path, flash: { alert: "Review errors" }
 			return
 		end
 

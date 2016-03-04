@@ -53,7 +53,7 @@ Product.all.each do |product|
 
 		# %(enhanced_dvr_box 1_additional_hd dta dvr_box)
 	when :internet.to_s
-		%w(download_speed upload_speed antivirus_protection email_accounts).each do |field_weight|
+		%w(download_speed upload_speed antivirus_protection email_accounts cloud_storage).each do |field_weight|
 			AdditionalFieldWeight.find_or_initialize_by(additional_weight: field_weight.humanize) do |field|
 				field.product_id = product.id
 				field.field_type = "String"

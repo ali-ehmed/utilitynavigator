@@ -7,114 +7,186 @@
 		<h3>Please configure your TV, Internet &amp; Home Phone Services</h3>
 		<h4>For TV #1, you will build the following options (Primary TV)</h4>
 		<ul>
-			<li>
-				<div class="checkbox">
-          <%= check_box_tag :dvr_box_1, fields["dvr_box_1"], false, {:class => "styled"}  %>
-          <label class="label-checkbox">
-            DVR Box
-          </label>
-        </div>
-			</li>
-			<li>
-				<div class="checkbox">
-          <%= check_box_tag :additional_hd_1, fields["additional_hd_1"], false, {:class => "styled"}  %>
-          <label class="label-checkbox">
-            1 Additional TV
-          </label>
-        </div>
-			</li>
-			<li>
-				<div class="checkbox">
-          <%= check_box_tag :dta_1, fields["dta_1"], false, {:class => "styled"}  %>
-          <label class="label-checkbox">
-            DTA Box
-          </label>
-        </div>
-			</li>
+			<% if fields["dvr_box_1"].present? %>
+				<li>
+					<% if fields["dvr_box_1"].downcase == "included" || fields["dvr_box_1"].downcase == "free" %>
+						DVR Box (<%= fields["dvr_box_1"].capitalize %>)
+					<% else %>
+						<div class="checkbox">
+		          <%= check_box_tag :dvr_box_1, false, false, {:class => "styled", data: { price: fields["dvr_box_1"] }}  %>
+		          <label class="label-checkbox">
+		            DVR Box
+		          </label>
+		        </div>
+	        <% end %>
+				</li>
+			<% end %>
+			<% if fields["additional_hd_1"].present? %>
+				<li>
+					<% if fields["additional_hd_1"].downcase == "included" || fields["additional_hd_1"].downcase == "free" %>
+						1 Additional TV (<%= fields["additional_hd_1"].capitalize %>)
+					<% else %>
+						<div class="checkbox">
+		          <%= check_box_tag :additional_hd_1, false, false, {:class => "styled", data: { price: fields["additional_hd_1"] }, onchange: "calculateEquiptmentCosts(this);"}  %>
+		          <label class="label-checkbox">
+		            1 Additional TV
+		          </label>
+		        </div>
+	        <% end %>
+				</li>
+			<% end %>
+			<% if fields["dta_1"].present? %>
+				<li>
+					<% if fields["dta_1"].downcase == "included" || fields["dta_1"].downcase == "free" %>
+						DTA Box (<%= fields["dta_1"].capitalize %>)
+					<% else %>
+						<div class="checkbox">
+		          <%= check_box_tag :dta_1, false, false, {:class => "styled", data: { price: fields["dta_1"] }, onchange: "calculateEquiptmentCosts(this);"}  %>
+		          <label class="label-checkbox">
+		            DTA Box
+		          </label>
+		        </div>
+	        <% end %>
+				</li>
+			<% end %>
 		</ul>
 		<!-- Second TV -->
 		<h4>For TV #2, you will build the following options (Second TV)</h4>
 		<ul>
-			<li>
-				<div class="checkbox">
-          <%= check_box_tag :dvr_box_2, fields["dvr_box_2"], false, {:class => "styled"}  %>
-          <label class="label-checkbox">
-            DVR Box
-          </label>
-        </div>
-			</li>
-			<li>
-				<div class="checkbox">
-          <%= check_box_tag :additional_hd_2, fields["additional_hd_2"], false, {:class => "styled"}  %>
-          <label class="label-checkbox">
-            1 Additional TV
-          </label>
-        </div>
-			</li>
-			<li>
-				<div class="checkbox">
-          <%= check_box_tag :dta_2, fields["dta_2"], false, {:class => "styled"}  %>
-          <label class="label-checkbox">
-            DTA Box
-          </label>
-        </div>
-			</li>
+			<% if fields["dvr_box_2"].present? %>
+				<li>
+					<% if fields["dvr_box_2"].downcase == "included" || fields["dvr_box_2"].downcase == "free" %>
+						DVR Box (<%= fields["dvr_box_2"].capitalize %>)
+					<% else %>
+						<div class="checkbox">
+		          <%= check_box_tag :dvr_box_2, false, false, {:class => "styled", data: { price: fields["dvr_box_2"] }, onchange: "calculateEquiptmentCosts(this);"}  %>
+		          <label class="label-checkbox">
+		            DVR Box
+		          </label>
+		        </div>
+	        <% end %>
+				</li>
+			<% end %>
+			<% if fields["additional_hd_2"].present? %>
+				<li>	
+					<% if fields["additional_hd_2"].downcase == "included" || fields["additional_hd_2"].downcase == "free" %>
+						1 Additional TV (<%= fields["additional_hd_2"].capitalize %>)
+					<% else %>
+						<div class="checkbox">
+		          <%= check_box_tag :additional_hd_2, false, false, {:class => "styled", data: { price: fields["additional_hd_2"] }, onchange: "calculateEquiptmentCosts(this);"}  %>
+		          <label class="label-checkbox">
+		            1 Additional TV
+		          </label>
+		        </div>
+	        <% end %>
+				</li>
+			<% end %>
+			<% if fields["dta_2"].present? %>
+				<% if fields["dta_2"].downcase == "included" || fields["dta_2"].downcase == "free" %>
+					DTA Box (<%= fields["dta_2"].capitalize %>)
+				<% else %>
+					<li>
+						<div class="checkbox">
+		          <%= check_box_tag :dta_2, false, false, {:class => "styled", data: { price: fields["dta_2"] }, onchange: "calculateEquiptmentCosts(this);"}  %>
+		          <label class="label-checkbox">
+		            DTA Box
+		          </label>
+		        </div>
+					</li>
+				<% end %>
+			<% end %>
 		</ul>
 		<!-- Third TV -->
 		<h4>For TV #3, you will build the following options (Third TV)</h4>
 		<ul>
-			<li>
-				<div class="checkbox">
-          <%= check_box_tag :dvr_box_3, fields["dvr_box_3"], false, {:class => "styled"}  %>
-          <label class="label-checkbox">
-            DVR Box
-          </label>
-        </div>
-			</li>
-			<li>
-				<div class="checkbox">
-          <%= check_box_tag :additional_hd_3, fields["additional_hd_3"], false, {:class => "styled"}  %>
-          <label class="label-checkbox">
-            1 Additional TV
-          </label>
-        </div>
-			</li>
-			<li>
-				<div class="checkbox">
-          <%= check_box_tag :dta_3, fields["dta_3"], false, {:class => "styled"}  %>
-          <label class="label-checkbox">
-            DTA Box
-          </label>
-        </div>
-			</li>
+			<% if fields["dvr_box_3"].present? %>
+				<% if fields["dvr_box_3"].downcase == "included" || fields["dvr_box_3"].downcase == "free" %>
+					DTA Box (<%= fields["dvr_box_3"].capitalize %>)
+				<% else %>
+					<li>
+						<div class="checkbox">
+		          <%= check_box_tag :dvr_box_3, false, false, {:class => "styled", data: { price: fields["dvr_box_3"] }, onchange: "calculateEquiptmentCosts(this);"}  %>
+		          <label class="label-checkbox">
+		            DVR Box
+		          </label>
+		        </div>
+					</li>
+				<% end %>
+			<% end %>
+			<% if fields["additional_hd_3"].present? %>
+				<% if fields["additional_hd_3"].downcase == "included" || fields["additional_hd_3"].downcase == "free" %>
+					 Additional TV (<%= fields["additional_hd_3"].capitalize %>)
+				<% else %>
+					<li>
+						<div class="checkbox">
+		          <%= check_box_tag :additional_hd_3, false, false, {:class => "styled", data: { price: fields["additional_hd_3"] }, onchange: "calculateEquiptmentCosts(this);"}  %>
+		          <label class="label-checkbox">
+		            1 Additional TV
+		          </label>
+		        </div>
+					</li>
+				<% end %>
+			<% end %>	
+			<% if fields["dta_3"].present? %>
+				<% if fields["dta_3"].downcase == "included" || fields["dta_3"].downcase == "free" %>
+					DTA Box (<%= fields["dta_3"].capitalize %>)
+				<% else %>
+					<li>
+						<div class="checkbox">
+		          <%= check_box_tag :dta_3, false, false, {:class => "styled", data: { price: fields["dta_3"] }, onchange: "calculateEquiptmentCosts(this);"}  %>
+		          <label class="label-checkbox">
+		            DTA Box
+		          </label>
+		        </div>
+					</li>
+				<% end %>
+			<% end %>
 		</ul>
 		<!-- Fourth TV -->
 		<h4>For TV #4, you will build the following options (Fourth TV)</h4>
 		<ul>
-			<li>
-				<div class="checkbox">
-          <%= check_box_tag :dvr_box_4, fields["dvr_box_4"], false, {:class => "styled"}  %>
-          <label class="label-checkbox">
-            DVR Box
-          </label>
-        </div>
-			</li>
-			<li>
-				<div class="checkbox">
-          <%= check_box_tag :additional_hd_4, fields["additional_hd_4"], false, {:class => "styled"}  %>
-          <label class="label-checkbox">
-            1 Additional TV
-          </label>
-        </div>
-			</li>
-			<li>
-				<div class="checkbox">
-          <%= check_box_tag :dta_4, fields["dta_4"], false, {:class => "styled"}  %>
-          <label class="label-checkbox">
-            DTA Box
-          </label>
-        </div>
-			</li>
+			<% if fields["dvr_box_4"].present? %>
+				<% if fields["dvr_box_4"].downcase == "included" || fields["dvr_box_4"].downcase == "free" %>
+					DVR Box (<%= fields["dvr_box_4"].capitalize %>)
+				<% else %>
+					<li>
+						<div class="checkbox">
+		          <%= check_box_tag :dvr_box_4, false, false, {:class => "styled", data: { price: fields["dvr_box_4"] }, onchange: "calculateEquiptmentCosts(this);"}  %>
+		          <label class="label-checkbox">
+		            DVR Box
+		          </label>
+		        </div>
+					</li>
+				<% end %>
+			<% end %>
+			<% if fields["additional_hd_4"].present? %>
+				<% if fields["additional_hd_4"].downcase == "included" || fields["additional_hd_4"].downcase == "free" %>
+					1 Additional TV (<%= fields["additional_hd_4"].capitalize %>)
+				<% else %>
+					<li>
+						<div class="checkbox">
+		          <%= check_box_tag :additional_hd_4, false, false, {:class => "styled", data: { price: fields["additional_hd_4"] }, onchange: "calculateEquiptmentCosts(this);"}  %>
+		          <label class="label-checkbox">
+		            1 Additional TV
+		          </label>
+		        </div>
+					</li>
+				<% end %>
+			<% end %>
+			<% if fields["dta_4"].present? %>
+				<% if fields["dta_4"].downcase == "included" || fields["dta_4"].downcase == "free" %>
+					DTA Box (<%= fields["dta_4"].capitalize %>)
+				<% else %>
+					<li>
+						<div class="checkbox">
+		          <%= check_box_tag :dta_4, false, false, {:class => "styled", data: { price: fields["dta_4"] }, onchange: "calculateEquiptmentCosts(this);"}  %>
+		          <label class="label-checkbox">
+		            DTA Box
+		          </label>
+		        </div>
+					</li>
+				<% end %>
+			<% end %>
 		</ul>
 		<!-- Details -->
 		<h4>
@@ -159,7 +231,7 @@
 			<ul>
 				<li>
 					<div class="checkbox">
-	          <%= check_box_tag :hbo, 15, false, {:class => "styled"}  %>
+	          <%= check_box_tag :hbo, false, false, {:class => "styled", data: { price: 15.00 }, onchange: "calculateEquiptmentCosts(this);"}  %>
 	          <label class="label-checkbox">
 	            HBO ($15.00 monthly)
 	          </label>
@@ -167,7 +239,7 @@
 				</li>
 				<li>
 					<div class="checkbox">
-	          <%= check_box_tag :cinemax, 9.99, false, {:class => "styled"}  %>
+	          <%= check_box_tag :cinemax, false, false, {:class => "styled", data: { price: 9.99 }, onchange: "calculateEquiptmentCosts(this);"}  %>
 	          <label class="label-checkbox">
 	            Cinemax ($9.99 monthly)
 	          </label>
@@ -175,7 +247,7 @@
 				</li>
 				<li>
 					<div class="checkbox">
-	          <%= check_box_tag :showtime, 9.99, false, {:class => "styled"}  %>
+	          <%= check_box_tag :showtime, false, false, {:class => "styled", data: { price: 9.99 }, onchange: "calculateEquiptmentCosts(this);"}  %>
 	          <label class="label-checkbox">
 	            Showtime ($9.99 monthly)
 	          </label>
@@ -183,7 +255,7 @@
 				</li>
 				<li>
 					<div class="checkbox">
-	          <%= check_box_tag :movie_channel, 9.99, false, {:class => "styled"}  %>
+	          <%= check_box_tag :movie_channel, false, false, {:class => "styled", data: { price: 9.99 }, onchange: "calculateEquiptmentCosts(this);"}  %>
 	          <label class="label-checkbox">
 	            The Movie Channel ($9.99 monthly)
 	          </label>
@@ -192,7 +264,7 @@
 				</li>
 				<li>
 					<div class="checkbox">
-	          <%= check_box_tag :starz, 9.99, false, {:class => "styled"}  %>
+	          <%= check_box_tag :starz, false, false, {:class => "styled", data: { price: 9.99 }, onchange: "calculateEquiptmentCosts(this);"}  %>
 	          <label class="label-checkbox">
 	            Starz ($9.99 monthly)
 	          </label>
@@ -209,7 +281,7 @@
 			<ul>
 				<li>
 					<div class="checkbox">
-	          <%= check_box_tag :twc_sports, 10.00, false, {:class => "styled"}  %>
+	          <%= check_box_tag :twc_sports, false, false, {:class => "styled", data: { price: 10.00 }, onchange: "calculateEquiptmentCosts(this);"}  %>
 	          <label class="label-checkbox">
 	            TWC Sports Pass ($10.00 monthly)
 	          </label>
@@ -220,7 +292,7 @@
 				</li>
 				<li>
 					<div class="checkbox">
-	          <%= check_box_tag :disney_on_demand, 3.99, false, {:class => "styled"}  %>
+	          <%= check_box_tag :disney_on_demand, false, false, {:class => "styled", data: { price: 3.99 }, onchange: "calculateEquiptmentCosts(this);"}  %>
 	          <label class="label-checkbox">
 	            Disney On Demand ($3.99 monthly)
 	          </label>
@@ -231,7 +303,7 @@
 				</li>
 				<li>
 					<div class="checkbox">
-	          <%= check_box_tag :twc_movie_pass, 10.00, false, {:class => "styled"}  %>
+	          <%= check_box_tag :twc_movie_pass, false, false, {:class => "styled", data: { price: 10.00 }, onchange: "calculateEquiptmentCosts(this);"}  %>
 	          <label class="label-checkbox">
 	            TWC Movie Pass ($10.00 monthly)
 	          </label>
@@ -242,7 +314,7 @@
 				</li>
 				<li>
 					<div class="checkbox">
-	          <%= check_box_tag :hd_pass, 6.95, false, {:class => "styled"}  %>
+	          <%= check_box_tag :hd_pass, false, false, {:class => "styled", data: { price: 6.95 }, onchange: "calculateEquiptmentCosts(this);"}  %>
 	          <label class="label-checkbox">
 	            HD Pass ($6.95 monthly)
 	          </label>
@@ -257,7 +329,7 @@
 		<ul>
 			<li>
 				<div class="checkbox">
-          <%= check_box_tag :spanish_programming, 5.00, false, {:class => "styled"}  %>
+          <%= check_box_tag :spanish_programming, 5.00, false, {:class => "styled", data: { price: 5.00 }, onchange: "calculateEquiptmentCosts(this);"}  %>
           <label class="label-checkbox">
             Spanish Programming ($5.00 Monthly)
           </label>
@@ -278,7 +350,7 @@
 			<ul>
 				<li>
 					<div class="radio">
-	          <%= radio_button_tag fields["modem"], 10.00, false, {id: "modem_with"}  %>
+	          <%= radio_button_tag :modem, false, false, {id: "modem_with", data: { price: 10.00 }, onchange: "calculateEquiptmentCosts(this);"}  %>
 	          <label class="label-checkbox" for="modem_with">
 	            Internet plan requires modem to connect internet service ($<%= fields["modem"] %>/Monthly)
 	          </label>
@@ -286,7 +358,7 @@
 				</li>
 				<li>
 					<div class="radio">
-	          <%= radio_button_tag :modem, 0, false, {id: "modem_own"}  %>
+	          <%= radio_button_tag :modem, false, false, {id: "modem_own", data: { price: 0 }, onchange: "calculateEquiptmentCosts(this);"}  %>
 	          <label class="label-checkbox" for="modem_own">
 	            I’ll use my own internet modem ($0)
 	          </label>
@@ -308,7 +380,7 @@
 			<ul>
 				<li>
 					<div class="radio">
-	          <%= radio_button_tag :wifi, fields["wifi"], false, {id: "wifi_with"}  %>
+	          <%= radio_button_tag :wifi, false, false, {id: "wifi_with", data: { price: fields["wifi"] }, onchange: "calculateEquiptmentCosts(this);"}  %>
 	          <label class="label-checkbox" for="wifi_with">
 	            Yes, I want to add home WiFi ($<%= fields["wifi"] %>)
 	          </label>
@@ -316,7 +388,7 @@
 				</li>
 				<li>
 					<div class="radio">
-	          <%= radio_button_tag :wifi, 0, false, {id: "wifi_own"}  %>
+	          <%= radio_button_tag :wifi, false, false, {id: "wifi_own", data: { price: 0 }, onchange: "calculateEquiptmentCosts(this);"}  %>
 	          <label class="label-checkbox" for="wifi_own">
 	            I’ll use my own wireless router ($0)
 	          </label>
@@ -338,7 +410,7 @@
 		<ul>
 			<li>
 				<div class="checkbox">
-          <%= check_box_tag :new_phone_number, fields["new_phone_number"], false, {:class => "styled"}  %>
+          <%= check_box_tag :new_phone_number, false, false, {:class => "styled", data: { price: fields["new_phone_number"] }, onchange: "calculateEquiptmentCosts(this);"}  %>
           <label class="label-checkbox">
             New Phone Number 
           </label>
@@ -349,7 +421,7 @@
 			</li>
 			<li>
 				<div class="checkbox">
-          <%= check_box_tag :transfer_phone_number, fields["transfer_phone_number"], false, {:class => "styled"}  %>
+          <%= check_box_tag :transfer_phone_number, false, false, {:class => "styled", data: { price: fields["transfer_phone_number"] }, onchange: "calculateEquiptmentCosts(this);"}  %>
           <label class="label-checkbox">
             Transfer Phone Number 
           </label>
@@ -363,9 +435,9 @@
 		<ul>
 			<li>
 				<div class="checkbox">
-          <%= check_box_tag :international_one_price, fields["international_one_price"], false, {:class => "styled"}  %>
+          <%= check_box_tag :international_one_price, false, false, {:class => "styled", data: { price: fields["international_one_price"] }, onchange: "calculateEquiptmentCosts(this);"}  %>
           <label class="label-checkbox">
-            INTERNATIONAL ONEPRICE ($19.95 monthly)
+            INTERNATIONAL ONE PRICE ($<%= fields["international_one_price"] %> monthly)
           </label>
           <p>
           	You can call up to 1,000 minutes a month to land-line phones in over 100 countries and cellphones in 14 countries. International OnePrice® gives you low rates after the 1,000 minutes are used.
@@ -374,7 +446,7 @@
 			</li>
 			<li>
 				<div class="checkbox">
-          <%= check_box_tag :sign_up_global_penny, fields["global_penny_plan"], false, {:class => "styled"}  %>
+          <%= check_box_tag :sign_up_global_penny, false, false, {:class => "styled", data: { price: fields["global_penny_plan"] }, onchange: "calculateEquiptmentCosts(this);"}  %>
           <label class="label-checkbox">
             Sign up for the Global Penny Phone Plan ($<%= fields["global_penny_plan"] %> monthly)  
           </label>
@@ -388,7 +460,7 @@
 		<ul>
 			<li>
 				<div class="checkbox">
-          <%= check_box_tag :voice_mail, fields["voice_mail"], false, {:class => "styled"}  %>
+          <%= check_box_tag :voice_mail, false, false, {:class => "styled", data: { price: fields["voice_mail"] }, onchange: "calculateEquiptmentCosts(this);"}  %>
           <label class="label-checkbox">
             Sign up for the Global Penny Phone Plan ($<%= fields["voice_mail"] %> monthly)  
           </label>
@@ -399,18 +471,5 @@
 			</li>
 		</ul>
 	<% end %>
-
-	<h3>Installation</h3>
-	<%#= fields %>
-	<ul>
-		<li>
-			<div class="checkbox">
-        <%= check_box_tag :installation, package.installation_price.downcase == "free" ? "" : package.installation_price, false, {:class => "styled"}  %>
-        <label class="label-checkbox">
-          Schedule an appointment for a technician to install my services (<%= package.installation_price %>) 
-        </label>
-      </div>
-		</li>
-	</ul>
 </div>
 

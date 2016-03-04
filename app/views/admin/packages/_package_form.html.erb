@@ -5,15 +5,15 @@
 			<li class="string input optional stringish" id="package_name_input">
 				<%= f.input :package_name %>
 			</li>
-			<li class="string input optional stringish" id="package_description_input">
+			<li class="string input optional stringish">
 				<%= f.label :package_description %>
-			</li>
-			<li class="string input optional stringish" id="package_description_input">
-				
-				<%= f.input :package_description, input_html: { class: "package-content" } %>
+				<div id="package_description_input">
+					<%= f.input :package_description, input_html: { class: "package-content" } %>
+				</div>
 			</li>
 			<li class="string input optional stringish" id="package_price_info_input">
-				<%= f.input :price_info %>
+				<%= f.input :price_info, hint: "Not should not be more than 50 characters" %>
+
 			</li>
 			<li class="string input optional stringish" id="package_price_input">
 				<%= f.input :price %>

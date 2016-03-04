@@ -35,3 +35,7 @@ li.product-errors {
 table td.fields, th.fields {
   text-align: center;
 }
+
+#package_description_input {
+  margin-left: 302px;
+}

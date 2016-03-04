@@ -23,7 +23,7 @@
 							<ul>
 								<li>
 									<div class="checkbox">
-						        <%= check_box_tag :installation, @package.installation_price.downcase == "free" ? "" : @package.installation_price, false, {:class => "styled"}  %>
+						        <%= check_box_tag :installation, @package.installation_price.downcase == "free" ? "" : @package.installation_price, false, {:class => "styled", onchange: "calculateEquiptmentCosts(this);"}  %>
 						        <label class="label-checkbox">
 						          Schedule an appointment for a technician to install my services (<%= @package.installation_price %>) 
 						        </label>
@@ -40,7 +40,7 @@
 								<ul class="list-inline">
 									<li>Plan Summary</li>
 									<li class="pull-right">
-										<%= link_to "Change Plan", :back %>
+										<%= link_to "Change Plan", root_path %>
 									</li>
 								</ul>
 							</div>
@@ -52,22 +52,50 @@
 								</li>
 								<hr />
 								<li>
-									<dl class="dl-horizontal">
-									  <dt>
-									  	Package Price
-									  </dt>
-									  <dd><%= number_to_currency(@package.price) %></dd>
-									  <dt>
-									  	Installation Price
-									  </dt>
-									  <dd><%= number_to_currency(@package.installation_price) %></dd>
-									  <dt>
-									  	Extra Equiptment Price
-									  </dt>
-									  <dd class="extra_equiptment">
-									  	$<span class="value">0</span>
-									  </dd>
-									</dl>
+									<ul class="list-inline">
+										<li>
+											<strong>Package Price</strong>
+										</li>
+										<li class="pull-right">
+											<%= number_to_currency(@package.price) %>
+										</li>
+									</ul>
+								</li>
+								<li>
+									<ul class="list-inline">
+										<li>
+											<strong>Installation Price</strong>
+										</li>
+										<li class="pull-right">
+											<% if @package.installation_price.downcase == "free" %>
+									  		Free
+								  		<% else %>
+								  			<%= number_to_currency(@package.installation_price) %>
+								  		<% end %>
+										</li>
+									</ul>
+								</li>
+								<li>
+									<ul class="list-inline">
+										<li>
+											<strong>Extra Equiptment Price</strong>
+										</li>
+										<li class="pull-right">
+											$
+											<%= hidden_field_tag :equiptment_cost, 0 %>
+											<span class="equiptment_cost_span">0.00</span>
+										</li>
+									</ul>
+								</li>
+								<li>
+									<ul class="list-inline">
+										<li data-toggle="tooltip" data-placement="top" title="Monthly fee after promotion">
+									  	<strong>MFP</strong>
+										</li>
+										<li class="pull-right">
+											<%= @package.monthly_fee_after_promotion %>
+										</li>
+									</ul>
 								</li>
 							</ul>
 						</div>
@@ -77,7 +105,8 @@
 									Total
 								</li>
 								<li class="pull-right">
-									<span class="label label-success">
+									<%= hidden_field_tag :total_cost, @package.price.to_f.round(2) %>
+									<span class="label label-success total_cost_span">
 							  		<%= number_to_currency(@package.price) %>
 							  	</span>
 								</li>

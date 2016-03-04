@@ -78,13 +78,15 @@
 			<label class="label">
 				New phone number
 			</label>
-			<%= ff.select :new_phone_number, options_for_select(["Required", "Free"]) %>
+			<%#= ff.select :new_phone_number, options_for_select(["Required", "Free"]) %>
+			<%= ff.text_field :new_phone_number %>
 		</li>
 		<li>
 			<label class="label">
 				Old phone number
 			</label>
-			<%= ff.select :old_phone_number, options_for_select(["Required", "Free"]) %>
+			<%#= ff.select :old_phone_number, options_for_select(["Required", "Free"]) %>
+			<%= ff.text_field :old_phone_number %>
 		</li>
 		<li>
 			<label class="label">
