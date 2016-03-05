@@ -12,11 +12,7 @@ class OffersController < ApplicationController
 			state: params[:state]
 		}
 
-		cookies[:user_address] = {
-      value: @attributes,
-      expires: Time.now + 15.minutes,
-      domain: request.domain
-    }
+		session[:user_address] = @attributes
 
 		@twc = Package.twc
 		@charter = Package.charter

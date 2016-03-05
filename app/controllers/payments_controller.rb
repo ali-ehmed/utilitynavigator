@@ -1,20 +1,3 @@
-# == Schema Information
-#
-# Table name: payments
-#
-#  id                :integer          not null, primary key
-#  user_id           :integer
-#  package_id        :integer
-#  extra_equiptments :string
-#  card_last4        :string
-#  card_exp_month    :integer
-#  card_exp_year     :integer
-#  card_type         :string
-#  created_at        :datetime         not null
-#  updated_at        :datetime         not null
-#  total_cost        :integer          default(0)
-#
-
 class PaymentsController < ApplicationController
 	before_action :set_package, only: [:create]
 	before_action :user_address, only: [:create]
@@ -63,8 +46,8 @@ class PaymentsController < ApplicationController
   def user_address
   	@user_address = Array.new
 
-  	unless cookies[:user_address].blank?
-			@getting_user_address = eval(cookies[:user_address])
+  	unless session[:user_address].blank?
+			@getting_user_address = session[:user_address]
 		else
 			redirect_to root_path, flash: { alert: "Your session for booking order has expired." }
 			return

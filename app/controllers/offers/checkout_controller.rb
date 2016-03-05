@@ -19,15 +19,17 @@ class Offers::CheckoutController < ApplicationController
 		when "payments"
 			@user_address = Array.new
 
-			@getting_user_address = eval(cookies[:user_address])
+			if session[:user_address]
+				@getting_user_address = session[:user_address]
 
-			@getting_user_address.map do |key, value|
-				unless value.blank?
-					@user_address << value
+				@getting_user_address.map do |key, value|
+					unless value.blank?
+						@user_address << value
+					end
 				end
-			end
 
-			@user_address = @user_address.join(", ")
+				@user_address = @user_address.join(", ")
+			end
 
 			@payment = Payment.new
 			@payment.build_user
