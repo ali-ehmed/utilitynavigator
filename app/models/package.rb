@@ -14,6 +14,7 @@
 #  promotion_disclaimer        :string
 #  created_at                  :datetime         not null
 #  updated_at                  :datetime         not null
+#  promotions                  :string
 #
 
 class Package < ActiveRecord::Base
@@ -22,6 +23,9 @@ class Package < ActiveRecord::Base
 
 	has_many :package_bundles
 	accepts_nested_attributes_for :package_bundles
+
+	has_many :payments
+	accepts_nested_attributes_for :payments
 
 	attr_accessor :product_ids, :charter_tv_spectrum
 

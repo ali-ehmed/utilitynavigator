@@ -22,6 +22,14 @@
 #  unconfirmed_email      :string
 #  created_at             :datetime         not null
 #  updated_at             :datetime         not null
+#  address                :string
+#  zip_code               :string
+#  cell_number            :string
+#  home_number            :string
+#  driver_license         :string
+#  social_security        :string
+#  four_digit_no          :string
+#  date_of_birth          :date
 #
 
 require 'test_helper'

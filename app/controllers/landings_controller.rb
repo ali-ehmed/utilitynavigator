@@ -24,4 +24,14 @@ class LandingsController < ApplicationController
 		@provider_banner = "charter-banner.png"
 		render :providers
 	end
+
+	def compare_packages
+		ids = params[:package_ids]
+
+		@packages = Package.where("id in (?)", ids)
+		
+		respond_to do |format|
+			format.js
+		end
+	end
 end

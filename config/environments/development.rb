@@ -39,7 +39,7 @@ Rails.application.configure do
   # Raises error for missing translations
   # config.action_view.raise_on_missing_translations = true
 
-  # config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
+  # config.action_mailer.default_url_options = { port: 3000 }
 
   config.action_mailer.delivery_method = :letter_opener
 
@@ -56,5 +56,5 @@ Rails.application.configure do
     :openssl_verify_mode => 'none'
   }
 
-  config.admin_notifications_email = ["admin@example.com", "test@designhenge.com"]
+  config.admin_notifications_email = ["test@designhenge.com"]
 end

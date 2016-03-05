@@ -157,7 +157,7 @@ ActiveAdmin.register Package do
 
 		def initialize_params
 			params.require(:package).permit(:provider_id, :package_type_id, :price, :price_info, :package_description,
-																			:package_name, :promotion_disclaimer, :monthly_fee_after_promotion, :installation_price)
+																			:package_name, :promotions, :promotion_disclaimer, :monthly_fee_after_promotion, :installation_price)
 		end
 	end
 

@@ -12,7 +12,7 @@
 				</div>
 			</li>
 			<li class="string input optional stringish" id="package_price_info_input">
-				<%= f.input :price_info, hint: "Not should not be more than 50 characters" %>
+				<%= f.input :price_info, hint: "Price Info should not be more than 50 characters" %>
 
 			</li>
 			<li class="string input optional stringish" id="package_price_input">
@@ -23,6 +23,12 @@
 			</li>
 			<li class="string input optional stringish" id="package_installation_price_input">
 				<%= f.input :installation_price %>
+			</li>
+			<li class="string input optional stringish">
+				<%= f.label :promotions %>
+				<div id="package_promotions_input">
+					<%= f.input :promotions, input_html: { class: "package-promotions" } %>
+				</div>
 			</li>
 		</ol>
 	</fieldset>

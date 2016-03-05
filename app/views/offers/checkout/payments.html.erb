@@ -1,1 +1,204 @@
-<%= link_to "Back to Equiptments", offer_checkout_path(@package, Package.checkout_steps.first.to_s), class: "btn btn-un" %>
+<div class="extra_equiptments">
+	<div class="container">
+		<%= simple_form_for @payment, url: :payments, method: :post do |f| %>
+			<input name="payment[package_id]" type="hidden" value="<%= @package.id %>" />
+			<div class="row">
+				<div class="col-md-9 col-sm-9">
+					<blockquote>
+					  <h2 class="page-header" style="margin: 20px 0 20px;">
+							<%= @package.provider.name %> <small><%= @package.package_name %></small>
+						</h2>
+					  <footer>Please enter your credit to reserve this order.</footer>
+					</blockquote>
+					<%= f.simple_fields_for :user do |form_user| %>
+						<div class="panel panel-default">
+							<div class="panel-body">
+								<div class="panel panel-primary">
+									<div class="panel-heading">
+										<div class="panel-title"><strong>Your General Information</strong></div>
+									</div>
+									<div class="panel-body">
+										<div class="row">
+											<div class="col-md-6">
+												<div class="form-group">
+													<%= form_user.input :first_name, placeholder: "First Name" %>
+												</div>
+											</div>
+											<div class="col-md-6">
+												<div class="form-group">
+													<%= form_user.input :last_name, placeholder: "Last Name" %>
+												</div>
+											</div>
+										</div>
+										<div class="row">
+											<div class="col-md-6">
+												<div class="form-group">
+													<%= form_user.input :email, placeholder: "Email" %>
+												</div>
+											</div>
+											<div class="col-md-6">
+												<div class="form-group">
+													<%= form_user.input :date_of_birth, :as => :date, :start_year => Date.today.year - 12, :end_year => 1900, :order => [:day, :month, :year], :required => true %>
+												</div>
+											</div>
+										</div>
+										<fieldset>
+											<legend>Contact Details</legend>
+											<div class="row">
+												<div class="col-md-6">
+													<div class="form-group">
+														<%= form_user.input :cell_number, placeholder: "Cell Number" %>
+													</div>
+												</div>
+												<div class="col-md-6">
+													<div class="form-group">
+														<%= form_user.input :home_number, placeholder: "Home Number" %>
+													</div>
+												</div>
+											</div>
+											<div class="row">
+												<div class="col-md-6">
+													<div class="form-group">
+														<%= form_user.input :zip_code, placeholder: "Zip Code", input_html: { value: @getting_user_address[:zip] } %>
+													</div>
+												</div>
+												<div class="col-md-6">
+													<div class="form-group">
+														<%= form_user.input :address, placeholder: "Address", input_html: {  value: @user_address.chomp } %>
+													</div>
+												</div>
+											</div>
+										</fieldset>
+										<fieldset>
+											<legend>Security</legend>
+											<div class="row">
+												<div class="col-md-4">
+													<div class="form-group">
+														<%= form_user.input :driver_license, placeholder: "Driver License" %>
+													</div>
+												</div>
+												<div class="col-md-4">
+													<div class="form-group">
+														<%= form_user.input :social_security, placeholder: "Social Security" %>
+													</div>
+												</div>
+												<div class="col-md-4">
+													<div class="form-group">
+														<%= form_user.input :four_digit_no, placeholder: "4 Digit No" %>
+													</div>
+												</div>
+											</div>
+										</fieldset>
+									</div>
+								</div>
+							</div>
+						</div>
+					<% end %>
+					<div class="panel panel-danger">
+						<div class="panel-heading">
+							<div class="panel-title">
+								<strong>Enter Your Credit Card Information</strong>
+							</div>
+						</div>
+						<div class="panel-body">
+							<div class="form-group">
+								<%= f.input :card_last4, placeholder: "Card Number", input_html: { "data-mask" => "999-99-999-9999-9" } %>
+							</div>
+							<div class="row">
+								<div class="col-md-6">
+									<%= f.input :card_exp_month, placeholder: "Card Expiry Month" %>
+								</div>
+								<div class="col-md-6">
+									<%= f.input :card_exp_year, placeholder: "Card Expiry Year" %>
+								</div>
+							</div>
+							<div class="form-group">
+							<label>CVV Code</label>
+								<%= text_field_tag :security_code, params[:security_code], placeholder: "CVV", class: "form-control" %>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-3 col-sm-3">
+					<div class="panel panel-default">
+						<div class="panel-heading">
+							<div class="panel-title">
+								<span>
+									Plan Summary
+								</span>
+							</div>
+						</div>
+						<div class="panel-body">
+							<ul class="list-unstyled">
+								<li class="summary-logo">
+									<%= provider_logo(@package.provider) %>
+								</li>
+								<hr />
+								<li>
+									<ul class="list-inline">
+										<li>
+											<strong>Package Price</strong>
+										</li>
+										<li class="pull-right">
+											<%= number_to_currency(@package.price) %>
+										</li>
+									</ul>
+								</li>
+								<li>
+									<ul class="list-inline">
+										<li>
+											<strong>Installation Price</strong>
+										</li>
+										<li class="pull-right">
+											<% if @package.installation_price.downcase == "free" %>
+									  		Free
+								  		<% else %>
+								  			<%= number_to_currency(@package.installation_price) %>
+								  		<% end %>
+										</li>
+									</ul>
+								</li>
+								<li>
+									<ul class="list-inline">
+										<li>
+											<strong>Extra Equiptment Price</strong>
+										</li>
+										<li class="pull-right">
+											<%= hidden_field_tag :equiptment_cost, @equiptment_params["equiptment_cost"] %>
+											<%= number_to_currency(@equiptment_params["equiptment_cost"]) %>
+										</li>
+									</ul>
+								</li>
+								<li>
+									<ul class="list-inline">
+										<li data-toggle="tooltip" data-placement="top" title="Monthly fee after promotion">
+									  	<strong>MFP</strong>
+										</li>
+										<li class="pull-right">
+											<%= @package.monthly_fee_after_promotion %>
+										</li>
+									</ul>
+								</li>
+							</ul>
+						</div>
+						<div class="panel-footer">
+							<ul class="list-inline">
+								<li>
+									Total
+								</li>
+								<li class="pull-right">
+									<%= hidden_field_tag :total_cost, @equiptment_params["total_cost"].to_f.round(2) %>
+									<span class="label label-success total_cost_span">
+							  		<%= number_to_currency(@equiptment_params["total_cost"]) %>
+							  	</span>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+			<%= f.button :button, 'Reserve', :class => 'btn btn-un btn-lg', data: { disable_with: "<i class='fa fa-spinner fa-spin'></i> Booking...!"} %>
+		<% end %>
+	</div>
+</div>
+	

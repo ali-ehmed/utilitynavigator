@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resources :payments
+
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
 
@@ -12,6 +14,10 @@ Rails.application.routes.draw do
   %w(cox charter_spectrum twc).each do |proivder|
     get proivder => "landings##{proivder}"
   end
+
+  get "/compare_packages" => "landings#compare_packages"
+
+  devise_for :users
   
   # devise_for :users
   resources :call_back, only: [:create]

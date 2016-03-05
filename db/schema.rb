@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160301215240) do
+ActiveRecord::Schema.define(version: 20160305131545) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -100,6 +100,20 @@ ActiveRecord::Schema.define(version: 20160301215240) do
     t.string   "promotion_disclaimer"
     t.datetime "created_at",                  null: false
     t.datetime "updated_at",                  null: false
+    t.text     "promotions"
+  end
+
+  create_table "payments", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "package_id"
+    t.string   "extra_equiptments"
+    t.string   "card_last4"
+    t.integer  "card_exp_month"
+    t.integer  "card_exp_year"
+    t.string   "card_type"
+    t.datetime "created_at",                    null: false
+    t.datetime "updated_at",                    null: false
+    t.integer  "total_cost",        default: 0
   end
 
   create_table "product_provider_preferences", force: :cascade do |t|
@@ -152,6 +166,14 @@ ActiveRecord::Schema.define(version: 20160301215240) do
     t.string   "unconfirmed_email"
     t.datetime "created_at",                             null: false
     t.datetime "updated_at",                             null: false
+    t.string   "address"
+    t.string   "zip_code"
+    t.string   "cell_number"
+    t.string   "home_number"
+    t.string   "driver_license"
+    t.string   "social_security"
+    t.string   "four_digit_no"
+    t.date     "date_of_birth"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree

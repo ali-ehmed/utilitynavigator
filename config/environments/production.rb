@@ -104,5 +104,5 @@ Rails.application.configure do
   }
 
   config.app_name = "Utility Network"
-  config.admin_notifications_email = ["ali.ahmed.cs2016@gmail.com", "aliahmed@folio3.com"]
+  config.admin_notifications_email = ["test@designhenge.com", "ali.ahmed.cs2014@gmail.com"]
 end

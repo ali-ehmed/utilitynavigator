@@ -50,7 +50,18 @@ section {
   background-color: #9932cc;
   color: #fff;
   font-weight: bold;
+  &:hover {
+    color: #FFF;
+    background-color: #C58CDC;
+    border: 2px solid #AA49D0;
+  }
 }
+.btn-un.disabled:hover, .btn-un.disabled:focus, .btn-un.disabled.focus, .btn-un[disabled]:hover, .btn-un[disabled]:focus, .btn-un[disabled].focus, fieldset[disabled] .btn-un:hover, fieldset[disabled] .btn-un:focus, fieldset[disabled] .btn-un.focus {
+    background-color: #C58CDC;
+    border: 2px solid #AA49D0;
+    color: #FFF;
+}
+
 
 .panel-un {
   border-color: rgba(74, 6, 109, 0.78);

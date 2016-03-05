@@ -686,7 +686,7 @@
 				</li>
 				<li>
 					<div class="radio">
-	          <%= radio_button_tag :directory_listing, false, false, {:id => "name_and_number_411", data: { price: 3.50 }}  %>
+	          <%= radio_button_tag :directory_listing, false, false, {:id => "name_and_number_411", data: { price: 3.50 }, onchange: "calculateEquiptmentCosts(this);"}  %>
 	          <label class="label-checkbox" for="name_and_number_411">
 	            Name and Number in 411 Directory Listing, ($3.50 monthly)
 	          </label>

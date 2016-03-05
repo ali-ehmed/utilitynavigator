@@ -8,7 +8,8 @@
 #  created_at        :datetime         not null
 #  updated_at        :datetime         not null
 #  checkout          :boolean          default(FALSE)
-#  type              :string
+#  field_type        :string
+#  value             :string
 #
 
 class AdditionalFieldWeight < ActiveRecord::Base

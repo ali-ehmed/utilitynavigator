@@ -222,4 +222,5 @@ $(document).on("ready", function(){
 	$admin.init()
 
 	$('.package-content').froalaEditor()
+	$('.package-promotions').froalaEditor()
 })

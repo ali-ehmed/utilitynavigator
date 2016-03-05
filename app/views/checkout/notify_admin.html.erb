@@ -1,0 +1,82 @@
+<style>
+table, td, th {    
+  border: 1px solid #ddd;
+  text-align: left;
+}
+
+table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+th, td {
+  padding: 15px;
+}
+</style>
+
+<h1><%= @greeting %></h1>
+
+<p>
+  A New order has been placed by a user.
+</p>
+<h3>Order Details</h3>
+<hr />
+<table>
+	<tr>
+		<th>
+			Package Type
+		</th>
+		<th>
+			Provider
+		</th>
+		<th>
+			Package
+		</th>
+	</tr>
+	<tr>
+		<td>
+			<%= @order.package.package_type.name %>
+		</td>
+		<td>
+			<%= @order.package.provider.name %>
+		</td>
+		<td>
+			<%= @order.package.package_name %>
+		</td>
+	</tr>
+</table>
+<hr />
+<h3>User Details</h3>
+<table>
+	<tr>
+		<th>
+			Name
+		</th>
+		<th>
+			Email
+		</th>
+		<th>
+			Package
+		</th>
+	</tr>
+	<tr>
+		<td>
+			<%= @order.user.full_name %>
+		</td>
+		<td>
+			<%= @order.user.email %>
+		</td>
+		<td>
+			<%= @order.user.address %>
+		</td>
+	</tr>
+</table>
+<hr />
+<p>
+	Please visit your <a href="<%= new_admin_user_session_url %>" target="_blank">Dashboard</a> to confirm this order.
+</p>
+
+<p>
+	Thank you
+</p>
+

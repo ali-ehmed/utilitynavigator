@@ -22,11 +22,39 @@
 #  unconfirmed_email      :string
 #  created_at             :datetime         not null
 #  updated_at             :datetime         not null
+#  address                :string
+#  zip_code               :string
+#  cell_number            :string
+#  home_number            :string
+#  driver_license         :string
+#  social_security        :string
+#  four_digit_no          :string
+#  date_of_birth          :date
 #
 
 class User < ActiveRecord::Base
   # Include default devise modules. Others available are:
   # :lockable, :timeoutable and :omniauthable
-  devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :trackable, :validatable, :confirmable
+  devise :database_authenticatable,
+         :recoverable, :rememberable, :trackable, :validatable
+         # , :registerable, :confirmable
+
+  has_many :payments
+
+  validates_presence_of :address, :zip_code, :cell_number, :home_number, :date_of_birth, :first_name, :last_name, :address
+
+  attr_accessor :password_validity
+  after_initialize :disable_password
+
+  def disable_password
+  	self.password_validity = false
+  end
+
+  def password_required?
+    !persisted? || !password.nil? || !password_confirmation.nil? if password_validity
+  end
+
+  def full_name
+  	"#{first_name} #{last_name}"
+  end
 end

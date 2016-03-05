@@ -1,0 +1,56 @@
+<div class="modal fade" id="compareModal" tabindex="-1" role="dialog" aria-labelledby="compareModal">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="compareModal">Comparing <%= pluralize(packages.count, "package") %></h4>
+      </div>
+      <div class="modal-body">
+      	<div class="row">
+      		<% packages.each do |package| %>
+	      		<div class="<%= packages.length == 2 ? 'col-md-6 col-sm-6 col-xs-6' : 'col-md-4 col-sm-4 col-xs-4' %>">
+	      			<div class="panel panel-default">
+	      				<div class="panel-body">
+	      					<blockquote>
+										<%= provider_logo(package.provider) %>
+									</blockquote>
+									
+									<div class="bs-callout bs-callout-danger" id="callout-collapse-dependency">
+										<p style="font-weight: bold;"><%= package.package_name %></p>
+									</div>
+									<dl>
+									  <dt>Package Type</dt>
+									  <dd><%= package.package_type.name %></dd>
+									</dl>
+									<dl>
+									  <dt>Price Info</dt>
+									  <dd><%= package.price_info %></dd>
+									</dl>
+									<dl>
+									  <dt>Price</dt>
+									  <dd><%= package.price %></dd>
+									</dl>
+									<dl>
+									  <dt>Promotion Disclaimer</dt>
+									  <dd><%= package.promotion_disclaimer.nil? ? "N/A" : package.promotion_disclaimer %></dd>
+									</dl>
+									<dl>
+									  <dt>Monthly Fee after Promotion</dt>
+									  <dd><%= package.monthly_fee_after_promotion.nil? ? "N/A" : package.monthly_fee_after_promotion %></dd>
+									</dl>
+									<dl>
+									  <dt>Installation Price</dt>
+									  <dd><%= package.installation_price.nil? ? "N/A" : package.installation_price %></dd>
+									</dl>
+	      				</div>
+		        	</div>
+	      		</div>
+    		 	<% end %>
+      	</div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-un" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>

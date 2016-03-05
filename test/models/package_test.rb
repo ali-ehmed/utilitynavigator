@@ -14,6 +14,7 @@
 #  promotion_disclaimer        :string
 #  created_at                  :datetime         not null
 #  updated_at                  :datetime         not null
+#  promotions                  :string
 #
 
 require 'test_helper'

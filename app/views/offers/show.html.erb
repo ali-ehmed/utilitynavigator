@@ -45,14 +45,16 @@
 											<div class="form-group"></div>
 											<div class="col-md-8 col-sm-8">
 												<label><%= package.package_name %></label>
-												<%= link_to "Plan Details", "#", class: "detail-link" %>
+												<%= link_to "Plan Details", "#", class: "detail-link", "data-toggle" => "modal", "data-target" => "#plan_details_#{package.id}" %>
+												<%= render partial: "shared/plan_details", locals: { package: package } %>
 											</div>
 										</div>
 										<p>
-											<%= package.package_description.html_safe %>
+											<%= package.package_description.nil? ? "N/A" : package.package_description.html_safe %>
 										</p>
 										
-										<%= link_to "More Info & Promotions", "#", class: "detail-link" %>
+										<%= link_to "More Info & Promotions", "#", class: "detail-link", class: "detail-link", "data-toggle" => "modal", "data-target" => "#promotions_#{package.id}" %>
+										<%= render partial: "shared/promotions", locals: { package: package } %>
 										<br /><br />
 										<%= link_to "CHOOSE THIS PLAN", offer_checkout_path(package, Package.checkout_steps.first.to_s), class: "btn btn-warning btn-lg choose-plan-btn" %>
 									</div>
@@ -65,7 +67,7 @@
 											<strong class="price-information"><%= package.price_info %></strong>
 										</div>
 										<div class="checkbox">
-			                <%= check_box_tag :compare, {:class => "styled"}  %>
+			                <%= check_box_tag :compare, false, false, {:class => "styled compare_box", onchange: "compareMe(this);", data: { package_id: package.id, :compare_url => compare_packages_path }}  %>
 			                <label class="label-checkbox">
 			                  COMPARE
 			                </label>
@@ -77,9 +79,40 @@
 					</div>
 				<% end %>
 			</div>
-			<%= will_paginate @packages, renderer: BootstrapPagination::Rails, class: "pull-right" %>
+			<ul class="list-inline pull-right">
+				<li>
+					<%= will_paginate @packages, renderer: BootstrapPagination::Rails, class: "pull-right" %>
+				</li>
+				<li>
+					<%= button_tag class: "btn btn-info pull-right", id: "compare_packages", style: "margin: 20px 0;" do %>
+						<i class="glyphicon glyphicon-random"></i> Compare Packages
+					<% end %>
+				</li>
+			</ul>
+			
 		<% end %>
+		
 	</div>
 </div>
 
+<div id="comparison"></div>
+
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Modal title</h4>
+      </div>
+      <div class="modal-body">
+        ...
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
 
