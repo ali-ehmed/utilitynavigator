@@ -49,10 +49,10 @@ removeActiveIconProviders = ->
 		  $(window).on 'scroll', (event) ->
 		  	$this = $(this)
 		  	if $this.scrollTop() <= 75
-		  		console.log icon
+		  		# console.log icon
 		  		element.attr("style", icon)
 		  	else
-		  		console.log $this.scrollTop()
+		  		# console.log $this.scrollTop()
 		  		element.removeAttr("style")
 		  return
 	) jQuery
@@ -110,6 +110,19 @@ window.calculateEquiptmentCosts = (elem) ->
 	$(".equiptment_cost_span").text(equiptment_cost)
 	$(".total_cost_span").text("$" + total_cost)
 
+
+window.loadPackages = (elem) ->
+	window.active_product = ""
+	window.active_product = $(elem).data("product")
+
+	$pagination = $(elem).parent().prev().find(".pagination")
+
+	$.getScript($pagination.find("li.next a").attr("href"))
+
+	$pagination.show()
+	$pagination.html("<i class=\'fa fa-circle-o-notch fa-spin fa-3x\'></i>")
+
+	$(elem).prop("disabled", "disabled")
 
 comparingPackages = (package_ids, elem) ->
 	console.log package_ids
@@ -182,3 +195,7 @@ $(document).on 'ready page:change', ->
 
 	$('[data-toggle="popover"]').popover()
 	$('[data-toggle="tooltip"]').tooltip()
+
+	if $(".packages-category-name").length
+		$(".pagination").css("margin", "0px 0px")
+		$(".pagination").hide()

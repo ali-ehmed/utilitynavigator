@@ -1,0 +1,27 @@
+<div class="col-md-4">
+  <div class="panel panel-default">
+    <div class="panel-body">
+      <div class="package-heading">
+        <!-- STANDARD INTERNET -->
+        <%= tv_package.package_name %>
+      </div>
+      <div class="package-price">
+        <%= number_to_currency(tv_package.price) %> <span class="per-month">/ month</span>
+      </div>
+      <%= tv_package.package_description.html_safe %>
+      <!-- <ul class="list-unstyled">
+        <li>
+          <i class="fa fa-check-circle-o fa-1x"></i>
+          Upto 15 Mbps Download Speed
+        </li>
+        <li>
+          <i class="fa fa-check-circle-o fa-1x"></i>
+          Recommended for online shopping and banking, watching videos online, downloading apps and more
+        </li>
+      </ul> -->
+      <div class="package-button">
+        <a href="#" class="btn btn-warning btn-block offer-btn">Select offer</a>
+      </div>
+    </div>
+  </div>
+</div>
