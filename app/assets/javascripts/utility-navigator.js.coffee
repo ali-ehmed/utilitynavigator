@@ -41,6 +41,29 @@ scrollingReviewNote = ->
 		  return
 	) jQuery
 
+removeActiveIconProviders = ->
+	(($) ->
+	  element = $('nav li.active-link').find("a")
+	  icon = element.attr("style")
+	  if element.length
+		  $(window).on 'scroll', (event) ->
+		  	$this = $(this)
+		  	if $this.scrollTop() <= 75
+		  		console.log icon
+		  		element.attr("style", icon)
+		  	else
+		  		console.log $this.scrollTop()
+		  		element.removeAttr("style")
+		  return
+	) jQuery
+
+window.settingFilterActive = (elem) ->
+  $links = $('.packages-category-name a')
+  $.each $links, ->
+  	$(this).find("span.package-filter").css('background-image', 'url("assets/filter-circle.png")')
+
+  $(elem).find("span.package-filter").css('background-image', 'url("assets/filter-circle-select.png")')
+
 window.calculateEquiptmentCosts = (elem) ->
 	equiptment_cost = parseFloat(document.getElementById("equiptment_cost").value)
 	total_cost = parseFloat(document.getElementById("total_cost").value)
@@ -150,11 +173,12 @@ comparePakages = ->
       comparingPackages window.$compare_checkboxex, $this
     return
 
-$(document).on 'page:change', ->
+$(document).on 'ready page:change', ->
 	navbarActiveLink()
 	offerSearchNotice()
 	scrollingReviewNote() if navigator.userAgent.toLowerCase().indexOf("mobile") == -1
 	comparePakages()
+	removeActiveIconProviders()
 
 	$('[data-toggle="popover"]').popover()
 	$('[data-toggle="tooltip"]').tooltip()

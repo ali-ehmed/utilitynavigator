@@ -8,7 +8,7 @@
       <div class="modal-body">
         <div class="panel panel-default">
         	<div class="panel-body">
-        		<%= package.promotions.nil? ? "N/A" : package.promotions.html_safe %>
+        		<%= package.promotions.blank? ? "N/A" : package.promotions.html_safe %>
         	</div>
         </div>
       </div>

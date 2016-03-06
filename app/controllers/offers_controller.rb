@@ -14,7 +14,7 @@ class OffersController < ApplicationController
 
 		session[:user_address] = @attributes
 
-		@twc = Package.twc
+		@twc = Package.time_warner
 		@charter = Package.charter
 		@cox = Package.cox
 

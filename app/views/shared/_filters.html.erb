@@ -1,0 +1,109 @@
+ <div class="tab-content">
+  <div role="tabpanel" class="tab-pane fade in active" id="filter_with_tv">
+    <div class="row">
+      <% @packages.tv_filter.each do |package| %>
+        <div class="col-md-4">
+          <div class="panel panel-default">
+            <div class="panel-body">
+              <div class="package-heading">
+                <!-- STANDARD INTERNET -->
+                <%= package.package_name %>
+              </div>
+              <div class="package-price">
+                <%= number_to_currency(package.price) %> <span class="per-month">/ month</span>
+              </div>
+              <%= package.package_description.html_safe %>
+              <!-- <ul class="list-unstyled">
+                <li>
+                  <i class="fa fa-check-circle-o fa-1x"></i>
+                  Upto 15 Mbps Download Speed
+                </li>
+                <li>
+                  <i class="fa fa-check-circle-o fa-1x"></i>
+                  Recommended for online shopping and banking, watching videos online, downloading apps and more
+                </li>
+              </ul> -->
+              <div class="package-button">
+                <a href="#" class="btn btn-warning btn-block offer-btn">Select offer</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    </div>
+    <a href="#" class="channel-comparison-link">CHANNEL COMPARISON</a>
+    <button class="btn btn-default pull-right see-more-btn">SEE MORE PACKAGES</button>
+  </div>
+  <div role="tabpanel" class="tab-pane" id="filter_with_internet">
+    <div class="row">
+      <% @packages.internet_filter.each do |package| %>
+        <div class="col-md-4">
+          <div class="panel panel-default">
+            <div class="panel-body">
+              <div class="package-heading">
+                <%= package.package_name %>
+              </div>
+              <div class="package-price">
+                <%= number_to_currency(package.price) %> <span class="per-month">/ month</span>
+              </div>
+              <%= package.package_description.html_safe %>
+              <div class="package-button">
+                <a href="#" class="btn btn-warning btn-block offer-btn">Select offer</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    </div>
+    <a href="#" class="channel-comparison-link">CHANNEL COMPARISON</a>
+    <button class="btn btn-default pull-right see-more-btn">SEE MORE PACKAGES</button>
+  </div>
+  <div role="tabpanel" class="tab-pane" id="filter_with_phone">
+    <div class="row">
+      <% @packages.phone_filter.each do |package| %>
+        <div class="col-md-4">
+          <div class="panel panel-default">
+            <div class="panel-body">
+              <div class="package-heading">
+                <%= package.package_name %>
+              </div>
+              <div class="package-price">
+                <%= number_to_currency(package.price) %> <span class="per-month">/ month</span>
+              </div>
+              <%= package.package_description.html_safe %>
+              <div class="package-button">
+                <a href="#" class="btn btn-warning btn-block offer-btn">Select offer</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    </div>
+    <a href="#" class="channel-comparison-link">CHANNEL COMPARISON</a>
+    <button class="btn btn-default pull-right see-more-btn">SEE MORE PACKAGES</button>
+  </div>
+  <div role="tabpanel" class="tab-pane" id="filter_with_bundles">
+    <div class="row">
+      <% @packages.bundle_filter.each do |package| %>
+        <div class="col-md-4">
+          <div class="panel panel-default">
+            <div class="panel-body">
+              <div class="package-heading">
+                <%= package.package_name %>
+              </div>
+              <div class="package-price">
+                <%= number_to_currency(package.price) %> <span class="per-month">/ month</span>
+              </div>
+              <%= package.package_description.html_safe %>
+              <div class="package-button">
+                <a href="#" class="btn btn-warning btn-block offer-btn">Select offer</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    </div>
+    <a href="#" class="channel-comparison-link">CHANNEL COMPARISON</a>
+    <button class="btn btn-default pull-right see-more-btn">SEE MORE PACKAGES</button>
+  </div>
+</div>

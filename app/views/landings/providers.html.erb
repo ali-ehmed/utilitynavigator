@@ -199,103 +199,33 @@
     <div class="container">
       <div class="packages-category-name">
         <ul class="list-inline">
-          <li>
-            TV
-            <span class="package-filter"></span>
+          <li class="active">
+            <a href="#filter_with_tv" class="filtering" aria-controls="tv" role="tab" data-toggle="tab" onclick="settingFilterActive(this);">
+              TV
+              <span class="package-filter" style="background-image: url('assets/filter-circle-select.png');"></span>
+            </a>
           </li>
           <li>
-            INTERNET
-            <span class="package-filter"></span>
+            <a href="#filter_with_internet" class="filtering" aria-controls="internet" role="tab" data-toggle="tab" onclick="settingFilterActive(this);">
+              INTERNET
+              <span class="package-filter"></span>
+            </a>
           </li>
           <li>
-            PHONE
-            <span class="package-filter"></span>
+            <a href="#filter_with_phone" class="filtering" aria-controls="phone" role="tab" data-toggle="tab" onclick="settingFilterActive(this);">
+              PHONE
+              <span class="package-filter"></span>
+            </a>
           </li>
           <li>
-            BUNDLES
-            <span class="package-filter"></span>
+            <a href="#filter_with_bundles" class="filtering" aria-controls="bundles" role="tab" data-toggle="tab" onclick="settingFilterActive(this);">
+              BUNDLES
+              <span class="package-filter"></span>
+            </a>
           </li>
         </ul>
       </div>
-      <div class="row">
-        <div class="col-md-4">
-          <div class="panel panel-default">
-            <div class="panel-body">
-              <div class="package-heading">
-                STANDARD INTERNET
-              </div>
-              <div class="package-price">
-                $34 <span class="per-month">/ month</span>
-              </div>
-              <ul class="list-unstyled">
-                <li>
-                  <i class="fa fa-check-circle-o fa-1x"></i>
-                  Upto 15 Mbps Download Speed
-                </li>
-                <li>
-                  <i class="fa fa-check-circle-o fa-1x"></i>
-                  Recommended for online shopping and banking, watching videos online, downloading apps and more
-                </li>
-              </ul>
-              <div class="package-button">
-                <a href="#" class="btn btn-warning btn-block offer-btn">Select offer</a>
-              </div>
-            </div>
-          </div>
-          <a href="#" class="channel-comparison-link">CHANNEL COMPARISON</a>
-        </div>
-        <div class="col-md-4">
-          <div class="panel panel-default">
-            <div class="panel-body">
-              <div class="package-heading">
-                TURBO INTERNET
-              </div>
-              <div class="package-price">
-                $44 <span class="per-month">/ month</span>
-              </div>
-              <ul class="list-unstyled">
-                <li>
-                  <i class="fa fa-check-circle-o fa-1x"></i>
-                  Upto 15 Mbps Download Speed
-                </li>
-                <li>
-                  <i class="fa fa-check-circle-o fa-1x"></i>
-                  Recommended for online shopping and banking, watching videos online, downloading apps and more
-                </li>
-              </ul>
-              <div class="package-button">
-                <a href="#" class="btn btn-warning btn-block offer-btn">Select offer</a>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-4">
-          <div class="panel panel-default">
-            <div class="panel-body">
-              <div class="package-heading">
-                EXTREME INTERNET
-              </div>
-              <div class="package-price">
-                $54 <span class="per-month">/ month</span>
-              </div>
-              <ul class="list-unstyled">
-                <li>
-                  <i class="fa fa-check-circle-o fa-1x"></i>
-                  Upto 15 Mbps Download Speed
-                </li>
-                <li>
-                  <i class="fa fa-check-circle-o fa-1x"></i>
-                  Recommended for online shopping and banking, watching videos online, downloading apps and more
-                </li>
-              </ul>
-              <div class="package-button">
-                <a href="#" class="btn btn-warning btn-block offer-btn">Select offer</a>
-              </div>
-            </div>
-          </div>
-          <button class="btn btn-default pull-right see-more-btn">SEE MORE PACKAGES</button>
-        </div>
-      </div>
+      <%= render partial: "shared/filters" %>
     </div>
   </div>
 </div>

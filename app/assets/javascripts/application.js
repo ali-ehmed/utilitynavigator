@@ -13,13 +13,15 @@
 //= require jquery
 //= require jquery_ujs
 //= require bootstrap-notify
-//= require turbolinks
 //= require bootstrap-sprockets
 //= require moment
 //= require bootstrap-datetimepicker
 //= require jquery.cookie
 //= require jasny-bootstrap.min
 //= require_tree .
+
+
+// require turbolinks
 
 $(document).ready(function(){
 	// $(".alert-message").addClass("in");

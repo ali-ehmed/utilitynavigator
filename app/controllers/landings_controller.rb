@@ -4,16 +4,17 @@ class LandingsController < ApplicationController
 	end
 
 	def providers
-		
 	end
 
 	def twc
 		@provider_banner = "twc-banner.png"
 		# simply redering providers with twc
+		@packages = Package.time_warner
 		render :providers
 	end
 
 	def cox
+		@packages = Package.cox
 		# simply redering providers with cox
 		@provider_banner = "cox-banner.png"
 		render :providers
@@ -22,6 +23,7 @@ class LandingsController < ApplicationController
 	def charter_spectrum
 		# simply redering providers with charter_spectrum
 		@provider_banner = "charter-banner.png"
+		@packages = Package.charter
 		render :providers
 	end
 

@@ -38,9 +38,14 @@ class Package < ActiveRecord::Base
 
 	after_create :set_promotion_disclaimer
 
-	scope :twc, -> { joins(:provider).where("providers.name = 'Time Warner'") }
+	scope :time_warner, -> { joins(:provider).where("providers.name = 'Time Warner'") }
 	scope :charter, -> { joins(:provider).where("providers.name = 'Charter Spectrum'") }
 	scope :cox, -> { joins(:provider).where("providers.name = 'COX'") }
+
+	scope :phone_filter, -> { joins(:package_bundles => :product).where("products.name LIKE '%Phone%'") }
+	scope :internet_filter, -> { joins(:package_bundles => :product).where("products.name LIKE '%Internet%'") }
+	scope :tv_filter, -> { joins(:package_bundles => :product).where("products.name LIKE '%Cable%'") }
+	scope :bundle_filter, -> { joins(:package_type).where("package_types.name LIKE '%Single%' or package_types.name LIKE '%Double%' or package_types.name LIKE '%Triple%'") }
 
 	CABLE_TV = ["Primary TV", "2nd TV", "3rd TV", "4th TV"]
 
