@@ -1,6 +1,10 @@
 header {
 	margin-bottom: 20px;
 }
+// Slider
+.slider-img {
+  height: 504px !important;
+}
 //Package Details
 #package-details {
   .packages {
@@ -115,6 +119,9 @@ header {
     background-color: #9932cc;
     margin-top: -60px;
     padding: 20px 152px;
+    @media (max-width: 480px) {
+      padding: 20px 50px;
+    }
     color: #fff;
 
     .package-type {
@@ -299,11 +306,11 @@ header {
     form {
       position :absolute;
       top: 101px;
-      left: 145px;
+      left: 220px;
       right: 239px;
     }
     background-size: 100% auto !important;
-
+    background-position: 0px -68px !important;
     @media (max-width: 1024px) {
       form { position: static; }
       padding: 45px 10px 25px 10px;

@@ -1,3 +1,16 @@
+$.fn.serializeObject = ->
+  o = {}
+  a = @serializeArray()
+  $.each a, ->
+    if o[@name] != undefined
+      if !o[@name].push
+        o[@name] = [ o[@name] ]
+      o[@name].push @value or ''
+    else
+      o[@name] = @value or ''
+    return
+  o
+
 navbarActiveLink = ->
 	$a = $('.navbar-links').find("a[href=\"#{@location.pathname}\"]")
 	$a.parent().addClass "active-link"
@@ -186,12 +199,87 @@ comparePakages = ->
       comparingPackages window.$compare_checkboxex, $this
     return
 
+geocodeLatitideAndLongtitude = (address = "1600 Amphitheatre Parkway, Mountain View, CA") ->
+  $.get('https://maps.googleapis.com/maps/api/geocode/json?address=' +address+ '&key=#{window.common.geocoder}', (data) ->
+  	console.log data.results[0].geometry.location
+	).done(->
+	  console.log 'Geocoding Done'
+	  return
+	).fail(->
+	  console.log "no location found"
+	  return "no result found"
+	)
+
+searchProviders = ->
+  $('form#search-deals-offer-form').on 'submit', (e) ->
+
+    e.preventDefault()
+    $form = $(this)
+
+    $full_address_json = JSON.stringify($form.serializeObject())
+    $full_address_json = jQuery.parseJSON($full_address_json)
+    delete $full_address_json['utf8']
+
+    if $full_address_json.address == '' or $full_address_json.zipcode == ''
+      $.notify {
+        icon: 'glyphicon glyphicon-warning-sign'
+        title: '<strong>Instructions:</strong><br />'
+        message: 'Please enter your Home Address'
+      }, type: 'danger'
+      return false
+
+    $full_address = []
+    $.each $full_address_json, (key, value) ->
+      $full_address.push value
+
+    $full_address = $full_address.join(', ')
+
+    $.get('https://maps.googleapis.com/maps/api/geocode/json?address=' + $full_address + '&key=#{window.common.geocoder}', (data) ->
+      
+      if data.status == 'ZERO_RESULTS'
+        $.notify {
+          icon: 'glyphicon glyphicon-warning-sign'
+          title: '<strong>Instructions:</strong><br />'
+          message: 'No location found'
+        }, type: 'danger'
+        return false
+
+      console.log data.results[0].geometry.location
+      results = data.results[0].geometry.location
+      results["address"] = $full_address
+
+      $.ajax {
+		    type: $form.attr("method")
+		    url: $form.attr("action")
+		    data: results
+		    dataType: "JSON"
+		    #beforeSend: ->
+		      #elem.html '<i class=\'fa fa-circle-o-notch fa-spin\'></i> Comparing'
+		    success: (response) ->
+		      console.log("Request Sent")
+		    error: ->
+		    	$.notify({
+		        icon: 'glyphicon glyphicon-warning-sign'
+		        title: '<strong>Instructions:</strong><br />'
+		        message: 'Something went wrong'
+		      }, type: 'danger')
+			}
+      return
+    ).done(->
+      console.log 'Geocoding Done'
+      return
+    ).fail ->
+      console.log 'no location found'
+      return
+
 $(document).on 'ready page:change', ->
 	navbarActiveLink()
 	offerSearchNotice()
 	scrollingReviewNote() if navigator.userAgent.toLowerCase().indexOf("mobile") == -1
 	comparePakages()
 	removeActiveIconProviders()
+	geocodeLatitideAndLongtitude()
+	searchProviders()
 
 	$('[data-toggle="popover"]').popover()
 	$('[data-toggle="tooltip"]').tooltip()

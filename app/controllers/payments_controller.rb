@@ -44,22 +44,13 @@ class PaymentsController < ApplicationController
   end
 
   def user_address
-  	@user_address = Array.new
+    @user_address = Address.new(session[:user_address])
 
-  	unless session[:user_address].blank?
-			@getting_user_address = session[:user_address]
-		else
-			redirect_to root_path, flash: { alert: "Your session for booking order has expired." }
-			return
-		end
-
-		@getting_user_address.map do |key, value|
-			unless value.blank?
-				@user_address << value
-			end
-		end
-		
-
-		@user_address = @user_address.join(", ")
+    if @user_address == "session_expired".to_sym
+      redirect_to root_path, flash: { alert: "Your session for booking order has expired." }
+      return
+    else
+      @user_address = @user_address.join(", ")
+    end
   end
 end

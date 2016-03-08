@@ -17,6 +17,7 @@
 //= require moment
 //= require bootstrap-datetimepicker
 //= require jquery.cookie
+//= require common/constant
 //= require jasny-bootstrap.min
 //= require_tree .
 
