@@ -212,7 +212,7 @@ geocodeLatitideAndLongtitude = (address = "1600 Amphitheatre Parkway, Mountain V
 
 searchProviders = ->
   $('form#search-deals-offer-form').on 'submit', (e) ->
-
+  	
     e.preventDefault()
     $form = $(this)
 
@@ -257,9 +257,19 @@ searchProviders = ->
 		    	$form.find("button[type='submit']").prop("disabled", "disabled")
 		    	$form.find("button[type='submit']").html '<i class=\'fa fa-circle-o-notch fa-spin\'></i> We are looking up the packages'
 		    success: (response) ->
-		    	$form.unbind("submit")
-		    	$form.submit()
-		    	console.log("Request Sent")
+		    	if response.status == "error"
+		    		$.notify({
+			        icon: 'glyphicon glyphicon-warning-sign'
+			        title: '<strong>Instructions:</strong><br />'
+			        message: response.msg
+			      }, type: 'danger')
+		    	else
+			    	$form.unbind("submit")
+			    	$form.submit()
+			    	console.log("Request Sent")
+	    	complete: ->
+	    		$form.find("button[type='submit']").removeAttr("disabled")
+	    		$form.find("button[type='submit']").html 'Find Deals &amp; Offers'
 		    error: ->
 		    	$.notify({
 		        icon: 'glyphicon glyphicon-warning-sign'

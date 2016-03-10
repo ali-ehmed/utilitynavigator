@@ -1,6 +1,7 @@
 class PaymentsController < ApplicationController
 	before_action :set_package, only: [:create]
 	before_action :user_address, only: [:create]
+  
   def create
   	@payment = @package.payments.build(payment_params)
 

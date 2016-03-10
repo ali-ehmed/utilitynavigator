@@ -34,7 +34,14 @@ class	Address
   	puts address
 
   	geocoder = "http://www.broadbandmap.gov/internet-service-providers/#{address}/lat=#{params[:lat]}/long=#{params[:lng]}/.json"
-  	results = JSON.parse(open(geocoder).read)
+    
+    begin
+      results = JSON.parse(open(geocoder).read)
+    rescue Timeout::Error, Errno::EINVAL, Errno::ECONNRESET, EOFError, Net::HTTPBadResponse, Net::HTTPHeaderSyntaxError, Net::ProtocolError => e
+      puts e.message
+      return :error
+    end
+  	
 
   	unless results["status"] == "OK"
   		puts geocoder

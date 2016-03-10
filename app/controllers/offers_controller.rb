@@ -44,8 +44,11 @@ class OffersController < ApplicationController
 		@results = @address.search_providers(@location)
 
 		logger.debug @results
-
-		session[:broadband_providers] = @results
-		render json: { status: :ok }
+		if @results == "error".to_sym
+			render json: { status: :error, msg: "There was a problem while fetching data." }
+		else
+			session[:broadband_providers] = @results
+			render json: { status: :ok }
+		end
 	end
 end
