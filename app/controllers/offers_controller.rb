@@ -29,7 +29,7 @@ class OffersController < ApplicationController
 
 		unless session[:broadband_providers] == "zero_results".to_sym
 			@providers = session[:broadband_providers]
-			@packages = Package.joins(:provider).where("providers.name in (?)", @providers)
+			@packages = Package.joins(:provider).where("providers.name in (?)", @providers).paginate(:page => params[:page], :per_page => 5)
 		end
 
 		respond_to do |format|
