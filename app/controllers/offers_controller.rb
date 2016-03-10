@@ -1,41 +1,51 @@
 class OffersController < ApplicationController
 	def show
-		# @zipcode = params[:zipcode]
+		@packages = []
 
-		# @provider_zipcode = ProviderZipcode.find_by(zipcode: @zipcode)
-		# @packages = []
+		@full_address = {
+			address: params[:address],
+			zip: params[:zipcode],
+			apt: params[:apt],
+			state: params[:state]
+		}
 
-		# @full_address = {
-		# 	address: params[:address],
-		# 	zip: params[:zipcode],
-		# 	apt: params[:apt],
-		# 	state: params[:state]
-		# }
+		@user_address = Array.new
 
-		# session[:user_address] = @full_address
+		@full_address.map do |key, value|
+			unless value.blank?
+				@user_address << value
+			end
+		end
 
-		# @twc = Package.time_warner
-		# @charter = Package.charter
-		# @cox = Package.cox
+		@user_address = @user_address.join(", ")
 
-		# if @provider_zipcode
-		# 	@provider = @provider_zipcode.provider
-		# 	@packages = @provider.packages.paginate(:page => params[:page], :per_page => 5)
-		# end
+		session[:user_address] = @user_address
 
-		@latitude = params[:lat]
-		@longtitude = params[:lng]
-		@user_address = params[:address]
+		@twc = Package.time_warner
+		@charter = Package.charter
+		@cox = Package.cox
 
-		@address = Address.new
+		logger.debug session[:broadband_providers]
 
-		@results = @address.search_providers(@user_address, @latitude, @longtitude)
-
-		logger.debug "-------____#{@results}"
+		unless session[:broadband_providers] == "zero_results".to_sym
+			@providers = session[:broadband_providers]
+			@packages = Package.joins(:provider).where("providers.name in (?)", @providers)
+		end
 
 		respond_to do |format|
 			format.html
-			format.json { render :json => { status: :ok } }
 		end
+	end
+
+	def broadband_providers
+		@location = params
+
+		@address = Address.new
+		@results = @address.search_providers(@location)
+
+		logger.debug @results
+
+		session[:broadband_providers] = @results
+		render json: { status: :ok }
 	end
 end

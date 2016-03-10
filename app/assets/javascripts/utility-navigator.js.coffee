@@ -249,14 +249,17 @@ searchProviders = ->
       results["address"] = $full_address
 
       $.ajax {
-		    type: $form.attr("method")
-		    url: $form.attr("action")
+		    type: "Get"
+		    url: "/offers/broadband_providers"
 		    data: results
 		    dataType: "JSON"
-		    #beforeSend: ->
-		      #elem.html '<i class=\'fa fa-circle-o-notch fa-spin\'></i> Comparing'
+		    beforeSend: ->
+		    	$form.find("button[type='submit']").prop("disabled", "disabled")
+		    	$form.find("button[type='submit']").html '<i class=\'fa fa-circle-o-notch fa-spin\'></i> We are looking up the packages'
 		    success: (response) ->
-		      console.log("Request Sent")
+		    	$form.unbind("submit")
+		    	$form.submit()
+		    	console.log("Request Sent")
 		    error: ->
 		    	$.notify({
 		        icon: 'glyphicon glyphicon-warning-sign'

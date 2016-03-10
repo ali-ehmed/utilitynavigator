@@ -2,7 +2,13 @@
   <div role="tabpanel" class="tab-pane fade in active" id="filter_with_tv">
     <div class="row">
       <div id="cable_packages">
-        <%= render partial: "shared/filtered_packages/cable", collection: @tv_packages, as: :tv_package %>
+        <% if @tv_packages.present? %>
+          <%= render partial: "shared/filtered_packages/cable", collection: @tv_packages, as: :tv_package %>
+        <% else %>
+          <div class="alert alert-warning">
+            Sorry! No <strong>Cable</strong> Packages available
+          </div>
+        <% end %>
       </div>
     </div>
 
@@ -24,7 +30,13 @@
   <div role="tabpanel" class="tab-pane fade in" id="filter_with_internet">
     <div class="row">
       <div id="internet_packages">
-        <%= render partial: "shared/filtered_packages/internet", collection: @internet_packages, as: :internet_package %>
+        <% if @internet_packages.present? %>
+          <%= render partial: "shared/filtered_packages/internet", collection: @internet_packages, as: :internet_package %>
+        <% else %>
+          <div class="alert alert-warning">
+            Sorry! No <strong>Internet</strong> Packages available
+          </div>
+        <% end %>
       </div>
     </div>
     
@@ -46,7 +58,13 @@
   <div role="tabpanel" class="tab-pane fade in" id="filter_with_phone">
     <div class="row">
       <div id="phone_packages">
-        <%= render partial: "shared/filtered_packages/phone", collection: @phone_packages, as: :phone_package %>
+        <% if @phone_packages.present? %>
+          <%= render partial: "shared/filtered_packages/phone", collection: @phone_packages, as: :phone_package %>
+        <% else %>
+          <div class="alert alert-warning">
+            Sorry! No <strong>Phone</strong> Packages available
+          </div>
+        <% end %>
       </div>
     </div>
 
@@ -68,7 +86,13 @@
   <div role="tabpanel" class="tab-pane fade in" id="filter_with_bundles">
     <div class="row">
       <div id="bundle_packages">
-        <%= render partial: "shared/filtered_packages/bundles", collection: @bundle_packages, as: :bundle_package %>
+        <% if @bundle_packages.present? %>
+          <%= render partial: "shared/filtered_packages/bundles", collection: @bundle_packages, as: :bundle_package %>
+        <% else %>
+          <div class="alert alert-warning">
+            Sorry! No Packages available
+          </div>
+        <% end %>
       </div>
     </div>
 

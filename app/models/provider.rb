@@ -58,10 +58,11 @@ class Provider < ActiveRecord::Base
 			short_name.downcase
 		end
 	end
-
-	all.map(&:acronym).map do |provider|
-		define_method("#{provider}?") do
-			self.acronym == provider
+	if ActiveRecord::Base.connection.table_exists? 'providers'
+		all.map(&:acronym).map do |provider|
+			define_method("#{provider}?") do
+				self.acronym == provider
+			end
 		end
 	end
 end

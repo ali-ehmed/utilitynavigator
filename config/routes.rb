@@ -7,7 +7,8 @@ Rails.application.routes.draw do
   resources :offers, only: :index do
     resources :checkout, controller: 'offers/checkout'
   	collection do
-  		get "show" => "offers#show", :constraints => {:format => /(html|json)/}
+  		get "show" => "offers#show"
+      get "broadband_providers" => "offers#broadband_providers", :constraints => {:format => /(json)/}
   	end
   end
 

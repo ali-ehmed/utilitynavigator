@@ -21,14 +21,6 @@ class Offers::CheckoutController < ApplicationController
 
 			if session[:user_address]
 				@getting_user_address = session[:user_address]
-
-				@getting_user_address.map do |key, value|
-					unless value.blank?
-						@user_address << value
-					end
-				end
-
-				@user_address = @user_address.join(", ")
 			end
 
 			@payment = Payment.new
