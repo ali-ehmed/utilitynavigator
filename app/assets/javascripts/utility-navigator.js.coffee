@@ -33,6 +33,7 @@ offerSearchNotice = ->
 			$('#search-deals-offer-form').popover("show")
 			$('#search-deals-offer-form').on 'shown.bs.popover', ->
 			  $(@).next().find(".popover-title").css("background-color", "#9932CC")
+			  $(@).next().css("width", "100%")
 			  return
 
  $(document).on 'click', (e) ->

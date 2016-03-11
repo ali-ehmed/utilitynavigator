@@ -4,28 +4,17 @@ require 'json'
 class	Address
 	def initialize(address = "")
 		if address.present?
-			chomp_user_address(address)
+			@address = address
 		end
 	end
 
-	def chomp_user_address(address)
-  	@user_address = Array.new
+  def get_address
+    return make_address(@address)
+  end
 
-  	unless address.blank?
-			@getting_user_address = address
-		else
-			return :session_expired
-		end
-
-		@getting_user_address.map do |key, value|
-			unless value.blank?
-				@user_address << value
-			end
-		end
-		
-
-		@user_address = @user_address.join(", ")
-		return true
+  def self.get_zip_code(address)
+    zip = address.split(",").reverse.second.strip if address.present?
+    zip
   end
 
   def search_providers(params)
@@ -67,7 +56,7 @@ class	Address
   		end
 
 			if provider == "Charter Communications, Inc."
-				@all_providers << "Charter"
+				@all_providers << "Charter Spectrum"
 			end
   	end
 
@@ -77,5 +66,20 @@ class	Address
   	end
 
   	return @all_providers
+  end
+
+  private
+
+  def make_address(address)
+    user_address = Array.new
+
+    address.map do |key, value|
+      unless value.blank?
+        user_address << value
+      end
+    end
+    
+    user_address = user_address.join(", ")
+    return user_address
   end
 end

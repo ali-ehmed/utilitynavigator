@@ -2,22 +2,14 @@ class OffersController < ApplicationController
 	def show
 		@packages = []
 
-		@full_address = {
+		address_params = {
 			address: params[:address],
 			zip: params[:zipcode],
 			apt: params[:apt],
 			state: params[:state]
 		}
 
-		@user_address = Array.new
-
-		@full_address.map do |key, value|
-			unless value.blank?
-				@user_address << value
-			end
-		end
-
-		@user_address = @user_address.join(", ")
+		@user_address = Address.new(address_params).get_address
 
 		session[:user_address] = @user_address
 
@@ -27,9 +19,9 @@ class OffersController < ApplicationController
 
 		logger.debug session[:broadband_providers]
 
-		unless session[:broadband_providers] == "zero_results".to_sym
+		unless session[:broadband_providers] == "zero_results"
 			@providers = session[:broadband_providers]
-			@packages = Package.joins(:provider).where("providers.name in (?)", @providers).paginate(:page => params[:page], :per_page => 5)
+			@packages = Package.broadband_providers(@providers).paginate(:page => params[:page], :per_page => 5)
 		end
 
 		respond_to do |format|

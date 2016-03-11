@@ -47,6 +47,8 @@ class Package < ActiveRecord::Base
 	scope :tv_filter, -> { joins(:package_bundles => :product).where("products.name LIKE '%Cable%'") }
 	scope :bundle_filter, -> { joins(:package_type).where("package_types.name LIKE '%Single%' or package_types.name LIKE '%Double%' or package_types.name LIKE '%Triple%'") }
 
+	scope :broadband_providers, -> (providers) { joins(:provider).where("providers.name in (?)", providers) }
+
 	CABLE_TV = ["Primary TV", "2nd TV", "3rd TV", "4th TV"]
 
 	def set_promotion_disclaimer

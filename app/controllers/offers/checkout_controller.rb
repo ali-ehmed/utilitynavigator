@@ -17,7 +17,8 @@ class Offers::CheckoutController < ApplicationController
 				redirect_to root_path, flash: { warning: "There was a problem, Please contact Tech Support Team!" }
 			end
 		when "payments"
-			@getting_user_address = session[:user_address] if session[:user_address]
+			@user_address = session[:user_address] if session[:user_address].present?
+			@zip_code = Address.get_zip_code(@user_address)
 
 			@payment = Payment.new
 			@payment.build_user

@@ -45,13 +45,13 @@ class PaymentsController < ApplicationController
   end
 
   def user_address
-    @user_address = Address.new(session[:user_address])
+    @user_address = session[:user_address] if session[:user_address]
 
-    if @user_address == "session_expired".to_sym
+    if @user_address.blank?
       redirect_to root_path, flash: { alert: "Your session for booking order has expired." }
       return
-    else
-      @user_address = @user_address.join(", ")
     end
+
+    @zip_code = Address.get_zip_code(@user_address)
   end
 end

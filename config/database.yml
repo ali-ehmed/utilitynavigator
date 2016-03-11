@@ -19,7 +19,7 @@ development:
   database: utility_navigator_development
   pool:     5
   username: aliahmed
-  password: 
+  password: aliahmed
   template: template0
 
   # Connect on a TCP socket. Omitted by default since the client uses a
@@ -47,7 +47,7 @@ test:
   database: utility_navigator_test
   pool:     5
   username: aliahmed
-  password: 
+  password: aliahmed
   template: template0
 
 production:
@@ -57,5 +57,5 @@ production:
   database: utility_navigator_production
   pool:     5
   username: aliahmed
-  password: 
+  password: aliahmed
   template: template0
