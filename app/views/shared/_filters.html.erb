@@ -104,7 +104,7 @@
         <%= will_paginate @bundle_packages, renderer: BootstrapPagination::Rails %>
       </div>
       <div class="col-md-4">
-        <% if @bundle_packages.count >= 1 %>
+        <% if @bundle_packages.count > 1 %>
           <button class="btn btn-default pull-right see-more-btn" id="see-more-bundle-packages" data-product="bundle" onclick="loadPackages(this);">SEE MORE PACKAGES</button>
         <% end %>
       </div>
