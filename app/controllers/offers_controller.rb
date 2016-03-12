@@ -1,4 +1,5 @@
 class OffersController < ApplicationController
+	@@broadband_providers = []
 	def show
 		@packages = []
 
@@ -17,7 +18,7 @@ class OffersController < ApplicationController
 		@charter = Package.charter
 		@cox = Package.cox
 
-		logger.debug $broadband_providers
+		logger.debug @@broadband_providers
 
 		unless $broadband_providers.to_s == "zero_results"
 			@providers = $broadband_providers
@@ -39,8 +40,8 @@ class OffersController < ApplicationController
 		if @results == "error".to_sym
 			render json: { status: :error, msg: "There was a problem while fetching data." }
 		else
-			$broadband_providers = @results
-			session[:broadband_providers] = @results
+			@@broadband_providers = @results
+			# session[:broadband_providers] = @results
 			render json: { status: :ok }
 		end
 	end
