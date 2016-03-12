@@ -8,7 +8,17 @@ class ApplicationController < ActionController::Base
 
   before_action :make_action_mailer_use_request_host_and_protocol
 
+  helper_method :zip_code, :user_address
+
   protected
+
+  def zip_code
+    @zip_code ||= session[:user_zip_code]
+  end
+
+  def user_address
+    @address ||= session[:user_address]
+  end
 
   $broadband_providers = []
 

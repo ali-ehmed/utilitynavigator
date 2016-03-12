@@ -13,7 +13,7 @@ class	Address
   end
 
   def self.get_zip_code(address)
-    zip = address.split(",").reverse.second.strip if address.present?
+    zip = address.split(",").reverse.first.strip if address.present?
     zip
   end
 
@@ -44,18 +44,18 @@ class	Address
 
   	@all_providers = Array.new
 
-  	# puts broadbandMapProviders
+  	puts broadbandMapProviders
 
   	broadbandMapProviders.each do |provider|
-  		if provider == Provider::TIMEWARNER_COMMUNICATION
+  		if provider.gsub(",", "").downcase.include? Provider::TIMEWARNER_COMMUNICATION.downcase
   			@all_providers << Provider.twc.name
   		end
 
-  		if provider == Provider::COX_COMMUNICATION
+  		if provider.gsub(",", "").downcase.include? Provider::COX_COMMUNICATION.downcase
   			@all_providers << Provider.cox.name
   		end
 
-			if provider == Provider::CHARTERSPETCRUM_COMMUNICATION
+			if provider.gsub(",", "").downcase.include? Provider::CHARTERSPETCRUM_COMMUNICATION.downcase
 				@all_providers << Provider.charter_spectrum.name
 			end
   	end

@@ -52,6 +52,6 @@ class PaymentsController < ApplicationController
       return
     end
 
-    @zip_code = Address.get_zip_code(@user_address)
+    # @zip_code = Address.get_zip_code(@user_address)
   end
 end
