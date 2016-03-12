@@ -1,5 +1,6 @@
 class OffersController < ApplicationController
 	@@broadband_providers = []
+	
 	def show
 		@packages = []
 
@@ -11,7 +12,7 @@ class OffersController < ApplicationController
 		}
 
 		session[:user_zip_code] = address_params[:zip]
-		
+
 		@user_address = Address.new(address_params).get_address
 		session[:user_address] = @user_address
 
@@ -41,8 +42,6 @@ class OffersController < ApplicationController
 		if @results == "error".to_sym
 			render json: { status: :error, msg: "There was a problem while fetching data." }
 		else
-			# @@broadband_providers = [] if @@broadband_providers.length > 0
-			# @@broadband_providers = @results
 			session[:broadband_providers] = @results
 			render json: { status: :ok }
 		end

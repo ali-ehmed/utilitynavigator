@@ -20,7 +20,7 @@
         <%= will_paginate @tv_packages, renderer: BootstrapPagination::Rails %>
       </div>
       <div class="col-md-4">
-        <% if @tv_packages.length > 1 %>
+        <% if @tv_packages.count > 1 %>
           <button class="btn btn-default pull-right see-more-btn" id="see-more-cable-packages" data-product="cable" onclick="loadPackages(this);">SEE MORE PACKAGES</button>
         <% end %>
       </div>
@@ -48,7 +48,7 @@
         <%= will_paginate @internet_packages, renderer: BootstrapPagination::Rails %>
       </div>
       <div class="col-md-4">
-        <% if @internet_packages.length > 1 %>
+        <% if @internet_packages.count > 1 %>
           <button class="btn btn-default pull-right see-more-btn" id="see-more-internet-packages" data-product="internet" onclick="loadPackages(this);">SEE MORE PACKAGES</button>
         <% end %>
       </div>
@@ -76,7 +76,7 @@
         <%= will_paginate @phone_packages, renderer: BootstrapPagination::Rails %>
       </div>
       <div class="col-md-4">
-        <% if @phone_packages.length > 1 %>
+        <% if @phone_packages.count > 1 %>
           <button class="btn btn-default pull-right see-more-btn" id="see-more-phone-packages" data-product="phone" onclick="loadPackages(this);">SEE MORE PACKAGES</button>
         <% end %>
       </div>
@@ -104,7 +104,7 @@
         <%= will_paginate @bundle_packages, renderer: BootstrapPagination::Rails %>
       </div>
       <div class="col-md-4">
-        <% if @bundle_packages.length >= 1 %>
+        <% if @bundle_packages.count >= 1 %>
           <button class="btn btn-default pull-right see-more-btn" id="see-more-bundle-packages" data-product="bundle" onclick="loadPackages(this);">SEE MORE PACKAGES</button>
         <% end %>
       </div>

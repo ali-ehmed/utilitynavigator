@@ -12,15 +12,12 @@ class ApplicationController < ActionController::Base
 
   protected
 
-  def zip_code
-    @zip_code ||= session[:user_zip_code]
+  %w(zip_code user_address broadband_providers).each do |method_name|
+    define_method(method_name) do
+      name  = instance_variable_get("@#{method_name}")
+      name ||= session[method_name.to_sym]
+    end
   end
-
-  def user_address
-    @address ||= session[:user_address]
-  end
-
-  $broadband_providers = []
 
   private
 
