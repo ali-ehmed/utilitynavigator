@@ -47,16 +47,16 @@ class	Address
   	# puts broadbandMapProviders
 
   	broadbandMapProviders.each do |provider|
-  		if provider == "Time Warner Cable Inc."
-  			@all_providers << "Time Warner"
+  		if provider == Provider::TIMEWARNER_COMMUNICATION
+  			@all_providers << Provider.twc.name
   		end
 
-  		if provider == "COXCOM INC"
-  			@all_providers << "COX"
+  		if provider == Provider::COX_COMMUNICATION
+  			@all_providers << Provider.cox.name
   		end
 
-			if provider == "Charter Communications, Inc."
-				@all_providers << "Charter Spectrum"
+			if provider == Provider::CHARTERSPETCRUM_COMMUNICATION
+				@all_providers << Provider.charter_spectrum.name
 			end
   	end
 

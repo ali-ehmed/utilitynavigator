@@ -23,6 +23,10 @@ class Provider < ActiveRecord::Base
 	validates_presence_of :name
 	after_save :creating_preferences
 
+	COX_COMMUNICATION = "CoxCom Inc."
+	TIMEWARNER_COMMUNICATION = "Time Warner Cable Inc."
+	CHARTERSPETCRUM_COMMUNICATION = "Charter Communications Inc."
+
 	# has_attached_file :logo, styles: { medium: "300x300>", thumb: "100x100>" }, default_url: "/images/:style/missing.png"
   
 
@@ -58,7 +62,18 @@ class Provider < ActiveRecord::Base
 			short_name.downcase
 		end
 	end
+
+	
 	if ActiveRecord::Base.connection.table_exists? 'providers'
+		class << self
+			[["cox", 1], ["twc", 2], ["charter_spectrum", 3]].each do |provider|
+				define_method("#{provider.first}") do
+					find_by(id: provider.second)
+				end
+			end
+		end
+
+		# To check if provider specified is true
 		all.map(&:acronym).map do |provider|
 			define_method("#{provider}?") do
 				self.acronym == provider

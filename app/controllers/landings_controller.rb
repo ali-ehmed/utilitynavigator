@@ -1,5 +1,4 @@
 class LandingsController < ApplicationController
-	before_action :destroy_search_provider, only: [:index]
 
 	def index
 	end

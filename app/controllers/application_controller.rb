@@ -8,9 +8,9 @@ class ApplicationController < ActionController::Base
 
   before_action :make_action_mailer_use_request_host_and_protocol
 
-  def destroy_search_provider
-    session[:broadband_providers] = nil  
-  end
+  protected
+
+  $broadband_providers = []
 
   private
 
