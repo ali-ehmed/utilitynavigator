@@ -20,7 +20,7 @@ class OffersController < ApplicationController
 
 		logger.debug @@broadband_providers
 
-		unless $broadband_providers.to_s == "zero_results"
+		unless @@broadband_providers.to_s == "zero_results"
 			@providers = @@broadband_providers
 			@packages = Package.broadband_providers(@providers).paginate(:page => params[:page], :per_page => 5)
 		end
