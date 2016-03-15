@@ -15,7 +15,7 @@ class PaymentsController < ApplicationController
   	
   	logger.debug @payment.inspect
 
-    email = current_user.email || payment_params[:user_attributes][:email]
+    email = current_user.try(:email) || payment_params[:user_attributes][:email]
 
     @user = User.find_by(email: email)
 
