@@ -1,4 +1,12 @@
 class LandingsController < ApplicationController
+	before_action :authenticate_user!, only: [ :dashboard ]
+
+	%w(twc cox charter_spectrum).each do |provider|
+		scope_name = if provider == "twc" then "time_warner" else provider end
+		before_action -> { filteration(scope_name) }, only: [ provider.to_sym ]
+	end
+
+	include Devise::Controllers::Helpers
 
 	def index
 	end
@@ -11,24 +19,14 @@ class LandingsController < ApplicationController
 	end
 
 	def twc
-		@provider_banner = "twc-banner.png"
 		# simply redering providers with twc
 
-		@tv_packages = Package.time_warner.tv_filter.paginate(:page => params[:page], :per_page => 1)
-		@internet_packages = Package.time_warner.internet_filter.paginate(:page => params[:page], :per_page => 1)
-		@phone_packages = Package.time_warner.phone_filter.paginate(:page => params[:page], :per_page => 1)
-		@bundle_packages = Package.time_warner.bundle_filter.paginate(:page => params[:page], :per_page => 1)
-
+		@provider_banner = "twc-banner.png"
 		render :providers
 	end
 
 	def cox
 		# simply redering providers with cox
-
-		@tv_packages = Package.cox.tv_filter.paginate(:page => params[:page], :per_page => 1)
-		@internet_packages = Package.cox.internet_filter.paginate(:page => params[:page], :per_page => 1)
-		@phone_packages = Package.cox.phone_filter.paginate(:page => params[:page], :per_page => 1)
-		@bundle_packages = Package.cox.bundle_filter.paginate(:page => params[:page], :per_page => 1)
 		
 		@provider_banner = "cox-banner.png"
 		render :providers
@@ -36,14 +34,12 @@ class LandingsController < ApplicationController
 
 	def charter_spectrum
 		# simply redering providers with charter_spectrum
+
 		@provider_banner = "charter-banner.png"
-
-		@tv_packages = Package.charter.tv_filter.paginate(:page => params[:page], :per_page => 1)
-		@internet_packages = Package.charter.internet_filter.paginate(:page => params[:page], :per_page => 1)
-		@phone_packages = Package.charter.phone_filter.paginate(:page => params[:page], :per_page => 1)
-		@bundle_packages = Package.charter.bundle_filter.paginate(:page => params[:page], :per_page => 1)
-
 		render :providers
+	end
+
+	def dashboard
 	end
 
 	def compare_packages
@@ -54,5 +50,14 @@ class LandingsController < ApplicationController
 		respond_to do |format|
 			format.js
 		end
+	end
+
+	private
+
+	def filteration(provider)
+		@tv_packages = Package.method(provider).call.tv_filter.paginate(:page => params[:page], :per_page => 1)
+		@internet_packages = Package.method(provider).call.internet_filter.paginate(:page => params[:page], :per_page => 1)
+		@phone_packages = Package.method(provider).call.phone_filter.paginate(:page => params[:page], :per_page => 1)
+		@bundle_packages = Package.method(provider).call.bundle_filter.paginate(:page => params[:page], :per_page => 1)
 	end
 end

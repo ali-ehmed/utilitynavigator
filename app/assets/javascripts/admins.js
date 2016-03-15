@@ -167,7 +167,7 @@ window.$provider_zipcodes = {
       contentType: false,
       dataType: 'JSON',
 		  beforeSend: function() {
-		    $submit_btn.html('<i class=\'fa fa-circle-o-notch fa-spin\'></i> Requesting');
+		    $submit_btn.html('<i class=\'fa fa-circle-o-notch fa-spin\'></i> Uploading');
 		    $submit_btn.attr("disabled", "disabled").off('click');
 		    return
 		  },

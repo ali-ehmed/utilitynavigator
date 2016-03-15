@@ -11,6 +11,30 @@
   <br />
   <span class="contact-no">866-978-7294</span>
 </li>
+<% unless current_user %>
+  <li>
+    <a type="button" data-controls-modal="login" data-keyboard="false" data-toggle="modal" data-target="#login">
+      <strong>Login</strong>
+    </a>
+  </li>
+<% else %>
+  <li class="dropdown">
+    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Profile <span class="caret"></span></a>
+    <ul class="dropdown-menu">
+      <li>
+        <a href="<%= dashboard_path %>">
+          <strong>Dashboard</strong>
+        </a>
+      </li>
+      <li role="separator" class="divider"></li>
+      <li>
+        <a href="<%=  destroy_user_session_path%>" data-method="delete">
+          <strong>Log out</strong>
+        </a>
+      </li>
+    </ul>
+  </li>
+<% end %>
 <%# unless user_signed_in? %>
   <!-- <li>
     <%#= link_to 'Sign In', new_user_session_path %>

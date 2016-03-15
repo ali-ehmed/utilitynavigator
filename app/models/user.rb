@@ -45,6 +45,10 @@ class User < ActiveRecord::Base
 
   attr_accessor :password_validity
   after_initialize :disable_password
+  after_create :generate_password
+
+  has_attached_file :profile_image, styles: { medium: "300x300>", thumb: "100x100>" }, default_url: "user-login.png"
+  validates_attachment_content_type :profile_image, content_type: /\Aimage\/.*\Z/
 
   def disable_password
   	self.password_validity = false
@@ -56,5 +60,42 @@ class User < ActiveRecord::Base
 
   def full_name
   	"#{first_name} #{last_name}"
+  end
+
+  def pwd_instructions(pwd)
+    Checkout.pwd_instructions(self, pwd).deliver_now!
+  end
+
+  def generate_random_string
+    alphabets = [('a'..'z'), ('A'..'Z')].map { |i| i.to_a }.flatten
+    random_string = (0...8).map { alphabets[rand(alphabets.length)] }.join
+    random_string
+  end
+
+  def generate_password
+    rand_string = generate_random_string
+
+    attributes = {
+      :password => rand_string, 
+      :password_confirmation => rand_string
+    }
+
+    self.password = attributes[:password]
+    self.password_confirmation = attributes[:password_confirmation]
+    self.save
+
+    pwd_instructions(rand_string)
+  end
+
+  def card_number
+    payments.last.card_last4.split(//).first(4).join
+  end
+
+  def card_expiry
+    "#{payments.last.card_exp_month}-#{payments.last.card_exp_year}"
+  end
+
+  def orders
+    payments.joins(:package).includes(:package)
   end
 end

@@ -10,4 +10,18 @@ class Checkout < ApplicationMailer
     @order = order
     mail to: UtilityNavigator::Application.config.admin_notifications_email.first, subject: "New Order, Order ##{@order.id}"
   end
+
+  def notify_user(order, user)
+    @user = user
+    @greeting = "Hi #{@user.full_name}"
+    @order = order
+    mail to: @user.email, subject: "Order successfully placed"
+  end
+
+  def pwd_instructions(user, pwd)
+    @user = user
+    @greeting = "Hi #{@user.full_name}"
+    @pwd = pwd
+    mail to: @user.email, subject: "Password Instructions"
+  end
 end

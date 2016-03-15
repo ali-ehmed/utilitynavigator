@@ -12,13 +12,16 @@ Rails.application.routes.draw do
   	end
   end
 
-  %w(cox charter_spectrum twc).each do |proivder|
+  %w(cox charter_spectrum twc dashboard).each do |proivder|
     get proivder => "landings##{proivder}"
   end
 
   get "/compare_packages" => "landings#compare_packages"
 
-  devise_for :users
+  devise_for :users, controllers: { sessions: "sessions" }
+  # devise_scope :user do
+  #   get "/" => "landings#index"
+  # end
   
   # devise_for :users
   resources :call_back, only: [:create]

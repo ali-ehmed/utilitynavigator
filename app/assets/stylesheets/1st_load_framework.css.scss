@@ -91,3 +91,8 @@ section {
   border-left-width: 5px;
   border-radius: 3px;
 }
+
+.navbar-inverse .navbar-nav > .open > a, .navbar-inverse .navbar-nav > .open > a:hover, .navbar-inverse .navbar-nav > .open > a:focus {
+    background-color: #F8F8F8;
+    color: #9932CC;
+}

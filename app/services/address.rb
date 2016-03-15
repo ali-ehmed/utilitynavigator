@@ -31,16 +31,19 @@ class	Address
       return :error
     end
   	
+    puts results
 
   	unless results["status"] == "OK"
-  		puts geocoder
   		return :zero_results
   	end
 
-  	wirelineServices = results["Results"]["wirelineServices"].map { |v| v['providerName'] }
-		wirelessServices = results["Results"]["wirelessServices"].map { |v| v['providerName'] }
+    results_for_wireline = results["Results"]["wirelineServices"] || []
+    results_for_wireless = results["Results"]["wirelessServices"] || []
 
-  	broadbandMapProviders = wirelineServices | wirelessServices
+  	results_for_wireline = results_for_wireline.map { |v| v['providerName'] } unless results_for_wireline.blank?
+		results_for_wireless = results_for_wireless.map { |v| v['providerName'] } unless results_for_wireless.blank?
+
+  	broadbandMapProviders = results_for_wireline | results_for_wireless
 
   	@all_providers = Array.new
 

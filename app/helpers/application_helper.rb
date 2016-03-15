@@ -22,4 +22,16 @@ module ApplicationHelper
 			image_tag "cox-logo.png", class: "img-rounded img-responsive"
 		end
 	end
+
+	def devise_mapping
+	  Devise.mappings[:user]
+	end
+
+	def resource_name
+	  devise_mapping.name
+	end
+
+	def resource_class
+	  devise_mapping.to
+	end
 end

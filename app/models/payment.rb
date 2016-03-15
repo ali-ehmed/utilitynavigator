@@ -23,7 +23,7 @@ class Payment < ActiveRecord::Base
 
 	validates :card_last4, :card_exp_year, :card_exp_month, presence: true
 
-	after_create :send_admin_notification
+	after_create :send_admin_notification, :send_user_notification
 	
 	def render_payment_step
 		'offers/checkout/payments'
@@ -33,5 +33,9 @@ class Payment < ActiveRecord::Base
 
 	def send_admin_notification
 		Checkout.notify_admin(self).deliver_now!
+	end
+
+	def send_user_notification
+		Checkout.notify_user(self, self.user).deliver_now!
 	end
 end

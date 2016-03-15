@@ -11,19 +11,19 @@ class OffersController < ApplicationController
 			state: params[:state]
 		}
 
-		session[:user_zip_code] = address_params[:zip]
+		session[:zip_code] = address_params[:zip]
 
 		@user_address = Address.new(address_params).get_address
 		session[:user_address] = @user_address
 
 		@twc = Package.time_warner
-		@charter = Package.charter
+		@charter = Package.charter_spectrum
 		@cox = Package.cox
 
-		logger.debug session[:broadband_providers]
+		logger.debug broadband_search
 
-		unless session[:broadband_providers].to_s == "zero_results"
-			@providers = session[:broadband_providers]
+		unless broadband_search.to_s == "zero_results"
+			@providers = broadband_search
 			@packages = Package.broadband_providers(@providers).paginate(:page => params[:page], :per_page => 5)
 		end
 
@@ -42,7 +42,7 @@ class OffersController < ApplicationController
 		if @results == "error".to_sym
 			render json: { status: :error, msg: "There was a problem while fetching data." }
 		else
-			session[:broadband_providers] = @results
+			session[:broadband_search] = @results
 			render json: { status: :ok }
 		end
 	end

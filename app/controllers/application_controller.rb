@@ -8,11 +8,11 @@ class ApplicationController < ActionController::Base
 
   before_action :make_action_mailer_use_request_host_and_protocol
 
-  helper_method :zip_code, :user_address
+  helper_method :zip_code, :user_address, :broadband_search
 
   protected
 
-  %w(zip_code user_address broadband_providers).each do |method_name|
+  %w(zip_code user_address broadband_search).each do |method_name|
     define_method(method_name) do
       name  = instance_variable_get("@#{method_name}")
       name ||= session[method_name.to_sym]

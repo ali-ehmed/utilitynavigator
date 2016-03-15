@@ -42,22 +42,22 @@ Rails.application.configure do
   # Raises error for missing translations
   # config.action_view.raise_on_missing_translations = true
 
-  # config.action_mailer.default_url_options = { port: 3000 }
+  config.action_mailer.default_url_options = { port: 3000 }
 
   config.action_mailer.delivery_method = :letter_opener
 
-  config.action_mailer.delivery_method = :smtp
-  config.action_mailer.perform_deliveries = true
+  # config.action_mailer.delivery_method = :smtp
+  # config.action_mailer.perform_deliveries = true
 
-  config.action_mailer.smtp_settings = {
-    address: "smtp.designhenge.com",
-    port: 25,
-    authentication: "plain",
-    enable_starttls_auto: true,
-    user_name: "test@designhenge.com",
-    password: "TESTing123",
-    :openssl_verify_mode => 'none'
-  }
+  # config.action_mailer.smtp_settings = {
+  #   address: "smtp.designhenge.com",
+  #   port: 25,
+  #   authentication: "plain",
+  #   enable_starttls_auto: true,
+  #   user_name: "test@designhenge.com",
+  #   password: "TESTing123",
+  #   :openssl_verify_mode => 'none'
+  # }
 
   config.admin_notifications_email = ["test@designhenge.com"]
 end

@@ -39,7 +39,7 @@ class Package < ActiveRecord::Base
 	after_create :set_promotion_disclaimer
 
 	scope :time_warner, -> { joins(:provider).where("providers.name = 'Time Warner'") }
-	scope :charter, -> { joins(:provider).where("providers.name = 'Charter Spectrum'") }
+	scope :charter_spectrum, -> { joins(:provider).where("providers.name = 'Charter Spectrum'") }
 	scope :cox, -> { joins(:provider).where("providers.name = 'COX'") }
 
 	scope :phone_filter, -> { joins(:package_bundles => :product).where("products.name LIKE '%Phone%'") }

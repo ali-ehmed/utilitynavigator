@@ -18,7 +18,7 @@ class Offers::CheckoutController < ApplicationController
 			end
 		when "payments"
 			@payment = Payment.new
-			@payment.build_user
+			current_user || @payment.build_user 
 			@equiptment_params = params.except(:utf8, :button, :controller, :action, :offer_id, :id)
 			session[:checkout_form_params] = @equiptment_params
 		end

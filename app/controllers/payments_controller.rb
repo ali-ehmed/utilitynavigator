@@ -1,6 +1,6 @@
 class PaymentsController < ApplicationController
 	before_action :set_package, only: [:create]
-	before_action :user_address, only: [:create]
+	# before_action :user_address, only: [:create]
   
   def create
   	@payment = @package.payments.build(payment_params)
@@ -15,8 +15,17 @@ class PaymentsController < ApplicationController
   	
   	logger.debug @payment.inspect
 
+    email = current_user.email || payment_params[:user_attributes][:email]
+
+    @user = User.find_by(email: email)
+
+    unless @user.blank?
+      logger.debug "User exists"
+      @payment.user = @user
+    end
+
   	if !@payment.valid?
-  		errors = content_tag(:strong, "While creating user")
+  		errors = content_tag(:strong, "Review Errors")
   		errors += @payment.errors.full_messages.map { |msg| content_tag(:li, msg) }.join.html_safe
   		flash.now[:alert] = errors
   		render @payment.render_payment_step and return
@@ -44,7 +53,7 @@ class PaymentsController < ApplicationController
   	@transfer_phone_number = @equiptment_params["transfer_phone_number"] if @package.provider.charter?
   end
 
-  def user_address
+  def address
     @user_address = session[:user_address] if session[:user_address]
 
     if @user_address.blank?
