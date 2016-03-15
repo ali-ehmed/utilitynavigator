@@ -35,28 +35,34 @@
 		</div>
 		<div class="col-md-9">
 			<h3>My Orders</h3>
-			<table class="table table-striped">
-				<thead>
-					<tr>
-						<th>#</th>
-						<th>Name</th>
-						<th>Desc</th>
-						<th>Price</th>
-						<th>Status</th>
-						<th>Placed at</th>
-					</tr>
-					<% current_user.orders.each do |order| %>
+			<% if current_user.orders.present? %>
+				<table class="table table-striped">
+					<thead>
 						<tr>
-							<td><%= order.package.id %></td>
-							<td class="col-md-2"><%= order.package.package_name %></td>
-							<td><%= order.package.package_description.html_safe %></td>
-							<td><%= number_to_currency(order.package.price) %></td>
-							<td>---</td>
-							<td class="col-md-2"><%= order.package.created_at.strftime("%d %b, %y") %></td>
+							<th>#</th>
+							<th>Name</th>
+							<th>Desc</th>
+							<th>Price</th>
+							<th>Status</th>
+							<th>Placed at</th>
 						</tr>
-					<% end %>
-				</thead>
-			</table>
+						<% current_user.orders.each do |order| %>
+							<tr>
+								<td><%= order.package.id %></td>
+								<td class="col-md-2"><%= order.package.package_name %></td>
+								<td><%= order.package.package_description.html_safe %></td>
+								<td><%= number_to_currency(order.package.price) %></td>
+								<td>---</td>
+								<td class="col-md-2"><%= order.package.created_at.strftime("%d %b, %y") %></td>
+							</tr>
+						<% end %>
+					</thead>
+				</table>
+			<% else %>
+				<div class="alert alert-warning">
+          There are no orders.
+        </div>
+			<% end %>
 		</div>
 	</div>
 </div>
