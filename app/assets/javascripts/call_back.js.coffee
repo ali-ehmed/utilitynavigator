@@ -24,6 +24,8 @@ window.requestCallback = (event) ->
           message: response.errors
         }, type: 'danger'
         $submit_btn.text($submit_btn_val)
+    complete: ->
+      $submit_btn.html "Submit"
 
   }, error: (response) ->
     console.log 'Something went wrong'
@@ -35,6 +37,12 @@ dismissForm = ->
 
 $(document).on "ready page:change", ->
   dismissForm()
-
+  dt = new Date()
+  
   $("#call_timings").datetimepicker
     format: 'hh:mm A'
+    minDate: dt
+
+  $("#call_date").datetimepicker
+    format: 'MM/DD/YYYY'
+    minDate: dt

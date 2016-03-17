@@ -14,7 +14,7 @@
 #  promotion_disclaimer        :string
 #  created_at                  :datetime         not null
 #  updated_at                  :datetime         not null
-#  promotions                  :string
+#  promotions                  :text
 #
 
 class Package < ActiveRecord::Base

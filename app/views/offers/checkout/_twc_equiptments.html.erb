@@ -13,7 +13,7 @@
 						DVR Box (<%= fields["dvr_box_1"].capitalize %>)
 					<% else %>
 						<div class="checkbox">
-		          <%= check_box_tag :dvr_box_1, false, false, {:class => "styled", data: { price: fields["dvr_box_1"] }}  %>
+		          <%= check_box_tag :dvr_box_1, false, false, {:class => "styled", data: { price: fields["dvr_box_1"] }, onchange: "calculateEquiptmentCosts(this);"}  %>
 		          <label class="label-checkbox">
 		            DVR Box
 		          </label>

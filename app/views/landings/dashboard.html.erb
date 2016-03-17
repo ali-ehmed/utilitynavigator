@@ -4,6 +4,10 @@
   </a>
 	
 	<span class="name"><%= current_user.full_name %></span>
+	<br />
+	<%= link_to edit_user_registration_path, class: "edit-profile" do %>
+		<i class="glyphicon glyphicon-pencil"></i> Edit Profile
+ 	<% end %>
 </div>
 
 <div class="container">
@@ -51,9 +55,13 @@
 								<td><%= order.package.id %></td>
 								<td class="col-md-2"><%= order.package.package_name %></td>
 								<td><%= order.package.package_description.html_safe %></td>
-								<td><%= number_to_currency(order.package.price) %></td>
-								<td>---</td>
-								<td class="col-md-2"><%= order.package.created_at.strftime("%d %b, %y") %></td>
+								<td><%= order.total_cost.blank? ? "N/A" : number_to_currency(order.total_cost) %></td>
+								<td>
+									<div class="label label-<%= status_label(order.status) %>">
+										<%= order.status.humanize %>
+									</div>
+								</td>
+								<td class="col-md-2"><%= order.created_at.utc.strftime("%d %b, %y") %></td>
 							</tr>
 						<% end %>
 					</thead>

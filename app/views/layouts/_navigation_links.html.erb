@@ -13,7 +13,7 @@
 </li>
 <% unless current_user %>
   <li>
-    <a type="button" data-controls-modal="login" data-keyboard="false" data-toggle="modal" data-target="#login">
+    <a data-controls-modal="login" data-keyboard="false" data-toggle="modal" data-target="#login">
       <strong>Login</strong>
     </a>
   </li>
@@ -28,7 +28,7 @@
       </li>
       <li role="separator" class="divider"></li>
       <li>
-        <a href="<%=  destroy_user_session_path%>" data-method="delete">
+        <a href="<%= destroy_user_session_path %>" data-method="delete">
           <strong>Log out</strong>
         </a>
       </li>

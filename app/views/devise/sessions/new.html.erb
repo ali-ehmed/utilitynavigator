@@ -32,9 +32,15 @@
 											<%= f.input :password, required: false, label: false, placeholder: "Password" %>
 										</div>
 									</div>
-									<div class="form-group">
-											<%= f.input :remember_me, as: :boolean if devise_mapping.rememberable? %>
-									</div>
+									<!-- <div class="form-group">
+											<%#= f.input :remember_me, as: :boolean if devise_mapping.rememberable? %>
+									</div> -->
+									<div class="checkbox">
+		                 <%= f.check_box :remember_me, {:class => "styled"} if devise_mapping.rememberable? %>
+		                  <label>
+		                    Remember Me
+		                  </label>
+		              </div>
 									<div class="form-group">
 										<%= f.button :button, 'Sign in', :class => 'btn btn-lg btn-success btn-block', data: { disable_with: "<i class='fa fa-spinner fa-spin'></i> Signing In...!"} %>
 									</div>

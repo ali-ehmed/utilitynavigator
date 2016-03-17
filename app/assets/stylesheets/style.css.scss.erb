@@ -322,6 +322,24 @@ header {
       // background: rgba(17, 17, 17, 0.72) !important;
     }
   }
+
+  .providers-form {
+    min-height: 490px;
+    padding: 100px 0px 0px 175px;
+    background-position-x: 80%;
+    background-repeat-x: no-repeat;
+    background-position-y: 55%;
+    background-color: #000000;
+  }
+
+  @media (max-width: 768px) {
+    .providers-form {
+      background-color: #535353;
+    }
+    .home_form {
+      width: 100%; 
+    }
+  }
 }
 
 .landing {
@@ -400,6 +418,9 @@ header {
       display: block;
       padding: 45px 10px 25px 10px;
       background: rgba(17, 17, 17, 0.72);
+      .home_form {
+        width: 100%; 
+      }
     }
     .desktop-view {
       display: none;
@@ -578,6 +599,27 @@ div.packages-tab-content {
     line-height: 50px;
   }
   .profile_img {
-    img { border: 3px solid #fff; }
+    img { 
+      border: 3px solid #fff; 
+      width: 12%;
+      height: 136px;
+    }
+    @media(max-width: 480px) {
+      img {
+        width: 35%;
+      }
+    }
+  }
+  .edit-profile {
+    color:#000; 
+    font-weight: 500;
+  }
+}
+
+.container-profile {
+  margin: 0 auto;
+  width: 40%;
+  @media(max-width: 480px) {
+    width: 100%;
   }
 }

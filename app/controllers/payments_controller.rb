@@ -1,3 +1,21 @@
+# == Schema Information
+#
+# Table name: payments
+#
+#  id                :integer          not null, primary key
+#  user_id           :integer
+#  package_id        :integer
+#  extra_equiptments :string
+#  card_last4        :string
+#  card_exp_month    :integer
+#  card_exp_year     :integer
+#  card_type         :string
+#  created_at        :datetime         not null
+#  updated_at        :datetime         not null
+#  total_cost        :integer          default(0)
+#  status            :integer          default(0)
+#
+
 class PaymentsController < ApplicationController
 	before_action :set_package, only: [:create]
 	# before_action :user_address, only: [:create]
@@ -11,7 +29,7 @@ class PaymentsController < ApplicationController
   	extra_equiptments[:transfer_phone_number] = @transfer_phone_number if @package.provider.charter?
 
   	@payment.extra_equiptments = extra_equiptments
-  	@payment.total_cost = @equiptment_params[:total_cost]
+  	@payment.total_cost = @equiptment_params[:total_cost].to_i
   	
   	logger.debug @payment.inspect
 
@@ -38,11 +56,11 @@ class PaymentsController < ApplicationController
   private 
 
   def payment_params
-  	params.require(:payment).permit(:package_id, :card_last4, :card_exp_month, :card_exp_year, 
+  	params.require(:payment).permit(:package_id, :card_last4, :card_exp_month, :card_exp_year, :security_code, :pay_at_installation, 
   																	user_attributes: [:first_name, :last_name, :email, :address, 
   																										:zip_code, :cell_number, :date_of_birth, 
   																										:home_number, :driver_license, 
-  																										:social_security, :four_digit_no])
+  																										:social_security, :four_digit_no, :state_issue])
   end
 
   def set_package

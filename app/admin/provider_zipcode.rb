@@ -1,5 +1,6 @@
 ActiveAdmin.register ProviderZipcode do
-
+  menu :if => proc { current_admin_user.super_admin == true } 
+  
 	index do
     selectable_column
     column :provider

@@ -18,7 +18,7 @@ Rails.application.routes.draw do
 
   get "/compare_packages" => "landings#compare_packages"
 
-  devise_for :users, controllers: { sessions: "sessions" }
+  devise_for :users, controllers: { sessions: "users/sessions", :registrations => "users/registrations" }
   # devise_scope :user do
   #   get "/" => "landings#index"
   # end

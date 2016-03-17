@@ -11,6 +11,9 @@ $.fn.serializeObject = ->
     return
   o
 
+String::capitalize = ->
+  @charAt(0).toUpperCase() + @slice(1)
+
 navbarActiveLink = ->
 	$a = $('.navbar-links').find("a[href=\"#{@location.pathname}\"]")
 	$a.parent().addClass "active-link"
@@ -221,13 +224,42 @@ searchProviders = ->
     $full_address_json = jQuery.parseJSON($full_address_json)
     delete $full_address_json['utf8']
 
-    if $full_address_json.address == '' or $full_address_json.zipcode == ''
-      $.notify {
-        icon: 'glyphicon glyphicon-warning-sign'
-        title: '<strong>Instructions:</strong><br />'
-        message: 'Please enter your Home Address'
-      }, type: 'danger'
-      return false
+    $input_address = $full_address_json
+    delete $full_address_json['apt']
+    console.log $input_address
+
+    $is_valid = true
+
+    $.each $input_address, (key, value) ->
+      if value == ''
+        $.notify {
+          icon: 'glyphicon glyphicon-warning-sign'
+          title: '<strong>Instructions:</strong><br />'
+          message: 'Please enter ' + key.capitalize()
+        }, type: 'danger'
+        $is_valid = false
+        return false
+
+    
+    return false if $is_valid == false
+
+    console.log $input_address.address.substring(0, 1)
+    
+    if $.isNumeric($input_address.address.substring(0, 1)) == false
+    	$.notify {
+		    icon: 'glyphicon glyphicon-warning-sign'
+		    title: '<strong>Instructions:</strong><br />'
+		    message: 'Address should start from digits'
+		  }, type: 'danger'
+    	return false
+
+    unless $input_address.zipcode.length == 5
+    	$.notify {
+		    icon: 'glyphicon glyphicon-warning-sign'
+		    title: '<strong>Instructions:</strong><br />'
+		    message: 'Zip Code should not be less than or greater than 5 digits'
+		  }, type: 'danger'
+    	return false
 
     $full_address = []
     $.each $full_address_json, (key, value) ->

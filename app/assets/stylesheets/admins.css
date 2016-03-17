@@ -43,3 +43,10 @@ table td.fields, th.fields {
 #package_promotions_input {
   margin-left: 302px;
 }
+
+.pending {
+  background: #ADAE6B !important;
+}
+.declined {
+  background: #D14D4D !important;
+}

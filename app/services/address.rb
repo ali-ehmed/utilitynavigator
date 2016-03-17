@@ -43,7 +43,7 @@ class	Address
   	results_for_wireline = results_for_wireline.map { |v| v['providerName'] } unless results_for_wireline.blank?
 		results_for_wireless = results_for_wireless.map { |v| v['providerName'] } unless results_for_wireless.blank?
 
-  	broadbandMapProviders = results_for_wireline | results_for_wireless
+  	broadbandMapProviders = results_for_wireline | results_for_wireless #intercection of two arrays
 
   	@all_providers = Array.new
 

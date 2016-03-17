@@ -13,7 +13,18 @@
 #  created_at        :datetime         not null
 #  updated_at        :datetime         not null
 #  total_cost        :integer          default(0)
+#  status            :integer          default(0)
 #
 
 module PaymentsHelper
+	def status_label(status)
+		case status
+		when "pending"
+			"warning"
+		when "declined"
+			"danger"
+		else
+			"success"
+		end
+	end
 end

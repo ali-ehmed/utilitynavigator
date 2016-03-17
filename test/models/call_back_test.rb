@@ -10,9 +10,11 @@
 #  address        :text
 #  state          :string
 #  zip            :string
-#  preferred_time :time
 #  created_at     :datetime         not null
 #  updated_at     :datetime         not null
+#  time_zone      :string
+#  preferred_time :time
+#  preferred_date :date
 #
 
 require 'test_helper'

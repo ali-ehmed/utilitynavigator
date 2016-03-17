@@ -44,7 +44,7 @@
           <div class="row">
             <div class="col-md-6">
               <div class="form-group">
-                <%= f.input :address, as: :text, placeholder: "Street Address", input_html: { rows: 8 } %>
+                <%= f.input :address, as: :text, placeholder: "Street Address", input_html: { rows: 5 } %>
               </div>
             </div>
             <div class="col-md-6">
@@ -54,11 +54,29 @@
               <div class="form-group">
                 <%= f.input :zip, placeholder: "Zip Code" %>
               </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-4">
               <div class="form-group">
-                <%= f.label :preferred_time %>
+                <%= f.label :preferred_time, "*Preferred Time" %>
                 <div class="input-group" id="call_timings">
                   <span class="input-group-addon"><span class="fa fa-clock-o"></span></span>
                   <%= f.input :preferred_time, label: false, as: :string, placeholder: "Choose your preferred timings" %>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="form-group">
+                <%= f.input :time_zone, collection: CallBack::TIMEZONE.map{|m| m}, include_blank: "--Select--" %>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="form-group">
+                <%= f.label :preferred_date, "*Preferred Date" %>
+                <div class="input-group" id="call_date">
+                  <span class="input-group-addon"><span class="fa fa-clock-o"></span></span>
+                  <%= f.input :preferred_date, label: false, as: :string, placeholder: "Choose your preferred date" %>
                 </div>
                 
               </div>

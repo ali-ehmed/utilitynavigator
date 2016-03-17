@@ -13,6 +13,7 @@
 #  created_at        :datetime         not null
 #  updated_at        :datetime         not null
 #  total_cost        :integer          default(0)
+#  status            :integer          default(0)
 #
 
 class Payment < ActiveRecord::Base
@@ -21,12 +22,28 @@ class Payment < ActiveRecord::Base
 
 	belongs_to :package
 
-	validates :card_last4, :card_exp_year, :card_exp_month, presence: true
+	validates :card_last4, :card_exp_year, :card_exp_month, :security_code, presence: true, if: :payment_after_install
 
 	after_create :send_admin_notification, :send_user_notification
+
+	enum :status => { pending: 0, approved: 1, declined: 2 }
+
+	validates_length_of :card_last4, :minimum => 14, :maximum => 16
+
+	validates_length_of :card_exp_month, :minimum => 1, :maximum => 12
+
+	# after_initialize :default_fields
 	
 	def render_payment_step
 		'offers/checkout/payments'
+	end
+
+	attr_accessor :security_code, :pay_at_installation
+
+	def payment_after_install
+		if self.pay_at_installation == "0"
+			true
+		end
 	end
 
 	RESERVED_MESSAGE = "<strong>Dear User!</strong> <p> Your order has been placed. Soon our administration will contact you. </p> Thank You".html_safe
@@ -37,5 +54,9 @@ class Payment < ActiveRecord::Base
 
 	def send_user_notification
 		Checkout.notify_user(self, self.user).deliver_now!
+	end
+
+	def default_fields
+		self.pay_at_installation = false
 	end
 end

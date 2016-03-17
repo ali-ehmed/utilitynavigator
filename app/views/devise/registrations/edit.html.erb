@@ -1,27 +1,86 @@
-<h2>Edit <%= resource_name.to_s.humanize %></h2>
+<div class="container container-profile">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="bs-callout bs-callout-danger" id="callout-collapse-dependency">
+        <h2>Edit Profile</h2>
+      </div>
+      <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
+        <%= f.error_notification %>
+        <%= validation_errors_notifications(resource) %>
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h3 class="panel-title">General Info</h3>
+          </div>
+          <div class="panel-body">
+            <div class="form-inputs">
+              <%= f.input :first_name, required: true, autofocus: true %>
+              <%= f.input :last_name, required: true %>
+              <%= f.input :date_of_birth, required: true %>
+              <div class="fileinput fileinput-new" data-provides="fileinput">
+                <div class="fileinput-preview thumbnail" data-trigger="fileinput" style="width: 200px; height: 150px;"></div>
+                <div>
+                  <span class="btn btn-default btn-file"><span class="fileinput-new">Select image</span><span class="fileinput-exists">Change</span>
+                  <!-- <input type="file" name="..."> -->
+                  <%= f.file_field :profile_image %>
+                  </span>
+                  <a href="#" class="btn btn-default fileinput-exists" data-dismiss="fileinput">Remove</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
 
-<%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
-  <%= f.error_notification %>
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h3 class="panel-title">Contact Details</h3>
+          </div>
+          <div class="panel-body">
+            <div class="form-inputs">
+              <%= f.input :cell_number, required: true %>
+              <%= f.input :home_number, required: true %>
+              <%= f.input :driver_license %>
+              <%= f.input :zip_code, required: true %>
+              <%= f.input :address, required: true %>
+            </div>
+          </div>
+        </div>       
 
-  <div class="form-inputs">
-    <%= f.input :email, required: true, autofocus: true %>
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <div class="panel-title">
+              <strong>Security</strong>
+            </div>
+          </div>
+          <div class="panel-body">
+            <div class="form-inputs">
+              <%= f.input :social_security %>
+              <%= f.input :four_digit_no %>
 
-    <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
-      <p>Currently waiting confirmation for: <%= resource.unconfirmed_email %></p>
-    <% end %>
+              <%= f.input :email, required: true %>
 
-    <%= f.input :password, autocomplete: "off", hint: "leave it blank if you don't want to change it", required: false %>
-    <%= f.input :password_confirmation, required: false %>
-    <%= f.input :current_password, hint: "we need your current password to confirm your changes", required: true %>
+              <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
+                <p>Currently waiting confirmation for: <%= resource.unconfirmed_email %></p>
+              <% end %>
+
+              <%= f.input :password, autocomplete: "off", hint: "leave it blank if you don't want to change it", required: false %>
+              <%= f.input :password_confirmation, required: false %>
+              <%= f.input :current_password, hint: "we need your current password to confirm your changes", required: true %>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-actions">
+          <%= f.button :submit, "Update" %>
+        </div>
+      <% end %>
+
+      <h3>Cancel my account</h3>
+
+      <p>Unhappy? <%= link_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete %></p>
+
+      <%= link_to "Back", :back %>
+    </div>
   </div>
+  
+</div>
 
-  <div class="form-actions">
-    <%= f.button :submit, "Update" %>
-  </div>
-<% end %>
-
-<h3>Cancel my account</h3>
-
-<p>Unhappy? <%= link_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete %></p>
-
-<%= link_to "Back", :back %>

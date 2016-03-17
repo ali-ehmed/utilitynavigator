@@ -13,6 +13,7 @@
 #  created_at        :datetime         not null
 #  updated_at        :datetime         not null
 #  total_cost        :integer          default(0)
+#  status            :integer          default(0)
 #
 
 require 'test_helper'
