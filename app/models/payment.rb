@@ -28,9 +28,9 @@ class Payment < ActiveRecord::Base
 
 	enum :status => { pending: 0, approved: 1, declined: 2 }
 
-	validates_length_of :card_last4, :minimum => 14, :maximum => 16
+	validates_length_of :card_last4, :minimum => 14, :maximum => 16, if: :payment_after_install
 
-	validates_length_of :card_exp_month, :minimum => 1, :maximum => 12
+	validates_length_of :card_exp_month, :minimum => 1, :maximum => 12, if: :payment_after_install
 
 	# after_initialize :default_fields
 	
