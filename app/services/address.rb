@@ -31,7 +31,7 @@ class	Address
       return :error
     end
   	
-    puts results
+    # puts results
 
   	unless results["status"] == "OK"
   		return :zero_results

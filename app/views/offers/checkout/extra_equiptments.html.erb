@@ -35,10 +35,7 @@
 								<div class="col-md-6">
 									<div class="form-group">
 		                <%= label_tag :preferred_time_1, "Preferred Time 1" %>
-		                <div class="input-group time_fields checkout_timing">
-		                  <span class="input-group-addon"><span class="fa fa-clock-o"></span></span>
-		                  <%= text_field_tag :preferred_time_1, params[:preferred_time_1], class: "form-control", placeholder: "Choose your preferred timing 1" %>
-		                </div>
+		                <%= select_tag :preferred_time_1, options_for_select(CallBack.preferred_timings.map{|m| m}), class: "form-control", prompt: "Select Timings" %>
 		              </div>
 								</div>
 								<div class="col-md-6">
@@ -55,10 +52,7 @@
 								<div class="col-md-6">
 									<div class="form-group">
 		                <%= label_tag :preferred_time_2, "Preferred Time 2" %>
-		                <div class="input-group time_fields">
-		                  <span class="input-group-addon"><span class="fa fa-clock-o"></span></span>
-		                  <%= text_field_tag :preferred_time_2, params[:preferred_time_2], class: "form-control", placeholder: "Choose your preferred timing" %>
-		                </div>
+		                <%= select_tag :preferred_time_2, options_for_select(CallBack.preferred_timings.map{|m| m}), class: "form-control", prompt: "Select Timings" %>
 		              </div>
 								</div>
 								<div class="col-md-6">
@@ -75,10 +69,7 @@
 								<div class="col-md-6">
 									<div class="form-group">
 		                <%= label_tag :preferred_time_3, "Preferred Time 3" %>
-		                <div class="input-group time_fields">
-		                  <span class="input-group-addon"><span class="fa fa-clock-o"></span></span>
-		                  <%= text_field_tag :preferred_time_3, params[:preferred_time_3], class: "form-control", placeholder: "Choose your preferred timing" %>
-		                </div>
+		                <%= select_tag :preferred_time_3, options_for_select(CallBack.preferred_timings.map{|m| m}), class: "form-control", prompt: "Select Timings" %>
 		              </div>
 								</div>
 								<div class="col-md-6">

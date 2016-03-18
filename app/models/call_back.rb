@@ -37,4 +37,18 @@ class CallBack < ActiveRecord::Base
 	def notify_admin
 		RequestCallBack.call_request.deliver_now!
 	end
+
+	class << self
+		def preferred_timings
+			timings = Array.new
+			Range.new(8, 12).each do |am|
+				timings << "#{am} AM"
+			end
+			Range.new(1,5).each do |pm|
+				timings << "#{pm} PM"
+			end
+
+			timings
+		end
+	end
 end
