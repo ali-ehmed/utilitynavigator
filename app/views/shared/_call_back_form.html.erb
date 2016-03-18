@@ -60,7 +60,7 @@
             <div class="col-md-4">
               <div class="form-group">
                 <%= f.label :preferred_time, "*Preferred Time" %>
-                <div class="input-group" id="call_timings">
+                <div class="input-group time_fields">
                   <span class="input-group-addon"><span class="fa fa-clock-o"></span></span>
                   <%= f.input :preferred_time, label: false, as: :string, placeholder: "Choose your preferred timings" %>
                 </div>
@@ -74,8 +74,8 @@
             <div class="col-md-4">
               <div class="form-group">
                 <%= f.label :preferred_date, "*Preferred Date" %>
-                <div class="input-group" id="call_date">
-                  <span class="input-group-addon"><span class="fa fa-clock-o"></span></span>
+                <div class="input-group date_fields">
+                  <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
                   <%= f.input :preferred_date, label: false, as: :string, placeholder: "Choose your preferred date" %>
                 </div>
                 

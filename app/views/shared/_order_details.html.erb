@@ -1,0 +1,13 @@
+<table class="table table-striped">
+	<tbody>
+		<% equiptment_params.map do |key, value| %>	
+			<% unless value.blank? %>
+				<tr>
+					<th><%= key.humanize %></th>
+
+					<td><%= value == "true" ? "Yes" : key == "equiptment_cost" || key == "total_cost" ? number_to_currency(value.to_f) : value %></td>
+				</tr>	
+			<% end %>
+		<% end %>
+	</tbody>
+</table>

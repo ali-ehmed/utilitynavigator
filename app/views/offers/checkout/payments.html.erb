@@ -230,14 +230,17 @@
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title" id="myModalLabel">Modal title</h4>
+        <h4 class="modal-title" id="myModalLabel">
+	        <div class="bs-callout bs-callout-danger" style="margin-bottom: 5px;" id="callout-collapse-dependency">
+	        	Cart Details
+		      </div>
+	      </h4>
       </div>
       <div class="modal-body">
-        ...
+        <%= render partial: "shared/order_details", locals: { equiptment_params: @equiptment_params, package: @package } %>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
+        <button type="button" class="btn btn-warning" data-dismiss="modal">Close</button>
       </div>
     </div>
   </div>

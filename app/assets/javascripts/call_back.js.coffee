@@ -39,10 +39,11 @@ $(document).on "ready page:change", ->
   dismissForm()
   dt = new Date()
   
-  $("#call_timings").datetimepicker
+  $(".time_fields").datetimepicker
     format: 'hh:mm A'
-    minDate: dt
 
-  $("#call_date").datetimepicker
+  $(".date_fields").datetimepicker
     format: 'MM/DD/YYYY'
     minDate: dt
+
+  $(".date_fields").find("input[type='text']").val("")

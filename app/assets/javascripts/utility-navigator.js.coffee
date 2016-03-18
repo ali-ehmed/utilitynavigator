@@ -214,6 +214,69 @@ geocodeLatitideAndLongtitude = (address = "6909 helena way, mckinney, tx 75070, 
 	  return "no result found"
 	)
 
+validateEquiptmentForm = ->
+  $('form#extra_equiptments_form').on 'submit', (e) ->
+    checkout_timing = $(this).find('div.checkout_timing').find('input').val()
+    checkout_date = $(this).find('div.checkout_date').find('input').val()
+    time_zone = $(this).find('select#time_zone').val()
+
+    console.log time_zone
+
+    if checkout_timing == '' or checkout_date == ''
+      $.notify {
+        icon: 'glyphicon glyphicon-warning-sign'
+        title: '<strong>Instructions:</strong><br />'
+        message: 'Select at least 1 Preferred Time & Date'
+      }, type: 'danger'
+      return false
+    if time_zone == ''
+      $.notify {
+        icon: 'glyphicon glyphicon-warning-sign'
+        title: '<strong>Instructions:</strong><br />'
+        message: 'Select Time Zone'
+      }, type: 'danger'
+      return false
+    true
+
+perform_validations = (address) ->
+  $is_valid = true
+  $input_address = address
+  
+  $.each $input_address, (key, value) ->
+    if value == ''
+      $.notify {
+        icon: 'glyphicon glyphicon-warning-sign'
+        title: '<strong>Instructions:</strong><br />'
+        message: 'Please enter ' + key.capitalize()
+      }, type: 'danger'
+
+      $is_valid = false
+      return false
+
+  return false if $is_valid == false
+
+  console.log $input_address.address.substring(0, 1)
+  
+  if $.isNumeric($input_address.address.substring(0, 1)) == false
+  	$.notify {
+	    icon: 'glyphicon glyphicon-warning-sign'
+	    title: '<strong>Instructions:</strong><br />'
+	    message: 'Address should start from digits'
+	  }, type: 'danger'
+  	
+  	$is_valid = false
+  	return $is_valid
+
+  unless $input_address.zipcode.length == 5
+  	$.notify {
+	    icon: 'glyphicon glyphicon-warning-sign'
+	    title: '<strong>Instructions:</strong><br />'
+	    message: 'Zip Code should not be less than or greater than 5 digits'
+	  }, type: 'danger'
+  	
+  	$is_valid = false
+  	return $is_valid
+
 searchProviders = ->
   $('form#search-deals-offer-form').on 'submit', (e) ->
   	
@@ -228,38 +291,11 @@ searchProviders = ->
     delete $full_address_json['apt']
     console.log $input_address
 
-    $is_valid = true
+    #Checking Validations of search inputs
 
-    $.each $input_address, (key, value) ->
-      if value == ''
-        $.notify {
-          icon: 'glyphicon glyphicon-warning-sign'
-          title: '<strong>Instructions:</strong><br />'
-          message: 'Please enter ' + key.capitalize()
-        }, type: 'danger'
-        $is_valid = false
-        return false
+    $is_valid = perform_validations($input_address) 
 
-    
     return false if $is_valid == false
-
-    console.log $input_address.address.substring(0, 1)
-    
-    if $.isNumeric($input_address.address.substring(0, 1)) == false
-    	$.notify {
-		    icon: 'glyphicon glyphicon-warning-sign'
-		    title: '<strong>Instructions:</strong><br />'
-		    message: 'Address should start from digits'
-		  }, type: 'danger'
-    	return false
-
-    unless $input_address.zipcode.length == 5
-    	$.notify {
-		    icon: 'glyphicon glyphicon-warning-sign'
-		    title: '<strong>Instructions:</strong><br />'
-		    message: 'Zip Code should not be less than or greater than 5 digits'
-		  }, type: 'danger'
-    	return false
 
     $full_address = []
     $.each $full_address_json, (key, value) ->
@@ -281,7 +317,7 @@ searchProviders = ->
       results = data.results[0].geometry.location
       results["address"] = $full_address
 
-      if data.results[0].partial_match
+      if data.results[0].partial_match or data.results[0].geometry.bounds
       	results["partial_match"] = true
 
       $.ajax {
@@ -329,6 +365,7 @@ $(document).on 'ready page:change', ->
 	removeActiveIconProviders()
 	geocodeLatitideAndLongtitude()
 	searchProviders()
+	validateEquiptmentForm()
 
 	$('[data-toggle="popover"]').popover()
 	$('[data-toggle="tooltip"]').tooltip()

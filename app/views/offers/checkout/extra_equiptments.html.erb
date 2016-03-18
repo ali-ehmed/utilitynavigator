@@ -1,6 +1,6 @@
 <div class="extra_equiptments">
 	<div class="container">
-		<%= form_tag offer_checkout_path(@package, Package.checkout_steps.second.to_s), method: :get do %>
+		<%= form_tag offer_checkout_path(@package, Package.checkout_steps.second.to_s), method: :get, id: "extra_equiptments_form" do %>
 			<div class="row">
 				<div class="col-md-9 col-sm-9">
 					<blockquote>
@@ -30,6 +30,75 @@
 						      </div>
 								</li>
 							</ul>
+							<h3>Choose your Preferred Timings</h3>
+							<div class="row">
+								<div class="col-md-6">
+									<div class="form-group">
+		                <%= label_tag :preferred_time_1, "Preferred Time 1" %>
+		                <div class="input-group time_fields checkout_timing">
+		                  <span class="input-group-addon"><span class="fa fa-clock-o"></span></span>
+		                  <%= text_field_tag :preferred_time_1, params[:preferred_time_1], class: "form-control", placeholder: "Choose your preferred timing 1" %>
+		                </div>
+		              </div>
+								</div>
+								<div class="col-md-6">
+									<div class="form-group">
+		                <%= label_tag :preferred_date_1, "Preferred Date 1" %>
+		                <div class="input-group date_fields checkout_date">
+		                  <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+		                  <%= text_field_tag :preferred_date_1, params[:preferred_date_1], class: "form-control", placeholder: "Choose your preferred date 1" %>
+		                </div>
+		              </div>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-md-6">
+									<div class="form-group">
+		                <%= label_tag :preferred_time_2, "Preferred Time 2" %>
+		                <div class="input-group time_fields">
+		                  <span class="input-group-addon"><span class="fa fa-clock-o"></span></span>
+		                  <%= text_field_tag :preferred_time_2, params[:preferred_time_2], class: "form-control", placeholder: "Choose your preferred timing" %>
+		                </div>
+		              </div>
+								</div>
+								<div class="col-md-6">
+									<div class="form-group">
+		                <%= label_tag :preferred_date_2, "Preferred Date 2" %>
+		                <div class="input-group date_fields">
+		                  <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+		                  <%= text_field_tag :preferred_date_2, params[:preferred_date_2], class: "form-control", placeholder: "Choose your preferred date" %>
+		                </div>
+		              </div>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-md-6">
+									<div class="form-group">
+		                <%= label_tag :preferred_time_3, "Preferred Time 3" %>
+		                <div class="input-group time_fields">
+		                  <span class="input-group-addon"><span class="fa fa-clock-o"></span></span>
+		                  <%= text_field_tag :preferred_time_3, params[:preferred_time_3], class: "form-control", placeholder: "Choose your preferred timing" %>
+		                </div>
+		              </div>
+								</div>
+								<div class="col-md-6">
+									<div class="form-group">
+		                <%= label_tag :preferred_date_3, "Preferred Date 3" %>
+		                <div class="input-group date_fields">
+		                  <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+		                  <%= text_field_tag :preferred_date_3, params[:preferred_date_3], class: "form-control", placeholder: "Choose your preferred date" %>
+		                </div>
+		              </div>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-md-12">
+									<div class="form-group">
+		                <%= label_tag :time_zone, "Time Zone" %>
+		                <%= select_tag :time_zone, options_for_select(CallBack::TIMEZONE.map{|m| m}), class: "form-control", prompt: "Select" %>
+		              </div>
+								</div>
+							</div>
 						</div>
 					</div>
 				</div>

@@ -25,6 +25,11 @@ class Offers::CheckoutController < ApplicationController
 		render_wizard
 	end
 
+	def set_package
+  	# @directory_name = @equiptment_params["directory_entered_name"] if @package.provider.cox?
+  	# @transfer_phone_number = @equiptment_params["transfer_phone_number"] if @package.provider.charter?
+  end
+
 	private 
 
 	def set_package
