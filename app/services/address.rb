@@ -68,6 +68,8 @@ class	Address
   		return :zero_results
   	end
 
+    @all_providers = [] if params[:partial_match].present?
+
   	return @all_providers
   end
 

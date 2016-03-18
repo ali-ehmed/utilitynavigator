@@ -87,15 +87,11 @@
 										</li>
 									</ul>
 								</li>
-								<li>
-									<ul class="list-inline">
-										<li data-toggle="tooltip" data-placement="top" title="Monthly fee after promotion">
-									  	<strong>MFP</strong>
-										</li>
-										<li class="pull-right">
-											<%= @package.monthly_fee_after_promotion %>
-										</li>
-									</ul>
+								<li class="disclaimer">
+									<div class="alert alert-warning" role="alert">
+										<strong>Disclaimer:</strong>
+										This amount excludes taxes. Actual taxes &amp; fees will be calculated &amp; reflect on your billing statement
+									</div>
 								</li>
 							</ul>
 						</div>
@@ -119,4 +115,3 @@
 		<% end %>
 	</div>
 </div>
-	

@@ -203,7 +203,7 @@ comparePakages = ->
       comparingPackages window.$compare_checkboxex, $this
     return
 
-geocodeLatitideAndLongtitude = (address = "1600 Amphitheatre Parkway, Mountain View, CA") ->
+geocodeLatitideAndLongtitude = (address = "6909 helena way, mckinney, tx 75070, usa") ->
   $.get('https://maps.googleapis.com/maps/api/geocode/json?address=' +address+ '&key=#{window.common.geocoder}', (data) ->
   	console.log data.results[0].geometry.location
 	).done(->
@@ -280,6 +280,9 @@ searchProviders = ->
       console.log data.results[0].geometry.location
       results = data.results[0].geometry.location
       results["address"] = $full_address
+
+      if data.results[0].partial_match
+      	results["partial_match"] = true
 
       $.ajax {
 		    type: "Get"

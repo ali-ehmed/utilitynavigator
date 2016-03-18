@@ -140,7 +140,7 @@
 						</div>
 					</div>
 				</div>
-				<div class="col-md-3 col-sm-3">
+				<div class="col-md-3 col-sm-3 follow-equiptments">
 					<div class="panel panel-default">
 						<div class="panel-heading">
 							<div class="panel-title">
@@ -190,15 +190,16 @@
 										</li>
 									</ul>
 								</li>
+								<li class="disclaimer">
+									<div class="alert alert-warning" role="alert">
+										<strong>Disclaimer:</strong>
+										This amount excludes taxes. Actual taxes &amp; fees will be calculated &amp; reflect on your billing statement
+									</div>
+								</li>
 								<li>
-									<ul class="list-inline">
-										<li data-toggle="tooltip" data-placement="top" title="Monthly fee after promotion">
-									  	<strong>MFP</strong>
-										</li>
-										<li class="pull-right">
-											<%= @package.monthly_fee_after_promotion %>
-										</li>
-									</ul>
+									<button type="button" data-toggle="modal" data-target="#order_details" class="btn btn-danger btn-block text-uppercase">
+										<strong>view cart details</strong>
+									</button>
 								</li>
 							</ul>
 						</div>
@@ -223,4 +224,21 @@
 		<% end %>
 	</div>
 </div>
-	
+
+<div class="modal fade" id="order_details" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Modal title</h4>
+      </div>
+      <div class="modal-body">
+        ...
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
