@@ -131,7 +131,8 @@
 
 							<div class="form-group">
 								<div class="checkbox">
-	                <%= f.check_box :pay_at_installation, {:class => "styled"}, true %>
+	                <%= check_box("payment", "pay_at_installation", { class: 'styled' }, "true", "false") %>
+
 									<label>
 									  Pay at the time of installation
 									</label>
@@ -140,7 +141,7 @@
 						</div>
 					</div>
 				</div>
-				<div class="col-md-3 col-sm-3 follow-equiptments">
+				<div class="col-md-3 col-sm-3 follow-equiptments on-payment">
 					<div class="panel panel-default">
 						<div class="panel-heading">
 							<div class="panel-title">

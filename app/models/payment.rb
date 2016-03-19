@@ -41,7 +41,7 @@ class Payment < ActiveRecord::Base
 	attr_accessor :security_code, :pay_at_installation
 
 	def payment_after_install
-		if self.pay_at_installation == "0"
+		if self.pay_at_installation == "false"
 			true
 		end
 	end

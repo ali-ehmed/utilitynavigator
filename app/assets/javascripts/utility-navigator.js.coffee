@@ -1,3 +1,9 @@
+###
+	Author: aliahmed (Software Engineer - Ruby on Rails)
+	This coffee contains all the front end functionality of Utility Navigator
+###
+
+# Stringfy JSON
 $.fn.serializeObject = ->
   o = {}
   a = @serializeArray()
@@ -11,6 +17,7 @@ $.fn.serializeObject = ->
     return
   o
 
+# Custom function for string class
 String::capitalize = ->
   @charAt(0).toUpperCase() + @slice(1)
 
@@ -30,7 +37,7 @@ navbarActiveLink = ->
 			break
 
 offerSearchNotice = ->
-	$('.offer-btn').on 'click', (e) ->
+	$(document).on "click", '.offer-btn', (e) ->
 		e.preventDefault()
 		$('html, body').animate { scrollTop: 0 }, 'slow', ->
 			$('#search-deals-offer-form').popover("show")
@@ -48,12 +55,16 @@ scrollingReviewNote = ->
 	  if element.length
 		  originalY = element.offset().top
 		  # Space between element and top of screen (when scrolling)
-		  topMargin = 80
-		  # Should probably be set in CSS; but here just for emphasis
+		  topMargin = if element.hasClass("on-payment") then 60 else 80
+		  # Should probably be set in CSS; but here just for emphasi s
 		  element.css 'position', 'relative'
 		  $(window).on 'scroll', (event) ->
 		    scrollTop = $(window).scrollTop()
-		    element.stop(false, false).animate { top: if scrollTop < originalY then 0 else scrollTop - originalY + topMargin }, 300
+		    if ($(window).scrollTop() + $(window).height()) > ($(document).height() - 100)
+		    	console.log scrollTop
+		    element.stop(false, false).animate { 
+		    	top: if scrollTop < originalY then 0 else scrollTop - originalY + 60
+	    	}, 300
 		    return
 		  return
 	) jQuery
@@ -81,6 +92,7 @@ window.settingFilterActive = (elem) ->
 
   $(elem).find("span.package-filter").css('background-image', 'url("assets/filter-circle-select.png")')
 
+# This method is calculating the extra equiptment cost
 window.calculateEquiptmentCosts = (elem) ->
 	equiptment_cost = parseFloat(document.getElementById("equiptment_cost").value)
 	total_cost = parseFloat(document.getElementById("total_cost").value)
@@ -127,7 +139,7 @@ window.calculateEquiptmentCosts = (elem) ->
 	$(".equiptment_cost_span").text(equiptment_cost)
 	$(".total_cost_span").text("$" + total_cost)
 
-
+# For custom pagination in filters
 window.loadPackages = (elem) ->
 	window.active_product = ""
 	window.active_product = $(elem).data("product")
@@ -141,6 +153,7 @@ window.loadPackages = (elem) ->
 
 	$(elem).prop("disabled", "disabled")
 
+# This method is comparing the results on show page
 comparingPackages = (package_ids, elem) ->
 	console.log package_ids
 	console.log window.$compare_url
@@ -214,6 +227,7 @@ geocodeLatitideAndLongtitude = (address = "6909 helena way, mckinney, tx 75070, 
 	  return "no result found"
 	)
 
+# Validating Equiptment form
 validateEquiptmentForm = ->
   $('form#extra_equiptments_form').on 'submit', (e) ->
     checkout_timing = $(this).find('div.checkout_timing').find('input').val()
@@ -238,6 +252,7 @@ validateEquiptmentForm = ->
       return false
     true
 
+# Validating Search Form
 perform_validations = (address) ->
   $is_valid = true
   $input_address = address
@@ -247,7 +262,7 @@ perform_validations = (address) ->
       $.notify {
         icon: 'glyphicon glyphicon-warning-sign'
         title: '<strong>Instructions:</strong><br />'
-        message: 'Please enter ' + key.capitalize()
+        message: 'Please Enter ' + key.capitalize()
       }, type: 'danger'
 
       $is_valid = false
@@ -277,6 +292,7 @@ perform_validations = (address) ->
   	$is_valid = false
   	return $is_valid
 
+# Search Method
 searchProviders = ->
   $('form#search-deals-offer-form').on 'submit', (e) ->
   	
@@ -303,6 +319,7 @@ searchProviders = ->
 
     $full_address = $full_address.join(', ')
 
+    # Fetching Latitude and Longtitude From Google Geocoding Api
     $.get('https://maps.googleapis.com/maps/api/geocode/json?address=' + $full_address + '&key=#{window.common.geocoder}', (data) ->
       
       if data.status == 'ZERO_RESULTS'
@@ -320,6 +337,7 @@ searchProviders = ->
       if data.results[0].partial_match or data.results[0].geometry.bounds
       	results["partial_match"] = true
 
+    	# Searching Providers with Ajax Call
       $.ajax {
 		    type: "Get"
 		    url: "/offers/broadband_providers"
@@ -358,6 +376,8 @@ searchProviders = ->
       return
 
 $(document).on 'ready page:change', ->
+	### Initializing ###
+
 	navbarActiveLink()
 	offerSearchNotice()
 	scrollingReviewNote() if navigator.userAgent.toLowerCase().indexOf("mobile") == -1
@@ -370,6 +390,10 @@ $(document).on 'ready page:change', ->
 	$('[data-toggle="popover"]').popover()
 	$('[data-toggle="tooltip"]').tooltip()
 
+
+	# For Search Filters
+	# This is custom pagination, as it needs to be hidden 
+	# and See More btn should appear instead
 	if $(".packages-category-name").length
 		$(".pagination").css("margin", "0px 0px")
 		$(".pagination").hide()
