@@ -1,5 +1,9 @@
 <h3>
-	Note: Donot add <strong>$</strong> in price fields.
+	Note:
+	<ol>
+		<li>Donot add <strong>$</strong> in price fields.</li>
+		<li>Any field must filled with <strong>Free</strong> if you want to include in that field in this package.</li>
+	</ol>
 </h3>
 <%= simple_form_for [:admin, @package], url: @url, method: @http_method do |f| %>
 	<fieldset class="inputs">

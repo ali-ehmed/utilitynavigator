@@ -23,7 +23,9 @@
 							<ul>
 								<li>
 									<div class="checkbox">
-						        <%= check_box_tag :installation, @package.installation_price.downcase == "free" ? "" : false, false, {:class => "styled", data: { price: @package.installation_price }, onchange: "calculateEquiptmentCosts(this);"}  %>
+										<% unless @package.installation_price.downcase == "free" or @package.installation_price.downcase == "included" %>
+						        	<%= check_box_tag :installation, false, false, {:class => "styled", data: { price: @package.installation_price }, onchange: "calculateEquiptmentCosts(this);"}  %>
+					        	<% end %>
 						        <label class="label-checkbox">
 						          Schedule an appointment for a technician to install my services (<%= @package.installation_price %>) 
 						        </label>
