@@ -5,9 +5,9 @@
 				<div class="col-md-9 col-sm-9">
 					<blockquote>
 					  <h2 class="page-header" style="margin: 20px 0 20px;">
-							<%= @package.provider.name %> <small><%= @package.package_name %></small>
+							<%= @package.provider.name %> <small><%= @package.package_name %></small><small><%= @package.package_type.name %></small>
 						</h2>
-					  <footer>What would you like to take for your extra equiptments?</footer>
+					  <footer>What would you like to add in your extra equiptments?</footer>
 					</blockquote>
 					<div class="panel panel-default">
 						<div class="panel-body">
@@ -100,7 +100,7 @@
 								<ul class="list-inline">
 									<li>Plan Summary</li>
 									<li class="pull-right">
-										<%= link_to "Change Plan", root_path %>
+										<%= link_to "Change Plan", offers_path %>
 									</li>
 								</ul>
 							</div>

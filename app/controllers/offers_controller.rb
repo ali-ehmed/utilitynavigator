@@ -11,16 +11,18 @@ class OffersController < ApplicationController
 			state: params[:state]
 		}
 
-		session[:zip_code] = address_params[:zip]
+		unless address_params[:address].blank?
+			session[:zip_code] = address_params[:zip]
 
-		@user_address = Address.new(address_params).get_address
-		session[:user_address] = @user_address
+			user_address = Address.new(address_params).get_address
+			session[:user_address] = user_address
+		end
 
 		@twc = Package.time_warner
 		@charter = Package.charter_spectrum
 		@cox = Package.cox
 
-		logger.debug broadband_search
+		logger.debug user_address
 
 		unless broadband_search.to_s == "zero_results"
 			@providers = broadband_search

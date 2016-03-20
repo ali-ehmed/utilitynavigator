@@ -17,6 +17,8 @@ gem "wysiwyg-rails"
 gem "paperclip-dropbox", ">= 1.1.7"
 gem 'will_paginate-bootstrap'
 gem 'wicked'
+# Stores session in database not in cookie
+gem 'activerecord-session_store', github: 'rails/activerecord-session_store'
 
 group :development, :test do
   gem 'byebug'

@@ -12,7 +12,7 @@
 #  card_type         :string
 #  created_at        :datetime         not null
 #  updated_at        :datetime         not null
-#  total_cost        :integer          default(0)
+#  total_cost        :float            default(0.0)
 #  status            :integer          default(0)
 #
 
@@ -29,7 +29,7 @@ class PaymentsController < ApplicationController
   	extra_equiptments[:transfer_phone_number] = @transfer_phone_number if @package.provider.charter?
 
   	@payment.extra_equiptments = extra_equiptments
-  	@payment.total_cost = @equiptment_params[:total_cost].to_i
+  	@payment.total_cost = @equiptment_params[:total_cost].to_f
   	
   	logger.debug @payment.inspect
 

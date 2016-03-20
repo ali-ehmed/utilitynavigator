@@ -1,5 +1,5 @@
 <div class="modal fade" id="login" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-  <div class="modal-dialog" role="document">
+  <div class="modal-dialog modal-sm" role="document">
     <div class="modal-content">
       <%= simple_form_for(User.new, as: resource_name, url: session_path(resource_name)) do |f| %>
         <div class="modal-header">
@@ -20,34 +20,37 @@
               </div>
             </div>
             <br />
-            <div class="row">
-              <div class="col-md-12">
-                <div class="form-group">
-                  <div class="input-group">
-                    <span class="input-group-addon">
-                      <i class="glyphicon glyphicon-user"></i>
-                    </span>
-                    <%= f.input :email, label: false, required: false, autofocus: true, placeholder: "Email" %>
+            <div class="conatiner">
+              <div class="row">
+                <div class="col-md-12">
+                  <div class="form-group">
+                    <div class="input-group">
+                      <span class="input-group-addon">
+                        <i class="glyphicon glyphicon-user"></i>
+                      </span>
+                      <%= f.input :email, label: false, required: false, autofocus: true, placeholder: "Email" %>
+                    </div>
                   </div>
-                </div>
-                <div class="form-group">
-                  <div class="input-group">
-                    <span class="input-group-addon">
-                      <i class="glyphicon glyphicon-lock"></i>
-                    </span>
-                    <%= f.input :password, required: false, label: false, placeholder: "Password" %>
+                  <div class="form-group">
+                    <div class="input-group">
+                      <span class="input-group-addon">
+                        <i class="glyphicon glyphicon-lock"></i>
+                      </span>
+                      <%= f.input :password, required: false, label: false, placeholder: "Password" %>
+                    </div>
                   </div>
-                </div>
-                <div class="form-group">
-                   <div class="checkbox">
-                     <%= f.check_box :remember_me, {:class => "styled"} if devise_mapping.rememberable? %>
-                      <label>
-                        Remember Me
-                      </label>
+                  <div class="form-group">
+                     <div class="checkbox">
+                       <%= f.check_box :remember_me, {:class => "styled"} if devise_mapping.rememberable? %>
+                        <label>
+                          Remember Me
+                        </label>
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
+            
           </fieldset>
         </div>
         <div class="modal-footer">

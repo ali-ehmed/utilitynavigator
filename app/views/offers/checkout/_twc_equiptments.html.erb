@@ -341,66 +341,74 @@
 		</ul>
 		<hr />
 	<% when "internet" %>
+
+		<!-- Fields For Internet -->
 		<% fields = get_in_hash(@package_bundles.find_by_product_id(product.id).checkout_fields) %>
 		<%#= fields %>
-		<h3>Modem</h3>
-		<% if fields["modem"].downcase == "included" %>
-			Modem is included in this package
-		<% else %>
-			<ul>
-				<li>
-					<div class="radio">
-	          <%= radio_button_tag :modem, false, false, {id: "modem_with", data: { price: 10.00 }, onchange: "calculateEquiptmentCosts(this);"}  %>
-	          <label class="label-checkbox" for="modem_with">
-	            Internet plan requires modem to connect internet service ($<%= fields["modem"] %>/Monthly)
-	          </label>
-	        </div>
-				</li>
-				<li>
-					<div class="radio">
-	          <%= radio_button_tag :modem, false, false, {id: "modem_own", data: { price: 0 }, onchange: "calculateEquiptmentCosts(this);"}  %>
-	          <label class="label-checkbox" for="modem_own">
-	            I’ll use my own internet modem ($0)
-	          </label>
-	        </div>
-				</li>
-			</ul>
-			<div class="alert alert-info">
-				<strong>Please Note:</strong>
-				<p>
-					Time Warner Cable does not sell modems. If you don't have a modem when we install your Internet service, we'll install an Internet Modem for you. The standard monthly modem rate (above) will apply.)
-				</p>
-			</div>
+
+
+		<% if fields["modem"].present? %>
+			<h3>Modem</h3>
+			<% if fields["modem"].downcase == "included" or fields["modem"].downcase == "free" or fields["modem"].blank? %>
+				Modem is included in this package
+			<% else %>
+				<ul>
+					<li>
+						<div class="radio">
+		          <%= radio_button_tag :modem, false, false, {id: "modem_with", data: { price: fields["modem"] }, onchange: "calculateEquiptmentCosts(this);"}  %>
+		          <label class="label-checkbox" for="modem_with">
+		            Internet plan requires modem to connect internet service ($<%= fields["modem"] %>/Monthly)
+		          </label>
+		        </div>
+					</li>
+					<li>
+						<div class="radio">
+		          <%= radio_button_tag :modem, false, false, {id: "modem_own", data: { price: 0 }, onchange: "calculateEquiptmentCosts(this);"}  %>
+		          <label class="label-checkbox" for="modem_own">
+		            I’ll use my own internet modem ($0)
+		          </label>
+		        </div>
+					</li>
+				</ul>
+				<div class="alert alert-info">
+					<strong>Please Note:</strong>
+					<p>
+						Time Warner Cable does not sell modems. If you don't have a modem when we install your Internet service, we'll install an Internet Modem for you. The standard monthly modem rate (above) will apply.)
+					</p>
+				</div>
+			<% end %>
 		<% end %>
 
-		<h3>WiFi Service &amp; Equipment</h3>
-		<% if fields["wifi"].downcase == "included" %>
-			WiFi Service is included in this package
-		<% else %>
-			<ul>
-				<li>
-					<div class="radio">
-	          <%= radio_button_tag :wifi, false, false, {id: "wifi_with", data: { price: fields["wifi"] }, onchange: "calculateEquiptmentCosts(this);"}  %>
-	          <label class="label-checkbox" for="wifi_with">
-	            Yes, I want to add home WiFi ($<%= fields["wifi"] %>)
-	          </label>
-	        </div>
-				</li>
-				<li>
-					<div class="radio">
-	          <%= radio_button_tag :wifi, false, false, {id: "wifi_own", data: { price: 0 }, onchange: "calculateEquiptmentCosts(this);"}  %>
-	          <label class="label-checkbox" for="wifi_own">
-	            I’ll use my own wireless router ($0)
-	          </label>
-	        </div>
-				</li>
-			</ul>
-			<div class="alert alert-info">
-				<strong>Please Note:</strong>
-				<p>
-					Time Warner Cable does not sell modems. If you don't have a modem when we install your Internet service, we'll install an Internet Modem for you. The standard monthly modem rate (above) will apply.)
-				</p>
-			</div>
+		<% if fields["wifi"].present? %>
+			<h3>WiFi Service &amp; Equipment</h3>
+			<% if fields["wifi"].downcase == "included" or fields["wifi"].downcase == "free"%>
+				WiFi Service is included in this package
+			<% else %>
+				<ul>
+					<li>
+						<div class="radio">
+		          <%= radio_button_tag :wifi, false, false, {id: "wifi_with", data: { price: fields["wifi"] }, onchange: "calculateEquiptmentCosts(this);"}  %>
+		          <label class="label-checkbox" for="wifi_with">
+		            Yes, I want to add home WiFi ($<%= fields["wifi"] %>)
+		          </label>
+		        </div>
+					</li>
+					<li>
+						<div class="radio">
+		          <%= radio_button_tag :wifi, false, false, {id: "wifi_own", data: { price: 0 }, onchange: "calculateEquiptmentCosts(this);"}  %>
+		          <label class="label-checkbox" for="wifi_own">
+		            I’ll use my own wireless router ($0)
+		          </label>
+		        </div>
+					</li>
+				</ul>
+				<div class="alert alert-info">
+					<strong>Please Note:</strong>
+					<p>
+						Time Warner Cable does not sell modems. If you don't have a modem when we install your Internet service, we'll install an Internet Modem for you. The standard monthly modem rate (above) will apply.)
+					</p>
+				</div>
+			<% end %>
 		<% end %>
 		<hr />
 	<% else %>
@@ -408,67 +416,93 @@
 		<%#= fields %>
 		<h3>PHONE</h3>
 		<ul>
-			<li>
-				<div class="checkbox">
-          <%= check_box_tag :new_phone_number, false, false, {:class => "styled", data: { price: fields["new_phone_number"] }, onchange: "calculateEquiptmentCosts(this);"}  %>
-          <label class="label-checkbox">
-            New Phone Number 
-          </label>
-          <p>
-          	Get a new phone number with Time Warner Cable Home Phone and avoid the waiting time to have your existing number ported. Activation Fees vary by market.
-          </p>
-        </div>
-			</li>
-			<li>
-				<div class="checkbox">
-          <%= check_box_tag :transfer_phone_number, false, false, {:class => "styled", data: { price: fields["transfer_phone_number"] }, onchange: "calculateEquiptmentCosts(this);"}  %>
-          <label class="label-checkbox">
-            Transfer Phone Number 
-          </label>
-          <p>
-          	Keep your old phone number when you switch to Time Warner Home Phone service. Activation Fees vary by market.
-          </p>
-        </div>
-			</li>
+			<% if fields["new_phone_number"].present? %>
+				<li>
+					<div class="checkbox">
+	          <% unless fields["new_phone_number"].downcase == "included" or fields["new_phone_number"].downcase == "free" %>
+							<%= check_box_tag :new_phone_number, false, false, {:class => "styled", data: { price: fields["new_phone_number"] }, onchange: "calculateEquiptmentCosts(this);"}  %>
+		          <label class="label-checkbox">
+		            New Phone Number ($<%= fields["new_phone_number"] %>)
+	            </label>
+	          <% else %>
+	          	<label class="label-checkbox">
+		            New Phone Number (<%= fields["new_phone_number"] %>)
+		          </label>
+          	<% end %>
+	          <p>
+	          	Get a new phone number with Time Warner Cable Home Phone and avoid the waiting time to have your existing number ported. Activation Fees vary by market.
+	          </p>
+	        </div>
+				</li>
+			<% end %>
+			<% if fields["transfer_phone_number"].present? %>
+				<li>
+					<div class="checkbox">
+						<% unless fields["global_penny_plan"].downcase == "included" or fields["global_penny_plan"].downcase == "free" %>
+
+	          	<%= check_box_tag :transfer_phone_number, false, false, {:class => "styled", data: { price: fields["transfer_phone_number"] }, onchange: "calculateEquiptmentCosts(this);"}  %>
+	          	<label class="label-checkbox">
+		            Transfer Phone Number ($<%= fields["transfer_phone_number"] %>)
+		          </label>
+	          <% else %>
+	          	<label class="label-checkbox">
+		            Transfer Phone Number (<%= fields["transfer_phone_number"] %>)
+		          </label>
+          	<% end %>
+	          <p>
+	          	Keep your old phone number when you switch to Time Warner Home Phone service. Activation Fees vary by market.
+	          </p>
+	        </div>
+				</li>
+			<% end %>
 		</ul>
 		<h3>Please select your additional phone plans</h3>
 		<ul>
-			<li>
-				<div class="checkbox">
-          <%= check_box_tag :international_one_price, false, false, {:class => "styled", data: { price: fields["international_one_price"] }, onchange: "calculateEquiptmentCosts(this);"}  %>
-          <label class="label-checkbox">
-            INTERNATIONAL ONE PRICE ($<%= fields["international_one_price"] %> monthly)
-          </label>
-          <p>
-          	You can call up to 1,000 minutes a month to land-line phones in over 100 countries and cellphones in 14 countries. International OnePrice® gives you low rates after the 1,000 minutes are used.
-          </p>
-        </div>
-			</li>
-			<li>
-				<div class="checkbox">
-          <%= check_box_tag :sign_up_global_penny, false, false, {:class => "styled", data: { price: fields["global_penny_plan"] }, onchange: "calculateEquiptmentCosts(this);"}  %>
-          <label class="label-checkbox">
-            Sign up for the Global Penny Phone Plan ($<%= fields["global_penny_plan"] %> monthly)  
-          </label>
-          <p>
-          	Our pay-as-you-go plan gives you penny per minute rates to over 40 countries and highly competitive rates to everywhere else. And it is free for 12 months when you sign up for any Triple Play package.
-          </p>
-        </div>
-			</li>
-		</ul>
-		<h3>Please select your additional phone options</h3>
-		<ul>
-			<li>
-				<div class="checkbox">
-          <%= check_box_tag :voice_mail, false, false, {:class => "styled", data: { price: fields["voice_mail"] }, onchange: "calculateEquiptmentCosts(this);"}  %>
-          <label class="label-checkbox">
-            Sign up for the Global Penny Phone Plan ($<%= fields["voice_mail"] %> monthly)  
-          </label>
-          <p>
-          	Our pay-as-you-go plan gives you penny per minute rates to over 40 countries and highly competitive rates to everywhere else. And it is free for 12 months when you sign up for any Triple Play package.
-          </p>
-        </div>
-			</li>
+			<% if fields["international_one_price"].present? %>
+				<li>
+					<div class="checkbox">
+	          <%= check_box_tag :international_one_price, false, false, {:class => "styled", data: { price: fields["international_one_price"] }, onchange: "calculateEquiptmentCosts(this);"}  %>
+	          <label class="label-checkbox">
+	            INTERNATIONAL ONE PRICE ($<%= fields["international_one_price"] %> monthly)
+	          </label>
+	          <p>
+	          	You can call up to 1,000 minutes a month to land-line phones in over 100 countries and cellphones in 14 countries. International OnePrice® gives you low rates after the 1,000 minutes are used.
+	          </p>
+	        </div>
+				</li>
+			<% elsif fields["international_one_price"].downcase == "included" or fields["international_one_price"].downcase == "free" %>
+				<p>International One Price is included in this package</p>
+			<% end %>
+			<% if fields["global_penny_plan"].present? %>
+				<li>
+					<div class="checkbox">
+	          <%= check_box_tag :sign_up_global_penny, false, false, {:class => "styled", data: { price: fields["global_penny_plan"] }, onchange: "calculateEquiptmentCosts(this);"}  %>
+	          <label class="label-checkbox">
+	            Sign up for the Global Penny Phone Plan ($<%= fields["global_penny_plan"] %> monthly)  
+	          </label>
+	          <p>
+	          	Our pay-as-you-go plan gives you penny per minute rates to over 40 countries and highly competitive rates to everywhere else. And it is free for 12 months when you sign up for any Triple Play package.
+	          </p>
+	        </div>
+				</li>
+			<% elsif fields["global_penny_plan"].downcase == "included" or fields["global_penny_plan"].downcase == "free" %>
+				<p>Global Penny is included in this package</p>
+			<% end %>
+			<% if fields["voice_mail"].present? %>
+				<li>
+					<div class="checkbox">
+	          <%= check_box_tag :voice_mail, false, false, {:class => "styled", data: { price: fields["voice_mail"] }, onchange: "calculateEquiptmentCosts(this);"}  %>
+	          <label class="label-checkbox">
+	            Voice Mail ($<%= fields["voice_mail"] %> monthly)  
+	          </label>
+	          <p>
+	          	Voice Mail allows you to get your calls when you are away or cannot get to the phone. And there is no equipment to buy.
+	          </p>
+	        </div>
+				</li>
+			<% elsif fields["voice_mail"].downcase == "included" or fields["voice_mail"].downcase == "free" %>
+				<p>Voice Mail is included in this package</p>
+			<% end %>
 		</ul>
 	<% end %>
 </div>

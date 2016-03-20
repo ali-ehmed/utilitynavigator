@@ -362,83 +362,111 @@
 		<% end %>
 		<hr />
 	<% when "internet" %>
+
+		<!-- Fields For Internet -->
+
 		<% fields = get_in_hash(@package_bundles.find_by_product_id(product.id).checkout_fields) %>
 		<%#= fields %>
-		<h3>Modem</h3>
-		<% if fields["modem"].downcase == "free" || fields["modem"].downcase == "included" %>
-			Internet plan requires modem to connect internet service (FREE)
-		<% else %>
-			<ul>
-				<li>
-					<div class="radio">
-	          <%= radio_button_tag :modem, false, false, {id: "modem_with", data: { price: fields["modem"] }, onchange: "calculateEquiptmentCosts(this);"}  %>
-	          <label class="label-checkbox" for="modem_with">
-	            Internet plan requires modem to connect internet service ($<%= fields["modem"] %>/Monthly)
-	          </label>
-	        </div>
-				</li>
-				<li>
-					<div class="radio">
-	          <%= radio_button_tag :modem, false, false, {id: "modem_own", data: { price: 0 }, onchange: "calculateEquiptmentCosts(this);"}  %>
-	          <label class="label-checkbox" for="modem_own">
-	            I’ll use my own internet modem ($0)
-	          </label>
-	        </div>
-				</li>
-			</ul>
+
+		<% if fields["modem"].present? %>
+			<h3>Modem</h3>
+			<% if fields["modem"].downcase == "free" || fields["modem"].downcase == "included" %>
+				Internet plan requires modem to connect internet service (FREE)
+			<% else %>
+				<ul>
+					<li>
+						<div class="radio">
+		          <%= radio_button_tag :modem, false, false, {id: "modem_with", data: { price: fields["modem"] }, onchange: "calculateEquiptmentCosts(this);"}  %>
+		          <label class="label-checkbox" for="modem_with">
+		            Internet plan requires modem to connect internet service ($<%= fields["modem"] %>/Monthly)
+		          </label>
+		        </div>
+					</li>
+					<li>
+						<div class="radio">
+		          <%= radio_button_tag :modem, false, false, {id: "modem_own", data: { price: 0 }, onchange: "calculateEquiptmentCosts(this);"}  %>
+		          <label class="label-checkbox" for="modem_own">
+		            I’ll use my own internet modem ($0)
+		          </label>
+		        </div>
+					</li>
+				</ul>
+			<% end %>
 		<% end %>
 
-		<h3>WiFi Service &amp; Equipment</h3>
-		<% if fields["wifi"].downcase == "included" || fields["wifi"].downcase == "free" %>
-			WiFi Service is included in this package
-		<% else %>
-			<ul>
-				<li>
-					<div class="radio">
-	          <%= radio_button_tag :wifi, false, false, {id: "wifi_with", data: { price: fields["wifi"] }, onchange: "calculateEquiptmentCosts(this);"}  %>
-	          <label class="label-checkbox" for="wifi_with">
-	            Yes, I want to add home WiFi router ($<%= fields["wifi"] %>)
-	          </label>
-	        </div>
-				</li>
-				<li>
-					<div class="radio">
-	          <%= radio_button_tag :wifi, false, false, {id: "wifi_own", data: { price: 0 }, onchange: "calculateEquiptmentCosts(this);"}  %>
-	          <label class="label-checkbox" for="wifi_own">
-	            I’ll use my own wireless router ($0)
-	          </label>
-	        </div>
-				</li>
-			</ul>
+		<% if fields["wifi"].present? %>
+			<h3>WiFi Service &amp; Equipment</h3>
+			<% if fields["wifi"].downcase == "included" || fields["wifi"].downcase == "free" %>
+				WiFi Service is included in this package
+			<% else %>
+				<ul>
+					<li>
+						<div class="radio">
+		          <%= radio_button_tag :wifi, false, false, {id: "wifi_with", data: { price: fields["wifi"] }, onchange: "calculateEquiptmentCosts(this);"}  %>
+		          <label class="label-checkbox" for="wifi_with">
+		            Yes, I want to add home WiFi router ($<%= fields["wifi"] %>)
+		          </label>
+		        </div>
+					</li>
+					<li>
+						<div class="radio">
+		          <%= radio_button_tag :wifi, false, false, {id: "wifi_own", data: { price: 0 }, onchange: "calculateEquiptmentCosts(this);"}  %>
+		          <label class="label-checkbox" for="wifi_own">
+		            I’ll use my own wireless router ($0)
+		          </label>
+		        </div>
+					</li>
+				</ul>
+			<% end %>
 		<% end %>
 		<hr />
 	<% else %>
+
+		<!-- Fields For Phone -->
+
 		<% fields = get_in_hash(@package_bundles.find_by_product_id(product.id).checkout_fields) %>
+
 		<%#= fields %>
 		<h3>PHONE</h3>
 		<ul>
-			<li>
-				<div class="checkbox">
-          <%= check_box_tag :new_phone_number, false, false, {:class => "styled", data: { price: fields["new_phone_number"] }, onchange: "calculateEquiptmentCosts(this);"}  %>
-          <label class="label-checkbox">
-            New Phone Number 
-          </label>
-          <p>
-          	Get a new phone number with Charter Home Phone and avoid the waiting time to have your existing number ported. Activation Fees vary by market.
-          </p>
-        </div>
-			</li>
-			<li>
-				<div class="checkbox">
-          <%= check_box_tag :old_phone_number, false, false, {:class => "styled", data: { price: fields["old_phone_number"] }, onchange: "calculateEquiptmentCosts(this);"}  %>
-          <label class="label-checkbox">
-            Old Phone Number 
-          </label>
-          <p>
-          	Keep your old phone number when you switch to Charter Home Phone service. Activation Fees vary by market.
-          </p>
-        </div>
-			</li>
+			<% if fields["new_phone_number"].present? %>
+				<li>
+					<div class="checkbox">
+	          <% unless fields["new_phone_number"].downcase == "included" or fields["new_phone_number"].downcase == "free" %>
+							<%= check_box_tag :new_phone_number, false, false, {:class => "styled", data: { price: fields["new_phone_number"] }, onchange: "calculateEquiptmentCosts(this);"}  %>
+		          <label class="label-checkbox">
+		            New Phone Number ($<%= fields["new_phone_number"] %>)
+	            </label>
+	          <% else %>
+	          	<label class="label-checkbox">
+		            New Phone Number (<%= fields["new_phone_number"] %>)
+		          </label>
+	        	<% end %>
+	          <p>
+	          	Get a new phone number with Charter Home Phone and avoid the waiting time to have your existing number ported. Activation Fees vary by market.
+	          </p>
+	        </div>
+				</li>
+			<% end %>
+			<% if fields["old_phone_number"].present? %>
+				<li>
+					<div class="checkbox">
+	          <% unless fields["old_phone_number"].downcase == "included" or fields["old_phone_number"].downcase == "free" %>
+							<%= check_box_tag :old_phone_number, false, false, {:class => "styled", data: { price: fields["old_phone_number"] }, onchange: "calculateEquiptmentCosts(this);"}  %>
+		          <label class="label-checkbox">
+		            Old Phone Number ($<%= fields["old_phone_number"] %>)
+	            </label>
+	          <% else %>
+	          	<label class="label-checkbox">
+		            Old Phone Number (<%= fields["old_phone_number"] %>)
+		          </label>
+	        	<% end %>
+	          <p>
+	          	Keep your old phone number when you switch to Charter Home Phone service. Activation Fees vary by market.
+	          </p>
+	        </div>
+				</li>
+			<% end %>
 			<li>
         <label>
           Enter your phone number
@@ -451,7 +479,7 @@
 		<h3>Please select your additional phone plans</h3>
 		<ul>
 			<li>
-				<% if fields["get_200_minutes"].downcase == "included" || fields["get_200_minutes"].downcase == "free" %>
+				<% if fields["get_200_minutes"].downcase == "free" %>
 					Get 200 minutes each month (Free) 
 				<% else %>
 					<div class="checkbox">
@@ -466,7 +494,7 @@
         <% end %>
 			</li>
 			<li>
-				<% if fields["mexico_500"].downcase == "included" || fields["mexico_500"].downcase == "free" %>
+				<% if fields["mexico_500"].downcase == "free" %>
 					Mexico 500 Calling Plan (Free) 
 				<% else %>
 					<div class="checkbox">
@@ -481,7 +509,7 @@
         <% end %>
 			</li>
 			<li>
-				<% if fields["get_500_minutes"].downcase == "included" || fields["get_500_minutes"].downcase == "free" %>
+				<% if fields["get_500_minutes"].downcase == "free" %>
 					 Worldwide 250 Calling Plan (Free)
 				<% else %>
 					<div class="checkbox">
