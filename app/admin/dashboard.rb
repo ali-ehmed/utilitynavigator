@@ -18,69 +18,101 @@ ActiveAdmin.register_page "Dashboard" do
           #     li "Hello"
           #   end
           # end
-          table_for Payment.order("created_at desc").limit(5) do
-            column :orders do |order|
-              "Order ##{order.id}"
+          if Payment.all.present?
+            table_for Payment.order("created_at desc").limit(5) do
+              column :orders do |order|
+                "Order ##{order.id}"
+              end
+              column :package_name do |order|
+                link_to order.try(:package).try(:package_name), admin_package_path(order.try(:package).try(:id))
+              end
+              column :ordered_by do |order|
+                link_to order.try(:user).try(:full_name), admin_user_path(order.try(:user).try(:id))
+              end
+              column :total_cost do |order|
+                number_to_currency(order.total_cost)
+              end
             end
-            column :package_name do |order|
-              link_to order.try(:package).try(:package_name), admin_package_path(order.try(:package).try(:id))
-            end
-            column :ordered_by do |order|
-              link_to order.try(:user).try(:full_name), admin_user_path(order.try(:user).try(:id))
-            end
-            column :total_cost do |order|
-              number_to_currency(order.total_cost)
+            strong { link_to "View All Orders", admin_orders_path }
+          else
+            div class: "blank_slate_container", id: "dashboard_default_message" do
+              span class: "blank_slate" do
+                span "There are no recent orders"
+              end
             end
           end
-          strong { link_to "View All Orders", admin_orders_path }
         end
       end
 
       column do
         panel "Latest Packages" do
-          table_for Package.order("created_at desc").limit(5) do
-            column :package_name
-            column :price do |package|
-              number_to_currency(package.price)
+          if Package.all.present?
+            table_for Package.order("created_at desc").limit(5) do
+              column :package_name
+              column :price do |package|
+                number_to_currency(package.price)
+              end
+              column :provider do |package|
+                package.try(:provider).try("name")
+              end
+              column :package_type do |package|
+                package.try(:package_type).try("name")
+              end
             end
-            column :provider do |package|
-              package.try(:provider).try("name")
-            end
-            column :package_type do |package|
-              package.try(:package_type).try("name")
+            strong { link_to "View All Packages", admin_packages_path }
+          else
+            div class: "blank_slate_container", id: "dashboard_default_message" do
+              span class: "blank_slate" do
+                span "There are no recent packages"
+              end
             end
           end
-          strong { link_to "View All Packages", admin_packages_path }
         end
       end
     end
 
     panel "New Users" do
-      table_for User.order("created_at desc").limit(5) do
-        column :full_name do |user|
-          user.full_name
+      if User.all.present?
+        table_for User.order("created_at desc").limit(5) do
+          column :full_name do |user|
+            user.full_name
+          end
+          column :address
+          column :zip_code
+          column :cell_number
+          column "" do |user|
+            link_to "View Profile", admin_user_path(user)
+          end
         end
-        column :address
-        column :zip_code
-        column :cell_number
-        column "" do |user|
-          link_to "View Profile", admin_user_path(user)
+        strong { link_to "View All Users", admin_users_path }
+      else
+        div class: "blank_slate_container", id: "dashboard_default_message" do
+          span class: "blank_slate" do
+            span "There are no users registered"
+          end
         end
       end
-      strong { link_to "View All Users", admin_users_path }
     end
 
     panel "New Call Requests" do
-      table_for CallBack.order("created_at desc").limit(5) do
-        column :full_name do |call_back|
-          call_back.full_name
+      if CallBack.all.present?
+        table_for CallBack.order("created_at desc").limit(5) do
+          column :full_name do |call_back|
+            call_back.full_name
+          end
+          column :email
+          column :address
+          column :zip
+          column :state
         end
-        column :email
-        column :address
-        column :zip
-        column :state
+        strong { link_to "View All Call Back Requests", admin_call_backs_path }
+      else
+        div class: "blank_slate_container", id: "dashboard_default_message" do
+          span class: "blank_slate" do
+            span "There are no call back requests"
+          end
+        end
       end
-      strong { link_to "View All Call Back Requests", admin_call_backs_path }
     end
   end # content
 end

@@ -50,3 +50,8 @@ table td.fields, th.fields {
 .declined {
   background: #D14D4D !important;
 }
+
+.unspaced {
+  margin-top: 0px;
+  margin-bottom: 0px;
+}
