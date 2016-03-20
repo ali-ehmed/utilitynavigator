@@ -114,10 +114,12 @@ class User < ActiveRecord::Base
   end
 
   def card_number
-    payments.last.card_last4.split(//).first(4).join
+    return "" if payments.blank?
+    payments.last.card_last4.split(//).first(4).join 
   end
 
   def card_expiry
+    return "" if payments.blank?
     "#{payments.last.card_exp_month}-#{payments.last.card_exp_year}"
   end
 
