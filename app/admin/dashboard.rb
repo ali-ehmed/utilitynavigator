@@ -24,10 +24,10 @@ ActiveAdmin.register_page "Dashboard" do
                 "Order ##{order.id}"
               end
               column :package_name do |order|
-                link_to order.try(:package).try(:package_name), "#"
+                link_to order.try(:package).try(:package_name), admin_package_path(order.try(:package).try(:id))
               end
               column :ordered_by do |order|
-                link_to order.try(:user).try(:full_name), "#"
+                link_to order.try(:user).try(:full_name), admin_user_path(order.try(:user).try(:id))
               end
               column :total_cost do |order|
                 number_to_currency(order.total_cost)
