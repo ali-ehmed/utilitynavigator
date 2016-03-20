@@ -3,16 +3,17 @@ ActiveAdmin.register Payment, as: "Orders" do
 	index do
     selectable_column
     column :package
+    
     column :user do |order|
     	link_to order.user.full_name, admin_user_path(order.user)
     end
     column :total_cost
     column :provider do |order|
-    	order.package.provider.name
+    	order.try("package").try("provider").try("name")
     end
 
     column :package_type do |order|
-    	order.package.package_type.name
+       order.try("package").try("package_type").try("name")
     end
     
     column "Placed At" do |order|
@@ -37,15 +38,15 @@ ActiveAdmin.register Payment, as: "Orders" do
     	end
 
     	if order.pending?
-    		item 'In Pending', "#", style: "font-size: 14px;"
+		    item 'In Pending', "#", style: "font-size: 14px;"
   		else
-				item "Put in pending", update_order_status_admin_order_path(order, status: 0), method: :put, data: { confirm: "Put in pending?" }
+		    item "Put in pending", update_order_status_admin_order_path(order, status: 0), method: :put, data: { confirm: "Put in pending?" }
   		end
 
   		if order.declined?
-    		item 'Declined', "#", style: "font-size: 14px;"
+  		  item 'Declined', "#", style: "font-size: 14px;"
     	else
-    		item 'Decline', update_order_status_admin_order_path(order, status: 2), method: :put, data: { confirm: "Decline this order?" }
+  		  item 'Decline', update_order_status_admin_order_path(order, status: 2), method: :put, data: { confirm: "Decline this order?" }
     	end
 	  end
   end
