@@ -23,7 +23,7 @@ class Payment < ActiveRecord::Base
 	belongs_to :package
 
 	validates :card_last4, :card_exp_year, :card_exp_month, :security_code, presence: true, if: :payment_after_install
-	validates :card_last4, format: { :with => /[\d-]/, message: "must be like 99999-9999-9999-9" }
+	validates :card_last4, format: { :with => /[\d-]/, message: "must be like 99999-9999-9999-9" }, if: :payment_after_install
 	
 	after_create :send_admin_notification, :send_user_notification
 
