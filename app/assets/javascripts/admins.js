@@ -1,3 +1,5 @@
+// Froala Html Editor Libraries
+
 //= require jquery.cookie
 //= require froala_editor.min.js
 //= require plugins/align.min.js
@@ -21,6 +23,11 @@
 //= require plugins/table.min.js
 //= require plugins/url.min.js
 
+// author: -> Ali Ahmed (Software Engineer - Ruby On Rails)
+//Admin Panel Javascript 
+
+// Setting valid form variable
+window.validPackageForm = true
 
 window.$packages = {
 	enableProducts: function(elem) {
@@ -47,7 +54,21 @@ window.$packages = {
 			$("fieldset.package-products").css("background", "rgb(191, 191, 191)")
 		}
 	},
+	// Price info
+	packagePriceInfoValidation: function() {
+		$("#package_price_info").on("blur", function(){
+			console.log($(this).val().length)
 
+			if($(this).val().length > 72) {
+				$(".price-info-error").show()
+				window.validPackageForm = false;
+			} else {
+				$(".price-info-error").hide()
+				window.validPackageForm = true;
+			}
+		})
+	},
+	// Products Type and Products 
 	validatingProducts: function(elem) {
 		$element = $(elem)
 		$error = $("li.product-errors")
@@ -59,7 +80,6 @@ window.$packages = {
 		
 		$package_type =  document.getElementById("package_package_type_id")
 		$checked_boxes = $("fieldset.package-products").find("[data-checked='true']")
-		// console.log($package_type.value)
 
 		switch($package_type.value) {
 			case "1":
@@ -102,6 +122,8 @@ window.$packages = {
 				break;
 		}
 	},
+	
+	// Validation Error Dsiplay
 	validationClass: function(elem, has) {
 		if(has === "true") {
 
@@ -139,6 +161,7 @@ window.$packages = {
 	}
 }
 
+// Provider zipcode upload JS
 window.$provider_zipcodes = {
 	uploadZipcodes: function(event) {
 		event.preventDefault()
@@ -192,10 +215,13 @@ window.$provider_zipcodes = {
 	}
 }
 
+// Initializing
 $admin = {
 	init: function(){
 		$packages.disableSubmission()
+		$packages.packagePriceInfoValidation()
 		$admin.settingFlash()
+		$admin.submitNewPackageForm()
 	},
 	settingFlash: function() {
 		var getFlash = $.cookie("setFlash")
@@ -213,11 +239,19 @@ $admin = {
 					break;
 			}
 		}
+	},
+	submitNewPackageForm: function() {
+		$("#new_package").on("submit", function(){
+			if(window.validPackageForm === false) {
+				return false;
+			}
+		})
 	}
 }
 
 $(document).on("ready", function(){
 	// Initially products checkboxes are disabled for packages
+
 	$("fieldset.package-products *").attr("disabled", "disabled").off('click');
 	$admin.init()
 

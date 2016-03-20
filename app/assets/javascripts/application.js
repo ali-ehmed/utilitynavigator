@@ -25,14 +25,6 @@
 // require turbolinks
 
 $(document).ready(function(){
-	// $(".alert-message").addClass("in");
-
-	// /* swap open/close side menu icons */
-	// $('[data-toggle=collapse]').click(function(){
-	//   	// toggle icon
-	//   	$(this).find("i").toggleClass("glyphicon-chevron-right glyphicon-chevron-down");
-	// });
-
 	// Notify
 	$.notifyDefaults({
 		allow_dismiss: true,

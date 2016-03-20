@@ -84,10 +84,13 @@ ActiveAdmin.register Package do
 
 	controller do
 		def create
-			@package = Package.new(session[:package_params])
+			unlock_package_params = ActiveSupport::HashWithIndifferentAccess.new(session[:package_params])
+			@package = Package.new(unlock_package_params)
+
 			package_bundle_params = session[:package_bundles_params]
 
 			@package.charter_tv_spectrum = package_bundle_params["charter_tv_spectrum"]
+
 			if @package.save
 				@product_ids = params[:product_ids].map(&:to_i)
 				@products = Product.where("id in (?)", @product_ids)
@@ -100,6 +103,7 @@ ActiveAdmin.register Package do
 					@provider_preferences.preferences_of_product(product.id).each do |preference|
 						bundle_keys_by_product << preference.additional_field_weight.to_field.to_s
 					end
+
 					bundle_params = "" 
 					bundle_params = package_bundle_params.select {|k,v| bundle_keys_by_product.include?(k) }
 					# params.select_keys(bundle_keys_by_product)
@@ -165,8 +169,10 @@ ActiveAdmin.register Package do
 
 	collection_action :product_bundles, method: :get do
 		# @params = params[:package]
+
 		@package = Package.new(initialize_params)
 		logger.debug "--#{initialize_params}"
+
 		if !@package.valid?
 			redirect_to new_admin_package_path, flash: { alert: "Review errors" }
 			return
@@ -184,6 +190,7 @@ ActiveAdmin.register Package do
 			redirect_to new_admin_package_path, flash: { alert: "There are no preferences present for #{@provider.name}" }
 			return
 		end
+
 	 	respond_to do |format|
 			format.html
 		end
