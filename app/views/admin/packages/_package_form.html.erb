@@ -16,7 +16,7 @@
 			</li>
 			<li class="string input optional stringish" id="package_price_info_input">
 				<%= f.input :price_info, hint: "Price Info should not be more than 70 characters" %>
-				<span class="price-info-error" style="display:none;">Price Info must not exceed 70 characters</span>
+				<span class="price-info-error" style="display:none;color: red;"><strong>Error: </strong>Price Info must not exceed 70 characters</span>
 			</li>
 			<li class="string input optional stringish" id="package_price_input">
 				<%= f.input :price %>

@@ -24,7 +24,7 @@
 //= require plugins/url.min.js
 
 // author: -> Ali Ahmed (Software Engineer - Ruby On Rails)
-//Admin Panel Javascript 
+// Admin Panel Javascript 
 
 // Setting valid form variable
 window.validPackageForm = true

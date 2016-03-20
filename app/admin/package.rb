@@ -138,7 +138,7 @@ ActiveAdmin.register Package do
 		def new
 			@package = Package.new
 			@url = product_bundles_admin_packages_path
-			@http_method = :get
+			@http_method = :post
 		end
 
 		def edit
@@ -167,8 +167,9 @@ ActiveAdmin.register Package do
 
 	# permit_params :provider_id
 
-	collection_action :product_bundles, method: :get do
+	collection_action :product_bundles, method: :post do
 		# @params = params[:package]
+		params.except(:promotions)
 
 		@package = Package.new(initialize_params)
 		logger.debug "--#{initialize_params}"

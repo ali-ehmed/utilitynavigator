@@ -1,6 +1,6 @@
 ActiveAdmin.register CallBack do
   # permit_params :email, :password, :password_confirmation
-  actions :all, except: [:update, :destroy, :new, :create, :edit]
+  actions :all, except: [:update, :new, :create, :edit]
   menu priority: 2
 
   index do
