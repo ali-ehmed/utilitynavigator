@@ -8,8 +8,12 @@ ActiveAdmin.register Package do
     column :package_name
     column :price
     column :installation_price
-    column :provider
-    column :package_type
+    column :provider do |package|
+    	package.try(:provider).try(:name)
+    end
+    column :package_type do |package|
+    	package.try(:package_type).try(:name)
+    end
     column "Disclaimer" do |package|
     	if package.provider.short_name == "CHARTER"
     		package.promotion_disclaimer

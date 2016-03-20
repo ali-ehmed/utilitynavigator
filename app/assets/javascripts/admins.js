@@ -257,4 +257,6 @@ $(document).on("ready", function(){
 
 	$('.package-content').froalaEditor()
 	$('.package-promotions').froalaEditor()
+
+	$("a#approval_statuses").closest("li").css("border-bottom", "solid 5px #ebebeb")
 })

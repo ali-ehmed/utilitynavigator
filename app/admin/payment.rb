@@ -2,7 +2,9 @@ ActiveAdmin.register Payment, as: "Orders" do
 
 	index do
     selectable_column
-    column :package
+    column :package do |order|
+      "#{order.try("package").try("package_name")}"
+    end
     
     column :user do |order|
     	link_to order.user.full_name, admin_user_path(order.user)
@@ -31,6 +33,8 @@ ActiveAdmin.register Payment, as: "Orders" do
     end
     actions defaults: false, dropdown: true do |order|
 	    item "Preview", admin_order_path(order)
+      item "Remove", admin_order_path(order), method: :delete, data: { confirm: "Remove this from list?
+        " }, id: "approval_statuses"
 	    if order.approved?
     		item 'Approved', "#", style: "font-size: 14px;"
     	else

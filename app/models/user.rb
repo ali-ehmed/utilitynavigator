@@ -45,7 +45,7 @@ class User < ActiveRecord::Base
          :registerable
          # , :confirmable
 
-  has_many :payments
+  has_many :payments, dependent: :delete_all
 
   validates_presence_of :address, :zip_code, :cell_number, :home_number, :date_of_birth, :first_name, :last_name, :address
 
