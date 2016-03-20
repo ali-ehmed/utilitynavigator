@@ -22,14 +22,18 @@
 							<h3>Installation</h3>
 							<ul>
 								<li>
-									<div class="checkbox">
-										<% unless @package.installation_price.downcase == "free" or @package.installation_price.downcase == "included" %>
-						        	<%= check_box_tag :installation, false, false, {:class => "styled", data: { price: @package.installation_price }, onchange: "calculateEquiptmentCosts(this);"}  %>
-					        	<% end %>
-						        <label class="label-checkbox">
-						          Schedule an appointment for a technician to install my services (<%= @package.installation_price %>) 
+									<% unless @package.installation_price.downcase == "free" or @package.installation_price.downcase == "included" %>
+										<div class="checkbox">
+			        				<%= check_box_tag :installation, false, false, {:class => "styled", data: { price: @package.installation_price }, onchange: "calculateEquiptmentCosts(this);"}  %>
+							        <label class="label-checkbox">
+							          Schedule an appointment for a technician to install my services (<%= @package.installation_price %>) 
+							        </label>
+							      </div>
+						      <% else %>
+						      	<label class="label-checkbox">
+						          Schedule an appointment for a technician to install my services (Free) 
 						        </label>
-						      </div>
+						      <% end %>
 								</li>
 							</ul>
 							<h3>Choose your Preferred Timings</h3>
