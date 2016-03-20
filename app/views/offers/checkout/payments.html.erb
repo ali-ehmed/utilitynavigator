@@ -115,7 +115,7 @@
 						</div>
 						<div class="panel-body">
 							<div class="form-group">
-								<%= f.input :card_last4, label: "Card Number", placeholder: "Card Number", input_html: { "data-mask" => "999-99-999-9999-9" } %>
+								<%= f.input :card_last4, label: "Card Number", placeholder: "Card Number" %>
 							</div>
 							<div class="row">
 								<div class="col-md-6">
@@ -134,7 +134,7 @@
 								<div class="checkbox">
 	                <%= check_box("payment", "pay_at_installation", { class: 'styled' }, "true", "false") %>
 
-									<label>
+									<label for="payment_pay_at_installation">
 									  Pay at the time of installation
 									</label>
 	              </div>
