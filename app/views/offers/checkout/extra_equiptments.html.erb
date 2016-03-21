@@ -19,7 +19,7 @@
 								<%= render partial: "#{@package.provider.acronym}_equiptments", locals: { product: product, package: @package } %>
 							<% end %>
 
-							<h3>Installation</h3>
+							<h3>Installation <span class="checkout_required">(Required)</span></h3>
 							<ul>
 								<li>
 									<% unless @package.installation_price.downcase == "free" or @package.installation_price.downcase == "included" %>

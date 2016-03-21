@@ -26,7 +26,7 @@ class OffersController < ApplicationController
 
 		unless broadband_search.to_s == "zero_results"
 			@providers = broadband_search
-			@packages = Package.broadband_providers(@providers).paginate(:page => params[:page], :per_page => 5)
+			@packages = Package.broadband_providers(@providers).paginate(:page => params[:page], :per_page => 6)
 		end
 
 		respond_to do |format|

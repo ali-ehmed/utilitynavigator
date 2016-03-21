@@ -5,17 +5,17 @@
 		<%#= fields %>
 		
 		<h3>Please configure your TV, Internet &amp; Home Phone Services</h3>
-		<h4>For TV #1, you will build the following options (Primary TV)</h4>
+		<h4>Configure your Primary TV <span class="checkout_required">(Required)</span></h4>
 		<ul>
 			<% if fields["dvr_box_1"].present? %>
 				<li>
-					<% if fields["dvr_box_1"].downcase == "included" || fields["dvr_box_1"].downcase == "free" %>
-						DVR Box (<%= fields["dvr_box_1"].capitalize %>)
+					<% if fields["dvr_box_1"].downcase == "free" %>
+						<p>DVR Box (<%= fields["dvr_box_1"].capitalize %>)</p>
 					<% else %>
 						<div class="checkbox">
 		          <%= check_box_tag :dvr_box_1, false, false, {:class => "styled", data: { price: fields["dvr_box_1"] }, onchange: "calculateEquiptmentCosts(this);"}  %>
 		          <label class="label-checkbox">
-		            DVR Box
+		            DVR Box ($<%= fields["dvr_box_1"] %>)
 		          </label>
 		        </div>
 	        <% end %>
@@ -23,13 +23,27 @@
 			<% end %>
 			<% if fields["additional_hd_1"].present? %>
 				<li>
-					<% if fields["additional_hd_1"].downcase == "included" || fields["additional_hd_1"].downcase == "included" %>
-						1 Additional TV (<%= fields["additional_hd_1"].capitalize %>)
+					<% if fields["additional_hd_1"].downcase == "free" %>
+						<p>HD Box (<%= fields["additional_hd_1"].capitalize %>)</p>
 					<% else %>
 						<div class="checkbox">
 		          <%= check_box_tag :additional_hd_1, false, false, {:class => "styled", data: { price: fields["additional_hd_1"] }, onchange: "calculateEquiptmentCosts(this);"}  %>
 		          <label class="label-checkbox">
-		            1 Additional TV
+		            HD Box ($<%= fields["additional_hd_1"] %>)
+		          </label>
+		        </div>
+	        <% end %>
+				</li>
+			<% end %>
+			<% if fields["sd_box_1"].present? %>
+				<li>
+					<% if fields["sd_box_1"].downcase == "free" %>
+						<p>SD Box (<%= fields["sd_box_1"].capitalize %>)</p>
+					<% else %>
+						<div class="checkbox">
+		          <%= check_box_tag :sd_box_1, false, false, {:class => "styled", data: { price: fields["sd_box_1"] }, onchange: "calculateEquiptmentCosts(this);"}  %>
+		          <label class="label-checkbox">
+		            SD Box ($<%= fields["sd_box_1"] %>)
 		          </label>
 		        </div>
 	        <% end %>
@@ -37,17 +51,17 @@
 			<% end %>
 		</ul>
 		<!-- Second TV -->
-		<h4>For TV #2, you will build the following options (Second TV)</h4>
+		<h4>Configure your 2nd TV</h4>
 		<ul>
 			<% if fields["dvr_box_2"].present? %>
 				<li>
-					<% if fields["dvr_box_2"].downcase == "included" || fields["dvr_box_2"].downcase ==  "included" %>
-						DVR Box (<%= fields["dvr_box_2"].capitalize %>)
+					<% if fields["dvr_box_2"].downcase == "free" %>
+						<p>DVR Box (<%= fields["dvr_box_2"].capitalize %>)</p>
 					<% else %>
 						<div class="checkbox">
 		          <%= check_box_tag :dvr_box_2, false, false, {:class => "styled", data: { price: fields["dvr_box_2"] }, onchange: "calculateEquiptmentCosts(this);"}  %>
 		          <label class="label-checkbox">
-		            DVR Box
+		            DVR Box ($<%= fields["dvr_box_2"] %>)
 		          </label>
 		        </div>
 	        <% end %>
@@ -55,13 +69,27 @@
 			<% end %>
 			<% if fields["additional_hd_2"].present? %>
 				<li>	
-					<% if fields["additional_hd_2"].downcase == "included" || fields["additional_hd_2"].downcase == "free" %>
-						1 Additional TV (<%= fields["additional_hd_2"].capitalize %>)
+					<% if fields["additional_hd_2"].downcase == "free" %>
+						<p>HD Box (<%= fields["additional_hd_2"].capitalize %>)</p>
 					<% else %>
 						<div class="checkbox">
 		          <%= check_box_tag :additional_hd_2, false, false, {:class => "styled", data: { price: fields["additional_hd_2"] }, onchange: "calculateEquiptmentCosts(this);"}  %>
 		          <label class="label-checkbox">
-		            1 Additional TV
+		            HD Box ($<%= fields["additional_hd_2"] %>)
+		          </label>
+		        </div>
+	        <% end %>
+				</li>
+			<% end %>
+			<% if fields["sd_box_2"].present? %>
+				<li>
+					<% if fields["sd_box_2"].downcase == "free" %>
+						<p>SD Box (<%= fields["sd_box_2"].capitalize %>)</p>
+					<% else %>
+						<div class="checkbox">
+		          <%= check_box_tag :sd_box_2, false, false, {:class => "styled", data: { price: fields["sd_box_2"] }, onchange: "calculateEquiptmentCosts(this);"}  %>
+		          <label class="label-checkbox">
+		            SD Box ($<%= fields["sd_box_2"] %>)
 		          </label>
 		        </div>
 	        <% end %>
@@ -69,67 +97,95 @@
 			<% end %>
 		</ul>
 		<!-- Third TV -->
-		<h4>For TV #3, you will build the following options (Third TV)</h4>
+		<h4>Configure your 3rd TV</h4>
 		<ul>
 			<% if fields["dvr_box_3"].present? %>
-				<% if fields["dvr_box_3"].downcase == "included" || fields["dvr_box_3"].downcase == "free" %>
-					DTA Box (<%= fields["dvr_box_3"].capitalize %>)
+				<% if fields["dvr_box_3"].downcase == "free" %>
+					<p>DTA Box (<%= fields["dvr_box_3"].capitalize %>)</p>
 				<% else %>
 					<li>
 						<div class="checkbox">
 		          <%= check_box_tag :dvr_box_3, false, false, {:class => "styled", data: { price: fields["dvr_box_3"] }, onchange: "calculateEquiptmentCosts(this);"}  %>
 		          <label class="label-checkbox">
-		            DVR Box
+		            DVR Box ($<%= fields["dvr_box_3"] %>)
 		          </label>
 		        </div>
 					</li>
 				<% end %>
 			<% end %>
 			<% if fields["additional_hd_3"].present? %>
-				<% if fields["additional_hd_3"].downcase == "included" || fields["additional_hd_3"].downcase == "free" %>
-					 Additional TV (<%= fields["additional_hd_3"].capitalize %>)
+				<% if fields["additional_hd_3"].downcase == "free" %>
+					 <p>HD Box (<%= fields["additional_hd_3"].capitalize %>)</p>
 				<% else %>
 					<li>
 						<div class="checkbox">
 		          <%= check_box_tag :additional_hd_3, false, false, {:class => "styled", data: { price: fields["additional_hd_3"] }, onchange: "calculateEquiptmentCosts(this);"}  %>
 		          <label class="label-checkbox">
-		            1 Additional TV
+		            HD Box ($<%= fields["additional_hd_3"] %>)
 		          </label>
 		        </div>
 					</li>
 				<% end %>
 			<% end %>	
+			<% if fields["sd_box_3"].present? %>
+				<li>
+					<% if fields["sd_box_3"].downcase == "free" %>
+						<p>SD Box (<%= fields["sd_box_3"].capitalize %>)</p>
+					<% else %>
+						<div class="checkbox">
+		          <%= check_box_tag :sd_box_3, false, false, {:class => "styled", data: { price: fields["sd_box_3"] }, onchange: "calculateEquiptmentCosts(this);"}  %>
+		          <label class="label-checkbox">
+		            SD Box ($<%= fields["sd_box_3"] %>)
+		          </label>
+		        </div>
+	        <% end %>
+				</li>
+			<% end %>
 		</ul>
 		<!-- Fourth TV -->
-		<h4>For TV #4, you will build the following options (Fourth TV)</h4>
+		<h4>Configure your 4th TV</h4>
 		<ul>
 			<% if fields["dvr_box_4"].present? %>
-				<% if fields["dvr_box_4"].downcase == "included" || fields["dvr_box_4"].downcase == "free" %>
-					DVR Box (<%= fields["dvr_box_4"].capitalize %>)
+				<% if fields["dvr_box_4"].downcase == "free" %>
+					<p>DVR Box (<%= fields["dvr_box_4"].capitalize %>)</p>
 				<% else %>
 					<li>
 						<div class="checkbox">
 		          <%= check_box_tag :dvr_box_4, false, false, {:class => "styled", data: { price: fields["dvr_box_4"] }, onchange: "calculateEquiptmentCosts(this);"}  %>
 		          <label class="label-checkbox">
-		            DVR Box
+		            DVR Box ($<%= fields["dvr_box_4"] %>)
 		          </label>
 		        </div>
 					</li>
 				<% end %>
 			<% end %>
 			<% if fields["additional_hd_4"].present? %>
-				<% if fields["additional_hd_4"].downcase == "included" || fields["additional_hd_4"].downcase == "free" %>
-					1 Additional TV (<%= fields["additional_hd_4"].capitalize %>)
+				<% if fields["additional_hd_4"].downcase == "free" %>
+					<p>HD Box (<%= fields["additional_hd_4"].capitalize %>)</p>
 				<% else %>
 					<li>
 						<div class="checkbox">
 		          <%= check_box_tag :additional_hd_4, false, false, {:class => "styled", data: { price: fields["additional_hd_4"] }, onchange: "calculateEquiptmentCosts(this);"}  %>
 		          <label class="label-checkbox">
-		            1 Additional TV
+		            HD Box ($<%= fields["additional_hd_4"] %>)
 		          </label>
 		        </div>
 					</li>
 				<% end %>
+			<% end %>
+			<% if fields["sd_box_4"].present? %>
+				<li>
+					<% if fields["sd_box_4"].downcase == "free" %>
+						<p>SD Box (<%= fields["sd_box_4"].capitalize %>)</p>
+					<% else %>
+						<div class="checkbox">
+		          <%= check_box_tag :sd_box_4, false, false, {:class => "styled", data: { price: fields["sd_box_4"] }, onchange: "calculateEquiptmentCosts(this);"}  %>
+		          <label class="label-checkbox">
+		            SD Box ($<%= fields["sd_box_4"] %>)
+		          </label>
+		        </div>
+	        <% end %>
+				</li>
 			<% end %>
 		</ul>
 		<!-- Details -->
@@ -369,8 +425,8 @@
 		<%#= fields %>
 
 		<% if fields["modem"].present? %>
-			<h3>Modem</h3>
-			<% if fields["modem"].downcase == "free" || fields["modem"].downcase == "included" %>
+			<h3>Modem <span class="checkout_required">(Required)</span></h3>
+			<% if fields["modem"].downcase == "free" %>
 				Internet plan requires modem to connect internet service (FREE)
 			<% else %>
 				<ul>
@@ -396,7 +452,7 @@
 
 		<% if fields["wifi"].present? %>
 			<h3>WiFi Service &amp; Equipment</h3>
-			<% if fields["wifi"].downcase == "included" || fields["wifi"].downcase == "free" %>
+			<% if fields["wifi"].downcase == "free" %>
 				WiFi Service is included in this package
 			<% else %>
 				<ul>
@@ -427,46 +483,52 @@
 		<% fields = get_in_hash(@package_bundles.find_by_product_id(product.id).checkout_fields) %>
 
 		<%#= fields %>
-		<h3>PHONE</h3>
+		<h3>PHONE <span class="checkout_required">(Required)</span></h3>
 		<ul>
 			<% if fields["new_phone_number"].present? %>
 				<li>
-					<div class="checkbox">
-	          <% unless fields["new_phone_number"].downcase == "included" or fields["new_phone_number"].downcase == "free" %>
+					<% unless fields["new_phone_number"].downcase == "free" %>
+						<div class="checkbox">
 							<%= check_box_tag :new_phone_number, false, false, {:class => "styled", data: { price: fields["new_phone_number"] }, onchange: "calculateEquiptmentCosts(this);"}  %>
 		          <label class="label-checkbox">
 		            New Phone Number ($<%= fields["new_phone_number"] %>)
 	            </label>
-	          <% else %>
-	          	<label class="label-checkbox">
-		            New Phone Number (<%= fields["new_phone_number"] %>)
-		          </label>
-	        	<% end %>
-	          <p>
-	          	Get a new phone number with Charter Home Phone and avoid the waiting time to have your existing number ported. Activation Fees vary by market.
-	          </p>
-	        </div>
+		          
+		          <p>
+		          	Get a new phone number with Charter Home Phone and avoid the waiting time to have your existing number ported. Activation Fees vary by market.
+		          </p>
+		        </div>
+	        <% else %>
+            New Phone Number (<%= fields["new_phone_number"] %>)
+        	<% end %>
 				</li>
 			<% end %>
 			<% if fields["old_phone_number"].present? %>
 				<li>
-					<div class="checkbox">
-	          <% unless fields["old_phone_number"].downcase == "included" or fields["old_phone_number"].downcase == "free" %>
+					<% unless fields["old_phone_number"].downcase == "free" %>
+						<div class="checkbox">
 							<%= check_box_tag :old_phone_number, false, false, {:class => "styled", data: { price: fields["old_phone_number"] }, onchange: "calculateEquiptmentCosts(this);"}  %>
 		          <label class="label-checkbox">
 		            Old Phone Number ($<%= fields["old_phone_number"] %>)
 	            </label>
-	          <% else %>
-	          	<label class="label-checkbox">
-		            Old Phone Number (<%= fields["old_phone_number"] %>)
-		          </label>
-	        	<% end %>
-	          <p>
-	          	Keep your old phone number when you switch to Charter Home Phone service. Activation Fees vary by market.
-	          </p>
-	        </div>
+		          
+		          <p>
+		          	Keep your old phone number when you switch to Charter Home Phone service. Activation Fees vary by market.
+		          </p>
+		        </div>
+	        <% else %>
+            Old Phone Number (<%= fields["old_phone_number"] %>)
+        	<% end %>
 				</li>
 			<% end %>
+			<li>
+        <label>
+          Enter your Current Phone Provider
+        </label>
+        <p>
+        	<%= text_field_tag :current_phone_provider, params[:current_phone_provider], {:class => "form-control"}  %>
+        </p>
+			</li>
 			<li>
         <label>
           Enter your phone number

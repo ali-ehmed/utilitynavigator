@@ -68,6 +68,21 @@ window.$packages = {
 			}
 		})
 	},
+	addPriceField: function(elem) {
+		$this = $(elem)
+		if($this.val() === "Add Price") {
+			$this.next().show()
+			return
+		} else if ($this.val() === "Free") {
+			$this.next().val("free")
+		} else {
+			$this.next().val("")
+		}
+
+		console.log($this.next().val())
+		$this.next().hide()
+		return
+	},
 	// Products Type and Products 
 	validatingProducts: function(elem) {
 		$element = $(elem)

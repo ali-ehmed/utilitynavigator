@@ -2,7 +2,7 @@
 	<%= fields_for :cable do |ff| %>
 		<li class="string input optional stringish" id="package_name_input">
 			<% Package::CABLE_TV.each_with_index do |cable_tv, count| %>
-				<h3 style="font-weight:bold;"><%= cable_tv %> <small style="font-size: 10px;">Required, N/A or included</small></h3>
+				<h3 style="font-weight:bold;"><%= cable_tv %></h3>
 				<% count += 1 %>
 				<ol>
 					<!-- <li>
@@ -15,31 +15,42 @@
 						<label for="provider_name" class="label">
 							Contour Record 6 HD-DVR Receiver &amp; Service
 						</label>
-						<%= ff.text_field "contour_record_dvr_#{count}"%>
+						<%= ff.select "checkout_select", options_for_select(["Free", "Not Include", "Add Price"]), {prompt: "--Select--"}, class: "package_select_field", onchange: "$packages.addPriceField(this);" %>
+
+						<%= ff.text_field "contour_record_dvr_#{count}", style: "display: none;", class: "admin_checkout_price", value: "free" %>
 					</li>
 					<li>
 						<label for="provider_name" class="label">
 							Contour HD-DVR Receiver
 						</label>
-						<%= ff.text_field "contour_hd_dvr_#{count}" %>
+						<%= ff.select "checkout_select", options_for_select(["Free", "Not Include", "Add Price"]), {prompt: "--Select--"}, class: "package_select_field", onchange: "$packages.addPriceField(this);" %>
+
+						<%= ff.text_field "contour_hd_dvr_#{count}", style: "display: none;", class: "admin_checkout_price", value: "free" %>
+
 					</li>
 					<li>
 						<label for="provider_name" class="label">
 							Contour HD Receiver
 						</label>
-						<%= ff.text_field "contour_hd_receiver_#{count}" %>
+						<%= ff.select "checkout_select", options_for_select(["Free", "Not Include", "Add Price"]), {prompt: "--Select--"}, class: "package_select_field", onchange: "$packages.addPriceField(this);" %>
+
+						<%= ff.text_field "contour_hd_receiver_#{count}", style: "display: none;", class: "admin_checkout_price", value: "free" %>
 					</li>
 					<li>
 						<label for="provider_name" class="label">
 							Mini Box
 						</label>
-						<%= ff.text_field "mini_box_#{count}" %>
+						<%= ff.select "checkout_select", options_for_select(["Free", "Not Include", "Add Price"]), {prompt: "--Select--"}, class: "package_select_field", onchange: "$packages.addPriceField(this);" %>
+
+						<%= ff.text_field "mini_box_#{count}", style: "display: none;", class: "admin_checkout_price", value: "free" %>
 					</li>
 					<li>
 						<label for="provider_name" class="label">
 							Cable CARD
 						</label>
-						<%= ff.text_field "cable_card_#{count}" %>
+						<%= ff.select "checkout_select", options_for_select(["Free", "Not Include", "Add Price"]), {prompt: "--Select--"}, class: "package_select_field", onchange: "$packages.addPriceField(this);" %>
+
+						<%= ff.text_field "cable_card_#{count}", style: "display: none;", class: "admin_checkout_price", value: "free" %>
 					</li>
 				</ol>
 			<% end %>

@@ -5,17 +5,17 @@
 		<%#= fields %>
 		
 		<h3>Please configure your TV, Internet &amp; Home Phone Services</h3>
-		<h4>For TV #1, you will build the following options (Primary TV)</h4>
+		<h4>Configure your Primary TV <span class="checkout_required">(Required)</span></h4>
 		<ul>
 			<% if fields["contour_record_dvr_1"].present? %>
 				<li>
-					<% if fields["contour_record_dvr_1"].downcase == "included" || fields["contour_record_dvr_1"].downcase == "free" %>
-						Contour Record 6 HD-DVR Receiver (<%= fields["contour_record_dvr_1"] %>)
+					<% if fields["contour_record_dvr_1"].downcase == "free" %>
+						<p>Contour Record 6 HD-DVR Receiver (<%= fields["contour_record_dvr_1"] %>)</p>
 					<% else %>
 						<div class="checkbox">
 		          <%= check_box_tag :contour_record_dvr_1, false, false, {:class => "styled", data: { price: fields["contour_record_dvr_1"] }, onchange: "calculateEquiptmentCosts(this);"}  %>
 		          <label class="label-checkbox">
-		            Contour Record 6 HD-DVR Receiver $<%= fields["contour_record_dvr_1"] %>
+		            Contour Record 6 HD-DVR Receiver ($<%= fields["contour_record_dvr_1"] %>)
 		          </label>
 		        </div>
 	        <% end %>
@@ -23,13 +23,13 @@
 			<% end %>
 			<% if fields["contour_hd_dvr_1"].present? %>
 				<li>
-					<% if fields["contour_hd_dvr_1"].downcase == "included" || fields["contour_hd_dvr_1"].downcase == "free" %>
-						Contour HD-DVR Receiver (<%= fields["contour_hd_dvr_1"] %>)
+					<% if fields["contour_hd_dvr_1"].downcase == "free" %>
+						<p>Contour HD-DVR Receiver (<%= fields["contour_hd_dvr_1"] %>)</p>
 					<% else %>
 						<div class="checkbox">
 		          <%= check_box_tag :contour_hd_dvr_1, false, false, {:class => "styled", data: { price: fields["contour_hd_dvr_1"] }, onchange: "calculateEquiptmentCosts(this);"}  %>
 		          <label class="label-checkbox">
-		            Contour HD-DVR Receiver $<%= fields["contour_hd_dvr_1"] %>
+		            Contour HD-DVR Receiver ($<%= fields["contour_hd_dvr_1"] %>)
 		          </label>
 		        </div>
 	        <% end %>
@@ -37,13 +37,13 @@
 			<% end %>
 			<% if fields["contour_hd_receiver_1"].present? %>
 				<li>
-					<% if fields["contour_hd_receiver_1"].downcase == "included" || fields["contour_hd_receiver_1"].downcase == "free" %>
-						Contour HD Receiver (<%= fields["contour_hd_receiver_1"] %>)
+					<% if fields["contour_hd_receiver_1"].downcase == "free" %>
+						<p>Contour HD Receiver (<%= fields["contour_hd_receiver_1"] %>)</p>
 					<% else %>
 						<div class="checkbox">
 		          <%= check_box_tag :contour_hd_receiver_1, false, false, {:class => "styled", data: { price: fields["contour_hd_receiver_1"] }, onchange: "calculateEquiptmentCosts(this);"}  %>
 		          <label class="label-checkbox">
-		            Contour HD Receiver $<%= fields["contour_hd_receiver_1"] %>
+		            Contour HD Receiver ($<%= fields["contour_hd_receiver_1"] %>)
 		          </label>
 		        </div>
 	        <% end %>
@@ -51,13 +51,13 @@
 			<% end %>
 			<% if fields["mini_box_1"].present? %>
 				<li>
-					<% if fields["mini_box_1"].downcase == "mini_box_1" || fields["mini_box_1"].downcase == "free" %>
-						Mini Box (<%= fields["mini_box_1"] %>)
+					<% if fields["mini_box_1"].downcase == "free" %>
+						<p>Mini Box (<%= fields["mini_box_1"] %>)</p>
 					<% else %>
 						<div class="checkbox">
 		          <%= check_box_tag :mini_box_1, false, false, {:class => "styled", data: { price: fields["mini_box_1"] }, onchange: "calculateEquiptmentCosts(this);"}  %>
 		          <label class="label-checkbox">
-		            Mini Box $<%= fields["mini_box_1"] %>
+		            Mini Box ($<%= fields["mini_box_1"] %>)
 		          </label>
 		        </div>
 	        <% end %>
@@ -65,13 +65,13 @@
 			<% end %>
 			<% if fields["cable_card_1"].present? %>
 				<li>
-					<% if fields["cable_card_1"].downcase == "cable_card_1" || fields["cable_card_1"].downcase == "free"  %>
-						Cable Card (<%= fields["cable_card_1"] %>)
+					<% if fields["cable_card_1"].downcase == "free"  %>
+						<p>Cable Card (<%= fields["cable_card_1"] %>)</p>
 					<% else %>
 						<div class="checkbox">
 		          <%= check_box_tag :cable_card_1, false, false, {:class => "styled", data: { price: fields["cable_card_1"] }, onchange: "calculateEquiptmentCosts(this);"}  %>
 		          <label class="label-checkbox">
-		            Cable Card $<%= fields["cable_card_1"] %>
+		            Cable Card ($<%= fields["cable_card_1"] %>)
 		          </label>
 		        </div>
 	        <% end %>
@@ -79,17 +79,17 @@
 			<% end %>
 		</ul>
 		<!-- Second TV -->
-		<h4>For TV #2, you will build the following options (Second TV)</h4>
+		<h4>Configure your 2nd TV</h4>
 		<ul>
 			<% if fields["contour_record_dvr_2"].present? %>
 				<li>
-					<% if fields["contour_record_dvr_2"].downcase == "included" || fields["contour_record_dvr_2"].downcase == "free" %>
-						Contour Record 6 HD-DVR Receiver (<%= fields["contour_record_dvr_2"] %>)
+					<% if fields["contour_record_dvr_2"].downcase == "free" %>
+						<p>Contour Record 6 HD-DVR Receiver (<%= fields["contour_record_dvr_2"] %>)</p>
 					<% else %>
 						<div class="checkbox">
 		          <%= check_box_tag :contour_record_dvr_2, false, false, {:class => "styled", data: { price: fields["contour_record_dvr_2"] }, onchange: "calculateEquiptmentCosts(this);"}  %>
 		          <label class="label-checkbox">
-		            Contour Record 6 HD-DVR Receiver $<%= fields["contour_record_dvr_2"] %>
+		            Contour Record 6 HD-DVR Receiver ($<%= fields["contour_record_dvr_2"] %>)
 		          </label>
 		        </div>
 	        <% end %>
@@ -97,13 +97,13 @@
 			<% end %>
 			<% if fields["contour_hd_dvr_2"].present? %>
 				<li>
-					<% if fields["contour_hd_dvr_2"].downcase == "included" || fields["contour_hd_dvr_2"].downcase == "free" %>
-						Contour HD-DVR Receiver (<%= fields["contour_hd_dvr_2"] %>)
+					<% if fields["contour_hd_dvr_2"].downcase == "free" %>
+						<p>Contour HD-DVR Receiver (<%= fields["contour_hd_dvr_2"] %>)</p>
 					<% else %>
 						<div class="checkbox">
 		          <%= check_box_tag :contour_hd_dvr_2, false, false, {:class => "styled", data: { price: fields["contour_hd_dvr_2"] }, onchange: "calculateEquiptmentCosts(this);"}  %>
 		          <label class="label-checkbox">
-		            Contour HD-DVR Receiver $<%= fields["contour_hd_dvr_2"] %>
+		            Contour HD-DVR Receiver ($<%= fields["contour_hd_dvr_2"] %>)
 		          </label>
 		        </div>
 	        <% end %>
@@ -111,13 +111,13 @@
 			<% end %>
 			<% if fields["contour_hd_receiver_2"].present? %>
 				<li>
-					<% if fields["contour_hd_receiver_2"].downcase == "included" || fields["contour_hd_receiver_2"].downcase == "free" %>
-						Contour HD Receiver (<%= fields["contour_hd_receiver_2"] %>)
+					<% if fields["contour_hd_receiver_2"].downcase == "free" %>
+						<p>Contour HD Receiver (<%= fields["contour_hd_receiver_2"] %>)</p>
 					<% else %>
 						<div class="checkbox">
 		          <%= check_box_tag :contour_hd_receiver_2, false, false, {:class => "styled", data: { price: fields["contour_hd_receiver_2"] }, onchange: "calculateEquiptmentCosts(this);"}  %>
 		          <label class="label-checkbox">
-		            Contour HD Receiver $<%= fields["contour_hd_receiver_2"] %>
+		            Contour HD Receiver ($<%= fields["contour_hd_receiver_2"] %>)
 		          </label>
 		        </div>
 	        <% end %>
@@ -125,13 +125,13 @@
 			<% end %>
 			<% if fields["mini_box_1"].present? %>
 				<li>
-					<% if fields["mini_box_2"].downcase == "included" || fields["mini_box_2"].downcase == "free" %>
-						Mini Box (<%= fields["mini_box_2"] %>)
+					<% if fields["mini_box_2"].downcase == "free" %>
+						<p>Mini Box (<%= fields["mini_box_2"] %>)</p>
 					<% else %>
 						<div class="checkbox">
 		          <%= check_box_tag :mini_box_2, false, false, {:class => "styled", data: { price: fields["mini_box_2"] }, onchange: "calculateEquiptmentCosts(this);"}  %>
 		          <label class="label-checkbox">
-		            Mini Box $<%= fields["mini_box_2"] %>
+		            Mini Box ($<%= fields["mini_box_2"] %>)
 		          </label>
 		        </div>
 	        <% end %>
@@ -139,13 +139,13 @@
 			<% end %>
 			<% if fields["cable_card_2"].present? %>
 				<li>
-					<% if fields["cable_card_1"].downcase == "included" || fields["cable_card_1"].downcase == "free" %>
-						Cable Card (<%= fields["cable_card_1"] %>)
+					<% if fields["cable_card_1"].downcase == "free" %>
+						<p>Cable Card (<%= fields["cable_card_1"] %>)</p>
 					<% else %>
 						<div class="checkbox">
 		          <%= check_box_tag :cable_card_2, false, false, {:class => "styled", data: { price: fields["cable_card_2"] }, onchange: "calculateEquiptmentCosts(this);"}  %>
 		          <label class="label-checkbox">
-		            Cable Card $<%= fields["cable_card_2"] %>
+		            Cable Card ($<%= fields["cable_card_2"] %>)
 		          </label>
 		        </div>
 	        <% end %>
@@ -153,17 +153,17 @@
 			<% end %>
 		</ul>
 		<!-- Third TV -->
-		<h4>For TV #3, you will build the following options (Third TV)</h4>
+		<h4>Configure your 3rd TV</h4>
 		<ul>
 			<% if fields["contour_record_dvr_3"].present? %>
 				<li>
-					<% if fields["contour_record_dvr_3"].downcase == "included" || fields["contour_record_dvr_3"].downcase == "free" %>
-						Contour Record 6 HD-DVR Receiver (<%= fields["contour_record_dvr_3"] %>)
+					<% if fields["contour_record_dvr_3"].downcase == "free" %>
+						<p>Contour Record 6 HD-DVR Receiver (<%= fields["contour_record_dvr_3"] %>)</p>
 					<% else %>
 						<div class="checkbox">
 		          <%= check_box_tag :contour_record_dvr_3, false, false, {:class => "styled", data: { price: fields["contour_record_dvr_3"] }, onchange: "calculateEquiptmentCosts(this);"}  %>
 		          <label class="label-checkbox">
-		            Contour Record 6 HD-DVR Receiver $<%= fields["contour_record_dvr_3"] %>
+		            Contour Record 6 HD-DVR Receiver ($<%= fields["contour_record_dvr_3"] %>)
 		          </label>
 		        </div>
 	        <% end %>
@@ -171,13 +171,13 @@
 			<% end %>
 			<% if fields["contour_hd_dvr_3"].present? %>
 				<li>
-					<% if fields["contour_hd_dvr_3"].downcase == "included" || fields["contour_hd_dvr_3"].downcase == "free" %>
-						Contour HD-DVR Receiver (<%= fields["contour_hd_dvr_3"] %>)
+					<% if fields["contour_hd_dvr_3"].downcase == "free" %>
+						<p>Contour HD-DVR Receiver (<%= fields["contour_hd_dvr_3"] %>)</p>
 					<% else %>
 						<div class="checkbox">
 		          <%= check_box_tag :contour_hd_dvr_3, false, false, {:class => "styled", data: { price: fields["contour_hd_dvr_3"] }, onchange: "calculateEquiptmentCosts(this);"}  %>
 		          <label class="label-checkbox">
-		            Contour HD-DVR Receiver $<%= fields["contour_hd_dvr_3"] %>
+		            Contour HD-DVR Receiver ($<%= fields["contour_hd_dvr_3"] %>)
 		          </label>
 		        </div>
 	        <% end %>
@@ -185,13 +185,13 @@
 			<% end %>
 			<% if fields["contour_hd_receiver_3"].present? %>
 				<li>
-					<% if fields["contour_hd_receiver_3"].downcase == "included" || fields["contour_hd_receiver_3"].downcase == "free" %>
-						Contour HD Receiver (<%= fields["contour_hd_receiver_3"] %>)
+					<% if fields["contour_hd_receiver_3"].downcase == "free" %>
+						<p>Contour HD Receiver (<%= fields["contour_hd_receiver_3"] %>)</p>
 					<% else %>
 						<div class="checkbox">
 		          <%= check_box_tag :contour_hd_receiver_3, false, false, {:class => "styled", data: { price: fields["contour_hd_receiver_3"] }, onchange: "calculateEquiptmentCosts(this);"}  %>
 		          <label class="label-checkbox">
-		            Contour HD Receiver $<%= fields["contour_hd_receiver_3"] %>
+		            Contour HD Receiver ($<%= fields["contour_hd_receiver_3"] %>)
 		          </label>
 		        </div>
 	        <% end %>
@@ -199,13 +199,13 @@
 			<% end %>
 			<% if fields["mini_box_3"].present? %>
 				<li>
-					<% if fields["mini_box_3"].downcase == "included" || fields["cable_card_3"].downcase == "free" %>
-						Mini Box (<%= fields["mini_box_3"] %>)
+					<% if fields["cable_card_3"].downcase == "free" %>
+						<p>Mini Box (<%= fields["mini_box_3"] %>)</p>
 					<% else %>
 						<div class="checkbox">
 		          <%= check_box_tag :mini_box_3, false, false, {:class => "styled", data: { price: fields["mini_box_3"] }, onchange: "calculateEquiptmentCosts(this);"}  %>
 		          <label class="label-checkbox">
-		            Mini Box $<%= fields["mini_box_3"] %>
+		            Mini Box ($<%= fields["mini_box_3"] %>)
 		          </label>
 		        </div>
 	        <% end %>
@@ -213,13 +213,13 @@
 			<% end %>
 			<% if fields["cable_card_3"].present? %>
 				<li>
-					<% if fields["cable_card_3"].downcase == "included" || fields["cable_card_3"].downcase == "free" %>
-						Cable Card (<%= fields["cable_card_3"] %>)
+					<% if fields["cable_card_3"].downcase == "free" %>
+						<p>Cable Card (<%= fields["cable_card_3"] %>)</p>
 					<% else %>
 						<div class="checkbox">
 		          <%= check_box_tag :cable_card_3, false, false, {:class => "styled", data: { price: fields["cable_card_3"] }, onchange: "calculateEquiptmentCosts(this);"}  %>
 		          <label class="label-checkbox">
-		            Cable Card $<%= fields["cable_card_3"] %>
+		            Cable Card ($<%= fields["cable_card_3"] %>)
 		          </label>
 		        </div>
 	        <% end %>
@@ -227,17 +227,17 @@
 			<% end %>
 		</ul>
 		<!-- Fourth TV -->
-		<h4>For TV #4, you will build the following options (Fourth TV)</h4>
+		<h4>Configure your 4th TV</h4>
 		<ul>
 			<% if fields["contour_record_dvr_4"].present? %>
 				<li>
-					<% if fields["contour_record_dvr_4"].downcase == "included" || fields["contour_record_dvr_4"].downcase == "free" %>
-						Contour Record 6 HD-DVR Receiver (<%= fields["contour_record_dvr_4"] %>)
+					<% if fields["contour_record_dvr_4"].downcase == "free" %>
+						<p>Contour Record 6 HD-DVR Receiver (<%= fields["contour_record_dvr_4"] %>)</p>
 					<% else %>
 						<div class="checkbox">
 		          <%= check_box_tag :contour_record_dvr_4, false, false, {:class => "styled", data: { price: fields["contour_record_dvr_4"] }, onchange: "calculateEquiptmentCosts(this);"}  %>
 		          <label class="label-checkbox">
-		            Contour Record 6 HD-DVR Receiver $<%= fields["contour_record_dvr_4"] %>
+		            Contour Record 6 HD-DVR Receiver ($<%= fields["contour_record_dvr_4"] %>)
 		          </label>
 		        </div>
 	        <% end %>
@@ -245,13 +245,13 @@
 			<% end %>
 			<% if fields["contour_hd_dvr_4"].present? %>
 				<li>
-					<% if fields["contour_hd_dvr_4"].downcase == "included" || fields["contour_hd_dvr_4"].downcase == "free" %>
-						Contour HD-DVR Receiver (<%= fields["contour_hd_dvr_4"] %>)
+					<% if fields["contour_hd_dvr_4"].downcase == "free" %>
+						<p>Contour HD-DVR Receiver (<%= fields["contour_hd_dvr_4"] %>)</p>
 					<% else %>
 						<div class="checkbox">
 		          <%= check_box_tag :contour_hd_dvr_4, false, false, {:class => "styled", data: { price: fields["contour_hd_dvr_4"] }, onchange: "calculateEquiptmentCosts(this);"}  %>
 		          <label class="label-checkbox">
-		            Contour HD-DVR Receiver $<%= fields["contour_hd_dvr_4"] %>
+		            Contour HD-DVR Receiver ($<%= fields["contour_hd_dvr_4"] %>)
 		          </label>
 		        </div>
 	        <% end %>
@@ -259,13 +259,13 @@
 			<% end %>
 			<% if fields["contour_hd_receiver_4"].present? %>
 				<li>
-					<% if fields["contour_hd_receiver_4"].downcase == "included" || fields["contour_hd_receiver_4"].downcase == "free" %>
-						Contour HD Receiver (<%= fields["contour_hd_receiver_4"] %>)
+					<% if fields["contour_hd_receiver_4"].downcase == "free" %>
+						<p>Contour HD Receiver (<%= fields["contour_hd_receiver_4"] %>)</p>
 					<% else %>
 						<div class="checkbox">
 		          <%= check_box_tag :contour_hd_receiver_4, false, false, {:class => "styled", data: { price: fields["contour_hd_receiver_4"] }, onchange: "calculateEquiptmentCosts(this);"}  %>
 		          <label class="label-checkbox">
-		            Contour HD Receiver $<%= fields["contour_hd_receiver_4"] %>
+		            Contour HD Receiver ($<%= fields["contour_hd_receiver_4"] %>)
 		          </label>
 		        </div>
 	        <% end %>
@@ -273,13 +273,13 @@
 			<% end %>
 			<% if fields["mini_box_4"].present? %>
 				<li>
-					<% if fields["mini_box_4"].downcase == "included" || fields["mini_box_4"].downcase == "free" %>
-						Mini Box (<%= fields["mini_box_4"] %>)
+					<% if fields["mini_box_4"].downcase == "free" %>
+						<p>Mini Box (<%= fields["mini_box_4"] %>)</p>
 					<% else %>
 						<div class="checkbox">
 		          <%= check_box_tag :mini_box_4, false, false, {:class => "styled", data: { price: fields["mini_box_4"] }, onchange: "calculateEquiptmentCosts(this);"}  %>
 		          <label class="label-checkbox">
-		            Mini Box $<%= fields["mini_box_4"] %>
+		            Mini Box ($<%= fields["mini_box_4"] %>)
 		          </label>
 		        </div>
 	        <% end %>
@@ -287,13 +287,13 @@
 			<% end %>
 			<% if fields["cable_card_4"].present? %>
 				<li>
-					<% if fields["cable_card_4"].downcase == "included" || fields["cable_card_4"].downcase == "free" %>
-						Cable Card (<%= fields["cable_card_4"] %>)
+					<% if fields["cable_card_4"].downcase == "free" %>
+						<p>Cable Card (<%= fields["cable_card_4"] %>)</p>
 					<% else %>
 						<div class="checkbox">
 		          <%= check_box_tag :cable_card_4, false, false, {:class => "styled", data: { price: fields["cable_card_4"] }, onchange: "calculateEquiptmentCosts(this);"}  %>
 		          <label class="label-checkbox">
-		            Cable Card $<%= fields["cable_card_4"] %>
+		            Cable Card ($<%= fields["cable_card_4"] %>)
 		          </label>
 		        </div>
 	        <% end %>
@@ -493,8 +493,19 @@
 		<% fields = get_in_hash(@package_bundles.find_by_product_id(product.id).checkout_fields) %>
 		<%#= fields %>
 		<% if fields["internet_equiptment"].downcase == "required" %>
-			<h3>Internet Equipment</h3>
+			<h3>Internet Equipment <span class="checkout_required">(Required)</span></h3>
 			<ul>
+				<li>
+					<div class="checkbox">
+	          <%= check_box_tag :premium_dual_band, false, false, {:class => "styled", data: { price: 9.99 }, onchange: "calculateEquiptmentCosts(this);"}  %>
+	          <label class="label-checkbox">
+	            Premium Dual-Band WiFi Modem - Lease, ($9.99/Monthly)
+	          </label>
+	          <p>
+	          	Combined Internet and Telephone WiFi Modem that utilizes 802.11ac WiFi technology to support the new Ultimate package speeds.
+	          </p>
+	        </div>
+				</li>
 				<li>
 					<div class="checkbox">
 	          <%= check_box_tag :wifi_internet_telephone_modem, false, false, {:class => "styled", data: { price: 6.95 }, onchange: "calculateEquiptmentCosts(this);"}  %>
@@ -655,7 +666,7 @@
 			</ul>
 		<% end %>
 		<% if fields["directory_listing"].downcase == 'required' %>
-			<h3>Directory Listing</h3>
+			<h3>Directory Listing <span class="checkout_required">(Required)</span></h3>
 			<p>
 				<small>
 					How would you like your name to appear in the phone directory? Don't worry, you'll have a chance to review and make edits on the Order Summary page.
@@ -730,7 +741,8 @@
 			</ul>
 		<% end %>
 		<% if fields["telephone_no_porting"].downcase == 'required' %>
-			<h3>Would you like to keep your current number?</h3>
+			<h3>Telephone Number Porting <span class="checkout_required">(Required)</span></h3>
+			<h4>Would you like to keep your current number?</h4>
 			<p>
 				<small>
 					Do you need any additional Telephone Outlets for your home?

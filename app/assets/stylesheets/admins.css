@@ -55,3 +55,8 @@ table td.fields, th.fields {
   margin-top: 0px;
   margin-bottom: 0px;
 }
+
+.admin_checkout_price {
+  margin-left: 20%;
+  margin-top: 15px;
+}
