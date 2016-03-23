@@ -57,6 +57,7 @@ ActiveAdmin.register Payment, as: "Orders" do
 
   member_action :update_order_status, method: :put do
     resource.update_attribute(:status, params[:status].to_i)
+    Checkout.user_order_approval(resource, resource.user).deliver_now!
     redirect_to admin_orders_path, notice: "Order for #{resource.user.full_name} has set to #{resource.status.humanize}"
   end
 end

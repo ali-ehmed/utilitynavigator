@@ -1,0 +1,13 @@
+<h1><%= @greeting %></h1>
+
+<p>
+  Your order status has
+  <% case @order.status.humanize %>
+	<% when "Pending" %>
+		set to <strong>In Pending</strong>
+	<% when "Declined" %>
+		been <strong>Declined</strong>
+	<% else %>
+		been <strong>Confirmed</strong>
+	<% end %>
+</p>
