@@ -5,15 +5,17 @@
 				<div class="col-md-9 col-sm-9">
 					<blockquote>
 					  <h2 class="page-header" style="margin: 20px 0 20px;">
-							<%= @package.provider.name %> <small><%= @package.package_name %></small><small><%= @package.package_type.name %></small>
+							<%= @package.package_name %>
 						</h2>
-					  <footer>What would you like to add in your extra equiptments?</footer>
+					  <footer>Configure your equipment &amp; setup installation</footer>
 					</blockquote>
 					<div class="panel panel-default">
 						<div class="panel-body">
 							<% @products.each do |product| %>
 								<div class="bs-callout bs-callout-danger" id="callout-collapse-dependency">
-									<h4><%= product.name %></h4> 
+									<h4>
+										<%= product.name == "Cable" ? "Setup your TV Service" : product.name == "Internet" ? "Setup your Internet Service" : "Setup your Phone Service" %>
+									</h4> 
 									<p>Here are some extra items for <strong><%= product.name %></strong>.</p> 
 								</div>
 								<%= render partial: "#{@package.provider.acronym}_equiptments", locals: { product: product, package: @package } %>

@@ -72,9 +72,10 @@ window.$packages = {
 		$this = $(elem)
 		if($this.val() === "Add Price") {
 			$this.next().show()
+			$this.next().val("")
 			return
 		} else if ($this.val() === "Free") {
-			$this.next().val("free")
+			$this.next().val("Included")
 		} else {
 			$this.next().val("")
 		}

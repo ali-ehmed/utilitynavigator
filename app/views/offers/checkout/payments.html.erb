@@ -6,10 +6,9 @@
 				<div class="col-md-9 col-sm-9">
 					<blockquote>
 					  <h2 class="page-header" style="margin: 20px 0 20px;">
-							<%= @package.provider.name %> <small><%= @package.package_name %></small>
-							<small><%= @package.package_type.name %></small>
+							<%= @package.package_name %>
 						</h2>
-					  <footer>Please enter your credit to reserve this order.</footer>
+					  <footer>Configure your equipment &amp; setup installation</footer>
 					</blockquote>
 					<%= f.simple_fields_for :user do |form_user| %>
 						<div class="panel panel-default">

@@ -9,7 +9,7 @@
 		<ul>
 			<% if fields["dvr_box_1"].present? %>
 				<li>
-					<% if fields["dvr_box_1"].downcase == "free" %>
+					<% if fields["dvr_box_1"].downcase == "included" %>
 						<p>Enhanced DVR Box &amp; Service (<%= fields["dvr_box_1"].capitalize %>)</p>
 					<% else %>
 						<div class="checkbox">
@@ -23,7 +23,7 @@
 			<% end %>
 			<% if fields["additional_hd_1"].present? %>
 				<li>
-					<% if fields["additional_hd_1"].downcase == "free" %>
+					<% if fields["additional_hd_1"].downcase == "included" %>
 						<p>Primary HD Box (<%= fields["additional_hd_1"].capitalize %>)</p>
 					<% else %>
 						<div class="checkbox">
@@ -37,7 +37,7 @@
 			<% end %>
 			<% if fields["dta_1"].present? %>
 				<li>
-					<% if fields["dta_1"].downcase == "free" %>
+					<% if fields["dta_1"].downcase == "included" %>
 						<p>DTA Box (<%= fields["dta_1"].capitalize %>)</p>
 					<% else %>
 						<div class="checkbox">
@@ -56,7 +56,7 @@
 		<ul>
 			<% if fields["dvr_box_2"].present? %>
 				<li>
-					<% if fields["dvr_box_2"].downcase == "free" %>
+					<% if fields["dvr_box_2"].downcase == "included" %>
 						<p>Enhanced DVR Box &amp; Service (<%= fields["dvr_box_2"].capitalize %>)</p>
 					<% else %>
 						<div class="checkbox">
@@ -70,7 +70,7 @@
 			<% end %>
 			<% if fields["additional_hd_2"].present? %>
 				<li>	
-					<% if fields["additional_hd_2"].downcase == "free" %>
+					<% if fields["additional_hd_2"].downcase == "included" %>
 						<p>Primary HD Box (<%= fields["additional_hd_2"].capitalize %>)</p>
 					<% else %>
 						<div class="checkbox">
@@ -83,7 +83,7 @@
 				</li>
 			<% end %>
 			<% if fields["dta_2"].present? %>
-				<% if fields["dta_2"].downcase == "free" %>
+				<% if fields["dta_2"].downcase == "included" %>
 					<p>DTA Box (<%= fields["dta_2"].capitalize %>)</p>
 				<% else %>
 					<li>
@@ -102,7 +102,7 @@
 		<h4>Configure your 3rd TV</h4>
 		<ul>
 			<% if fields["dvr_box_3"].present? %>
-				<% if fields["dvr_box_3"].downcase == "free" %>
+				<% if fields["dvr_box_3"].downcase == "included" %>
 					<p>Enhanced DVR Box &amp; Service (<%= fields["dvr_box_3"].capitalize %>)</p>
 				<% else %>
 					<li>
@@ -116,7 +116,7 @@
 				<% end %>
 			<% end %>
 			<% if fields["additional_hd_3"].present? %>
-				<% if fields["additional_hd_3"].downcase == "free" %>
+				<% if fields["additional_hd_3"].downcase == "included" %>
 					 <p>Primary HD Box (<%= fields["additional_hd_3"].capitalize %>)</p>
 				<% else %>
 					<li>
@@ -130,7 +130,7 @@
 				<% end %>
 			<% end %>	
 			<% if fields["dta_3"].present? %>
-				<% if fields["dta_3"].downcase == "free" %>
+				<% if fields["dta_3"].downcase == "included" %>
 					<p>DTA Box (<%= fields["dta_3"].capitalize %>)</p>
 				<% else %>
 					<li>
@@ -149,7 +149,7 @@
 		<h4>Configure your 4th TV</h4>
 		<ul>
 			<% if fields["dvr_box_4"].present? %>
-				<% if fields["dvr_box_4"].downcase == "free" %>
+				<% if fields["dvr_box_4"].downcase == "included" %>
 					<p>Enhanced DVR Box &amp; Service (<%= fields["dvr_box_4"].capitalize %>)</p>
 				<% else %>
 					<li>
@@ -163,7 +163,7 @@
 				<% end %>
 			<% end %>
 			<% if fields["additional_hd_4"].present? %>
-				<% if fields["additional_hd_4"].downcase == "free" %>
+				<% if fields["additional_hd_4"].downcase == "included" %>
 					<p>Primary HD Box (<%= fields["additional_hd_4"].capitalize %>)</p>
 				<% else %>
 					<li>
@@ -177,7 +177,7 @@
 				<% end %>
 			<% end %>
 			<% if fields["dta_4"].present? %>
-				<% if fields["dta_4"].downcase == "free" %>
+				<% if fields["dta_4"].downcase == "included" %>
 					<p>DTA Box (<%= fields["dta_4"].capitalize %>)</p>
 				<% else %>
 					<li>
@@ -191,7 +191,7 @@
 				<% end %>
 			<% end %>
 			<% if fields["4th_tv_install_4"].present? %>
-				<% if fields["4th_tv_install_4"].downcase == "free" %>
+				<% if fields["4th_tv_install_4"].downcase == "included" %>
 					<p>4th Outlet Activation (<%= fields["4th_tv_install_4"].capitalize %>)</p>
 				<% else %>
 					<li>
@@ -207,7 +207,7 @@
 		</ul>
 		<!-- Details -->
 		<h4>
-			(<a role="button" data-toggle="collapse" href="#collapseDetailsTV" aria-expanded="false" aria-controls="collapseExample">Click for more details</a>)
+			(<a role="button" data-toggle="collapse" href="#collapseDetailsTV" aria-expanded="false" aria-controls="collapseExample">Equipment Description</a>)
 		</h4>
 		<div class="collapse" id="collapseDetailsTV">
 		  <div class="well">
@@ -357,10 +357,10 @@
 			</li>
 		</ul>
 		<% if fields["epix_offer"].present? %>
-			<h3>EPIX Offer <span class="checkout_required">(Required)</span></h3>
+			<h3>EPIX Offer <span class="checkout_required"></span></h3>
 			<ul>
 				<li>
-					<% if fields["epix_offer"].downcase == "free" %>
+					<% if fields["epix_offer"].downcase == "included" %>
 						EPIX Offer (Included)
 					<% else %>
 						<div class="checkbox">
@@ -370,6 +370,9 @@
 		          </label>
 		        </div>
 	        <% end %>
+	        <p>
+	        	If you would like to add EPIX free for 12 months.
+	        </p>
 				</li>
 			</ul>
 		<% end %>
@@ -383,7 +386,7 @@
 
 		<% if fields["modem"].present? %>
 			<h3>Internet Modem <span class="checkout_required">(Required)</span></h3>
-			<% if fields["modem"].downcase == "free" or fields["modem"].blank? %>
+			<% if fields["modem"].downcase == "included" or fields["modem"].blank? %>
 				Modem is included in this package
 			<% else %>
 				<ul>
@@ -415,7 +418,7 @@
 
 		<% if fields["wifi"].present? %>
 			<h3>WiFi Service &amp; Equiptment</h3>
-			<% if fields["wifi"].downcase == "free"%>
+			<% if fields["wifi"].downcase == "included"%>
 				WiFi Service is included in this package
 			<% else %>
 				<ul>
@@ -456,7 +459,7 @@
 		<ul>
 			<% if fields["new_phone_number"].present? %>
 				<li>
-					<% unless fields["new_phone_number"].downcase == "free" %>
+					<% unless fields["new_phone_number"].downcase == "included" %>
 						<div class="checkbox">
 	          	<%= check_box_tag :new_phone_number, false, false, {:class => "styled", data: { price: fields["new_phone_number"] }, onchange: "calculateEquiptmentCosts(this);"}  %>
 		          <label class="label-checkbox">
@@ -473,7 +476,7 @@
 			<% end %>
 			<% if fields["transfer_phone_number"].present? %>
 				<li>
-					<% unless fields["transfer_phone_number"].downcase == "free" %>
+					<% unless fields["transfer_phone_number"].downcase == "included" %>
 						<div class="checkbox">
 	          	<%= check_box_tag :transfer_phone_number, false, false, {:class => "styled", data: { price: fields["transfer_phone_number"] }, onchange: "calculateEquiptmentCosts(this);"}  %>
 	          	<label class="label-checkbox">
@@ -504,7 +507,7 @@
 	          </p>
 	        </div>
 				</li>
-			<% elsif fields["international_one_price"].downcase == "free" %>
+			<% elsif fields["international_one_price"].downcase == "included" %>
 				<p>International One Price is included in this package</p>
 			<% end %>
 
@@ -521,7 +524,7 @@
 	        </div>
 				</li>
 
-			<% elsif fields["global_penny_plan"].downcase == "free" %>
+			<% elsif fields["global_penny_plan"].downcase == "included" %>
 				<p>Global Penny is included in this package</p>
 			<% end %>
 
@@ -537,7 +540,7 @@
 	          </p>
 	        </div>
 				</li>
-			<% elsif fields["voice_mail"].downcase == "free" %>
+			<% elsif fields["voice_mail"].downcase == "included" %>
 				<p>Voice Mail is included in this package</p>
 			<% end %>
 

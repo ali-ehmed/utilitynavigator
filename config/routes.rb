@@ -5,7 +5,9 @@ Rails.application.routes.draw do
   ActiveAdmin.routes(self)
 
   resources :offers, only: :index do
-    resources :checkout, controller: 'offers/checkout'
+    resources :checkout, controller: 'offers/checkout'do
+      post "/" => "offers/checkout#show"
+    end
   	collection do
   		get "show" => "offers#show"
       get "broadband_providers" => "offers#broadband_providers", :constraints => {:format => /(json)/}
