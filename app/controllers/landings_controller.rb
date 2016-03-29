@@ -52,6 +52,17 @@ class LandingsController < ApplicationController
 		end
 	end
 
+	def load_channels
+		@file = Roo::Spreadsheet.open('./lib/channel_list_ordered.xlsx')
+		@channels = Channel.new(@file).load_all
+
+		@channel_names = @channels.group_by { |d| d["channel_provider"] }.keys
+
+		respond_to do |format|
+			format.js
+		end
+	end
+
 	private
 
 	def filteration(provider)

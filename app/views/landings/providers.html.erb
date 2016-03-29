@@ -1,5 +1,30 @@
+<div class="landing">
+  <div id="search-deals" class="provider-pages-form">
+    <div class="mobile-view">
+      <%= render partial: "shared/search_deals" %>
+    </div>
+    <div class="desktop-view">
+      <div id="bannerImage" class="carousel slide">  
+        <div class="carousel-inner">
+          <div class="item active">
+            <%= image_tag(@provider_banner, class: "slider-img") %>
+            <div class="container">
+              <div class="carousel-caption">
+                <div class="row">
+                  <div class="col-md-8" style="margin-left: -8.3%;">
+                    <%= render partial: "shared/search_deals" %>    
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 <div class="providers">
-  <div class="providers-search">
+  <!-- <div class="providers-search">
     <div id="search-deals" style="background: url('<%= asset_path(@provider_banner) %>');" class="providers-form">
       <div class="container">
         <div class="row">
@@ -9,7 +34,7 @@
         </div>
       </div>
     </div>
-  </div>
+  </div> -->
   <div class="section-1">
     <div class="container">
       <% if params[:action] == "twc" %>

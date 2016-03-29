@@ -24,7 +24,7 @@ class Package < ActiveRecord::Base
 	has_many :package_bundles
 	accepts_nested_attributes_for :package_bundles
 
-	has_many :payments
+	has_many :payments, dependent: :delete_all
 	accepts_nested_attributes_for :payments
 
 	attr_accessor :product_ids, :charter_tv_spectrum

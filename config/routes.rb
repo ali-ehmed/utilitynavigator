@@ -19,6 +19,7 @@ Rails.application.routes.draw do
   end
 
   get "/compare_packages" => "landings#compare_packages"
+  get "/load_channels" => "landings#load_channels"
 
   devise_for :users, controllers: { sessions: "users/sessions", :registrations => "users/registrations" }
   # devise_scope :user do

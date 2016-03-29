@@ -22,6 +22,7 @@ ActiveAdmin.register_page "Dashboard" do
             table_for Payment.order("created_at desc").limit(5) do
               column :orders do |order|
                 "Order ##{order.id}"
+                link_to "Order ##{order.id}", admin_order_path(order.id)
               end
               column :package_name do |order|
                 link_to order.try(:package).try(:package_name), admin_package_path(order.try(:package).try(:id))

@@ -4,8 +4,8 @@
 		<% fields = get_in_hash(@package_bundles.find_by_product_id(product.id).checkout_fields) %>
 		<%#= fields %>
 		
-		<h3>Please configure your TV, Internet &amp; Home Phone Services</h3>
-		<h4>Configure your Primary TV <span class="checkout_required">(Required)</span></h4>
+		<!-- <h3>Please configure your TV, Internet &amp; Home Phone Services</h3> -->
+		<h3>Configure your 1st TV <span class="checkout_required">(Required)</span></h3>
 		<ul>
 			<% if fields["contour_record_dvr_1"].present? %>
 				<li>
@@ -79,7 +79,7 @@
 			<% end %>
 		</ul>
 		<!-- Second TV -->
-		<h4>Configure your 2nd TV</h4>
+		<h3>Configure your 2nd TV</h4>
 		<ul>
 			<% if fields["contour_record_dvr_2"].present? %>
 				<li>
@@ -153,7 +153,7 @@
 			<% end %>
 		</ul>
 		<!-- Third TV -->
-		<h4>Configure your 3rd TV</h4>
+		<h3>Configure your 3rd TV</h4>
 		<ul>
 			<% if fields["contour_record_dvr_3"].present? %>
 				<li>
@@ -227,7 +227,7 @@
 			<% end %>
 		</ul>
 		<!-- Fourth TV -->
-		<h4>Configure your 4th TV</h4>
+		<h3>Configure your 4th TV</h4>
 		<ul>
 			<% if fields["contour_record_dvr_4"].present? %>
 				<li>
@@ -358,13 +358,13 @@
 		<!-- Premiumns  -->
 		<% if fields["premiums"].downcase == "required" %>
 			<h3>Premium Movie Channels</h3>
-			<p>
+			<!-- <p>
 				<small>
 					<strong>Note:</strong> 
 					Special Offer! Pick 1 premium for $10/mo, 2 premiums for $15/mo, 3 premiums for $20/mo, or 4 premiums for $25/mo for 6 months! Order Showtime today and get $25 cash back! See details at 
 					<a href="http://www.showtimecoxrebate.com/" target="_blank">http://www.showtimecoxrebate.com/</a>
 				</small>
-			</p>
+			</p> -->
 			<ul>
 				<li>
 					<div class="checkbox">
@@ -415,13 +415,13 @@
 		<!-- TV Paks  -->
 		<% if fields["tv_paks"].downcase == "required" %>
 			<h3>TV Paks</h3>
-			<p>
+			<!-- <p>
 				<small>
 					<strong>Note:</strong> 
 					Special Offer! Order the Movie Pak today and get $25 cash back! See details at 
 					<a href="http://www.starz.com/encoreoffers" target="_blank">http://www.starz.com/encoreoffers</a>
 				</small>
-			</p>
+			</p> -->
 			<ul>
 				<li>
 					<div class="checkbox">
@@ -473,17 +473,17 @@
 	          <label class="label-checkbox">
 	            Latino Pak ($6.95 monthly)
 	          </label>
-	          <p>
+	          <!-- <p>
 	          	Promotional Price: $5.00/mo
-	          </p>
+	          </p> -->
 	          <p>
 							The Latino Pak provides nine channels that offer the best in Spanish language programming, including Telefutura, Galavision, Discovery en Español, CNN en Español, FOX Deportes, ESPN Deportes, Tr3s, Azteca, GolTV. Latino Pak available for additional charge with minimum of Contour TV.
 	          </p>
-	          <p>
+	          <!-- <p>
 	          	<div class="alert alert-info">
 	          		<strong>DISCOUNT: Latino Pak for $5/mo for 6 months for 6 months!</strong>
 	          	</div>
-	          </p>
+	          </p> -->
 	        </div>
 				</li>
 			</ul>
@@ -544,16 +544,16 @@
 					<div class="radio">
 	          <%= radio_button_tag :cox_tech_solutions, false, false, {id: "cox_solution_1", data: { price: 14.99 }, onchange: "calculateEquiptmentCosts(this);"}  %>
 	          <label class="label-checkbox" for="cox_solution_1">
-	            Multi-device support, $14.99 - Promotional Price: $5.00/mo
+	            Multi-device support, $14.99
 	          </label>
 	          <p>
 	          	Cox Tech Solutions (CTS) is your personal IT concierge, available 24/7 for support, training and advice. It's designed to help you get the most out of your in-home technology by providing real-time diagnoses and resolutions for PC crashes, virus removal, home network support, training, technology education and much more. This option covers up to four devices, including PCs, tablets and laptops.
 	          </p>
-	          <p>
+	          <!-- <p>
 	          	<div class="alert alert-info">
 	          		<strong>DISCOUNT:</strong> Multi Device Support - $9.99/mo for 24 months for 24 months!
 	          	</div>
-	          </p>
+	          </p> -->
 	        </div>
 				</li>
 				<li>
@@ -563,13 +563,13 @@
 	            Single device support, $9.99 - Promotional Price: $3.00/mo
 	          </label>
 	          <p>
-	          	ox Tech Solutions (CTS) is your personal IT concierge, available 24/7 for support, training and advice. It's designed to help you get the most out of your in-home technology by providing real-time diagnoses and resolutions for PC crashes, virus removal, home network support, training, technology education and much more. This option covers a single device, including a PC, tablet or laptop.
+	          	Cox Tech Solutions (CTS) is your personal IT concierge, available 24/7 for support, training and advice. It's designed to help you get the most out of your in-home technology by providing real-time diagnoses and resolutions for PC crashes, virus removal, home network support, training, technology education and much more. This option covers a single device, including a PC, tablet or laptop.
 	          </p>
-	          <p>
+	          <!-- <p>
 	          	<div class="alert alert-info">
 	          		<strong>DISCOUNT:</strong> Single Device Support - $6.99/mo for 24 mos for 24 months!
 	          	</div>
-	          </p>
+	          </p> -->
 	        </div>
 				</li>
 				<li>
@@ -805,12 +805,11 @@
 			</ul>
 		<% end %>
 		<% if fields["service_agreement"].downcase == 'yes' %>
-			<p>
-				<div class="alert alert-warning">
-					You can change the service agreement term to better fit your needs. This term will apply to all selected services. Any change to your service term may alter your package, bundle pricing or discounts. Save more on your monthly cost by selecting a longer service agreement term.
-				</div>
-			</p>
+			<h3>Service Agreement</h3>
 			<ul>
+				<li>
+					You can change the service agreement term to better fit your needs. This term will apply to all selected services. Any change to your service term may alter your package, bundle pricing or discounts. Save more on your monthly cost by selecting a longer service agreement term.
+				</li>
 				<li>
 					<div class="radio">
 	          <%= radio_button_tag :service_agreement, false, false, {id: "service_agreement_lock"}  %>

@@ -105,10 +105,26 @@
 
 <!-- Script to Activate the Carousel -->
 <script>
-//   $(document).on('ready', function () {
-//     $('.carousel').carousel({
-//       interval: 1000 //changes the speed
-//     })
-//   });
+  $(document).on('ready', function () {
+    $('.carousel').carousel({
+      interval: 4000, //changes the speed
+      pause: "click"
+    })
+    
+    $address_inputs = $("#search-deals-offer-form input[type='text']:lt(4)");
+    $.each($address_inputs, function(){
+      elem = $(this).attr("class").split(" ")
+      $("." + elem[2]).focus(function() {
+        $('.carousel').carousel('pause');
+        return false;
+      });
+
+      $("." + elem[2]).blur(function() {
+        $('.carousel').carousel('cycle');
+        return false;
+      });
+    });
+    
+  });
 </script>
 

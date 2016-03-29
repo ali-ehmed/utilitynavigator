@@ -227,12 +227,12 @@ geocodeLatitideAndLongtitude = (address = "6909 helena way, mckinney, tx 75070, 
 	  return "no result found"
 	)
 
-# Validating Equiptment form
-validateEquiptmentForm = ->
-  $('form#extra_equiptments_form').on 'submit', (e) ->
-    checkout_timing = $(this).find('div.checkout_timing').find('input').val()
+# Validating Preferred Timings
+validatePreferredTimings = ->
+  $('form#new_payment').on 'submit', (e) ->
+    checkout_timing = $(this).find('div.checkout_timing').find('select').val()
     checkout_date = $(this).find('div.checkout_date').find('input').val()
-    time_zone = $(this).find('select#time_zone').val()
+    time_zone = $(this).find('select#timings_time_zone').val()
 
     console.log time_zone
 
@@ -291,6 +291,23 @@ perform_validations = (address) ->
   	
   	$is_valid = false
   	return $is_valid
+
+# Loading Channels
+loadChannels = ->
+	$('a.channel-comparison-link').on 'click', (e) ->
+		e.preventDefault()
+		$link = $(this)
+		# $link.html("<i class=\'fa fa-spinner fa-spin\'></i> Loading Channels")
+		# $.get('/load_channels', (data) ->
+	 #  	console.log data
+		# ).done(->
+		#   $link.html("CHANNEL COMPARISON")
+		#   return false
+		# ).fail(->
+		# 	$link.html("CHANNEL COMPARISON")
+		# 	console.log "Something went wrong"
+		# 	return false
+		# )
 
 # Search Method
 searchProviders = ->
@@ -385,7 +402,8 @@ $(document).on 'ready page:change', ->
 	removeActiveIconProviders()
 	geocodeLatitideAndLongtitude()
 	searchProviders()
-	validateEquiptmentForm()
+	validatePreferredTimings()
+	loadChannels()
 
 	$('[data-toggle="popover"]').popover()
 	$('[data-toggle="tooltip"]').tooltip()

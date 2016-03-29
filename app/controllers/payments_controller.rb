@@ -27,6 +27,9 @@ class PaymentsController < ApplicationController
 
   	extra_equiptments[:directory_name] = @directory_name if @package.provider.cox?
   	extra_equiptments[:transfer_phone_number] = @transfer_phone_number if @package.provider.charter?
+    extra_equiptments[:timings] = params[:timings]
+
+    logger.debug "----#{extra_equiptments}"
 
   	@payment.extra_equiptments = extra_equiptments
   	@payment.total_cost = @equiptment_params[:total_cost].to_f

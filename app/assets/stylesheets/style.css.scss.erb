@@ -202,6 +202,10 @@ header {
       margin: 0 0 30px;
     }
 	}
+
+  .provider-pages-form {
+    form { margin-top: 1px !Important; }
+  }
 }
 
 .providers {
@@ -257,6 +261,9 @@ header {
   }
   .section-3 {
     margin-top: 52px;
+    a.channel-comparison-link:hover {
+      text-decoration: none;
+    }
     .packages-category-name {
       text-align: center;
       ul {
@@ -310,42 +317,6 @@ header {
     .channel-comparison-link {
       font-weight: bold;
       color: rgba(0, 0, 0, 0.72);
-    }
-  }
-}
-
-.providers {
-  #search-deals {
-    //form {
-      //position :absolute;
-      //top: 101px;
-      //left: 220px;
-      //right: 239px;
-    //}
-    //background-size: 100% auto !important;
-    //background-position: 0px -68px !important;
-    @media (max-width: 1024px) {
-      form { position: static; }
-      padding: 45px 10px 25px 10px;
-      // background: rgba(17, 17, 17, 0.72) !important;
-    }
-  }
-
-  .providers-form {
-    min-height: 490px;
-    padding: 100px 0px 0px 175px;
-    background-position-x: 80%;
-    background-repeat-x: no-repeat;
-    background-position-y: 55%;
-    background-color: #000000;
-  }
-
-  @media (max-width: 768px) {
-    .providers-form {
-      background-color: #535353;
-    }
-    .home_form {
-      width: 100%; 
     }
   }
 }
@@ -427,7 +398,7 @@ header {
   @media (max-width: 768px) {
     .mobile-view {
       display: block;
-      padding: 45px 10px 25px 10px;
+      padding: 83px 10px 25px 10px;
       background: rgba(17, 17, 17, 0.72);
       .home_form {
         width: 100%; 
@@ -550,7 +521,7 @@ nav.navbar-app {
 // Checkbox Label
 label.label-checkbox {
   padding-left: 6px;
-  font-weight: bold;
+  //font-weight: bold;
 }
 
 // Extra Equiptments
@@ -563,7 +534,12 @@ label.label-checkbox {
         font-size: 20px;
       }
     }
-  }  
+  }
+
+  h4.setup {
+    font-size: 20px;
+    font-weight: bold;
+  }
 }
 
 // Disclaimer on checkout and payment

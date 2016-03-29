@@ -4,8 +4,8 @@
 		<% fields = get_in_hash(@package_bundles.find_by_product_id(product.id).checkout_fields) %>
 		<%#= fields %>
 		
-		<h3>Please configure your TV, Internet &amp; Home Phone Services</h3>
-		<h4>Configure your Primary TV <span class="checkout_required">(Required)</span></h4>
+		<!-- <h3>Please configure your TV, Internet &amp; Home Phone Services</h3> -->
+		<h3>Configure your 1st TV <span class="checkout_required">(Required)</span></h3>
 		<ul>
 			<% if fields["dvr_box_1"].present? %>
 				<li>
@@ -24,12 +24,12 @@
 			<% if fields["additional_hd_1"].present? %>
 				<li>
 					<% if fields["additional_hd_1"].downcase == "included" %>
-						<p>Primary HD Box (<%= fields["additional_hd_1"].capitalize %>)</p>
+						<p>HD Box (<%= fields["additional_hd_1"].capitalize %>)</p>
 					<% else %>
 						<div class="checkbox">
 		          <%= check_box_tag :additional_hd_1, false, false, {:class => "styled", data: { price: fields["additional_hd_1"] }, onchange: "calculateEquiptmentCosts(this);"}  %>
 		          <label class="label-checkbox">
-		            Primary HD Box ($<%= fields["additional_hd_1"] %>)
+		            HD Box ($<%= fields["additional_hd_1"] %>)
 		          </label>
 		        </div>
 	        <% end %>
@@ -52,7 +52,7 @@
 		</ul>
 
 		<!-- Second TV -->
-		<h4>Configure your 2nd TV</h4>
+		<h3>Configure your 2nd TV</h3>
 		<ul>
 			<% if fields["dvr_box_2"].present? %>
 				<li>
@@ -71,12 +71,12 @@
 			<% if fields["additional_hd_2"].present? %>
 				<li>	
 					<% if fields["additional_hd_2"].downcase == "included" %>
-						<p>Primary HD Box (<%= fields["additional_hd_2"].capitalize %>)</p>
+						<p>HD Box (<%= fields["additional_hd_2"].capitalize %>)</p>
 					<% else %>
 						<div class="checkbox">
 		          <%= check_box_tag :additional_hd_2, false, false, {:class => "styled", data: { price: fields["additional_hd_2"] }, onchange: "calculateEquiptmentCosts(this);"}  %>
 		          <label class="label-checkbox">
-		            Primary HD Box ($<%= fields["additional_hd_2"] %>)
+		            HD Box ($<%= fields["additional_hd_2"] %>)
 		          </label>
 		        </div>
 	        <% end %>
@@ -99,7 +99,7 @@
 		</ul>
 
 		<!-- Third TV -->
-		<h4>Configure your 3rd TV</h4>
+		<h3>Configure your 3rd TV</h3>
 		<ul>
 			<% if fields["dvr_box_3"].present? %>
 				<% if fields["dvr_box_3"].downcase == "included" %>
@@ -117,13 +117,13 @@
 			<% end %>
 			<% if fields["additional_hd_3"].present? %>
 				<% if fields["additional_hd_3"].downcase == "included" %>
-					 <p>Primary HD Box (<%= fields["additional_hd_3"].capitalize %>)</p>
+					 <p>HD Box (<%= fields["additional_hd_3"].capitalize %>)</p>
 				<% else %>
 					<li>
 						<div class="checkbox">
 		          <%= check_box_tag :additional_hd_3, false, false, {:class => "styled", data: { price: fields["additional_hd_3"] }, onchange: "calculateEquiptmentCosts(this);"}  %>
 		          <label class="label-checkbox">
-		            Primary HD Box ($<%= fields["additional_hd_3"] %>)
+		            HD Box ($<%= fields["additional_hd_3"] %>)
 		          </label>
 		        </div>
 					</li>
@@ -146,8 +146,22 @@
 		</ul>
 
 		<!-- Fourth TV -->
-		<h4>Configure your 4th TV</h4>
+		<h3>Configure your 4th TV</h3>
 		<ul>
+			<% if fields["4th_tv_install_4"].present? %>
+				<% if fields["4th_tv_install_4"].downcase == "included" %>
+					<p>4th Outlet Activation (<%= fields["4th_tv_install_4"].capitalize %>)</p>
+				<% else %>
+					<li>
+						<div class="checkbox">
+		          <%= check_box_tag "4th_tv_activation", false, false, {:class => "styled", data: { price: fields["4th_tv_install_4"] }, onchange: "calculateEquiptmentCosts(this);"}  %>
+		          <label class="label-checkbox">
+		            4th Outlet Activation Fee ($<%= fields["4th_tv_install_4"] %>)
+		          </label>
+		        </div>
+					</li>
+				<% end %>
+			<% end %>
 			<% if fields["dvr_box_4"].present? %>
 				<% if fields["dvr_box_4"].downcase == "included" %>
 					<p>Enhanced DVR Box &amp; Service (<%= fields["dvr_box_4"].capitalize %>)</p>
@@ -164,13 +178,13 @@
 			<% end %>
 			<% if fields["additional_hd_4"].present? %>
 				<% if fields["additional_hd_4"].downcase == "included" %>
-					<p>Primary HD Box (<%= fields["additional_hd_4"].capitalize %>)</p>
+					<p>HD Box (<%= fields["additional_hd_4"].capitalize %>)</p>
 				<% else %>
 					<li>
 						<div class="checkbox">
 		          <%= check_box_tag :additional_hd_4, false, false, {:class => "styled", data: { price: fields["additional_hd_4"] }, onchange: "calculateEquiptmentCosts(this);"}  %>
 		          <label class="label-checkbox">
-		            Primary HD Box ($<%= fields["additional_hd_4"] %>)
+		            HD Box ($<%= fields["additional_hd_4"] %>)
 		          </label>
 		        </div>
 					</li>
@@ -190,20 +204,6 @@
 					</li>
 				<% end %>
 			<% end %>
-			<% if fields["4th_tv_install_4"].present? %>
-				<% if fields["4th_tv_install_4"].downcase == "included" %>
-					<p>4th Outlet Activation (<%= fields["4th_tv_install_4"].capitalize %>)</p>
-				<% else %>
-					<li>
-						<div class="checkbox">
-		          <%= check_box_tag "4th_tv_activation", false, false, {:class => "styled", data: { price: fields["4th_tv_install_4"] }, onchange: "calculateEquiptmentCosts(this);"}  %>
-		          <label class="label-checkbox">
-		            4th Outlet Activation Fee ($<%= fields["4th_tv_install_4"] %>)
-		          </label>
-		        </div>
-					</li>
-				<% end %>
-			<% end %>
 		</ul>
 		<!-- Details -->
 		<h4>
@@ -212,9 +212,9 @@
 		<div class="collapse" id="collapseDetailsTV">
 		  <div class="well">
 		    <ol>
-		    	<li>
+		    	<!-- <li>
 		    		<strong>4th Outlet Activation Fee</strong>
-		    	</li>
+		    	</li> -->
 		    	<li>
 		    		<strong>Enhanced DVR Box &amp; Service</strong>
 		    		<p>
@@ -224,7 +224,7 @@
 		    		</p>
 		    	</li>
 		    	<li>
-		    		<strong>Primary HD Box</strong>
+		    		<strong>HD Box</strong>
 		    		<p>
 		    			<small>
 		    				Watch programming in high definition and digital programming. Access to the Guide, Start Over®, Look Back®, Parental Controls, On Demand and Pay Per View
@@ -407,12 +407,12 @@
 		        </div>
 					</li>
 				</ul>
-				<div class="alert alert-info">
+				<!-- <div class="alert alert-info">
 					<strong>Please Note:</strong>
 					<p>
 						Time Warner Cable does not sell modems. If you don't have a modem when we install your Internet service, we'll install an Internet Modem for you. The standard monthly modem rate (above) will apply.)
 					</p>
-				</div>
+				</div> -->
 			<% end %>
 		<% end %>
 
@@ -439,12 +439,12 @@
 		        </div>
 					</li>
 				</ul>
-				<div class="alert alert-info">
+				<!-- <div class="alert alert-info">
 					<strong>Please Note:</strong>
 					<p>
 						Time Warner Cable does not sell modems. If you don't have a modem when we install your Internet service, we'll install an Internet Modem for you. The standard monthly modem rate (above) will apply.)
 					</p>
-				</div>
+				</div> -->
 			<% end %>
 		<% end %>
 		<hr />
@@ -484,7 +484,8 @@
 		          </label>
 		          
 		          <p>
-		          	Keep your old phone number when you switch to Time Warner Home Phone service. Activation Fees vary by market. <span class="checkout_required">Third party verification is required (details on confirmation page)</span>
+		          	Keep your old phone number when you switch to Time Warner Home Phone service. Activation Fees vary by market. 
+		          	<span class="checkout_required">Third party verification is required</span>.
 		          </p>
 		        </div>
 	        <% else %>
