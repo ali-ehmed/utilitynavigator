@@ -10,7 +10,7 @@ signInUser = function() {
 		  data: $this.serialize(),
 		  beforeSend: function() {
 		  	$button.prop("disabled", "disabled")
-		    return $button.html('<i class=\'fa fa-circle-o-notch fa-spin\'></i> Signing In');
+		    return $button.html('<i class=\'fa fa-spinner fa-spin\'></i> Signing In');
 		  },
 		  success: function(response) {
 		    window.location = response.location
@@ -18,6 +18,8 @@ signInUser = function() {
 		  },
 		  error: function(response) {
 		  	console.log(response)
+		  	$button.html("Sign in");
+		  	$button.removeAttr("disabled")
 	  		return $.notify({
 		      icon: 'glyphicon glyphicon-warning-sign',
 		      title: '<strong>Instructions:</strong><br />',
@@ -25,10 +27,6 @@ signInUser = function() {
 		    }, {
 		      type: 'danger'
 		    });
-		  },
-		  complete: function() {
-		  	$button.html("Sign in");
-		  	$button.removeAttr("disabled")
 		  }
 		});
 	})

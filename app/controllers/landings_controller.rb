@@ -56,6 +56,8 @@ class LandingsController < ApplicationController
 		@file = Roo::Spreadsheet.open('./lib/channel_list_ordered.xlsx')
 		@channels, @channel_names = Channel.new(@file).load_all
 
+		sleep 1
+
 		respond_to do |format|
 			format.js
 		end

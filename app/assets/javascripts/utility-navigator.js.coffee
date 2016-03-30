@@ -363,6 +363,9 @@ searchProviders = ->
 		    beforeSend: ->
 		    	$form.find("button[type='submit']").prop("disabled", "disabled")
 		    	$form.find("button[type='submit']").html '<i class=\'fa fa-circle-o-notch fa-spin\'></i> We are looking up the packages'
+
+		    	# Pausing slider
+		    	$('.carousel').carousel('pause')
 		    success: (response) ->
 		    	if response.status == "error"
 		    		$.notify({
