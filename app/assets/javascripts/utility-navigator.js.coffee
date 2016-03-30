@@ -297,17 +297,17 @@ loadChannels = ->
 	$('a.channel-comparison-link').on 'click', (e) ->
 		e.preventDefault()
 		$link = $(this)
-		# $link.html("<i class=\'fa fa-spinner fa-spin\'></i> Loading Channels")
-		# $.get('/load_channels', (data) ->
-	 #  	console.log data
-		# ).done(->
-		#   $link.html("CHANNEL COMPARISON")
-		#   return false
-		# ).fail(->
-		# 	$link.html("CHANNEL COMPARISON")
-		# 	console.log "Something went wrong"
-		# 	return false
-		# )
+		$link.html("<i class=\'fa fa-spinner fa-spin\'></i> Loading Channels")
+		$.get('/load_channels', (data) ->
+			console.log data
+		).done(->
+			$link.html("CHANNEL COMPARISON")
+			return false
+		).fail(->
+			$link.html("CHANNEL COMPARISON")
+			console.log "Something went wrong"
+			return false
+		)
 
 # Search Method
 searchProviders = ->

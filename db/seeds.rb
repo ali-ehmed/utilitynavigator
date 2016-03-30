@@ -67,4 +67,6 @@ end
 #   f.puts "contents"
 # end
 
-puts "Creating Packages"
+puts "Creating Channels"
+file = Roo::Spreadsheet.open('./lib/channel_list_ordered.xlsx')
+# UploadChannel.new(file).load_all

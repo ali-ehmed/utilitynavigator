@@ -1,3 +1,4 @@
+<!-- Banner -->
 <div class="landing">
   <div id="search-deals" class="provider-pages-form">
     <div class="mobile-view">
@@ -8,6 +9,8 @@
         <div class="carousel-inner">
           <div class="item active">
             <%= image_tag(@provider_banner, class: "slider-img") %>
+            
+            <!-- Search Box -->
             <div class="container">
               <div class="carousel-caption">
                 <div class="row">
@@ -23,18 +26,8 @@
     </div>
   </div>
 </div>
+<!-- Page Content -->
 <div class="providers">
-  <!-- <div class="providers-search">
-    <div id="search-deals" style="background: url('<%= asset_path(@provider_banner) %>');" class="providers-form">
-      <div class="container">
-        <div class="row">
-          <div class="col-md-8">
-            <%= render partial: "shared/search_deals" %>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div> -->
   <div class="section-1">
     <div class="container">
       <% if params[:action] == "twc" %>

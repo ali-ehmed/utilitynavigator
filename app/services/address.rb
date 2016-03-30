@@ -1,6 +1,10 @@
 require 'net/http'
 require 'json'
 
+# Ali Ahmed :-> (Software Engineer - Ruby on Rails)
+# This class make user addresses in humanize form
+# Also it verifies that whether services of three providers are available in the provided area
+
 class	Address
 	def initialize(address = "")
 		if address.present?
@@ -30,8 +34,6 @@ class	Address
       puts e.message
       return :error
     end
-  	
-    # puts results
 
   	unless results["status"] == "OK"
   		return :zero_results
