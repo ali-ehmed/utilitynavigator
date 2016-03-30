@@ -60,8 +60,8 @@ scrollingReviewNote = ->
 		  element.css 'position', 'relative'
 		  $(window).on 'scroll', (event) ->
 		    scrollTop = $(window).scrollTop()
-		    if ($(window).scrollTop() + $(window).height()) > ($(document).height() - 100)
-		    	console.log scrollTop
+		    # if ($(window).scrollTop() + $(window).height()) > ($(document).height() - 100)
+		    # 	console.log scrollTop
 		    element.stop(false, false).animate { 
 		    	top: if scrollTop < originalY then 0 else scrollTop - originalY + 60
 	    	}, 300
@@ -112,8 +112,10 @@ window.calculateEquiptmentCosts = (elem) ->
 				document.getElementById("equiptment_cost").value = equiptment_cost
 				document.getElementById("total_cost").value = total_cost
 				$elem.val("false")
+				$elem.removeAttr("checked")
 
-	console.log(equiptment_cost)
+	$this.attr("checked", true)
+	console.log($this.val())
 	unless elem.value == "" or elem.value == "0"
 		
 		if elem.value == "false" 		
@@ -126,6 +128,7 @@ window.calculateEquiptmentCosts = (elem) ->
 				total_cost = total_cost.toFixed(2)
 		else
 			elem.value = "false"
+			$(elem).removeAttr("checked")
 			if $.isNumeric(elem.dataset.price)
 				equiptment_cost -= parseFloat(elem.dataset.price)
 				total_cost -= parseFloat(elem.dataset.price)
@@ -227,7 +230,7 @@ geocodeLatitideAndLongtitude = (address = "6909 helena way, mckinney, tx 75070, 
 	  return "no result found"
 	)
 
-# Validating Preferred Timings
+# Validating Preferred Timings On Payment
 validatePreferredTimings = ->
   $('form#new_payment').on 'submit', (e) ->
     checkout_timing = $(this).find('div.checkout_timing').find('select').val()
@@ -250,6 +253,86 @@ validatePreferredTimings = ->
         message: 'Select Time Zone'
       }, type: 'danger'
       return false
+    true
+
+# Validatings On Extra Equipment
+validateExtraEquiptment = ->
+  $('form#extra_equiptments_form').on 'submit', (e) ->
+    $valid = true
+    $provider = $('#package_provider').data("provider")
+    $errors = []
+    
+    first_tv = $("input[name='first_tv']:checked")
+    first_tv_radio_btns = $("input[name='first_tv']")
+
+    fourth_tv = $("input[name='fourth_tv']:checked")
+    fourth_outlet = $("input[name='4th_tv_outlet']:checked")
+
+    epix_offer = $("input[name='epix_offer']:checked")
+    phone = $("input[name='phone']:checked")
+    modem = $("input[name='modem']:checked")
+
+    internet_equiptment = $("input[name='internet_equiptment']:checked")
+    directory_listing = $("input[name='directory_listing']:checked")
+    current_telephone_number = $("input[name='current_telephone_number']:checked")
+    service_agreement = $("input[name='service_agreement']:checked")
+
+    installation = $("input[name='installation']:checked")
+
+    if first_tv.length == 0 and first_tv_radio_btns.length >= 3
+      $errors.push("Please configure 1st TV")
+      $valid = false
+
+    if installation.length == 0
+      $errors.push("Please select Installation")
+      $valid = false
+
+    if $provider == "twc"
+	    if fourth_tv.length > 0 and fourth_outlet.length == 0
+        $errors.push("Please select 4th Outlet Avtivation fees")
+	      $valid = false
+
+	    if epix_offer.length == 0
+        $errors.push("Please select Epix Offer")
+	      $valid = false
+
+    if $provider == "twc" or $provider == "charter"
+	    if modem.length == 0
+        $errors.push("Please select modem")
+	      $valid = false
+
+      if phone.length == 0
+        $errors.push("Choose one of the phone service")
+	      $valid = false
+
+    if $provider == "cox"
+    	if internet_equiptment.length == 0
+        $errors.push("Please select internet equiptment")
+	      $valid = false
+
+      if directory_listing.length == 0
+        $errors.push("Please select directory listing")
+	      $valid = false
+
+    	if current_telephone_number.length == 0
+        $errors.push("Please select telephone number porting")
+	      $valid = false
+
+      if service_agreement.length == 0
+        $errors.push("Please select service agreement")
+	      $valid = false
+
+    if $errors.length == 0
+    	$valid = true
+
+    if $valid == false
+    	console.log $errors
+    	$.notify {
+        icon: 'glyphicon glyphicon-warning-sign'
+        title: '<strong>Instructions:</strong><br />'
+        message: $.map $errors, (n) -> "<li>#{n}</li>"
+      }, type: 'danger'
+    	return false 
     true
 
 # Validating Search Form
@@ -407,6 +490,7 @@ $(document).on 'ready page:change', ->
 	searchProviders()
 	validatePreferredTimings()
 	loadChannels()
+	validateExtraEquiptment()
 
 	$('[data-toggle="popover"]').popover()
 	$('[data-toggle="tooltip"]').tooltip()

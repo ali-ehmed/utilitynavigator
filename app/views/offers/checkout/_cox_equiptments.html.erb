@@ -12,8 +12,8 @@
 					<% if fields["contour_record_dvr_1"].downcase == "included" %>
 						<p>Contour Record 6 HD-DVR Receiver (<%= fields["contour_record_dvr_1"] %>)</p>
 					<% else %>
-						<div class="checkbox">
-		          <%= check_box_tag :contour_record_dvr_1, false, false, {:class => "styled", data: { price: fields["contour_record_dvr_1"] }, onchange: "calculateEquiptmentCosts(this);"}  %>
+						<div class="radio">
+		          <%= radio_button_tag :first_tv, false, false, {data: { price: fields["contour_record_dvr_1"] }, onchange: "calculateEquiptmentCosts(this);"}  %>
 		          <label class="label-checkbox">
 		            Contour Record 6 HD-DVR Receiver ($<%= fields["contour_record_dvr_1"] %>)
 		          </label>
@@ -26,8 +26,8 @@
 					<% if fields["contour_hd_dvr_1"].downcase == "included" %>
 						<p>Contour HD-DVR Receiver (<%= fields["contour_hd_dvr_1"] %>)</p>
 					<% else %>
-						<div class="checkbox">
-		          <%= check_box_tag :contour_hd_dvr_1, false, false, {:class => "styled", data: { price: fields["contour_hd_dvr_1"] }, onchange: "calculateEquiptmentCosts(this);"}  %>
+						<div class="radio">
+		          <%= radio_button_tag :first_tv, false, false, {data: { price: fields["contour_hd_dvr_1"] }, onchange: "calculateEquiptmentCosts(this);"}  %>
 		          <label class="label-checkbox">
 		            Contour HD-DVR Receiver ($<%= fields["contour_hd_dvr_1"] %>)
 		          </label>
@@ -40,8 +40,8 @@
 					<% if fields["contour_hd_receiver_1"].downcase == "included" %>
 						<p>Contour HD Receiver (<%= fields["contour_hd_receiver_1"] %>)</p>
 					<% else %>
-						<div class="checkbox">
-		          <%= check_box_tag :contour_hd_receiver_1, false, false, {:class => "styled", data: { price: fields["contour_hd_receiver_1"] }, onchange: "calculateEquiptmentCosts(this);"}  %>
+						<div class="radio">
+		          <%= radio_button_tag :first_tv, false, false, {data: { price: fields["contour_hd_receiver_1"] }, onchange: "calculateEquiptmentCosts(this);"}  %>
 		          <label class="label-checkbox">
 		            Contour HD Receiver ($<%= fields["contour_hd_receiver_1"] %>)
 		          </label>
@@ -54,8 +54,8 @@
 					<% if fields["mini_box_1"].downcase == "included" %>
 						<p>Mini Box (<%= fields["mini_box_1"] %>)</p>
 					<% else %>
-						<div class="checkbox">
-		          <%= check_box_tag :mini_box_1, false, false, {:class => "styled", data: { price: fields["mini_box_1"] }, onchange: "calculateEquiptmentCosts(this);"}  %>
+						<div class="radio">
+		          <%= radio_button_tag :first_tv, false, false, {data: { price: fields["mini_box_1"] }, onchange: "calculateEquiptmentCosts(this);"}  %>
 		          <label class="label-checkbox">
 		            Mini Box ($<%= fields["mini_box_1"] %>)
 		          </label>
@@ -68,8 +68,8 @@
 					<% if fields["cable_card_1"].downcase == "included"  %>
 						<p>Cable Card (<%= fields["cable_card_1"] %>)</p>
 					<% else %>
-						<div class="checkbox">
-		          <%= check_box_tag :cable_card_1, false, false, {:class => "styled", data: { price: fields["cable_card_1"] }, onchange: "calculateEquiptmentCosts(this);"}  %>
+						<div class="radio">
+		          <%= radio_button_tag :first_tv, false, false, { data: { price: fields["cable_card_1"] }, onchange: "calculateEquiptmentCosts(this);"}  %>
 		          <label class="label-checkbox">
 		            Cable Card ($<%= fields["cable_card_1"] %>)
 		          </label>
@@ -86,8 +86,8 @@
 					<% if fields["contour_record_dvr_2"].downcase == "included" %>
 						<p>Contour Record 6 HD-DVR Receiver (<%= fields["contour_record_dvr_2"] %>)</p>
 					<% else %>
-						<div class="checkbox">
-		          <%= check_box_tag :contour_record_dvr_2, false, false, {:class => "styled", data: { price: fields["contour_record_dvr_2"] }, onchange: "calculateEquiptmentCosts(this);"}  %>
+						<div class="radio">
+		          <%= radio_button_tag :second_tv, false, false, {data: { price: fields["contour_record_dvr_2"] }, onchange: "calculateEquiptmentCosts(this);"}  %>
 		          <label class="label-checkbox">
 		            Contour Record 6 HD-DVR Receiver ($<%= fields["contour_record_dvr_2"] %>)
 		          </label>
@@ -100,8 +100,8 @@
 					<% if fields["contour_hd_dvr_2"].downcase == "included" %>
 						<p>Contour HD-DVR Receiver (<%= fields["contour_hd_dvr_2"] %>)</p>
 					<% else %>
-						<div class="checkbox">
-		          <%= check_box_tag :contour_hd_dvr_2, false, false, {:class => "styled", data: { price: fields["contour_hd_dvr_2"] }, onchange: "calculateEquiptmentCosts(this);"}  %>
+						<div class="radio">
+		          <%= radio_button_tag :second_tv, false, false, {data: { price: fields["contour_hd_dvr_2"] }, onchange: "calculateEquiptmentCosts(this);"}  %>
 		          <label class="label-checkbox">
 		            Contour HD-DVR Receiver ($<%= fields["contour_hd_dvr_2"] %>)
 		          </label>
@@ -114,8 +114,8 @@
 					<% if fields["contour_hd_receiver_2"].downcase == "included" %>
 						<p>Contour HD Receiver (<%= fields["contour_hd_receiver_2"] %>)</p>
 					<% else %>
-						<div class="checkbox">
-		          <%= check_box_tag :contour_hd_receiver_2, false, false, {:class => "styled", data: { price: fields["contour_hd_receiver_2"] }, onchange: "calculateEquiptmentCosts(this);"}  %>
+						<div class="radio">
+		          <%= radio_button_tag :second_tv, false, false, {data: { price: fields["contour_hd_receiver_2"] }, onchange: "calculateEquiptmentCosts(this);"}  %>
 		          <label class="label-checkbox">
 		            Contour HD Receiver ($<%= fields["contour_hd_receiver_2"] %>)
 		          </label>
@@ -128,8 +128,8 @@
 					<% if fields["mini_box_2"].downcase == "included" %>
 						<p>Mini Box (<%= fields["mini_box_2"] %>)</p>
 					<% else %>
-						<div class="checkbox">
-		          <%= check_box_tag :mini_box_2, false, false, {:class => "styled", data: { price: fields["mini_box_2"] }, onchange: "calculateEquiptmentCosts(this);"}  %>
+						<div class="radio">
+		          <%= radio_button_tag :second_tv, false, false, {data: { price: fields["mini_box_2"] }, onchange: "calculateEquiptmentCosts(this);"}  %>
 		          <label class="label-checkbox">
 		            Mini Box ($<%= fields["mini_box_2"] %>)
 		          </label>
@@ -142,8 +142,8 @@
 					<% if fields["cable_card_1"].downcase == "included" %>
 						<p>Cable Card (<%= fields["cable_card_1"] %>)</p>
 					<% else %>
-						<div class="checkbox">
-		          <%= check_box_tag :cable_card_2, false, false, {:class => "styled", data: { price: fields["cable_card_2"] }, onchange: "calculateEquiptmentCosts(this);"}  %>
+						<div class="radio">
+		          <%= radio_button_tag :second_tv, false, false, {data: { price: fields["cable_card_2"] }, onchange: "calculateEquiptmentCosts(this);"}  %>
 		          <label class="label-checkbox">
 		            Cable Card ($<%= fields["cable_card_2"] %>)
 		          </label>
@@ -160,8 +160,8 @@
 					<% if fields["contour_record_dvr_3"].downcase == "included" %>
 						<p>Contour Record 6 HD-DVR Receiver (<%= fields["contour_record_dvr_3"] %>)</p>
 					<% else %>
-						<div class="checkbox">
-		          <%= check_box_tag :contour_record_dvr_3, false, false, {:class => "styled", data: { price: fields["contour_record_dvr_3"] }, onchange: "calculateEquiptmentCosts(this);"}  %>
+						<div class="radio">
+		          <%= radio_button_tag :third_tv, false, false, {data: { price: fields["contour_record_dvr_3"] }, onchange: "calculateEquiptmentCosts(this);"}  %>
 		          <label class="label-checkbox">
 		            Contour Record 6 HD-DVR Receiver ($<%= fields["contour_record_dvr_3"] %>)
 		          </label>
@@ -174,8 +174,8 @@
 					<% if fields["contour_hd_dvr_3"].downcase == "included" %>
 						<p>Contour HD-DVR Receiver (<%= fields["contour_hd_dvr_3"] %>)</p>
 					<% else %>
-						<div class="checkbox">
-		          <%= check_box_tag :contour_hd_dvr_3, false, false, {:class => "styled", data: { price: fields["contour_hd_dvr_3"] }, onchange: "calculateEquiptmentCosts(this);"}  %>
+						<div class="radio">
+		          <%= radio_button_tag :third_tv, false, false, {data: { price: fields["contour_hd_dvr_3"] }, onchange: "calculateEquiptmentCosts(this);"}  %>
 		          <label class="label-checkbox">
 		            Contour HD-DVR Receiver ($<%= fields["contour_hd_dvr_3"] %>)
 		          </label>
@@ -188,8 +188,8 @@
 					<% if fields["contour_hd_receiver_3"].downcase == "included" %>
 						<p>Contour HD Receiver (<%= fields["contour_hd_receiver_3"] %>)</p>
 					<% else %>
-						<div class="checkbox">
-		          <%= check_box_tag :contour_hd_receiver_3, false, false, {:class => "styled", data: { price: fields["contour_hd_receiver_3"] }, onchange: "calculateEquiptmentCosts(this);"}  %>
+						<div class="radio">
+		          <%= radio_button_tag :third_tv, false, false, {data: { price: fields["contour_hd_receiver_3"] }, onchange: "calculateEquiptmentCosts(this);"}  %>
 		          <label class="label-checkbox">
 		            Contour HD Receiver ($<%= fields["contour_hd_receiver_3"] %>)
 		          </label>
@@ -202,8 +202,8 @@
 					<% if fields["cable_card_3"].downcase == "included" %>
 						<p>Mini Box (<%= fields["mini_box_3"] %>)</p>
 					<% else %>
-						<div class="checkbox">
-		          <%= check_box_tag :mini_box_3, false, false, {:class => "styled", data: { price: fields["mini_box_3"] }, onchange: "calculateEquiptmentCosts(this);"}  %>
+						<div class="radio">
+		          <%= radio_button_tag :third_tv, false, false, {data: { price: fields["mini_box_3"] }, onchange: "calculateEquiptmentCosts(this);"}  %>
 		          <label class="label-checkbox">
 		            Mini Box ($<%= fields["mini_box_3"] %>)
 		          </label>
@@ -216,8 +216,8 @@
 					<% if fields["cable_card_3"].downcase == "included" %>
 						<p>Cable Card (<%= fields["cable_card_3"] %>)</p>
 					<% else %>
-						<div class="checkbox">
-		          <%= check_box_tag :cable_card_3, false, false, {:class => "styled", data: { price: fields["cable_card_3"] }, onchange: "calculateEquiptmentCosts(this);"}  %>
+						<div class="radio">
+		          <%= radio_button_tag :third_tv, false, false, { data: { price: fields["cable_card_3"] }, onchange: "calculateEquiptmentCosts(this);"}  %>
 		          <label class="label-checkbox">
 		            Cable Card ($<%= fields["cable_card_3"] %>)
 		          </label>
@@ -234,8 +234,8 @@
 					<% if fields["contour_record_dvr_4"].downcase == "included" %>
 						<p>Contour Record 6 HD-DVR Receiver (<%= fields["contour_record_dvr_4"] %>)</p>
 					<% else %>
-						<div class="checkbox">
-		          <%= check_box_tag :contour_record_dvr_4, false, false, {:class => "styled", data: { price: fields["contour_record_dvr_4"] }, onchange: "calculateEquiptmentCosts(this);"}  %>
+						<div class="radio">
+		          <%= radio_button_tag :fourth_tv, false, false, {data: { price: fields["contour_record_dvr_4"] }, onchange: "calculateEquiptmentCosts(this);"}  %>
 		          <label class="label-checkbox">
 		            Contour Record 6 HD-DVR Receiver ($<%= fields["contour_record_dvr_4"] %>)
 		          </label>
@@ -248,8 +248,8 @@
 					<% if fields["contour_hd_dvr_4"].downcase == "included" %>
 						<p>Contour HD-DVR Receiver (<%= fields["contour_hd_dvr_4"] %>)</p>
 					<% else %>
-						<div class="checkbox">
-		          <%= check_box_tag :contour_hd_dvr_4, false, false, {:class => "styled", data: { price: fields["contour_hd_dvr_4"] }, onchange: "calculateEquiptmentCosts(this);"}  %>
+						<div class="radio">
+		          <%= radio_button_tag :fourth_tv, false, false, {data: { price: fields["contour_hd_dvr_4"] }, onchange: "calculateEquiptmentCosts(this);"}  %>
 		          <label class="label-checkbox">
 		            Contour HD-DVR Receiver ($<%= fields["contour_hd_dvr_4"] %>)
 		          </label>
@@ -262,8 +262,8 @@
 					<% if fields["contour_hd_receiver_4"].downcase == "included" %>
 						<p>Contour HD Receiver (<%= fields["contour_hd_receiver_4"] %>)</p>
 					<% else %>
-						<div class="checkbox">
-		          <%= check_box_tag :contour_hd_receiver_4, false, false, {:class => "styled", data: { price: fields["contour_hd_receiver_4"] }, onchange: "calculateEquiptmentCosts(this);"}  %>
+						<div class="radio">
+		          <%= radio_button_tag :fourth_tv, false, false, {data: { price: fields["contour_hd_receiver_4"] }, onchange: "calculateEquiptmentCosts(this);"}  %>
 		          <label class="label-checkbox">
 		            Contour HD Receiver ($<%= fields["contour_hd_receiver_4"] %>)
 		          </label>
@@ -276,8 +276,8 @@
 					<% if fields["mini_box_4"].downcase == "included" %>
 						<p>Mini Box (<%= fields["mini_box_4"] %>)</p>
 					<% else %>
-						<div class="checkbox">
-		          <%= check_box_tag :mini_box_4, false, false, {:class => "styled", data: { price: fields["mini_box_4"] }, onchange: "calculateEquiptmentCosts(this);"}  %>
+						<div class="radio">
+		          <%= radio_button_tag :fourth_tv, false, false, { data: { price: fields["mini_box_4"] }, onchange: "calculateEquiptmentCosts(this);"}  %>
 		          <label class="label-checkbox">
 		            Mini Box ($<%= fields["mini_box_4"] %>)
 		          </label>
@@ -290,8 +290,8 @@
 					<% if fields["cable_card_4"].downcase == "included" %>
 						<p>Cable Card (<%= fields["cable_card_4"] %>)</p>
 					<% else %>
-						<div class="checkbox">
-		          <%= check_box_tag :cable_card_4, false, false, {:class => "styled", data: { price: fields["cable_card_4"] }, onchange: "calculateEquiptmentCosts(this);"}  %>
+						<div class="radio">
+		          <%= radio_button_tag :fourth_tv, false, false, {data: { price: fields["cable_card_4"] }, onchange: "calculateEquiptmentCosts(this);"}  %>
 		          <label class="label-checkbox">
 		            Cable Card ($<%= fields["cable_card_4"] %>)
 		          </label>
@@ -302,7 +302,7 @@
 		</ul>
 		<!-- Details -->
 		<h4>
-			(<a role="button" data-toggle="collapse" href="#collapseDetailsTV" aria-expanded="false" aria-controls="collapseExample">Equipment Description</a>)
+			(<a role="button" data-toggle="collapse" href="#collapseDetailsTV" aria-expanded="false" aria-controls="collapseExample">Equitpment Description</a>)
 		</h4>
 		<div class="collapse" id="collapseDetailsTV">
 		  <div class="well">
@@ -496,8 +496,8 @@
 			<h3>Internet Equipment <span class="checkout_required">(Required)</span></h3>
 			<ul>
 				<li>
-					<div class="checkbox">
-	          <%= check_box_tag :premium_dual_band, false, false, {:class => "styled", data: { price: 9.99 }, onchange: "calculateEquiptmentCosts(this);"}  %>
+					<div class="radio">
+	          <%= radio_button_tag :internet_equiptment, false, false, {data: { price: 9.99 }, onchange: "calculateEquiptmentCosts(this);"}  %>
 	          <label class="label-checkbox">
 	            Premium Dual-Band WiFi Modem - Lease, ($9.99/Monthly)
 	          </label>
@@ -507,8 +507,8 @@
 	        </div>
 				</li>
 				<li>
-					<div class="checkbox">
-	          <%= check_box_tag :wifi_internet_telephone_modem, false, false, {:class => "styled", data: { price: 6.95 }, onchange: "calculateEquiptmentCosts(this);"}  %>
+					<div class="radio">
+	          <%= radio_button_tag :internet_equiptment, false, false, {data: { price: 6.95 }, onchange: "calculateEquiptmentCosts(this);"}  %>
 	          <label class="label-checkbox">
 	            WiFi Internet &amp; Telephone Modem - Rent, ($6.99/Monthly)
 	          </label>
@@ -518,8 +518,8 @@
 	        </div>
 				</li>
 				<li>
-					<div class="checkbox">
-	          <%= check_box_tag :internet_and_telephone_modem, false, false, {:class => "styled", data: { price: 0 }, onchange: "calculateEquiptmentCosts(this);"}  %>
+					<div class="radio">
+	          <%= radio_button_tag :internet_equiptment, false, false, {data: { price: 0 }, onchange: "calculateEquiptmentCosts(this);"}  %>
 	          <label class="label-checkbox">
 	            Internet &amp; Telephone Modem, (Free)
 	          </label>
@@ -530,7 +530,6 @@
 				</li>
 			</ul>
 		<% end %>
-
 		
 		<% if fields["cox_teck_solutions"].downcase == "required" %>
 			<h3>Cox Tech Solutions</h3>
@@ -717,6 +716,15 @@
 	          </p>
 	        </div>
 				</li>
+				<% if fields["directory_name"].downcase == 'required' %>
+					<li>
+						<label>Enter Name:</label>
+						<%= text_field_tag :directory_entered_name, params[:directory_entered_name], class: "form-control" %>
+						<p>
+							What name would you like your directory listing to be under?
+						</p>
+					</li>
+				<% end %>
 			</ul>
 		<% end %>
 		<% if fields["telephone_outlet_installation"].downcase == 'required' %>
@@ -773,18 +781,7 @@
 				</li>
 			</ul>
 		<% end %>
-		<% if fields["directory_name"].downcase == 'required' %>
-			<h3>Directory Listing </h3>
-			<p>
-				What name would you like your directory listing to be under?
-			</p>
-			<ul>
-				<li>
-					<label>Enter Name:</label>
-					<%= text_field_tag :directory_entered_name, params[:directory_entered_name], class: "form-control" %>
-				</li>
-			</ul>
-		<% end %>
+		
 		<% if fields["cox_service_protection_plan"].downcase == 'required' %>
 			<h3>Cox Service Protection Plan </h3>
 			<ul>

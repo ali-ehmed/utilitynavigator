@@ -1,3 +1,4 @@
+<div id="package_provider" data-provider="<%= @package.provider.acronym %>"></div>
 <div class="extra_equiptments">
 	<div class="container">
 		<%= form_tag offer_checkout_path(@package, Package.checkout_steps.second.to_s), method: :get, id: "extra_equiptments_form" do %>

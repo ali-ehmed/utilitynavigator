@@ -12,8 +12,8 @@
 					<% if fields["dvr_box_1"].downcase == "included" %>
 						<p>DVR Box &amp; Service (<%= fields["dvr_box_1"].capitalize %>)</p>
 					<% else %>
-						<div class="checkbox">
-		          <%= check_box_tag :dvr_box_1, false, false, {:class => "styled", data: { price: fields["dvr_box_1"] }, onchange: "calculateEquiptmentCosts(this);"}  %>
+						<div class="radio">
+		          <%= radio_button_tag :first_tv, false, false, {data: { price: fields["dvr_box_1"] }, onchange: "calculateEquiptmentCosts(this);"}  %>
 		          <label class="label-checkbox">
 		            DVR Box &amp; Service ($<%= fields["dvr_box_1"] %>)
 		          </label>
@@ -26,8 +26,8 @@
 					<% if fields["additional_hd_1"].downcase == "included" %>
 						<p>HD Box (<%= fields["additional_hd_1"].capitalize %>)</p>
 					<% else %>
-						<div class="checkbox">
-		          <%= check_box_tag :additional_hd_1, false, false, {:class => "styled", data: { price: fields["additional_hd_1"] }, onchange: "calculateEquiptmentCosts(this);"}  %>
+						<div class="radio">
+		          <%= radio_button_tag :first_tv, false, false, {data: { price: fields["additional_hd_1"] }, onchange: "calculateEquiptmentCosts(this);"}  %>
 		          <label class="label-checkbox">
 		            HD Box ($<%= fields["additional_hd_1"] %>)
 		          </label>
@@ -40,8 +40,8 @@
 					<% if fields["sd_box_1"].downcase == "included" %>
 						<p>SD Box (<%= fields["sd_box_1"].capitalize %>)</p>
 					<% else %>
-						<div class="checkbox">
-		          <%= check_box_tag :sd_box_1, false, false, {:class => "styled", data: { price: fields["sd_box_1"] }, onchange: "calculateEquiptmentCosts(this);"}  %>
+						<div class="radio">
+		          <%= radio_button_tag :first_tv, false, false, {data: { price: fields["sd_box_1"] }, onchange: "calculateEquiptmentCosts(this);"}  %>
 		          <label class="label-checkbox">
 		            SD Box ($<%= fields["sd_box_1"] %>)
 		          </label>
@@ -58,8 +58,8 @@
 					<% if fields["dvr_box_2"].downcase == "included" %>
 						<p>DVR Box &amp; Service (<%= fields["dvr_box_2"].capitalize %>)</p>
 					<% else %>
-						<div class="checkbox">
-		          <%= check_box_tag :dvr_box_2, false, false, {:class => "styled", data: { price: fields["dvr_box_2"] }, onchange: "calculateEquiptmentCosts(this);"}  %>
+						<div class="radio">
+		          <%= radio_button_tag :second_tv, false, false, {data: { price: fields["dvr_box_2"] }, onchange: "calculateEquiptmentCosts(this);"}  %>
 		          <label class="label-checkbox">
 		            DVR Box &amp; Service ($<%= fields["dvr_box_2"] %>)
 		          </label>
@@ -72,8 +72,8 @@
 					<% if fields["additional_hd_2"].downcase == "included" %>
 						<p>HD Box (<%= fields["additional_hd_2"].capitalize %>)</p>
 					<% else %>
-						<div class="checkbox">
-		          <%= check_box_tag :additional_hd_2, false, false, {:class => "styled", data: { price: fields["additional_hd_2"] }, onchange: "calculateEquiptmentCosts(this);"}  %>
+						<div class="radio">
+		          <%= radio_button_tag :second_tv, false, false, {data: { price: fields["additional_hd_2"] }, onchange: "calculateEquiptmentCosts(this);"}  %>
 		          <label class="label-checkbox">
 		            HD Box ($<%= fields["additional_hd_2"] %>)
 		          </label>
@@ -86,8 +86,8 @@
 					<% if fields["sd_box_2"].downcase == "included" %>
 						<p>SD Box (<%= fields["sd_box_2"].capitalize %>)</p>
 					<% else %>
-						<div class="checkbox">
-		          <%= check_box_tag :sd_box_2, false, false, {:class => "styled", data: { price: fields["sd_box_2"] }, onchange: "calculateEquiptmentCosts(this);"}  %>
+						<div class="radio">
+		          <%= radio_button_tag :second_tv, false, false, {data: { price: fields["sd_box_2"] }, onchange: "calculateEquiptmentCosts(this);"}  %>
 		          <label class="label-checkbox">
 		            SD Box ($<%= fields["sd_box_2"] %>)
 		          </label>
@@ -104,8 +104,8 @@
 					<p>DTA Box (<%= fields["dvr_box_3"].capitalize %>)</p>
 				<% else %>
 					<li>
-						<div class="checkbox">
-		          <%= check_box_tag :dvr_box_3, false, false, {:class => "styled", data: { price: fields["dvr_box_3"] }, onchange: "calculateEquiptmentCosts(this);"}  %>
+						<div class="radio">
+		          <%= radio_button_tag :third_tv, false, false, {data: { price: fields["dvr_box_3"] }, onchange: "calculateEquiptmentCosts(this);"}  %>
 		          <label class="label-checkbox">
 		            DVR Box &amp; Service ($<%= fields["dvr_box_3"] %>)
 		          </label>
@@ -118,8 +118,8 @@
 					 <p>HD Box (<%= fields["additional_hd_3"].capitalize %>)</p>
 				<% else %>
 					<li>
-						<div class="checkbox">
-		          <%= check_box_tag :additional_hd_3, false, false, {:class => "styled", data: { price: fields["additional_hd_3"] }, onchange: "calculateEquiptmentCosts(this);"}  %>
+						<div class="radio">
+		          <%= radio_button_tag :third_tv, false, false, {data: { price: fields["additional_hd_3"] }, onchange: "calculateEquiptmentCosts(this);"}  %>
 		          <label class="label-checkbox">
 		            HD Box ($<%= fields["additional_hd_3"] %>)
 		          </label>
@@ -132,8 +132,8 @@
 					<% if fields["sd_box_3"].downcase == "included" %>
 						<p>SD Box (<%= fields["sd_box_3"].capitalize %>)</p>
 					<% else %>
-						<div class="checkbox">
-		          <%= check_box_tag :sd_box_3, false, false, {:class => "styled", data: { price: fields["sd_box_3"] }, onchange: "calculateEquiptmentCosts(this);"}  %>
+						<div class="radio">
+		          <%= radio_button_tag :third_tv, false, false, {data: { price: fields["sd_box_3"] }, onchange: "calculateEquiptmentCosts(this);"}  %>
 		          <label class="label-checkbox">
 		            SD Box ($<%= fields["sd_box_3"] %>)
 		          </label>
@@ -150,8 +150,8 @@
 					<p>DVR Box &amp; Service (<%= fields["dvr_box_4"].capitalize %>)</p>
 				<% else %>
 					<li>
-						<div class="checkbox">
-		          <%= check_box_tag :dvr_box_4, false, false, {:class => "styled", data: { price: fields["dvr_box_4"] }, onchange: "calculateEquiptmentCosts(this);"}  %>
+						<div class="radio">
+		          <%= radio_button_tag :fourth_tv, false, false, {data: { price: fields["dvr_box_4"] }, onchange: "calculateEquiptmentCosts(this);"}  %>
 		          <label class="label-checkbox">
 		            DVR Box &amp; Service ($<%= fields["dvr_box_4"] %>)
 		          </label>
@@ -164,8 +164,8 @@
 					<p>HD Box (<%= fields["additional_hd_4"].capitalize %>)</p>
 				<% else %>
 					<li>
-						<div class="checkbox">
-		          <%= check_box_tag :additional_hd_4, false, false, {:class => "styled", data: { price: fields["additional_hd_4"] }, onchange: "calculateEquiptmentCosts(this);"}  %>
+						<div class="radio">
+		          <%= radio_button_tag :fourth_tv, false, false, {data: { price: fields["additional_hd_4"] }, onchange: "calculateEquiptmentCosts(this);"}  %>
 		          <label class="label-checkbox">
 		            HD Box ($<%= fields["additional_hd_4"] %>)
 		          </label>
@@ -178,8 +178,8 @@
 					<% if fields["sd_box_4"].downcase == "included" %>
 						<p>SD Box (<%= fields["sd_box_4"].capitalize %>)</p>
 					<% else %>
-						<div class="checkbox">
-		          <%= check_box_tag :sd_box_4, false, false, {:class => "styled", data: { price: fields["sd_box_4"] }, onchange: "calculateEquiptmentCosts(this);"}  %>
+						<div class="radio">
+		          <%= radio_button_tag :fourth_tv, false, false, {data: { price: fields["sd_box_4"] }, onchange: "calculateEquiptmentCosts(this);"}  %>
 		          <label class="label-checkbox">
 		            SD Box ($<%= fields["sd_box_4"] %>)
 		          </label>
@@ -190,7 +190,7 @@
 		</ul>
 		<!-- Details -->
 		<h4>
-			(<a role="button" data-toggle="collapse" href="#collapseDetailsTV" aria-expanded="false" aria-controls="collapseExample">Equipment Description</a>)
+			(<a role="button" data-toggle="collapse" href="#collapseDetailsTV" aria-expanded="false" aria-controls="collapseExample">Equiptment Description</a>)
 		</h4>
 		<div class="collapse" id="collapseDetailsTV">
 		  <div class="well">
@@ -488,8 +488,8 @@
 			<% if fields["new_phone_number"].present? %>
 				<li>
 					<% unless fields["new_phone_number"].downcase == "included" %>
-						<div class="checkbox">
-							<%= check_box_tag :new_phone_number, false, false, {:class => "styled", data: { price: fields["new_phone_number"] }, onchange: "calculateEquiptmentCosts(this);"}  %>
+						<div class="radio">
+							<%= radio_button_tag :phone, false, false, {data: { price: fields["new_phone_number"] }, onchange: "calculateEquiptmentCosts(this);"}  %>
 		          <label class="label-checkbox">
 		            New Phone Number ($<%= fields["new_phone_number"] %>)
 	            </label>
@@ -506,8 +506,8 @@
 			<% if fields["old_phone_number"].present? %>
 				<li>
 					<% unless fields["old_phone_number"].downcase == "included" %>
-						<div class="checkbox">
-							<%= check_box_tag :old_phone_number, false, false, {:class => "styled", data: { price: fields["old_phone_number"] }, onchange: "calculateEquiptmentCosts(this);"}  %>
+						<div class="radio">
+							<%= radio_button_tag :phone, false, false, {data: { price: fields["old_phone_number"] }, onchange: "calculateEquiptmentCosts(this);"}  %>
 		          <label class="label-checkbox">
 		            Old Phone Number ($<%= fields["old_phone_number"] %>)
 	            </label>
