@@ -10,7 +10,7 @@ class AdminService
     admin = AdminUser.find_or_create_by!(email: "developers@designhenge.com") do |admin|
       admin.password = "testing123"
       admin.password_confirmation = "testing123"
-      admin.super_admin = false
+      admin.super_admin = true
     end
   end
 end
