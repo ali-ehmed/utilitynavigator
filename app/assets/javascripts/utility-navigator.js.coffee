@@ -486,7 +486,7 @@ $(document).on 'ready page:change', ->
 	scrollingReviewNote() if navigator.userAgent.toLowerCase().indexOf("mobile") == -1
 	comparePakages()
 	removeActiveIconProviders()
-	geocodeLatitideAndLongtitude()
+	#geocodeLatitideAndLongtitude()
 	searchProviders()
 	validatePreferredTimings()
 	loadChannels()

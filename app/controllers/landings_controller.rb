@@ -53,7 +53,7 @@ class LandingsController < ApplicationController
 	end
 
 	def load_channels
-		@file = Roo::Spreadsheet.open('./lib/channel_list_ordered.xlsx')
+		@file = Roo::Spreadsheet.open(File.join(Rails.root, 'lib','channel_list_ordered.xlsx'))
 		@channels, @channel_names = Channel.new(@file).load_all
 
 		sleep 1
