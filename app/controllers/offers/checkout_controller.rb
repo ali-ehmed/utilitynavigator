@@ -24,6 +24,11 @@ class Offers::CheckoutController < ApplicationController
 		end
 		render_wizard
 	end
+	
+	def update
+		logger.debug "Update Step: #{step}"
+		redirect_to root_path, notice: Payment::RESERVED_MESSAGE
+	end
 
 	def set_package
   	# @directory_name = @equiptment_params["directory_entered_name"] if @package.provider.cox?

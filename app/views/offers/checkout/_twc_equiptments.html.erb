@@ -302,9 +302,13 @@
 	          <label class="label-checkbox">
 	            TWC Sports Pass ($10.00 monthly)
 	          </label>
-	          <p>
-	          	Get more games, events and exclusive online content with more than a dozen popular sports channels like NFL RedZone, FOX Soccer Plus, CBS Sports Network and Tennis Channel.
-	          </p>
+	          <br />
+	          <a role="button" data-toggle="collapse" href="#collapsetwc_sports" aria-expanded="false" aria-controls="collapseExample" class="view_more">View Details</a>
+						<div class="collapse" id="collapsetwc_sports">
+		          <p class="well">
+		          	Get more games, events and exclusive online content with more than a dozen popular sports channels like NFL RedZone, FOX Soccer Plus, CBS Sports Network and Tennis Channel.
+		          </p>
+	          </div>
 	        </div>
 				</li>
 				<li>
@@ -313,9 +317,13 @@
 	          <label class="label-checkbox">
 	            Disney On Demand ($3.99 monthly)
 	          </label>
-	          <p>
-	          	Kids will love having access anytime to the most popular Disney Channel® and Playhouse Disney series. Plus, watch original movies and series up to one week before they air on Disney Channel.
-	          </p>
+	          <br />
+	          <a role="button" data-toggle="collapse" href="#collapsedisney_on_demand" aria-expanded="false" aria-controls="collapseExample" class="view_more">View Details</a>
+						<div class="collapse" id="collapsedisney_on_demand">
+		          <p class="well">
+		          	Kids will love having access anytime to the most popular Disney Channel® and Playhouse Disney series. Plus, watch original movies and series up to one week before they air on Disney Channel.
+		          </p>
+	          </div>
 	        </div>
 				</li>
 				<li>
@@ -324,9 +332,13 @@
 	          <label class="label-checkbox">
 	            TWC Movie Pass ($10.00 monthly)
 	          </label>
-	          <p>
-	          	Includes Encore, Fox Movie Channel, Sundance and more!
-	          </p>
+	          <br />
+	          <a role="button" data-toggle="collapse" href="#collapsetwc_movie_pass" aria-expanded="false" aria-controls="collapseExample" class="view_more">View Details</a>
+						<div class="collapse" id="collapsetwc_movie_pass">
+		          <p class="well">
+		          	Includes Encore, Fox Movie Channel, Sundance and more!
+		          </p>
+	          </div>
 	        </div>
 				</li>
 				<li>
@@ -335,9 +347,13 @@
 	          <label class="label-checkbox">
 	            HD Pass ($6.95 monthly)
 	          </label>
-	          <p>
-	          	Expand your HD experience with a wide range of programming from Smithsonian HD, MAV TV HD, MGM HD and Universal HD.
-	          </p>
+	          <br />
+	          <a role="button" data-toggle="collapse" href="#collapsehd_pass" aria-expanded="false" aria-controls="collapseExample" class="view_more">View Details</a>
+						<div class="collapse" id="collapsehd_pass">
+		          <p class="well">
+		          	Expand your HD experience with a wide range of programming from Smithsonian HD, MAV TV HD, MGM HD and Universal HD.
+		          </p>
+	          </div>
 	        </div>
 				</li>
 			</ul>
@@ -350,9 +366,13 @@
           <label class="label-checkbox">
             Spanish Programming ($5.00 Monthly)
           </label>
-          <p>
-          	More than 40 Spanish-language channels, including Discovery Espanol, ESPN Deportes HD and Mun2.
-          </p>
+          <br />
+          <a role="button" data-toggle="collapse" href="#collapsespanish_programming" aria-expanded="false" aria-controls="collapseExample" class="view_more">View Details</a>
+					<div class="collapse" id="collapsespanish_programming">
+	          <p class="well">
+	          	More than 40 Spanish-language channels, including Discovery Espanol, ESPN Deportes HD and Mun2.
+	          </p>
+          </div>
         </div>
 			</li>
 		</ul>
@@ -465,13 +485,16 @@
 		          <label class="label-checkbox">
 		            New Phone Number ($<%= fields["new_phone_number"] %>)
 	            </label>
-		          <p>
-		          	Get a new phone number with Time Warner Cable Home Phone and avoid the waiting time to have your existing number ported. Activation Fees vary by market.
-		          </p>
 		        </div>
 					<% else %>
 						New Phone Number (<%= fields["new_phone_number"] %>)
 	        <% end %>
+          <a role="button" data-toggle="collapse" href="#collapsephone" aria-expanded="false" aria-controls="collapseExample" class="view_more">View Details</a>
+					<div class="collapse" id="collapsephone">
+	          <p class="well">
+	          	Get a new phone number with Time Warner Cable Home Phone and avoid the waiting time to have your existing number ported. Activation Fees vary by market.
+	          </p>
+          </div>
 				</li>
 			<% end %>
 			<% if fields["transfer_phone_number"].present? %>
@@ -482,15 +505,17 @@
 	          	<label class="label-checkbox">
 		            Transfer Phone Number ($<%= fields["transfer_phone_number"] %>)
 		          </label>
-		          
-		          <p>
-		          	Keep your old phone number when you switch to Time Warner Home Phone service. Activation Fees vary by market. 
-		          	<span class="checkout_required">Third party verification is required</span>.
-		          </p>
 		        </div>
 	        <% else %>
             Transfer Phone Number (<%= fields["transfer_phone_number"] %>)
         	<% end %>
+          <a role="button" data-toggle="collapse" href="#collapsephone_1" aria-expanded="false" aria-controls="collapseExample" class="view_more">View Details</a>
+					<div class="collapse" id="collapsephone_1">
+	          <p class="well">
+	          	Keep your old phone number when you switch to Time Warner Home Phone service. Activation Fees vary by market. 
+	          	<span class="checkout_required">Third party verification is required</span>.
+	          </p>
+          </div>
 				</li>
 			<% end %>
 		</ul>
@@ -503,14 +528,17 @@
 	          <label class="label-checkbox">
 	            INTERNATIONAL ONE PRICE ($<%= fields["international_one_price"] %> monthly)
 	          </label>
-	          <p>
-	          	You can call up to 1,000 minutes a month to land-line phones in over 100 countries and cellphones in 14 countries. International OnePrice® gives you low rates after the 1,000 minutes are used.
-	          </p>
 	        </div>
 				</li>
 			<% elsif fields["international_one_price"].downcase == "included" %>
 				<p>International One Price is included in this package</p>
 			<% end %>
+      <a role="button" data-toggle="collapse" href="#collapseinternational_one_price" aria-expanded="false" aria-controls="collapseExample" class="view_more">View Details</a>
+			<div class="collapse" id="collapseinternational_one_price">
+        <p class="well">
+        	You can call up to 1,000 minutes a month to land-line phones in over 100 countries and cellphones in 14 countries. International OnePrice® gives you low rates after the 1,000 minutes are used.
+        </p>
+      </div>
 
 			<% if fields["global_penny_plan"].present? %>
 				<li>
@@ -519,15 +547,19 @@
 	          <label class="label-checkbox">
 	            Sign up for the Global Penny Phone Plan ($<%= fields["global_penny_plan"] %> monthly)  
 	          </label>
-	          <p>
-	          	Our pay-as-you-go plan gives you penny per minute rates to over 40 countries and highly competitive rates to everywhere else. And it is free for 12 months when you sign up for any Triple Play package.
-	          </p>
 	        </div>
 				</li>
 
 			<% elsif fields["global_penny_plan"].downcase == "included" %>
 				<p>Global Penny is included in this package</p>
 			<% end %>
+
+      <a role="button" data-toggle="collapse" href="#collapsesign_up_global_penny" aria-expanded="false" aria-controls="collapseExample" class="view_more">View Details</a>
+			<div class="collapse" id="collapsesign_up_global_penny">
+        <p class="well">
+        	Our pay-as-you-go plan gives you penny per minute rates to over 40 countries and highly competitive rates to everywhere else. And it is free for 12 months when you sign up for any Triple Play package.
+        </p>
+      </div>
 
 			<% if fields["voice_mail"].present? %>
 				<li>
@@ -536,15 +568,18 @@
 	          <label class="label-checkbox">
 	            Voice Mail ($<%= fields["voice_mail"] %> monthly)  
 	          </label>
-	          <p>
-	          	Voice Mail allows you to get your calls when you are away or cannot get to the phone. And there is no equipment to buy.
-	          </p>
 	        </div>
 				</li>
 			<% elsif fields["voice_mail"].downcase == "included" %>
 				<p>Voice Mail is included in this package</p>
 			<% end %>
 
+      <a role="button" data-toggle="collapse" href="#collapsevoice_mail" aria-expanded="false" aria-controls="collapseExample" class="view_more">View Details</a>
+			<div class="collapse" id="collapsevoice_mail">
+        <p class="well">
+        	Voice Mail allows you to get your calls when you are away or cannot get to the phone. And there is no equipment to buy.
+        </p>
+      </div>
 		</ul>
 	<% end %>
 </div>
