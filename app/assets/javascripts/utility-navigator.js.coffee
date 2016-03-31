@@ -330,7 +330,7 @@ validateExtraEquiptment = ->
     	$.notify {
         icon: 'glyphicon glyphicon-warning-sign'
         title: '<strong>Instructions:</strong><br />'
-        message: $.map $errors, (n) -> "<li>#{n}</li>"
+        message: $.map($errors, (n) -> "<li>#{n}</li>").join("")
       }, type: 'danger'
     	return false 
     true
