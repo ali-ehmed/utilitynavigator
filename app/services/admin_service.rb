@@ -1,7 +1,7 @@
 class AdminService
   def call
     admin = AdminUser.find_or_create_by!(email: "khurram.chaudhry@excelsteer.com") do |admin|
-      admin.password = "BeHappy2016#"
+      admin.password = "BeHappy2016"
       admin.password_confirmation = "BeHappy2016"
       admin.super_admin = false
     end
