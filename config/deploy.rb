@@ -3,7 +3,7 @@ lock '3.4.0'
 
 set :application, 'utility_navigator'
 set :repo_url, 'git@bitbucket.org:aliahmed922/utility_navigator.git'
-set :ssh_options, { forward_agent: false, paranoid: true, keys: "~/.ssh/work_rsa" }
+set :ssh_options, { forward_agent: true, paranoid: true, keys: "~/.ssh/work_rsa" }
 # load "lib/channel_list_ordered.xlsx"
 # Default branch is :master
 # ask :branch, `git rev-parse --abbrev-ref HEAD`.chomp
