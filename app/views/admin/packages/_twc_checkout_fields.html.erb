@@ -17,7 +17,7 @@
 						</label>
 						<%= ff.select "checkout_select", options_for_select(["Free", "Not Include", "Add Price"]), {prompt: "--Select--"}, class: "package_select_field", onchange: "$packages.addPriceField(this);" %>
 
-						<%= ff.text_field "dvr_box_#{count}", style: "display: none;", class: "admin_checkout_price", value: "free" %>
+						<%= ff.text_field "dvr_box_#{count}", style: "display: none;", class: "admin_checkout_price", value: "Included" %>
 					</li>
 					<li>
 						<label for="provider_name" class="label">
@@ -25,7 +25,7 @@
 						</label>
 						<%= ff.select "checkout_select", options_for_select(["Free", "Not Include", "Add Price"]), {prompt: "--Select--"}, class: "package_select_field", onchange: "$packages.addPriceField(this);" %>
 
-						<%= ff.text_field "additional_hd_#{count}", style: "display: none;", class: "admin_checkout_price", value: "free" %>
+						<%= ff.text_field "additional_hd_#{count}", style: "display: none;", class: "admin_checkout_price", value: "Included" %>
 					</li>
 					<li>
 						<label for="provider_name" class="label">
@@ -33,7 +33,7 @@
 						</label>
 						<%= ff.select "checkout_select", options_for_select(["Free", "Not Include", "Add Price"]), {prompt: "--Select--"}, class: "package_select_field", onchange: "$packages.addPriceField(this);" %>
 
-						<%= ff.text_field "dta_#{count}", style: "display: none;", class: "admin_checkout_price", value: "free" %>
+						<%= ff.text_field "dta_#{count}", style: "display: none;", class: "admin_checkout_price", value: "Included" %>
 					</li>
 					<% if Package::CABLE_TV.last == cable_tv %>
 						<li>
@@ -42,7 +42,7 @@
 							</label>
 							<%= ff.select "checkout_select", options_for_select(["Free", "Not Include", "Add Price"]), {prompt: "--Select--"}, class: "package_select_field", onchange: "$packages.addPriceField(this);" %>
 
-							<%= ff.text_field "4th_tv_install_#{count}", style: "display: none;", class: "admin_checkout_price", value: "free" %>
+							<%= ff.text_field "4th_tv_install_#{count}", style: "display: none;", class: "admin_checkout_price", value: "Included" %>
 						</li>
 					<% end %>
 				</ol>
@@ -84,7 +84,7 @@
 			</label>
 			<%= ff.select "checkout_select", options_for_select(["Free", "Not Include", "Add Price"]), {prompt: "--Select--"}, class: "package_select_field", onchange: "$packages.addPriceField(this);" %>
 
-			<%= ff.text_field :epix_offer, style: "display: none;", class: "admin_checkout_price", value: "free" %>
+			<%= ff.text_field :epix_offer, style: "display: none;", class: "admin_checkout_price", value: "Included" %>
 		</li>
 	<% end %>
 <% elsif product.name.downcase == :internet.to_s %>
@@ -95,7 +95,7 @@
 			</label>
 			<%= ff.select "checkout_select", options_for_select(["Free", "Not Include", "Add Price"]), {prompt: "--Select--"}, class: "package_select_field", onchange: "$packages.addPriceField(this);" %>
 
-			<%= ff.text_field :modem, style: "display: none;", class: "admin_checkout_price", value: "free" %>
+			<%= ff.text_field :modem, style: "display: none;", class: "admin_checkout_price", value: "Included" %>
 		</li>
 		<li>
 			<label class="label">
@@ -103,7 +103,7 @@
 			</label>
 			<%= ff.select "checkout_select", options_for_select(["Free", "Not Include", "Add Price"]), {prompt: "--Select--"}, class: "package_select_field", onchange: "$packages.addPriceField(this);" %>
 
-			<%= ff.text_field :wifi, style: "display: none;", class: "admin_checkout_price", value: "free" %>
+			<%= ff.text_field :wifi, style: "display: none;", class: "admin_checkout_price", value: "Included" %>
 		</li>
 	<% end %>
 <% else %>
@@ -114,7 +114,7 @@
 			</label>
 			<%= ff.select "checkout_select", options_for_select(["Free", "Not Include", "Add Price"]), {prompt: "--Select--"}, class: "package_select_field", onchange: "$packages.addPriceField(this);" %>
 
-			<%= ff.text_field :new_phone_number, style: "display: none;", class: "admin_checkout_price", value: "free" %>
+			<%= ff.text_field :new_phone_number, style: "display: none;", class: "admin_checkout_price", value: "Included" %>
 		</li>
 		<li>
 			<label class="label">
@@ -122,7 +122,7 @@
 			</label>
 			<%= ff.select "checkout_select", options_for_select(["Free", "Not Include", "Add Price"]), {prompt: "--Select--"}, class: "package_select_field", onchange: "$packages.addPriceField(this);" %>
 
-			<%= ff.text_field :transfer_phone_number, style: "display: none;", class: "admin_checkout_price", value: "free" %>
+			<%= ff.text_field :transfer_phone_number, style: "display: none;", class: "admin_checkout_price", value: "Included" %>
 		</li>
 		<li>
 			<label class="label">
@@ -130,7 +130,7 @@
 			</label>
 			<%= ff.select "checkout_select", options_for_select(["Free", "Not Include", "Add Price"]), {prompt: "--Select--"}, class: "package_select_field", onchange: "$packages.addPriceField(this);" %>
 
-			<%= ff.text_field :voice_mail, style: "display: none;", class: "admin_checkout_price", value: "free" %>
+			<%= ff.text_field :voice_mail, style: "display: none;", class: "admin_checkout_price", value: "Included" %>
 		</li>
 		<li>
 			<label class="label">
@@ -138,7 +138,7 @@
 			</label>
 			<%= ff.select "checkout_select", options_for_select(["Free", "Not Include", "Add Price"]), {prompt: "--Select--"}, class: "package_select_field", onchange: "$packages.addPriceField(this);" %>
 
-			<%= ff.text_field :international_one_price, style: "display: none;", class: "admin_checkout_price", value: "free" %>
+			<%= ff.text_field :international_one_price, style: "display: none;", class: "admin_checkout_price", value: "Included" %>
 		</li>
 		<li>
 			<label class="label">
@@ -146,7 +146,7 @@
 			</label>
 			<%= ff.select "checkout_select", options_for_select(["Free", "Not Include", "Add Price"]), {prompt: "--Select--"}, class: "package_select_field", onchange: "$packages.addPriceField(this);" %>
 
-			<%= ff.text_field :global_penny_plan, style: "display: none;", class: "admin_checkout_price", value: "free" %>
+			<%= ff.text_field :global_penny_plan, style: "display: none;", class: "admin_checkout_price", value: "Included" %>
 		</li>
 	<% end %>
 <% end %>

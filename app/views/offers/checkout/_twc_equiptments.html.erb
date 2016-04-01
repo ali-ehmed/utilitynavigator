@@ -522,64 +522,70 @@
 		<h3>Please select your additional phone plans</h3>
 		<ul>
 			<% if fields["international_one_price"].present? %>
-				<li>
-					<div class="checkbox">
-	          <%= check_box_tag :international_one_price, false, false, {:class => "styled", data: { price: fields["international_one_price"] }, onchange: "calculateEquiptmentCosts(this);"}  %>
-	          <label class="label-checkbox">
-	            INTERNATIONAL ONE PRICE ($<%= fields["international_one_price"] %> monthly)
-	          </label>
-	        </div>
-				</li>
-			<% elsif fields["international_one_price"].downcase == "included" %>
-				<p>International One Price is included in this package</p>
-			<% end %>
-      <a role="button" data-toggle="collapse" href="#collapseinternational_one_price" aria-expanded="false" aria-controls="collapseExample" class="view_more">View Details</a>
-			<div class="collapse" id="collapseinternational_one_price">
-        <p class="well">
-        	You can call up to 1,000 minutes a month to land-line phones in over 100 countries and cellphones in 14 countries. International OnePrice® gives you low rates after the 1,000 minutes are used.
-        </p>
-      </div>
+				<% unless fields["international_one_price"].downcase == "included" %>
+					<li>
+						<div class="checkbox">
+		          <%= check_box_tag :international_one_price, false, false, {:class => "styled", data: { price: fields["international_one_price"] }, onchange: "calculateEquiptmentCosts(this);"}  %>
+		          <label class="label-checkbox">
+		            INTERNATIONAL ONE PRICE ($<%= fields["international_one_price"] %> monthly)
+		          </label>
+		        </div>
+					</li>
+				<% else %>
+					<p>International One Price is included in this package</p>
+				<% end %>
+			
+	      <a role="button" data-toggle="collapse" href="#collapseinternational_one_price" aria-expanded="false" aria-controls="collapseExample" class="view_more">View Details</a>
+				<div class="collapse" id="collapseinternational_one_price">
+	        <p class="well">
+	        	You can call up to 1,000 minutes a month to land-line phones in over 100 countries and cellphones in 14 countries. International OnePrice® gives you low rates after the 1,000 minutes are used.
+	        </p>
+	      </div>
+      <% end %>
 
 			<% if fields["global_penny_plan"].present? %>
-				<li>
-					<div class="checkbox">
-	          <%= check_box_tag :sign_up_global_penny, false, false, {:class => "styled", data: { price: fields["global_penny_plan"] }, onchange: "calculateEquiptmentCosts(this);"}  %>
-	          <label class="label-checkbox">
-	            Sign up for the Global Penny Phone Plan ($<%= fields["global_penny_plan"] %> monthly)  
-	          </label>
-	        </div>
-				</li>
+				<% unless fields["global_penny_plan"].downcase == "included" %>
+					<li>
+						<div class="checkbox">
+		          <%= check_box_tag :sign_up_global_penny, false, false, {:class => "styled", data: { price: fields["global_penny_plan"] }, onchange: "calculateEquiptmentCosts(this);"}  %>
+		          <label class="label-checkbox">
+		            Sign up for the Global Penny Phone Plan ($<%= fields["global_penny_plan"] %> monthly)  
+		          </label>
+		        </div>
+					</li>
 
-			<% elsif fields["global_penny_plan"].downcase == "included" %>
-				<p>Global Penny is included in this package</p>
+				<% else %>
+					<p>Global Penny is included in this package</p>
+				<% end %>
+				<a role="button" data-toggle="collapse" href="#collapsesign_up_global_penny" aria-expanded="false" aria-controls="collapseExample" class="view_more">View Details</a>
+				<div class="collapse" id="collapsesign_up_global_penny">
+	        <p class="well">
+	        	Our pay-as-you-go plan gives you penny per minute rates to over 40 countries and highly competitive rates to everywhere else. And it is free for 12 months when you sign up for any Triple Play package.
+	        </p>
+	      </div>
 			<% end %>
-
-      <a role="button" data-toggle="collapse" href="#collapsesign_up_global_penny" aria-expanded="false" aria-controls="collapseExample" class="view_more">View Details</a>
-			<div class="collapse" id="collapsesign_up_global_penny">
-        <p class="well">
-        	Our pay-as-you-go plan gives you penny per minute rates to over 40 countries and highly competitive rates to everywhere else. And it is free for 12 months when you sign up for any Triple Play package.
-        </p>
-      </div>
 
 			<% if fields["voice_mail"].present? %>
-				<li>
-					<div class="checkbox">
-	          <%= check_box_tag :voice_mail, false, false, {:class => "styled", data: { price: fields["voice_mail"] }, onchange: "calculateEquiptmentCosts(this);"}  %>
-	          <label class="label-checkbox">
-	            Voice Mail ($<%= fields["voice_mail"] %> monthly)  
-	          </label>
-	        </div>
-				</li>
-			<% elsif fields["voice_mail"].downcase == "included" %>
-				<p>Voice Mail is included in this package</p>
+				<% unless fields["voice_mail"].downcase == "included" %>
+					<li>
+						<div class="checkbox">
+		          <%= check_box_tag :voice_mail, false, false, {:class => "styled", data: { price: fields["voice_mail"] }, onchange: "calculateEquiptmentCosts(this);"}  %>
+		          <label class="label-checkbox">
+		            Voice Mail ($<%= fields["voice_mail"] %> monthly)  
+		          </label>
+		        </div>
+					</li>
+				<% else %>
+					<p>Voice Mail is included in this package</p>
+				<% end %>
+				<a role="button" data-toggle="collapse" href="#collapsevoice_mail" aria-expanded="false" aria-controls="collapseExample" class="view_more">View Details</a>
+				<div class="collapse" id="collapsevoice_mail">
+	        <p class="well">
+	        	Voice Mail allows you to get your calls when you are away or cannot get to the phone. And there is no equipment to buy.
+	        </p>
+	      </div>
 			<% end %>
 
-      <a role="button" data-toggle="collapse" href="#collapsevoice_mail" aria-expanded="false" aria-controls="collapseExample" class="view_more">View Details</a>
-			<div class="collapse" id="collapsevoice_mail">
-        <p class="well">
-        	Voice Mail allows you to get your calls when you are away or cannot get to the phone. And there is no equipment to buy.
-        </p>
-      </div>
 		</ul>
 	<% end %>
 </div>
