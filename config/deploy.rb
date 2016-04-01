@@ -3,6 +3,8 @@ lock '3.4.0'
 
 set :application, 'utility_navigator'
 set :repo_url, 'https://aliahmed922@bitbucket.org/aliahmed922/utility_navigator.git'
+set :git_https_username, 'aliahmed922'
+set :git_https_password, 'Chopedvege12'
 # load "lib/channel_list_ordered.xlsx"
 # Default branch is :master
 # ask :branch, `git rev-parse --abbrev-ref HEAD`.chomp
