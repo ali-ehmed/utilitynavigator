@@ -56,6 +56,7 @@ group :development do
   gem "letter_opener"
 end
 
+# Deployement
 group :development do
   gem 'capistrano', '~> 3.4'
   gem 'capistrano-rails', '~> 1.1', '>= 1.1.6'

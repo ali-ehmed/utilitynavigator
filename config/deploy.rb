@@ -3,7 +3,7 @@ lock '3.4.0'
 
 set :application, 'utility_navigator'
 set :repo_url, 'git@github.com:aliahmed922/utility_navigator.git'
-load "lib/channel_list_ordered.xlsx"
+# load "lib/channel_list_ordered.xlsx"
 # Default branch is :master
 # ask :branch, `git rev-parse --abbrev-ref HEAD`.chomp
 
