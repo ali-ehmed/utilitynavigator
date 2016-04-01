@@ -270,6 +270,7 @@ validateExtraEquiptment = ->
 
     epix_offer = $("input[name='epix_offer']:checked")
     phone = $("input[name='phone']:checked")
+    phone_radio_btns = $("input[name='phone']")
     modem = $("input[name='modem']:checked")
 
     internet_equiptment = $("input[name='internet_equiptment']:checked")
@@ -301,7 +302,7 @@ validateExtraEquiptment = ->
         $errors.push("Please select modem")
 	      $valid = false
 
-      if phone.length == 0
+      if phone.length == 0 and phone_radio_btns.length > 1
         $errors.push("Choose one of the phone service")
 	      $valid = false
 
