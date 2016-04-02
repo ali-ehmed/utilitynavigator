@@ -1,0 +1,40 @@
+# == Schema Information
+#
+# Table name: call_backs
+#
+#  id             :integer          not null, primary key
+#  first_name     :string
+#  last_name      :string
+#  email          :string
+#  phone_no       :string
+#  address        :text
+#  state          :string
+#  zip            :string
+#  created_at     :datetime         not null
+#  updated_at     :datetime         not null
+#  time_zone      :string
+#  preferred_time :time
+#  preferred_date :date
+#
+
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  first_name: MyString
+  last_name: MyString
+  email: MyString
+  phone_no: MyString
+  address: MyText
+  state: MyString
+  zip: MyString
+  preferred_time: 2016-02-17 15:36:09
+
+two:
+  first_name: MyString
+  last_name: MyString
+  email: MyString
+  phone_no: MyString
+  address: MyText
+  state: MyString
+  zip: MyString
+  preferred_time: 2016-02-17 15:36:09

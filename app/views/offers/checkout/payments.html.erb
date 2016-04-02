@@ -1,0 +1,318 @@
+<div class="extra_equiptments">
+	<div class="container">
+		<%= simple_form_for @payment, url: :payments, method: :post, :html => {:novalidate => true} do |f| %>
+			<input name="payment[package_id]" type="hidden" value="<%= @package.id %>" />
+			<div class="row">
+				<div class="col-md-9 col-sm-9">
+					<blockquote>
+					  <h2 class="page-header" style="margin: 20px 0 20px;">
+							<%= @package.package_name %>
+						</h2>
+					  <footer>Configure your equipment &amp; setup installation</footer>
+					</blockquote>
+					<%= f.simple_fields_for :user do |form_user| %>
+						<div class="panel panel-default">
+							<div class="panel-body">
+								<div class="panel panel-primary">
+									<div class="panel-heading">
+										<div class="panel-title"><strong>Your General Information</strong></div>
+									</div>
+									<div class="panel-body">
+										<div class="row">
+											<div class="col-md-6">
+												<div class="form-group">
+													<%= form_user.input :first_name, placeholder: "First Name" %>
+												</div>
+											</div>
+											<div class="col-md-6">
+												<div class="form-group">
+													<%= form_user.input :last_name, placeholder: "Last Name" %>
+												</div>
+											</div>
+										</div>
+										<div class="row">
+											<div class="col-md-6">
+												<div class="form-group">
+													<%= form_user.input :email, placeholder: "Email" %>
+												</div>
+											</div>
+											<div class="col-md-6">
+												<div class="form-group">
+													<%= form_user.input :date_of_birth, :as => :date, :start_year => Date.today.year - 12, :end_year => 1900, :order => [:day, :month, :year], :required => true %>
+												</div>
+											</div>
+										</div>
+										<fieldset>
+											<legend>Contact Details</legend>
+											<div class="row">
+												<div class="col-md-6">
+													<div class="form-group">
+														<%= form_user.input :cell_number, placeholder: "Cell Number" %>
+													</div>
+												</div>
+												<div class="col-md-6">
+													<div class="form-group">
+														<%= form_user.input :home_number, placeholder: "Home Number" %>
+													</div>
+												</div>
+											</div>
+											<div class="row">
+												<div class="col-md-6">
+													<div class="form-group">
+														<%= form_user.input :zip_code, placeholder: "Zip Code", input_html: { value: zip_code } %>
+													</div>
+												</div>
+												<div class="col-md-6">
+													<div class="form-group">
+														<%= form_user.input :address, placeholder: "Address", input_html: {  value: user_address } %>
+													</div>
+												</div>
+											</div>
+										</fieldset>
+										<fieldset>
+											<legend>Security</legend>
+											<div class="row">
+												<div class="col-md-4">
+													<div class="form-group">
+														<%= form_user.input :driver_license, placeholder: "Driver License" %>
+													</div>
+												</div>
+												<div class="col-md-1 text-center">
+													<div style="margin: 27px auto;">
+														<strong>OR</strong>
+													</div>													
+												</div>
+												<div class="col-md-3">
+													<div class="form-group">
+														<%= form_user.input :social_security, placeholder: "Social Security" %>
+													</div>
+												</div>
+												<div class="col-md-4">
+													<div class="form-group">
+														<%= form_user.input :four_digit_no, placeholder: "4 Digit No" %>
+													</div>
+												</div>
+											</div>
+											<div class="row">
+												<div class="col-md-6">
+													<div class="form-group">
+														<%= form_user.input :state_issue, placeholder: "State Change" %>
+													</div>
+												</div>
+											</div>
+										</fieldset>
+									</div>
+								</div>
+							</div>
+						</div>
+					<% end %>
+					<div class="panel panel-danger">
+						<div class="panel-heading">
+							<div class="panel-title">
+								<strong>Enter Your Credit Card Information</strong>
+							</div>
+						</div>
+						<div class="panel-body">
+							<div class="form-group">
+								<%= f.input :card_last4, label: "Card Number", placeholder: "Card Number" %>
+							</div>
+							<div class="row">
+								<div class="col-md-6">
+									<%= f.input :card_exp_month, placeholder: "Card Expiry Month" %>
+								</div>
+								<div class="col-md-6">
+									<%= f.input :card_exp_year, placeholder: "Card Expiry Year" %>
+								</div>
+							</div>
+							<div class="form-group">
+							<!-- <label>*CVV Code</label> -->
+								<%= f.input :security_code, placeholder: "CVV", class: "form-control", required: true %>
+							</div>
+
+							<div class="form-group">
+								<div class="checkbox">
+	                <%= check_box("payment", "pay_at_installation", { class: 'styled' }, "true", "false") %>
+
+									<label for="payment_pay_at_installation">
+									  Pay at the time of installation
+									</label>
+	              </div>
+							</div>
+						</div>
+					</div>
+					<div class="panel panel-success">
+						<div class="panel-heading">
+							<div class="panel-title">
+								<h3>Choose your Preferred Timings</h3>
+							</div>
+						</div>
+						<div class="panel-body">
+							<%= fields_for :timings do |ff| %>
+								<div class="row">
+									<div class="col-md-6">
+										<div class="form-group checkout_timing">
+			                <%= label_tag :preferred_time_1, "Preferred Time 1" %>
+			                <%= ff.select :preferred_time_1, options_for_select(CallBack.preferred_timings.map{|m| m}), { prompt: "Select Timings" }, class: "form-control" %>
+			              </div>
+									</div>
+									<div class="col-md-6">
+										<div class="form-group">
+			                <%= label_tag :preferred_date_1, "Preferred Date 1" %>
+			                <div class="input-group date_fields checkout_date">
+			                  <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+			                  <%= ff.text_field :preferred_date_1, class: "form-control", placeholder: "Choose your preferred date 1" %>
+			                </div>
+			              </div>
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-md-6">
+										<div class="form-group">
+			                <%= label_tag :preferred_time_2, "Preferred Time 2" %>
+			                <%= ff.select :preferred_time_2, options_for_select(CallBack.preferred_timings.map{|m| m}), { prompt: "Select Timings" }, class: "form-control" %>
+			              </div>
+									</div>
+									<div class="col-md-6">
+										<div class="form-group">
+			                <%= label_tag :preferred_date_2, "Preferred Date 2" %>
+			                <div class="input-group date_fields">
+			                  <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+			                  <%= ff.text_field :preferred_date_2, class: "form-control", placeholder: "Choose your preferred date" %>
+			                </div>
+			              </div>
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-md-6">
+										<div class="form-group">
+			                <%= label_tag :preferred_time_3, "Preferred Time 3" %>
+			                <%= ff.select :preferred_time_3, options_for_select(CallBack.preferred_timings.map{|m| m}), { prompt: "Select Timings" }, class: "form-control" %>
+			              </div>
+									</div>
+									<div class="col-md-6">
+										<div class="form-group">
+			                <%= label_tag :preferred_date_3, "Preferred Date 3" %>
+			                <div class="input-group date_fields">
+			                  <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+			                  <%= ff.text_field :preferred_date_3, class: "form-control", placeholder: "Choose your preferred date" %>
+			                </div>
+			              </div>
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-md-12">
+										<div class="form-group">
+			                <%= label_tag :time_zone, "Time Zone" %>
+			                <%= ff.select :time_zone, options_for_select(CallBack::TIMEZONE.map{|m| m}), { prompt: "Select" }, class: "form-control" %>
+			              </div>
+									</div>
+								</div>
+							<% end %>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-3 col-sm-3 follow-equiptments on-payment">
+					<div class="panel panel-default">
+						<div class="panel-heading">
+							<div class="panel-title">
+								<span>
+									Plan Summary
+								</span>
+							</div>
+						</div>
+						<div class="panel-body">
+							<ul class="list-unstyled">
+								<li class="summary-logo">
+									<%= provider_logo(@package.provider) %>
+								</li>
+								<hr />
+								<li>
+									<ul class="list-inline">
+										<li>
+											<strong>Package Price</strong>
+										</li>
+										<li class="pull-right">
+											<%= number_to_currency(@package.price) %>
+										</li>
+									</ul>
+								</li>
+								<li>
+									<ul class="list-inline">
+										<li>
+											<strong>Installation Price</strong>
+										</li>
+										<li class="pull-right">
+											<% if @package.installation_price.downcase == "free" %>
+									  		Free
+								  		<% else %>
+								  			<%= number_to_currency(@package.installation_price) %>
+								  		<% end %>
+										</li>
+									</ul>
+								</li>
+								<li>
+									<ul class="list-inline">
+										<li>
+											<strong>Extra Equiptment Price</strong>
+										</li>
+										<li class="pull-right">
+											<%= hidden_field_tag :equiptment_cost, @equiptment_params["equiptment_cost"] %>
+											<%= number_to_currency(@equiptment_params["equiptment_cost"]) %>
+										</li>
+									</ul>
+								</li>
+								<li class="disclaimer">
+									<div class="alert alert-warning" role="alert">
+										<strong>Disclaimer:</strong>
+										This amount excludes taxes. Actual taxes &amp; fees will be calculated &amp; reflect on your billing statement
+									</div>
+								</li>
+								<li>
+									<button type="button" data-toggle="modal" data-target="#order_details" class="btn btn-danger btn-block text-uppercase">
+										<strong>view cart details</strong>
+									</button>
+								</li>
+							</ul>
+						</div>
+						<div class="panel-footer">
+							<ul class="list-inline">
+								<li>
+									Total
+								</li>
+								<li class="pull-right">
+									<%= hidden_field_tag :total_cost, @equiptment_params["total_cost"].to_f.round(2) %>
+									<span class="label label-success total_cost_span">
+							  		<%= number_to_currency(@equiptment_params["total_cost"]) %>
+							  	</span>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+			<%= f.button :button, 'Reserve', :class => 'btn btn-un btn-lg', data: { disable_with: "<i class='fa fa-spinner fa-spin'></i> Reserving...!"} %>
+			<%#= link_to "Previous Step", :back %>
+		<% end %>
+	</div>
+</div>
+
+<div class="modal fade" id="order_details" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">
+	        <div class="bs-callout bs-callout-danger" style="margin-bottom: 5px;" id="callout-collapse-dependency">
+	        	Cart Details
+		      </div>
+	      </h4>
+      </div>
+      <div class="modal-body">
+        <%= render partial: "shared/order_details", locals: { equiptment_params: @equiptment_params, package: @package } %>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-warning" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>

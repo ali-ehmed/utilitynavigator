@@ -1,0 +1,131 @@
+<div class="landing">
+  <!-- Slider -->
+  <%= render partial: "shared/slider" %>
+  
+  <!-- Page Content -->
+  <div class="container">
+    <div class="section-2">
+      <div class="row">
+        <div class="col-lg-12">
+          <h1 class="page-header text-center">HOW DOES IT WORK!</h1>
+        </div>
+        <div class="col-md-4 col-sm-6 text-center">
+          <%= image_tag("address.png") %>
+          <p>
+            01. Enter your Address
+          </p>
+          <strong>We'll find the providers available in your area.</strong>
+        </div>
+        <div class="col-md-4 col-sm-6 text-center">
+          <%= image_tag("offer.png") %>
+          <p>
+            02. Choose an Offer
+          </p>
+          <strong>Whether you want a triple-service bundle or standalone TV. We have it.</strong>
+        </div>
+        <div class="col-md-4 col-sm-6 col-sm-offset-3 col-md-offset-0 text-center">
+          <%= image_tag("service-request.png") %>
+          <p>
+            03. Place your service request
+          </p>
+          <strong>We'll help you to have the best service package for you.</strong>
+        </div>
+      </div>
+    </div>
+    <!-- /.row -->
+  </div>
+  <!-- /.container -->
+  <div class="section-3">
+    <!-- Features Section -->
+    <div class="row">
+      <div class="col-lg-12">
+        <span>
+          Get TV your way, starting, now. Call now (Toll Free)
+        </span>
+        <br />
+        <small>866-978-7294</small>
+      </div>
+    </div>
+    <!-- /.row -->
+  </div>
+
+  <div class="container">
+    <div class="section-4">
+      <h1 class="page-header text-center">
+        DON'T COMPROMISE YOUR SPEED
+      </h1>
+      <div class="row">
+        <div class="col-md-7">
+          <p>
+            With 2 billion connected devices around the globe, you don‘t want to lag in with your performance. You need blazing fast &amp; reliable internet that gets you online, lets you listen to online music. stream HD content, download movies 8. above all connect all your devices at home for the entire family. We provider internet packages from Nation‘s best service providers.
+          </p>
+          <p>
+            Faster the internet. the better. If you are a light internet user mostly doing web . 1' surfing &amp; checking emails. internet speeds up to 6 Mbps shall be sufficient. For T heavy users with multiple devices streaming music, video content &amp; playing online games. we recommend internet speed of 15Mbps or greater. Call us today &amp; one of our experts will custom tailor a solution for your needs.
+          </p>
+        </div>
+        <div class="col-md-5 text-center">
+          <%= image_tag("speed.png") %>
+        </div>
+      </div>
+      <h1 class="page-header text-center">
+        CRYSTAL CLEAR HD CABLE!
+      </h1>
+      <div class="row">
+        <div class="col-md-7">
+          <p>
+            Choosing for a cable provider can be an ordeal. With so many choices 8. factors such as number of channels. number of HD channels. contract. no contract, price after promotion. Premier channels. equipment 8. installation fees. a long list of packages where do you start. Cut yourself slack &amp; let us do the work for you. Our expert navigates you through the offers &amp; deals available in your area, clearly explaining the pros &amp; cons. We place your service request &amp; set up the installation. Our service is 100% free to you. 
+          </p>
+          <p>
+            We are often able to get you premier channels free to you for up to three months. Offers may not be available in all areas.
+          </p>
+        </div>
+        <div class="col-md-5 text-center">
+          <%= image_tag("hd-tv.png") %>
+        </div>
+      </div>
+      <h1 class="page-header text-center">
+        CALL WITHOUT BOUNDARIES!
+      </h1>
+      <div class="row">
+        <div class="col-md-7">
+          <p>
+            It‘s time we break you from boundaries &amp; you go international. Call your family a friends around the world worry free. With packages covering 35 countries with unlimited calling, HD voice. phone goto app, voicemail &amp; much more.
+          </p>
+          <p>
+            You Will fall In love With your home one once again.
+          </p>
+        </div>
+        <div class="col-md-5 text-center">
+          <%= image_tag("mobile.png") %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- Script to Activate the Carousel -->
+<script>
+  $(document).on('ready', function () {
+    $('.carousel').carousel({
+      interval: 4000, //changes the speed
+      pause: "click"
+    })
+    
+    $address_inputs = $("#search-deals-offer-form input[type='text']:lt(4)");
+    $.each($address_inputs, function(){
+      elem = $(this).attr("class").split(" ")
+      $("." + elem[2]).focus(function() {
+        $('.carousel').carousel('pause');
+        return false;
+      });
+
+      $("." + elem[2]).blur(function() {
+        $('.carousel').carousel('cycle');
+        return false;
+      });
+    });
+    
+  });
+</script>
+

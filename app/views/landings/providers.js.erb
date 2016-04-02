@@ -1,0 +1,48 @@
+console.log(window.active_product)
+switch(window.active_product) {
+	case "cable": 
+		$("#cable_packages").append("<%= j render partial: 'shared/filtered_packages/cable', collection: @tv_packages, as: :tv_package %>")
+		<% if @tv_packages.next_page %>
+			$(".pagination").replaceWith("<%= j will_paginate(@tv_packages, renderer: BootstrapPagination::Rails) %>")
+			$(".pagination").hide()
+			$("button#see-more-cable-packages").removeAttr("disabled")
+		<% else %>
+			$("button#see-more-cable-packages").parent().prev().find(".pagination").remove()
+			$("button#see-more-cable-packages").remove()
+		<% end %>
+		break
+	case "internet":
+		$("#internet_packages").append("<%= j render partial: 'shared/filtered_packages/internet', collection: @internet_packages, as: :internet_package %>")
+		<% if @internet_packages.next_page %>
+			$(".pagination").replaceWith("<%= j will_paginate(@internet_packages, renderer: BootstrapPagination::Rails) %>")
+			$(".pagination").hide()
+			$("button#see-more-internet-packages").removeAttr("disabled")
+		<% else %>
+			$("button#see-more-internet-packages").parent().prev().find(".pagination").remove()
+			$("button#see-more-internet-packages").remove()
+		<% end %>
+		break
+	case "phone":
+		$("#phone_packages").append("<%= j render partial: 'shared/filtered_packages/phone', collection: @phone_packages, as: :phone_package %>")
+		<% if @phone_packages.next_page %>
+			$(".pagination").replaceWith("<%= j will_paginate(@phone_packages, renderer: BootstrapPagination::Rails) %>")
+			$(".pagination").hide()
+			$("button#see-more-phone-packages").removeAttr("disabled")
+		<% else %>
+			$("button#see-more-phone-packages").parent().prev().find(".pagination").remove()
+			$("button#see-more-phone-packages").remove()
+		<% end %>
+		break
+	case "bundle":
+		$("#bundle_packages").append("<%= j render partial: 'shared/filtered_packages/bundles', collection: @bundle_packages, as: :bundle_package %>")
+		<% if @bundle_packages.next_page %>
+			$(".pagination").replaceWith("<%= j will_paginate(@bundle_packages, renderer: BootstrapPagination::Rails) %>")
+			$(".pagination").hide()
+			$("button#see-more-bundle-packages").removeAttr("disabled")
+		<% else %>
+			$("button#see-more-bundle-packages").parent().prev().find(".pagination").remove()
+			$("button#see-more-bundle-packages").remove()
+		<% end %>
+		break
+}
+<% sleep 1 %>

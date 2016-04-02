@@ -1,0 +1,131 @@
+<% if product.name.downcase == :cable.to_s %>
+	<%= fields_for :cable do |ff| %>
+		<li class="string input optional stringish" id="package_name_input">
+			<% Package::CABLE_TV.each_with_index do |cable_tv, count| %>
+				<h3><%= cable_tv %></h3>
+				<% count += 1 %>
+				<ol>
+					<!-- <li>
+						<label for="is_required" class="label">
+							Is Required
+						</label>
+						<%#= ff.select "is_required_#{count}", options_for_select(["Required", "Optional", "Free"]) %>
+					</li> -->
+					<li>
+						<label for="provider_name" class="label">
+							DVR Box &amp; Service 
+						</label>
+						<%= ff.select "checkout_select", options_for_select(["Free", "Not Include", "Add Price"]), {prompt: "--Select--"}, class: "package_select_field", onchange: "$packages.addPriceField(this);" %>
+
+						<%= ff.text_field "dvr_box_#{count}", style: "display: none;", class: "admin_checkout_price", value: "free" %>
+					</li>
+					<li>
+						<label for="provider_name" class="label">
+							HD BOX
+						</label>
+						<%= ff.select "checkout_select", options_for_select(["Free", "Not Include", "Add Price"]), {prompt: "--Select--"}, class: "package_select_field", onchange: "$packages.addPriceField(this);" %>
+
+						<%= ff.text_field "additional_hd_#{count}", style: "display: none;", class: "admin_checkout_price", value: "free" %>
+					</li>
+
+					<li>
+						<label for="provider_name" class="label">
+							SD BOX
+						</label>
+						<%= ff.select "checkout_select", options_for_select(["Free", "Not Include", "Add Price"]), {prompt: "--Select--"}, class: "package_select_field", onchange: "$packages.addPriceField(this);" %>
+
+						<%= ff.text_field "sd_box_#{count}", style: "display: none;", class: "admin_checkout_price", value: "free" %>
+					</li>
+				</ol>
+			<% end %>
+		</li>
+		<li>
+			<label class="label">
+				Premiums
+			</label>
+			<%= ff.select :premiums, options_for_select(["Required", "Free"]) %>
+		</li>
+		<li>
+			<label class="label">
+				Digital Tier 1
+			</label>
+			<%= ff.select :digital_tier_1, options_for_select(["Required", "Free"]) %>
+		</li>
+		<li>
+			<label class="label">
+				Digital Tier 2
+			</label>
+			<%= ff.select :digital_tier_2, options_for_select(["Required", "Free"]) %>
+		</li>
+		<li>
+			<label class="label">
+				International Channels
+			</label>
+			<%= ff.select :international_channels, options_for_select(["Required", "Free"]) %>
+		</li>
+	<% end %>
+<% elsif product.name.downcase == :internet.to_s %>
+	<%= fields_for :internet do |ff| %>
+		<li>
+			<label class="label">
+				Internet Modem
+			</label>
+			<%= ff.select "checkout_select", options_for_select(["Free", "Not Include", "Add Price"]), {prompt: "--Select--"}, class: "package_select_field", onchange: "$packages.addPriceField(this);" %>
+
+			<%= ff.text_field "modem", style: "display: none;", class: "admin_checkout_price", value: "free" %>
+		</li>
+		<li>
+			<label class="label">
+				Wifi Service &amp; Equiptment
+			</label>
+			<%= ff.select "checkout_select", options_for_select(["Free", "Not Include", "Add Price"]), {prompt: "--Select--"}, class: "package_select_field", onchange: "$packages.addPriceField(this);" %>
+
+			<%= ff.text_field "wifi", style: "display: none;", class: "admin_checkout_price", value: "free" %>
+		</li>
+		<li>
+			<label class="label">
+				Wifi Installation
+			</label>
+			<%= ff.select "checkout_select", options_for_select(["Free", "Not Include", "Add Price"]), {prompt: "--Select--"}, class: "package_select_field", onchange: "$packages.addPriceField(this);" %>
+
+			<%= ff.text_field "wifi_installation", style: "display: none;", class: "admin_checkout_price", value: "free" %>
+		</li>
+	<% end %>
+<% else %>
+	<%= fields_for :phone do |ff| %>
+		<li>
+			<label class="label">
+				New phone number
+			</label>
+			<%= ff.select "checkout_select", options_for_select(["Free", "Not Include", "Add Price"]), {prompt: "--Select--"}, class: "package_select_field", onchange: "$packages.addPriceField(this);" %>
+
+			<%= ff.text_field "new_phone_number", style: "display: none;", class: "admin_checkout_price", value: "free" %>
+		</li>
+		<li>
+			<label class="label">
+				Old phone number
+			</label>
+			<%= ff.select "checkout_select", options_for_select(["Free", "Not Include", "Add Price"]), {prompt: "--Select--"}, class: "package_select_field", onchange: "$packages.addPriceField(this);" %>
+
+			<%= ff.text_field "old_phone_number", style: "display: none;", class: "admin_checkout_price", value: "free" %>
+		</li>
+		<li>
+			<label class="label">
+				Get 200 Minutes
+			</label>
+			<%= ff.select :get_200_minutes, options_for_select(["Required", "Free"]) %>
+		</li>
+		<li>
+			<label class="label">
+				Mexico 500
+			</label>
+			<%= ff.select :mexico_500, options_for_select(["Required", "Free"]) %>
+		</li>
+		<li>
+			<label class="label">
+				Get 500 Minutes
+			</label>
+			<%= ff.select :get_500_minutes, options_for_select(["Required", "Free"]) %>
+		</li>
+	<% end %>
+<% end %>

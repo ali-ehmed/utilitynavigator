@@ -13,5 +13,30 @@
 //= require jquery
 //= require jquery_ujs
 //= require turbolinks
+//= require bootstrap-notify
 //= require bootstrap-sprockets
+//= require moment
+//= require bootstrap-datetimepicker
+//= require jquery.cookie
+//= require common/constant
+//= require jasny-bootstrap.min
 //= require_tree .
+
+
+// 
+
+$(document).ready(function(){
+	// Notify
+	$.notifyDefaults({
+		allow_dismiss: true,
+		z_index: 10000,
+		offset: {
+			y: 50,
+			x: 33
+		},
+		placement: {
+			from: "top",
+			align: "right"
+		}
+	});
+});

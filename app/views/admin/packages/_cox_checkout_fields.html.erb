@@ -1,0 +1,155 @@
+<% if product.name.downcase == :cable.to_s %>
+	<%= fields_for :cable do |ff| %>
+		<li class="string input optional stringish" id="package_name_input">
+			<% Package::CABLE_TV.each_with_index do |cable_tv, count| %>
+				<h3 style="font-weight:bold;"><%= cable_tv %></h3>
+				<% count += 1 %>
+				<ol>
+					<!-- <li>
+						<label for="is_required" class="label">
+							Is Required
+						</label>
+						<%#= ff.select "is_required_#{count}", options_for_select(["Required", "Optional", "Free"]) %>
+					</li> -->
+					<li>
+						<label for="provider_name" class="label">
+							Contour Record 6 HD-DVR Receiver &amp; Service
+						</label>
+						<%= ff.select "checkout_select", options_for_select(["Free", "Not Include", "Add Price"]), {prompt: "--Select--"}, class: "package_select_field", onchange: "$packages.addPriceField(this);" %>
+
+						<%= ff.text_field "contour_record_dvr_#{count}", style: "display: none;", class: "admin_checkout_price", value: "free" %>
+					</li>
+					<li>
+						<label for="provider_name" class="label">
+							Contour HD-DVR Receiver
+						</label>
+						<%= ff.select "checkout_select", options_for_select(["Free", "Not Include", "Add Price"]), {prompt: "--Select--"}, class: "package_select_field", onchange: "$packages.addPriceField(this);" %>
+
+						<%= ff.text_field "contour_hd_dvr_#{count}", style: "display: none;", class: "admin_checkout_price", value: "free" %>
+
+					</li>
+					<li>
+						<label for="provider_name" class="label">
+							Contour HD Receiver
+						</label>
+						<%= ff.select "checkout_select", options_for_select(["Free", "Not Include", "Add Price"]), {prompt: "--Select--"}, class: "package_select_field", onchange: "$packages.addPriceField(this);" %>
+
+						<%= ff.text_field "contour_hd_receiver_#{count}", style: "display: none;", class: "admin_checkout_price", value: "free" %>
+					</li>
+					<li>
+						<label for="provider_name" class="label">
+							Mini Box
+						</label>
+						<%= ff.select "checkout_select", options_for_select(["Free", "Not Include", "Add Price"]), {prompt: "--Select--"}, class: "package_select_field", onchange: "$packages.addPriceField(this);" %>
+
+						<%= ff.text_field "mini_box_#{count}", style: "display: none;", class: "admin_checkout_price", value: "free" %>
+					</li>
+					<li>
+						<label for="provider_name" class="label">
+							Cable CARD
+						</label>
+						<%= ff.select "checkout_select", options_for_select(["Free", "Not Include", "Add Price"]), {prompt: "--Select--"}, class: "package_select_field", onchange: "$packages.addPriceField(this);" %>
+
+						<%= ff.text_field "cable_card_#{count}", style: "display: none;", class: "admin_checkout_price", value: "free" %>
+					</li>
+				</ol>
+			<% end %>
+		</li>
+		<li>
+			<label class="label">
+				Premium Movie Channels
+			</label>
+			<%= ff.select :premiums, options_for_select(["Required", "Free"]) %>
+		</li>
+		<li>
+			<label class="label">
+				TV Paks
+			</label>
+			<%= ff.select :tv_paks, options_for_select(["Required", "Free"]) %>
+		</li>
+	<% end %>
+<% elsif product.name.downcase == :internet.to_s %>
+	<%= fields_for :internet do |ff| %>
+		<li>
+			<label class="label">
+				Internet Equiptment
+			</label>
+			<%= ff.select :internet_equiptment, options_for_select(["Required", "Free"]) %>
+		</li>
+		<li>
+			<label class="label">
+				Cox Tech Solutions 
+			</label>
+			<%= ff.select :cox_teck_solutions, options_for_select(["Required", "Free"]) %>
+		</li>
+	<% end %>
+<% else %>
+	<%= fields_for :phone do |ff| %>
+		<li>
+			<label class="label">
+				Long Distance
+			</label>
+			<%= ff.select :long_distance, options_for_select(["Required", "Free"]) %>
+		</li>
+		<li>
+			<label class="label">
+				Additional Calling Features
+			</label>
+			<%= ff.select :calling_features, options_for_select(["Required", "Free"]) %>
+		</li>
+		<li>
+			<label class="label">
+				International Calling Plan
+			</label>
+			<%= ff.select :international_calling_plan, options_for_select(["Required", "Free"]) %>
+		</li>
+		<li>
+			<label class="label">
+				Mexico Calling Plan
+			</label>
+			<%= ff.select :mexico_calling_plan, options_for_select(["Required", "Free"]) %>
+		</li>
+		<li>
+			<label class="label">
+				Directory Listing
+			</label>
+			<%= ff.select :directory_listing, options_for_select(["Required", "Free"]) %>
+		</li>
+		<li>
+			<label class="label">
+				Telephone Outlet Installation Additional
+			</label>
+			<%= ff.select :telephone_outlet_installation, options_for_select(["Required", "Free"]) %>
+		</li>
+		<li>
+			<label class="label">
+				Telephone Equipment (EMTA) 
+			</label>
+			<%= ff.select :telephone_equiptment, options_for_select(["Required", "Free"]) %>
+		</li>
+		<li>
+			<label class="label">
+				Telephone Number porting
+			</label>
+			<%= ff.select :telephone_no_porting, options_for_select(["Required", "Free"]) %>
+		</li>
+		<li>
+			<label class="label">
+				Directory Name
+			</label>
+			<%= ff.select :directory_name, options_for_select(["Required", "Free"]) %>
+		</li>
+		<li>
+			<label class="label">
+				Cox Service Protection Plan
+			</label>
+			<%= ff.select :cox_service_protection_plan, options_for_select(["Required", "Free"]) %>
+		</li>
+		<li>
+			<label class="label">
+				Service Agreement
+			</label>
+			<%= ff.select :service_agreement, options_for_select(["Yes", "Not for this package"]) %>
+		</li>
+	<% end %>
+<% end %>

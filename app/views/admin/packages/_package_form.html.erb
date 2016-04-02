@@ -1,0 +1,76 @@
+<h3>
+	Note:
+	<ol>
+		<li>Donot add <strong>$</strong> in price fields.</li>
+		<li>Any field must filled with <strong>Free</strong> if you want to include in that field in this package.</li>
+	</ol>
+</h3>
+<%= simple_form_for [:admin, @package], url: @url, method: @http_method do |f| %>
+	<fieldset class="inputs">
+		<legend><span>General Details of Package</span></legend>
+		<ol>
+			<li class="string input optional stringish" id="package_name_input">
+				<%= f.input :package_name %>
+			</li>
+			<li class="string input optional stringish">
+				<%= f.label :package_description %>
+				<div id="package_description_input">
+					<%= f.input :package_description, input_html: { class: "package-content" } %>
+				</div>
+			</li>
+			<li class="string input optional stringish" id="package_price_info_input">
+				<%= f.input :price_info, hint: "Price Info should not be more than 70 characters" %>
+				<span class="price-info-error" style="display:none;color: red;"><strong>Error: </strong>Price Info must not exceed 70 characters</span>
+			</li>
+			<li class="string input optional stringish" id="package_price_input">
+				<%= f.input :price %>
+			</li>
+			<li class="string input optional stringish" id="package_monthly_fee_after_promotion_input">
+				<%= f.input :monthly_fee_after_promotion %>
+			</li>
+			<li class="string input optional stringish" id="package_installation_price_input">
+				<%= f.input :installation_price %>
+			</li>
+			<li class="string input optional stringish">
+				<%= f.label :promotions %>
+				<div id="package_promotions_input">
+					<%= f.input :promotions, input_html: { class: "package-promotions" } %>
+				</div>
+			</li>
+		</ol>
+	</fieldset>
+	<% if @package.new_record? %>
+		<fieldset class="inputs">
+			<legend><span>Select Provider &amp; Package Type</span></legend>
+			<ol>
+				<li>
+					<%= f.association :provider,:as => :select,:include_blank => "--Select--", input_html: { onchange: "$packages.validatingProvider(this);" } %>
+				</li>
+				<li>
+					<%= f.association :package_type,:as => :select,:include_blank => "--Select--", input_html: { onchange: "$packages.enableProducts(this);" } %>
+				</li>
+				<li>
+					<fieldset class="choices package-products">
+						<legend class="label"><label>Choose Products</label></legend>
+						<ol class="choices-group">
+							<li class="product-errors"></li>
+							<% Product.all.each do |product| %>
+								<li class="choice">
+									<%= check_box_tag "product_ids[]", product.id, false, onchange: "$packages.validatingProducts(this);" %> <%= product.name %>
+								</li>
+							<% end %>
+						</ol>
+					</fieldset>
+				</li>
+			</ol>
+		</fieldset>
+	<% end %>
+	<fieldset class="actions">
+		<ol>
+			<li class="action input_action " id="provider_submit_action">
+				<%= f.button :submit, @package.new_record? ? "Next" : "Update Package" %>
+			</li>
+			<li class="cancel"><%= link_to "Cancel", admin_packages_path %></li>
+		</ol>
+	</fieldset>
+<% end %>

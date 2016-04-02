@@ -1,0 +1,116 @@
+<div id="results-banner">
+	<div class="row">
+		<div class="col-md-6 address">
+			<strong>Offer Showing for:</strong>
+			<address><%= user_address %></address>
+			<i class="glyphicon glyphicon-edit"></i> <%= link_to "Change Address", root_path, class: "change-address-link" %>
+		</div>
+		<div class="col-md-6 companies">
+			<strong>Our Providers</strong>
+				<ul class="list-inline">
+					<li class="text-center">
+						<%= image_tag("twc-search.png") %>
+						(<%= @twc.count %>)
+					</li>
+					<li class="text-center">
+						<%= image_tag("cox-search.png") %>
+						(<%= @cox.count %>)
+					</li>
+					<li class="text-center">
+						<%= image_tag("charter-search.png") %>
+						(<%= @charter.count %>)
+					</li>
+				</ul>
+		</div>
+	</div>
+</div>
+<div id="package-details">
+	<div class="container">
+		<% if @packages.blank? %>
+			<div class="alert alert-danger">
+				<strong>Sorry!</strong> Currently, our packages are not available in your area.
+			</div>
+		<% else %>
+			<div class="row">
+				<% @packages.each do |package| %>
+					<div class="col-md-6 col-sm-12">
+						<div class="panel panel-default packages">
+							<div class="panel-body">
+								<div class="row">
+									<div class="col-md-9 col-sm-9">
+										<div class="row">
+											<div class="col-md-4 col-sm-4">
+												<%= provider_logo(package.provider) %>
+											</div>
+											<div class="form-group"></div>
+											<div class="col-md-8 col-sm-8">
+												<label><%= package.package_name %></label>
+												<%= link_to "Plan Details", "#", class: "detail-link", "data-toggle" => "modal", "data-target" => "#plan_details_#{package.id}" %>
+												<%= render partial: "shared/plan_details", locals: { package: package } %>
+											</div>
+										</div>
+										<p>
+											<%= package.package_description.blank? ? "N/A" : package.package_description.html_safe %>
+										</p>
+										
+										<%= link_to "More Info & Promotions", "#", class: "detail-link", class: "detail-link", "data-toggle" => "modal", "data-target" => "#promotions_#{package.id}" %>
+										<%= render partial: "shared/promotions", locals: { package: package } %>
+										<br /><br />
+										<%= link_to "CHOOSE THIS PLAN", offer_checkout_path(package, Package.checkout_steps.first.to_s), class: "btn btn-warning btn-lg choose-plan-btn" %>
+									</div>
+									<div class="col-md-3 col-sm-3">
+										<div class="price-info">
+											<strong>Starting at</strong>
+											<strong class="price"><%= package.price %></strong>
+											per month
+											<br />
+											<strong class="price-information"><%= package.price_info %></strong>
+										</div>
+										<div class="checkbox">
+			                <%= check_box_tag :compare, false, false, {:class => "styled compare_box", onchange: "compareMe(this);", data: { package_id: package.id, :compare_url => compare_packages_path }}  %>
+			                <label class="label-checkbox">
+			                  COMPARE
+			                </label>
+			              </div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				<% end %>
+			</div>
+			<ul class="list-inline pull-right">
+				<li>
+					<%= will_paginate @packages, renderer: BootstrapPagination::Rails, class: "pull-right" %>
+				</li>
+				<li>
+					<%= button_tag class: "btn btn-info pull-right", id: "compare_packages", style: "margin: 20px 0;" do %>
+						<i class="glyphicon glyphicon-random"></i> Compare Packages
+					<% end %>
+				</li>
+			</ul>
+		<% end %>
+	</div>
+</div>
+
+<div id="comparison"></div>
+
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Modal title</h4>
+      </div>
+      <div class="modal-body">
+        ...
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+

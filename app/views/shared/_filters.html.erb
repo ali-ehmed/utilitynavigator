@@ -1,0 +1,117 @@
+ <div class="tab-content packages-tab-content">
+  <div role="tabpanel" class="tab-pane fade in active" id="filter_with_tv">
+    <div class="row">
+      <div id="cable_packages">
+        <% if @tv_packages.present? %>
+          <%= render partial: "shared/filtered_packages/cable", collection: @tv_packages, as: :tv_package %>
+        <% else %>
+          <div class="alert alert-warning">
+            Sorry! No <strong>Cable</strong> Packages available
+          </div>
+        <% end %>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-4">
+        <a href="#" class="channel-comparison-link">CHANNEL COMPARISON</a>
+      </div>
+      <div class="col-md-4 text-center">
+        <%= will_paginate @tv_packages, renderer: BootstrapPagination::Rails %>
+      </div>
+      <div class="col-md-4">
+        <% if @tv_packages.count > 3 %>
+          <button class="btn btn-default pull-right see-more-btn" id="see-more-cable-packages" data-product="cable" onclick="loadPackages(this);">SEE MORE PACKAGES</button>
+        <% end %>
+      </div>
+    </div>
+
+  </div>
+  <div role="tabpanel" class="tab-pane fade in" id="filter_with_internet">
+    <div class="row">
+      <div id="internet_packages">
+        <% if @internet_packages.present? %>
+          <%= render partial: "shared/filtered_packages/internet", collection: @internet_packages, as: :internet_package %>
+        <% else %>
+          <div class="alert alert-warning">
+            Sorry! No <strong>Internet</strong> Packages available
+          </div>
+        <% end %>
+      </div>
+    </div>
+    
+    <div class="row">
+      <div class="col-md-4">
+        <a href="#" class="channel-comparison-link">CHANNEL COMPARISON</a>
+      </div>
+      <div class="col-md-4 text-center">
+        <%= will_paginate @internet_packages, renderer: BootstrapPagination::Rails %>
+      </div>
+      <div class="col-md-4">
+        <% if @internet_packages.count > 3 %>
+          <button class="btn btn-default pull-right see-more-btn" id="see-more-internet-packages" data-product="internet" onclick="loadPackages(this);">SEE MORE PACKAGES</button>
+        <% end %>
+      </div>
+    </div>
+
+  </div>
+  <div role="tabpanel" class="tab-pane fade in" id="filter_with_phone">
+    <div class="row">
+      <div id="phone_packages">
+        <% if @phone_packages.present? %>
+          <%= render partial: "shared/filtered_packages/phone", collection: @phone_packages, as: :phone_package %>
+        <% else %>
+          <div class="alert alert-warning">
+            Sorry! No <strong>Phone</strong> Packages available
+          </div>
+        <% end %>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-4">
+        <a href="#" class="channel-comparison-link">CHANNEL COMPARISON</a>
+      </div>
+      <div class="col-md-4 text-center">
+        <%= will_paginate @phone_packages, renderer: BootstrapPagination::Rails %>
+      </div>
+      <div class="col-md-4">
+        <% if @phone_packages.count > 3 %>
+          <button class="btn btn-default pull-right see-more-btn" id="see-more-phone-packages" data-product="phone" onclick="loadPackages(this);">SEE MORE PACKAGES</button>
+        <% end %>
+      </div>
+    </div>
+    
+  </div>
+  <div role="tabpanel" class="tab-pane fade in" id="filter_with_bundles">
+    <div class="row">
+      <div id="bundle_packages">
+        <% if @bundle_packages.present? %>
+          <%= render partial: "shared/filtered_packages/bundles", collection: @bundle_packages, as: :bundle_package %>
+        <% else %>
+          <div class="alert alert-warning">
+            Sorry! No Packages available
+          </div>
+        <% end %>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-4">
+        <a href="#" class="channel-comparison-link">CHANNEL COMPARISON</a>
+      </div>
+      <div class="col-md-4 text-center">
+        <%= will_paginate @bundle_packages, renderer: BootstrapPagination::Rails %>
+      </div>
+      <div class="col-md-4">
+        <% if @bundle_packages.count > 3 %>
+          <button class="btn btn-default pull-right see-more-btn" id="see-more-bundle-packages" data-product="bundle" onclick="loadPackages(this);">SEE MORE PACKAGES</button>
+        <% end %>
+      </div>
+    </div>
+    
+  </div>
+</div>
+
+<div class="channels"> 
+</div>

@@ -1,0 +1,20 @@
+<div class="modal fade" id="plan_details_<%= package.id %>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Plan Details</h4>
+      </div>
+      <div class="modal-body">
+        <div class="panel panel-default">
+        	<div class="panel-body">
+            <%= package.package_description.blank? ? "N/A" : package.package_description.html_safe %>
+        	</div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-un" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>

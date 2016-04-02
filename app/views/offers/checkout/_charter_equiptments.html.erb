@@ -1,0 +1,652 @@
+<div class="">
+	<% case product.name.downcase %>
+	<% when "cable" %>
+		<% fields = get_in_hash(@package_bundles.find_by_product_id(product.id).checkout_fields) %>
+		<%#= fields %>
+		
+		<!-- <h4>Please configure your TV, Internet &amp; Home Phone Services</h4> -->
+		<h4>Configure your 1st TV <span class="checkout_required">(Required)</span></h4>
+		<ul>
+			<% if fields["dvr_box_1"].present? %>
+				<li>
+					<% if fields["dvr_box_1"].downcase == "included" %>
+						<p>DVR Box &amp; Service (<%= fields["dvr_box_1"].capitalize %>)</p>
+					<% else %>
+						<div class="radio">
+		          <%= radio_button_tag :first_tv, false, false, {data: { price: fields["dvr_box_1"] }, onchange: "calculateEquiptmentCosts(this);"}  %>
+		          <label class="label-checkbox">
+		            DVR Box &amp; Service ($<%= fields["dvr_box_1"] %>)
+		          </label>
+		        </div>
+	        <% end %>
+				</li>
+			<% end %>
+			<% if fields["additional_hd_1"].present? %>
+				<li>
+					<% if fields["additional_hd_1"].downcase == "included" %>
+						<p>HD Box (<%= fields["additional_hd_1"].capitalize %>)</p>
+					<% else %>
+						<div class="radio">
+		          <%= radio_button_tag :first_tv, false, false, {data: { price: fields["additional_hd_1"] }, onchange: "calculateEquiptmentCosts(this);"}  %>
+		          <label class="label-checkbox">
+		            HD Box ($<%= fields["additional_hd_1"] %>)
+		          </label>
+		        </div>
+	        <% end %>
+				</li>
+			<% end %>
+			<% if fields["sd_box_1"].present? %>
+				<li>
+					<% if fields["sd_box_1"].downcase == "included" %>
+						<p>SD Box (<%= fields["sd_box_1"].capitalize %>)</p>
+					<% else %>
+						<div class="radio">
+		          <%= radio_button_tag :first_tv, false, false, {data: { price: fields["sd_box_1"] }, onchange: "calculateEquiptmentCosts(this);"}  %>
+		          <label class="label-checkbox">
+		            SD Box ($<%= fields["sd_box_1"] %>)
+		          </label>
+		        </div>
+	        <% end %>
+				</li>
+			<% end %>
+		</ul>
+		<!-- Second TV -->
+		<h4>Configure your 2nd TV <small><a href="javascript:void(0);" onclick="resetSelectedItem(this);">Reset selected item</a></small></h4>
+		<ul>
+			<% if fields["dvr_box_2"].present? %>
+				<li>
+					<% if fields["dvr_box_2"].downcase == "included" %>
+						<p>DVR Box &amp; Service (<%= fields["dvr_box_2"].capitalize %>)</p>
+					<% else %>
+						<div class="radio">
+		          <%= radio_button_tag :second_tv, false, false, {data: { price: fields["dvr_box_2"] }, onchange: "calculateEquiptmentCosts(this);"}  %>
+		          <label class="label-checkbox">
+		            DVR Box &amp; Service ($<%= fields["dvr_box_2"] %>)
+		          </label>
+		        </div>
+	        <% end %>
+				</li>
+			<% end %>
+			<% if fields["additional_hd_2"].present? %>
+				<li>	
+					<% if fields["additional_hd_2"].downcase == "included" %>
+						<p>HD Box (<%= fields["additional_hd_2"].capitalize %>)</p>
+					<% else %>
+						<div class="radio">
+		          <%= radio_button_tag :second_tv, false, false, {data: { price: fields["additional_hd_2"] }, onchange: "calculateEquiptmentCosts(this);"}  %>
+		          <label class="label-checkbox">
+		            HD Box ($<%= fields["additional_hd_2"] %>)
+		          </label>
+		        </div>
+	        <% end %>
+				</li>
+			<% end %>
+			<% if fields["sd_box_2"].present? %>
+				<li>
+					<% if fields["sd_box_2"].downcase == "included" %>
+						<p>SD Box (<%= fields["sd_box_2"].capitalize %>)</p>
+					<% else %>
+						<div class="radio">
+		          <%= radio_button_tag :second_tv, false, false, {data: { price: fields["sd_box_2"] }, onchange: "calculateEquiptmentCosts(this);"}  %>
+		          <label class="label-checkbox">
+		            SD Box ($<%= fields["sd_box_2"] %>)
+		          </label>
+		        </div>
+	        <% end %>
+				</li>
+			<% end %>
+		</ul>
+		<!-- Third TV -->
+		<h4>Configure your 3rd TV <small><a href="javascript:void(0);" onclick="resetSelectedItem(this);">Reset selected item</a></small></h4>
+		<ul>
+			<% if fields["dvr_box_3"].present? %>
+				<% if fields["dvr_box_3"].downcase == "included" %>
+					<p>DTA Box (<%= fields["dvr_box_3"].capitalize %>)</p>
+				<% else %>
+					<li>
+						<div class="radio">
+		          <%= radio_button_tag :third_tv, false, false, {data: { price: fields["dvr_box_3"] }, onchange: "calculateEquiptmentCosts(this);"}  %>
+		          <label class="label-checkbox">
+		            DVR Box &amp; Service ($<%= fields["dvr_box_3"] %>)
+		          </label>
+		        </div>
+					</li>
+				<% end %>
+			<% end %>
+			<% if fields["additional_hd_3"].present? %>
+				<% if fields["additional_hd_3"].downcase == "included" %>
+					 <p>HD Box (<%= fields["additional_hd_3"].capitalize %>)</p>
+				<% else %>
+					<li>
+						<div class="radio">
+		          <%= radio_button_tag :third_tv, false, false, {data: { price: fields["additional_hd_3"] }, onchange: "calculateEquiptmentCosts(this);"}  %>
+		          <label class="label-checkbox">
+		            HD Box ($<%= fields["additional_hd_3"] %>)
+		          </label>
+		        </div>
+					</li>
+				<% end %>
+			<% end %>	
+			<% if fields["sd_box_3"].present? %>
+				<li>
+					<% if fields["sd_box_3"].downcase == "included" %>
+						<p>SD Box (<%= fields["sd_box_3"].capitalize %>)</p>
+					<% else %>
+						<div class="radio">
+		          <%= radio_button_tag :third_tv, false, false, {data: { price: fields["sd_box_3"] }, onchange: "calculateEquiptmentCosts(this);"}  %>
+		          <label class="label-checkbox">
+		            SD Box ($<%= fields["sd_box_3"] %>)
+		          </label>
+		        </div>
+	        <% end %>
+				</li>
+			<% end %>
+		</ul>
+		<!-- Fourth TV -->
+		<h4>Configure your 4th TV <small><a href="javascript:void(0);" onclick="resetSelectedItem(this);">Reset selected item</a></small></h4>
+		<ul>
+			<% if fields["dvr_box_4"].present? %>
+				<% if fields["dvr_box_4"].downcase == "included" %>
+					<p>DVR Box &amp; Service (<%= fields["dvr_box_4"].capitalize %>)</p>
+				<% else %>
+					<li>
+						<div class="radio">
+		          <%= radio_button_tag :fourth_tv, false, false, {data: { price: fields["dvr_box_4"] }, onchange: "calculateEquiptmentCosts(this);"}  %>
+		          <label class="label-checkbox">
+		            DVR Box &amp; Service ($<%= fields["dvr_box_4"] %>)
+		          </label>
+		        </div>
+					</li>
+				<% end %>
+			<% end %>
+			<% if fields["additional_hd_4"].present? %>
+				<% if fields["additional_hd_4"].downcase == "included" %>
+					<p>HD Box (<%= fields["additional_hd_4"].capitalize %>)</p>
+				<% else %>
+					<li>
+						<div class="radio">
+		          <%= radio_button_tag :fourth_tv, false, false, {data: { price: fields["additional_hd_4"] }, onchange: "calculateEquiptmentCosts(this);"}  %>
+		          <label class="label-checkbox">
+		            HD Box ($<%= fields["additional_hd_4"] %>)
+		          </label>
+		        </div>
+					</li>
+				<% end %>
+			<% end %>
+			<% if fields["sd_box_4"].present? %>
+				<li>
+					<% if fields["sd_box_4"].downcase == "included" %>
+						<p>SD Box (<%= fields["sd_box_4"].capitalize %>)</p>
+					<% else %>
+						<div class="radio">
+		          <%= radio_button_tag :fourth_tv, false, false, {data: { price: fields["sd_box_4"] }, onchange: "calculateEquiptmentCosts(this);"}  %>
+		          <label class="label-checkbox">
+		            SD Box ($<%= fields["sd_box_4"] %>)
+		          </label>
+		        </div>
+	        <% end %>
+				</li>
+			<% end %>
+		</ul>
+		<!-- Details -->
+		<h4>
+			(<a role="button" data-toggle="collapse" href="#collapseDetailsTV" aria-expanded="false" aria-controls="collapseExample">Equiptment Description</a>)
+		</h4>
+		<div class="collapse" id="collapseDetailsTV">
+		  <div class="well">
+		    <ol>
+		    	<li>
+		    		<strong>DVR Box &amp; Service</strong>
+		    		<p>
+		    			<small>
+		    				DVR Box &amp; Service - Record your favorite shows and movies anytime you want, when you want to watch it - all in stunning HD.
+		    			</small>
+		    		</p>
+		    		<p>
+		    			<small>
+		    				DVR Service - Reinvent the way you watch TV on your schedule. Pause, record and rewind live TV. Automatically record single shows or an entire series. Record two shows at once or record one while you watch another.
+		    			</small>
+		    		</p>
+		    	</li>
+		    	<li>
+		    		<strong>HD Box</strong>
+		    		<p>
+		    			<small>
+		    				HD BOX - Watch Charter TV in stunning High Definition (Works on both newer HDTVs and older non HDTVs).
+		    			</small>
+		    		</p>
+		    	</li>
+		    	<li>
+		    		<strong>SD Box</strong>
+		    		<p>
+		    			<small>
+		    				SD BOX - Watch Charter TV in Standard Definition (For older, non HDTVs only).
+		    			</small>
+		    		</p>
+		    	</li>
+		    </ol>
+		  </div>
+		</div>
+		<!-- Digital Tier 1  -->
+		<h4>Digital Tier 1</h4>
+		<ul>
+			<li>
+				<% if fields["digital_tier_1"].downcase == "required" %>
+					<div class="checkbox">
+	          <%= check_box_tag :digital_tier_1, false, false, {:class => "styled", data: { price: 12.00 }, onchange: "calculateEquiptmentCosts(this);"}  %>
+	          <label class="label-checkbox">
+	            50 additional channels ($12.00 monthly)
+	          </label>
+	        </div>
+        <% else %>
+        	<label>50 additional channels (Free)</label>
+        <% end %>
+			</li>
+		</ul>
+		<a role="button" data-toggle="collapse" href="#collaspedigital_tier_1" aria-expanded="false" aria-controls="collapseExample" class="view_more">View Details</a>
+		<div class="collapse" id="collaspedigital_tier_1">
+      <p class="well">
+      	NFL Network, nick jr, bio, diy, FXM, Fox Sports 2
+      </p>
+    </div>
+
+		<!-- Digital Tier 2  -->
+		<h4>Digital Tier 2</h4>
+		<ul>
+			<li>
+				<% if fields["digital_tier_2"].downcase == "required" %>
+					<div class="checkbox">
+	          <%= check_box_tag :digital_tier_2, false, false, {:class => "styled", data: { price: 12.00 }, onchange: "calculateEquiptmentCosts(this);"}  %>
+	          <label class="label-checkbox">
+	            25 additional channels ($12.00 monthly)
+	          </label>
+	        </div>
+        <% else %>
+        	<label>25 additional channels (Free)</label>
+        <% end %>
+			</li>
+		</ul>
+		<a role="button" data-toggle="collapse" href="#collaspedigital_tier_2" aria-expanded="false" aria-controls="collapseExample" class="view_more">View Details</a>
+		<div class="collapse" id="collaspedigital_tier_2">
+      <p class="well">
+      	NFL RED ZONE, FOX College Sports, Outdoor, ESPN Classic
+      </p>
+    </div>
+		
+		<!-- More Entertainment for every one  -->
+		<% if fields["premiums"].downcase == "required" %>
+			<h4>Premium Channels</h4>
+			<ul>
+				<li>
+					<div class="checkbox">
+	          <%= check_box_tag :hbo, false, false, {:class => "styled", data: { price: 15.00 }, onchange: "calculateEquiptmentCosts(this);"}  %>
+	          <label class="label-checkbox">
+	            HBO ($15.00 monthly)
+	          </label>
+	          <br />
+	          <a role="button" data-toggle="collapse" href="#collaspehbo" aria-expanded="false" aria-controls="collapseExample" class="view_more">View Details</a>
+						<div class="collapse" id="collaspehbo">
+				      <p class="well">
+				      	8 channels of award-winning shows and movies, HBO on Demand, and watch HBO on your mobile device with HBO GO
+				      </p>
+				    </div>
+	        </div>
+				</li>
+				<li>
+					<div class="checkbox">
+	          <%= check_box_tag :cinemax, false, false, {:class => "styled", data: { price: 15.00 }, onchange: "calculateEquiptmentCosts(this);"}  %>
+	          <label class="label-checkbox">
+	            Cinemax ($15.00 monthly)
+	          </label>
+	          <br />
+	          <a role="button" data-toggle="collapse" href="#collaspecinemax" aria-expanded="false" aria-controls="collapseExample" class="view_more">View Details</a>
+						<div class="collapse" id="collaspecinemax">
+				      <p class="well">
+				      	9 channels of classic and blockbuster movies, Cinemax on Demand on your mobile device with MAX GO
+				      </p>
+				    </div>
+	        </div>
+				</li>
+				<li>
+					<div class="checkbox">
+	          <%= check_box_tag :showtime, false, false, {:class => "styled", data: { price: 15.00 }, onchange: "calculateEquiptmentCosts(this);"}  %>
+	          <label class="label-checkbox">
+	            Showtime ($15.00 monthly)
+	          </label>
+	          <br />
+	          <a role="button" data-toggle="collapse" href="#collaspshowtime" aria-expanded="false" aria-controls="collapseExample" class="view_more">View Details</a>
+						<div class="collapse" id="collaspshowtime">
+				      <p class="well">
+				      	6 Channels of Emmy Award-winning shows and tons of movies plus Showtime on Demand.
+				      </p>
+				    </div>
+	        </div>
+				</li>
+				<li>
+					<div class="checkbox">
+	          <%= check_box_tag :movie_channel, false, false, {:class => "styled", data: { price: 15.00 }, onchange: "calculateEquiptmentCosts(this);"}  %>
+	          <label class="label-checkbox">
+	            The Movie Channel ($15.00 monthly)
+	          </label>
+	          <br />
+	          <a role="button" data-toggle="collapse" href="#collaspmovie_channel" aria-expanded="false" aria-controls="collapseExample" class="view_more">View Details</a>
+						<div class="collapse" id="collaspmovie_channel">
+				      <p class="well">
+				      	3 channels of movies, including The Movie Channel on Demand, plus, get the deepest behind-the-scenes dish and insider trivia.
+				      </p>
+				    </div>
+	        </div>
+				</li>
+				<li>
+					<div class="checkbox">
+	          <%= check_box_tag :epix, false, false, {:class => "styled", data: { price: 15.00 }, onchange: "calculateEquiptmentCosts(this);"}  %>
+	          <label class="label-checkbox">
+	            EPIX ($15.00 monthly)
+	          </label>
+	          <br />
+	          <a role="button" data-toggle="collapse" href="#collaspepix" aria-expanded="false" aria-controls="collapseExample" class="view_more">View Details</a>
+						<div class="collapse" id="collaspepix">
+				      <p class="well">
+				      	Watch the biggest movies, original programming and a library of classics On Demand and online
+				      </p>
+				    </div>
+	        </div>
+				</li>
+				<li>
+					<div class="checkbox">
+	          <%= check_box_tag :starz, false, false, {:class => "styled", data: { price: 15.00 }, onchange: "calculateEquiptmentCosts(this);"}  %>
+	          <label class="label-checkbox">
+	            Starz ($15.00 monthly)
+	          </label>
+	          <br />
+	          <a role="button" data-toggle="collapse" href="#collaspstarz" aria-expanded="false" aria-controls="collapseExample" class="view_more">View Details</a>
+						<div class="collapse" id="collaspstarz">
+				      <p class="well">
+				      	5 channels of movies and new shows for the entire family plus Starz on Demand.
+				      </p>
+				    </div>
+	        </div>
+				</li>
+				<li>
+					<div class="checkbox">
+	          <%= check_box_tag :encore, false, false, {:class => "styled", data: { price: 15.00 }, onchange: "calculateEquiptmentCosts(this);"}  %>
+	          <label class="label-checkbox">
+	            Encore ($15.00 monthly)
+	          </label>
+	          <br />
+	          <a role="button" data-toggle="collapse" href="#collaspencore" aria-expanded="false" aria-controls="collapseExample" class="view_more">View Details</a>
+						<div class="collapse" id="collaspencore">
+				      <p class="well">
+				      	6 channels of mysteries, western, dramas, and more plus Encore on Demand.
+				      </p>
+				    </div>
+	        </div>
+				</li>
+			</ul>
+		<% end %>
+		<% if fields["international_channels"].downcase == "required" %>
+			<h4>International Channels</h4>
+			<ul>
+				<li>
+					<div class="checkbox">
+	          <%= check_box_tag :flipino_view, false, false, {:class => "styled", data: { price: 19.00 }, onchange: "calculateEquiptmentCosts(this);"}  %>
+	          <label class="label-checkbox">
+	            Filipino View ($19.99 monthly)
+	          </label>
+	          <br />
+	          <a role="button" data-toggle="collapse" href="#collaspflipino_view" aria-expanded="false" aria-controls="collapseExample" class="view_more">View Details</a>
+						<div class="collapse" id="collaspflipino_view">
+				      <p class="well">
+				      	6 Filipino Networks 
+				      </p>
+				    </div>
+	        </div>
+				</li>
+				<li>
+					<div class="checkbox">
+	          <%= check_box_tag :french_view, false, false, {:class => "styled", data: { price: 6.99 }, onchange: "calculateEquiptmentCosts(this);"}  %>
+	          <label class="label-checkbox">
+	            French View ($6.99 monthly)
+	          </label>
+	          <br />
+	          <a role="button" data-toggle="collapse" href="#collaspfrench_view" aria-expanded="false" aria-controls="collapseExample" class="view_more">View Details</a>
+						<div class="collapse" id="collaspfrench_view">
+				      <p class="well">
+				      	French Networks
+				      </p>
+				    </div>
+	        </div>
+				</li>
+				<li>
+					<div class="checkbox">
+	          <%= check_box_tag :latino_view, false, false, {:class => "styled", data: { price: 6.99 }, onchange: "calculateEquiptmentCosts(this);"}  %>
+	          <label class="label-checkbox">
+	            Latino View ($6.99 monthly)
+	          </label>
+	          <br />
+	          <a role="button" data-toggle="collapse" href="#collasplatino_view" aria-expanded="false" aria-controls="collapseExample" class="view_more">View Details</a>
+						<div class="collapse" id="collasplatino_view">
+				      <p class="well">
+				      	Up to 45 channels in Spanish
+				      </p>
+				    </div>
+	        </div>
+				</li>
+				<li>
+					<div class="checkbox">
+	          <%= check_box_tag :se_asian_view, false, false, {:class => "styled", data: { price: 29.99 }, onchange: "calculateEquiptmentCosts(this);"}  %>
+	          <label class="label-checkbox">
+	            SE Asian View ($29.99 monthly) 
+	          </label>
+	          <br />
+	          <a role="button" data-toggle="collapse" href="#collaspese_asian_view" aria-expanded="false" aria-controls="collapseExample" class="view_more">View Details</a>
+						<div class="collapse" id="collaspese_asian_view">
+				      <p class="well">
+				      	SE Asian Networks
+				      </p>
+				    </div>
+	        </div>
+				</li>
+				<li>
+					<div class="checkbox">
+	          <%= check_box_tag :tv_japan, false, false, {:class => "styled", data: { price: 14.99 }, onchange: "calculateEquiptmentCosts(this);"}  %>
+	          <label class="label-checkbox">
+	            TV Japan ($14.99 monthly)
+	          </label>
+	          <br />
+	          <a role="button" data-toggle="collapse" href="#collaspetv_japan" aria-expanded="false" aria-controls="collapseExample" class="view_more">View Details</a>
+						<div class="collapse" id="collaspetv_japan">
+				      <p class="well">
+				      	Japanese Networks
+				      </p>
+				    </div>
+	        </div>
+				</li>
+			</ul>
+		<% end %>
+		<hr />
+	<% when "internet" %>
+
+		<!-- Fields For Internet -->
+
+		<% fields = get_in_hash(@package_bundles.find_by_product_id(product.id).checkout_fields) %>
+		<%#= fields %>
+
+		<% if fields["modem"].present? %>
+			<h4>Modem <span class="checkout_required">(Required)</span></h4>
+			<% if fields["modem"].downcase == "included" %>
+				Internet plan requires modem to connect internet service (FREE)
+			<% else %>
+				<ul>
+					<li>
+						<div class="radio">
+		          <%= radio_button_tag :modem, false, false, {id: "modem_with", data: { price: fields["modem"] }, onchange: "calculateEquiptmentCosts(this);"}  %>
+		          <label class="label-checkbox" for="modem_with">
+		            Internet plan requires modem to connect internet service ($<%= fields["modem"] %>/Monthly)
+		          </label>
+		        </div>
+					</li>
+					<li>
+						<div class="radio">
+		          <%= radio_button_tag :modem, false, false, {id: "modem_own", data: { price: 0 }, onchange: "calculateEquiptmentCosts(this);"}  %>
+		          <label class="label-checkbox" for="modem_own">
+		            I’ll use my own internet modem ($0)
+		          </label>
+		        </div>
+					</li>
+				</ul>
+			<% end %>
+		<% end %>
+
+		<% if fields["wifi"].present? %>
+			<h4>WiFi Service &amp; Equipment <small><a href="javascript:void(0);" onclick="resetSelectedItem(this);">Reset selected item</a></small></h4>
+			<% if fields["wifi"].downcase == "included" %>
+				WiFi Service is included in this package
+			<% else %>
+				<ul>
+					<li>
+						<div class="radio">
+		          <%= radio_button_tag :wifi, false, false, {id: "wifi_with", data: { price: fields["wifi"] }, onchange: "calculateEquiptmentCosts(this);"}  %>
+		          <label class="label-checkbox" for="wifi_with">
+		            Yes, I want to add home WiFi router ($<%= fields["wifi"] %>)
+		          </label>
+		        </div>
+					</li>
+					<li>
+						<div class="radio">
+		          <%= radio_button_tag :wifi, false, false, {id: "wifi_own", data: { price: 0 }, onchange: "calculateEquiptmentCosts(this);"}  %>
+		          <label class="label-checkbox" for="wifi_own">
+		            I’ll use my own wireless router ($0)
+		          </label>
+		        </div>
+					</li>
+				</ul>
+			<% end %>
+		<% end %>
+		<hr />
+	<% else %>
+
+		<!-- Fields For Phone -->
+
+		<% fields = get_in_hash(@package_bundles.find_by_product_id(product.id).checkout_fields) %>
+
+		<%#= fields %>
+		<h4>PHONE <span class="checkout_required">(Required)</span></h4>
+		<ul>
+			<% if fields["new_phone_number"].present? %>
+				<li>
+					<% unless fields["new_phone_number"].downcase == "included" %>
+						<div class="radio">
+							<%= radio_button_tag :phone, false, false, {data: { price: fields["new_phone_number"] }, onchange: "calculateEquiptmentCosts(this);"}  %>
+		          <label class="label-checkbox">
+		            New Phone Number ($<%= fields["new_phone_number"] %>)
+	            </label>
+		        </div>
+	        <% else %>
+            New Phone Number (<%= fields["new_phone_number"] %>)
+        	<% end %>
+          <a role="button" data-toggle="collapse" href="#collaspephone" aria-expanded="false" aria-controls="collapseExample" class="view_more">View Details</a>
+					<div class="collapse" id="collaspephone">
+			      <p class="well">
+			      	Get a new phone number with Charter Home Phone and avoid the waiting time to have your existing number ported. Activation Fees vary by market.
+			      </p>
+			    </div>
+				</li>
+			<% end %>
+			<% if fields["old_phone_number"].present? %>
+				<li>
+					<% unless fields["old_phone_number"].downcase == "included" %>
+						<div class="radio">
+							<%= radio_button_tag :phone, false, false, {data: { price: fields["old_phone_number"] }, onchange: "calculateEquiptmentCosts(this);"}  %>
+		          <label class="label-checkbox">
+		            Old Phone Number ($<%= fields["old_phone_number"] %>)
+	            </label>
+		        </div>
+	        <% else %>
+            Old Phone Number (<%= fields["old_phone_number"] %>)
+        	<% end %>
+          <a role="button" data-toggle="collapse" href="#collaspephone_1" aria-expanded="false" aria-controls="collapseExample" class="view_more">View Details</a>
+					<div class="collapse" id="collaspephone_1">
+			      <p class="well">
+			      	Keep your old phone number when you switch to Charter Home Phone service. Activation Fees vary by market.
+			      </p>
+			    </div>
+				</li>
+			<% end %>
+			<li>
+        <label>
+          Enter your Current Phone Provider
+        </label>
+        <p>
+        	<%= text_field_tag :current_phone_provider, params[:current_phone_provider], {:class => "form-control"}  %>
+        </p>
+			</li>
+			<li>
+        <label>
+          Enter your phone number
+        </label>
+        <p>
+        	<%= text_field_tag :transfer_phone_number, params[:transfer_phone_number], {:class => "form-control"}  %>
+        </p>
+			</li>
+		</ul>
+		<h4>Please select your additional phone plans</h4>
+		<ul>
+			<li>
+				<% if fields["get_200_minutes"].downcase == "included" %>
+					Get 200 minutes each month (Free) 
+				<% else %>
+					<div class="checkbox">
+	          <%= check_box_tag :get_200_minutes, false, false, {:class => "styled", data: { price: 10.00 }, onchange: "calculateEquiptmentCosts(this);"}  %>
+	          <label class="label-checkbox">
+	            Get 200 minutes each month ($10 monthly) 
+	          </label>
+	        </div>
+        <% end %>
+        <a role="button" data-toggle="collapse" href="#collaspeget_200_minutes" aria-expanded="false" aria-controls="collapseExample" class="view_more">View Details</a>
+				<div class="collapse" id="collaspeget_200_minutes">
+		      <p class="well">
+		      	Call any landline in Mexico Talk as low as 50 a minute
+		      </p>
+		    </div>
+			</li>
+			<li>
+				<% if fields["mexico_500"].downcase == "included" %>
+					Mexico 500 Calling Plan (Free) 
+				<% else %>
+					<div class="checkbox">
+	          <%= check_box_tag :mexico_500, false, false, {:class => "styled", data: { price: 25.00 }, onchange: "calculateEquiptmentCosts(this);"}  %>
+	          <label class="label-checkbox">
+	            Mexico 500 Calling Plan ($25 monthly)  
+	          </label>
+	        </div>
+        <% end %>
+        <a role="button" data-toggle="collapse" href="#collaspegmexico_500" aria-expanded="false" aria-controls="collapseExample" class="view_more">View Details</a>
+				<div class="collapse" id="collaspegmexico_500">
+		      <p class="well">
+		      	Get 500 minutes each month Call any landline in Mexico Talk as low as 50 a minute
+		      </p>
+		    </div>
+			</li>
+			<li>
+				<% if fields["get_500_minutes"].downcase == "included" %>
+					 Worldwide 250 Calling Plan (Free)
+				<% else %>
+					<div class="checkbox">
+	          <%= check_box_tag :get_500_minutes, false, false, {:class => "styled", data: { price: 20.00 }, onchange: "calculateEquiptmentCosts(this);"}  %>
+	          <label class="label-checkbox">
+	             Worldwide 250 Calling Plan ($20 monthly) 
+	          </label>
+	        </div>
+        <% end %>
+        <a role="button" data-toggle="collapse" href="#collaspeget_500_minutes" aria-expanded="false" aria-controls="collapseExample" class="view_more">View Details</a>
+				<div class="collapse" id="collaspeget_500_minutes">
+		      <p class="well">
+		      	Get 250 minutes to 195 countries Includes 78 mobile destinations
+		      </p>
+		    </div>
+			</li>
+		</ul>
+	<% end %>
+</div>
+

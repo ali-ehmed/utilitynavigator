@@ -1,0 +1,7 @@
+$("#comparison").html("<%= escape_javascript(render partial: 'shared/compare_packages', locals: { packages: @packages }) %>")
+
+$("#compareModal").modal({
+	backdrop: "static",
+	keyboard: false,
+	show: true
+})

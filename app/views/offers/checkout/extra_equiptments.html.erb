@@ -1,0 +1,129 @@
+<div id="package_provider" data-provider="<%= @package.provider.acronym %>"></div>
+<div class="extra_equiptments">
+	<div class="container">
+		<!-- offer_checkout_path(@package, Package.checkout_steps.second.to_s) -->
+		<%= form_tag wizard_path, method: :put, id: "extra_equiptments_form" do %>
+			<div class="row">
+				<div class="col-md-9 col-sm-9">
+					<blockquote>
+					  <h2 class="page-header" style="margin: 20px 0 20px;">
+							<%= @package.package_name %>
+						</h2>
+					  <footer>Configure your equipment &amp; setup installation</footer>
+					</blockquote>
+					<div class="panel panel-default">
+						<div class="panel-body">
+							<% @products.each do |product| %>
+								<div class="bs-callout bs-callout-danger" style="background-color: #E0E0E0;" id="callout-collapse-dependency">
+									<h4 class="setup">
+										<%= product.name == "Cable" ? "Setup your TV Service" : product.name == "Internet" ? "Setup your Internet Service" : "Setup your Phone Service" %>
+									</h4>
+								</div>
+								<%= render partial: "#{@package.provider.acronym}_equiptments", locals: { product: product, package: @package } %>
+							<% end %>
+							<div class="bs-callout bs-callout-danger" style="background-color: #E0E0E0;" id="callout-collapse-dependency">
+								<h4 class="setup">
+									Installation <span class="checkout_required">(Required)</span>
+								</h4>
+							</div>
+							<ul>
+								<li>
+									<% unless @package.installation_price.downcase == "free" or @package.installation_price.downcase == "included" %>
+										<div class="checkbox">
+			        				<%= check_box_tag :installation, false, false, {:class => "styled", data: { price: @package.installation_price }, onchange: "calculateEquiptmentCosts(this);"}  %>
+							        <label class="label-checkbox">
+							          Schedule an appointment for a technician to install my services (<%= @package.installation_price %>) 
+							        </label>
+							      </div>
+						      <% else %>
+						      	<label class="label-checkbox">
+						          Schedule an appointment for a technician to install my services (Free) 
+						        </label>
+						      <% end %>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-3 col-sm-3 follow-equiptments">
+					<div class="panel panel-default">
+						<div class="panel-heading">
+							<div class="panel-title">
+								<ul class="list-inline">
+									<li>Plan Summary</li>
+									<li class="pull-right">
+										<%= link_to "Change Plan", offers_path %>
+									</li>
+								</ul>
+							</div>
+						</div>
+						<div class="panel-body">
+							<ul class="list-unstyled">
+								<li class="summary-logo">
+									<%= provider_logo(@package.provider) %>
+								</li>
+								<hr />
+								<li>
+									<ul class="list-inline">
+										<li>
+											<strong>Package Price</strong>
+										</li>
+										<li class="pull-right">
+											<%= number_to_currency(@package.price) %>
+										</li>
+									</ul>
+								</li>
+								<li>
+									<ul class="list-inline">
+										<li>
+											<strong>Installation Price</strong>
+										</li>
+										<li class="pull-right">
+											<% if @package.installation_price.downcase == "free" %>
+									  		Free
+								  		<% else %>
+								  			<%= number_to_currency(@package.installation_price) %>
+								  		<% end %>
+										</li>
+									</ul>
+								</li>
+								<li>
+									<ul class="list-inline">
+										<li>
+											<strong>Extra Equiptment Price</strong>
+										</li>
+										<li class="pull-right">
+											$
+											<%= hidden_field_tag :equiptment_cost, 0 %>
+											<span class="equiptment_cost_span">0.00</span>
+										</li>
+									</ul>
+								</li>
+								<li class="disclaimer">
+									<div class="alert alert-warning" role="alert">
+										<strong>Disclaimer:</strong>
+										This amount excludes taxes. Actual taxes &amp; fees will be calculated &amp; reflect on your billing statement
+									</div>
+								</li>
+							</ul>
+						</div>
+						<div class="panel-footer">
+							<ul class="list-inline">
+								<li>
+									Total
+								</li>
+								<li class="pull-right">
+									<%= hidden_field_tag :total_cost, @package.price.to_f.round(2) %>
+									<span class="label label-success total_cost_span">
+							  		<%= number_to_currency(@package.price) %>
+							  	</span>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+			<%= button_tag "Place Order", type: :submit, class: "btn btn-un btn-lg" %>
+		<% end %>
+	</div>
+</div>

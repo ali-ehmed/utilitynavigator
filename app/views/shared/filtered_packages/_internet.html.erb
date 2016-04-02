@@ -1,0 +1,19 @@
+<div class="col-md-4">
+  <div class="panel panel-default">
+    <div class="panel-body">
+      <div class="package-heading">
+        <%= internet_package.package_name %>
+      </div>
+      <div class="package-price">
+        <%= number_to_currency(internet_package.price) %> <span class="per-month">/ month</span>
+      </div>
+      <div class="package-desc">
+        <%= internet_package.package_description.html_safe %>
+      </div>
+      
+      <div class="package-button">
+        <a href="#" class="btn btn-warning btn-block offer-btn">Select offer</a>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,26 @@
+<h3>
+	<strong>Note:</strong>
+	<ol>
+		<li>All the fields are <strong>Free</strong> by default</li>
+		<li>Donot Enter <strong>$</strong> sign for Prices</li>
+		<li>Selecting <strong>Not Include</strong> will remove the field from package</li>
+	</ol>
+</h3>
+<%= form_tag admin_packages_path(product_ids: @product_ids), method: :post do %>
+	<% for product in @products do %>	
+		<fieldset class="inputs">
+			<legend><span><%= product.name %></span></legend>
+			<ol>
+				<% if @provider.short_name == "CHARTER" %>
+					<%= render partial: "charter_checkout_fields", locals: { product: product } %>
+				<% elsif @provider.short_name == "TIME" %>
+					<%= render partial: "twc_checkout_fields", locals: { product: product } %>
+				<% else %>
+					<%= render partial: "cox_checkout_fields", locals: { product: product } %>
+				<% end %>
+			</ol>
+		</fieldset>	
+	<% end %>
+	<%= button_tag "Create Package", type: :submit %>
+	<%= link_to "Cancel", admin_packages_path %>
+<% end %>

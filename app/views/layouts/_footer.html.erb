@@ -1,12 +1,41 @@
 <!-- Footer -->
-<div class="container">
-  <hr>
-  <footer>
-      <div class="row">
-          <div class="col-lg-12">
-              <p>Copyright &copy; Your Website 2014</p>
-          </div>
-      </div>
-  </footer>
-</div>
-<!-- /.container -->
+<footer>
+	<div class="well application-footer">
+		<div class="row">
+			<div class="col-md-3">
+				<div class="footer-logo">
+					<p>
+						<%= link_to root_path do %>
+			        <%= image_tag "logo-footer.png" %>
+			      <% end %>
+					</p>
+					<strong>&copy; 2016 Utility Navigator. All Rights Reserved</strong>
+				</div>
+				
+			</div>
+			<div class="col-md-9">
+				<div class="row">
+					<div class="col-md-9">
+						<p>We at Utility Navigators are committed to making your choice of TV/Internet/Phone a simple &amp; smooth decision. No more complex comparisons or long holds..!</p>
+					</div>
+					<div class="col-md-3">
+						<button type="button" data-controls-modal="call_back" data-backdrop="static" data-keyboard="false" class="btn btn-lg btn-warning btn-callback btn-block" data-toggle="modal" data-target="#call_back">
+							Request Call Back
+						</button>
+					</div>
+				</div>
+				<hr />
+				<ul class="list-inline providers-link">
+					<li><a href="/twc">TWS</a></li>
+					<li><a href="/cox">COX</a></li>
+					<li><a href="/charter_spectrum">CHARTER</a></li>
+					<li class="pull-right"><a href="http://designhenge.com/" style="color: #7E7E7E;">Powered By <strong>Design Henge</strong></a></li>
+				</ul>
+			</div>
+		</div>
+	</div>
+</footer>
+
+<%= render partial: "shared/call_back_form" %>
+<%= render partial: "shared/login" %>
+
