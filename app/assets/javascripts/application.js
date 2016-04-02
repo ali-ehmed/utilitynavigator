@@ -12,6 +12,7 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require turbolinks
 //= require bootstrap-notify
 //= require bootstrap-sprockets
 //= require moment
@@ -22,7 +23,7 @@
 //= require_tree .
 
 
-// require turbolinks
+// 
 
 $(document).ready(function(){
 	// Notify

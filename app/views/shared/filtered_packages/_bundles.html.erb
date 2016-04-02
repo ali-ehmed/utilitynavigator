@@ -7,7 +7,10 @@
       <div class="package-price">
         <%= number_to_currency(bundle_package.price) %> <span class="per-month">/ month</span>
       </div>
-      <%= bundle_package.package_description.html_safe %>
+      <div class="package-desc">
+        <%= bundle_package.package_description.html_safe %>  
+      </div>
+      
       <div class="package-button">
         <a href="#" class="btn btn-warning btn-block offer-btn">Select offer</a>
       </div>

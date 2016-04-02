@@ -40,9 +40,10 @@ offerSearchNotice = ->
 	$(document).on "click", '.offer-btn', (e) ->
 		e.preventDefault()
 		$('html, body').animate { scrollTop: 0 }, 'slow', ->
-			$('#search-deals-offer-form').popover("show")
-			$('#search-deals-offer-form').on 'shown.bs.popover', ->
+			$('.pop-msg').popover("show")
+			$('.pop-msg').on 'shown.bs.popover', ->
 			  $(@).next().find(".popover-title").css("background-color", "#9932CC")
+			  $(@).next().find(".popover-content").css("color", "#232121")
 			  $(@).next().css("width", "100%")
 			  return
 
@@ -92,6 +93,32 @@ window.settingFilterActive = (elem) ->
 
   $(elem).find("span.package-filter").css('background-image', 'url("assets/filter-circle-select.png")')
 
+window.resetSelectedItem = (elem) ->
+	$this = $(elem)
+	equiptment_cost = parseFloat(document.getElementById("equiptment_cost").value)
+	total_cost = parseFloat(document.getElementById("total_cost").value)
+	$radios = $this.closest("h4").next().find("li input")
+
+	x = 0
+	while x < $radios.length
+    if $($radios[x]).attr("checked")
+      $radios[x].checked = false
+
+      equiptment_cost -= parseFloat($($radios[x]).data("price"))
+      total_cost -= parseFloat($($radios[x]).data("price"))
+      
+      document.getElementById("equiptment_cost").value = equiptment_cost.toFixed(2)
+      document.getElementById("total_cost").value = total_cost.toFixed(2)
+
+      $($radios[x]).val("false")
+      $($radios[x]).removeAttr("checked")
+
+      $(".equiptment_cost_span").text(equiptment_cost.toFixed(2))
+      $(".total_cost_span").text("$" + total_cost.toFixed(2))
+      
+      # return
+    x++
+    
 # This method is calculating the extra equiptment cost
 window.calculateEquiptmentCosts = (elem) ->
 	equiptment_cost = parseFloat(document.getElementById("equiptment_cost").value)
@@ -268,7 +295,6 @@ validateExtraEquiptment = ->
     fourth_tv = $("input[name='fourth_tv']:checked")
     fourth_outlet = $("input[name='4th_tv_outlet']:checked")
 
-    epix_offer = $("input[name='epix_offer']:checked")
     phone = $("input[name='phone']:checked")
     phone_radio_btns = $("input[name='phone']")
     modem = $("input[name='modem']:checked")
@@ -291,10 +317,6 @@ validateExtraEquiptment = ->
     if $provider == "twc"
 	    if fourth_tv.length > 0 and fourth_outlet.length == 0
         $errors.push("Please select 4th Outlet Avtivation fees")
-	      $valid = false
-
-	    if epix_offer.length == 0
-        $errors.push("Please select Epix Offer")
 	      $valid = false
 
     if $provider == "twc" or $provider == "charter"
@@ -383,7 +405,7 @@ loadChannels = ->
 		$link = $(this)
 		$link.html("<i class=\'fa fa-spinner fa-spin\'></i> Loading Channels")
 		$.get('/load_channels', (data) ->
-			console.log data
+			# console.log data
 		).done(->
 			$link.html("CHANNEL COMPARISON")
 			return false
@@ -479,7 +501,7 @@ searchProviders = ->
       console.log 'no location found'
       return
 
-$(document).on 'ready page:change', ->
+$(document).on 'page:change', ->
 	### Initializing ###
 
 	navbarActiveLink()

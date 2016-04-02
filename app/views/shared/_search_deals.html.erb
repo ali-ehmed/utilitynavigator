@@ -1,38 +1,34 @@
-<div class="row">
-  <div class="col-md-8">
-    <%= form_tag offers_path, method: :get, id: "search-deals-offer-form", class: "form-inline", "data-title" => "<span class='search-form-popover-title'>Find your offer</span>", "data-content" => "Please enter your zipcode and find available deals and offers.", "data-html" => "true", tabindex: "0", "data-trigger" => "manual" do %>
-      <div class="panel panel-search home_form">
-        <div class="panel-body">
-          <h4 class="search-title">
-            Compare and Choose Your TV, Internet and Phone Services
-          </h4>
-          <p>ENTER YOUR ADDRESS</p>
-          <ul class="list-inline">
-            <li class="col-md-4 col-sm-4 col-xs-12">
-              <div class="form-group">
-                <%= text_field_tag :address, params[:address], class: "col-md-3 form-control address-bar", placeholder: "Street Address*" %>
-              </div>
-            </li>
-            <li class="col-md-2 col-xs-12 col-sm-2">
-              <div class="form-group">
-                <%= text_field_tag :apt, params[:apt], class: "col-md-3 form-control apt-bar", placeholder: "Apt#" %>
-              </div>
-            </li>
-            <li class="col-md-3 col-xs-12 col-sm-3">
-              <div class="form-group">
-                <%= text_field_tag :zipcode, params[:zipcode], class: "col-md-3 form-control zipcode-bar", placeholder: "Zip Code*" %>
-              </div>
-            </li>
-            <li class="col-md-3 col-xs-12 col-sm-3">
-              <div class="form-group">
-                <%= text_field_tag :state, params[:state], class: "col-md-3 form-control state-bar", placeholder: "State*" %>
-              </div>
-            </li>
-          </ul>
-          <br />
-          <%= button_tag "Find Deals &amp; Offers".html_safe, type: :submit, class: "btn btn-block btn-danger search-btn" %>
-        </div>
-      </div>
-    <% end %>
+<%= form_tag offers_path, method: :get, id: "search-deals-offer-form", class: "form-inline" do %>
+  <div class="panel panel-search home_form pop-msg" data-toggle="popover" data-trigger="manual" title="<span class='search-form-popover-title'>Find your offer</span>" data-content="Please enter your zipcode and find available deals and offers." data-html="true" tabindex="0">
+    <div class="panel-body">
+      <h4 class="search-title">
+        Compare and Choose Your TV, Internet and Phone Services
+      </h4>
+      <p>ENTER YOUR ADDRESS</p>
+      <ul class="list-inline">
+        <li class="col-md-4 col-sm-4 col-xs-12">
+          <div class="form-group">
+            <%= text_field_tag :address, params[:address], class: "col-md-3 form-control address-bar", placeholder: "Street Address*" %>
+          </div>
+        </li>
+        <li class="col-md-2 col-xs-12 col-sm-2">
+          <div class="form-group">
+            <%= text_field_tag :apt, params[:apt], class: "col-md-3 form-control apt-bar", placeholder: "Apt#" %>
+          </div>
+        </li>
+        <li class="col-md-3 col-xs-12 col-sm-3">
+          <div class="form-group">
+            <%= text_field_tag :zipcode, params[:zipcode], class: "col-md-3 form-control zipcode-bar", placeholder: "Zip Code*" %>
+          </div>
+        </li>
+        <li class="col-md-3 col-xs-12 col-sm-3">
+          <div class="form-group">
+            <%= text_field_tag :state, params[:state], class: "col-md-3 form-control state-bar", placeholder: "State*" %>
+          </div>
+        </li>
+      </ul>
+      <br />
+      <%= button_tag "Find Deals &amp; Offers".html_safe, type: :submit, class: "btn btn-block btn-danger search-btn" %>
+    </div>
   </div>
-</div>
+<% end %>

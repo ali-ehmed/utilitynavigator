@@ -8,7 +8,9 @@
       <div class="package-price">
         <%= number_to_currency(tv_package.price) %> <span class="per-month">/ month</span>
       </div>
-      <%= tv_package.package_description.html_safe %>
+      <div class="package-desc">
+        <%= tv_package.package_description.html_safe %>  
+      </div>
       <!-- <ul class="list-unstyled">
         <li>
           <i class="fa fa-check-circle-o fa-1x"></i>

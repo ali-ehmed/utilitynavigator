@@ -21,8 +21,11 @@
 								</div>
 								<%= render partial: "#{@package.provider.acronym}_equiptments", locals: { product: product, package: @package } %>
 							<% end %>
-
-							<h3>Installation <span class="checkout_required">(Required)</span></h3>
+							<div class="bs-callout bs-callout-danger" style="background-color: #E0E0E0;" id="callout-collapse-dependency">
+								<h4 class="setup">
+									Installation <span class="checkout_required">(Required)</span>
+								</h4>
+							</div>
 							<ul>
 								<li>
 									<% unless @package.installation_price.downcase == "free" or @package.installation_price.downcase == "included" %>
@@ -120,7 +123,7 @@
 					</div>
 				</div>
 			</div>
-			<%= button_tag "Continue to Payment", type: :submit, class: "btn btn-un btn-lg" %>
+			<%= button_tag "Place Order", type: :submit, class: "btn btn-un btn-lg" %>
 		<% end %>
 	</div>
 </div>

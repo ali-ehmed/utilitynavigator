@@ -4,8 +4,8 @@
 		<% fields = get_in_hash(@package_bundles.find_by_product_id(product.id).checkout_fields) %>
 		<%#= fields %>
 		
-		<!-- <h3>Please configure your TV, Internet &amp; Home Phone Services</h3> -->
-		<h3>Configure your 1st TV <span class="checkout_required">(Required)</span></h3>
+		<!-- <h4>Please configure your TV, Internet &amp; Home Phone Services</h4> -->
+		<h4>Configure your 1st TV <span class="checkout_required">(Required)</span></h4>
 		<ul>
 			<% if fields["dvr_box_1"].present? %>
 				<li>
@@ -51,7 +51,7 @@
 			<% end %>
 		</ul>
 		<!-- Second TV -->
-		<h3>Configure your 2nd TV</h3>
+		<h4>Configure your 2nd TV <small><a href="javascript:void(0);" onclick="resetSelectedItem(this);">Reset selected item</a></small></h4>
 		<ul>
 			<% if fields["dvr_box_2"].present? %>
 				<li>
@@ -97,7 +97,7 @@
 			<% end %>
 		</ul>
 		<!-- Third TV -->
-		<h3>Configure your 3rd TV</h3>
+		<h4>Configure your 3rd TV <small><a href="javascript:void(0);" onclick="resetSelectedItem(this);">Reset selected item</a></small></h4>
 		<ul>
 			<% if fields["dvr_box_3"].present? %>
 				<% if fields["dvr_box_3"].downcase == "included" %>
@@ -143,7 +143,7 @@
 			<% end %>
 		</ul>
 		<!-- Fourth TV -->
-		<h3>Configure your 4th TV</h3>
+		<h4>Configure your 4th TV <small><a href="javascript:void(0);" onclick="resetSelectedItem(this);">Reset selected item</a></small></h4>
 		<ul>
 			<% if fields["dvr_box_4"].present? %>
 				<% if fields["dvr_box_4"].downcase == "included" %>
@@ -228,7 +228,7 @@
 		  </div>
 		</div>
 		<!-- Digital Tier 1  -->
-		<h3>Digital Tier 1</h3>
+		<h4>Digital Tier 1</h4>
 		<ul>
 			<li>
 				<% if fields["digital_tier_1"].downcase == "required" %>
@@ -251,7 +251,7 @@
     </div>
 
 		<!-- Digital Tier 2  -->
-		<h3>Digital Tier 2</h3>
+		<h4>Digital Tier 2</h4>
 		<ul>
 			<li>
 				<% if fields["digital_tier_2"].downcase == "required" %>
@@ -275,7 +275,7 @@
 		
 		<!-- More Entertainment for every one  -->
 		<% if fields["premiums"].downcase == "required" %>
-			<h3>Premium Channels</h3>
+			<h4>Premium Channels</h4>
 			<ul>
 				<li>
 					<div class="checkbox">
@@ -385,7 +385,7 @@
 			</ul>
 		<% end %>
 		<% if fields["international_channels"].downcase == "required" %>
-			<h3>International Channels</h3>
+			<h4>International Channels</h4>
 			<ul>
 				<li>
 					<div class="checkbox">
@@ -473,7 +473,7 @@
 		<%#= fields %>
 
 		<% if fields["modem"].present? %>
-			<h3>Modem <span class="checkout_required">(Required)</span></h3>
+			<h4>Modem <span class="checkout_required">(Required)</span></h4>
 			<% if fields["modem"].downcase == "included" %>
 				Internet plan requires modem to connect internet service (FREE)
 			<% else %>
@@ -499,7 +499,7 @@
 		<% end %>
 
 		<% if fields["wifi"].present? %>
-			<h3>WiFi Service &amp; Equipment</h3>
+			<h4>WiFi Service &amp; Equipment <small><a href="javascript:void(0);" onclick="resetSelectedItem(this);">Reset selected item</a></small></h4>
 			<% if fields["wifi"].downcase == "included" %>
 				WiFi Service is included in this package
 			<% else %>
@@ -531,7 +531,7 @@
 		<% fields = get_in_hash(@package_bundles.find_by_product_id(product.id).checkout_fields) %>
 
 		<%#= fields %>
-		<h3>PHONE <span class="checkout_required">(Required)</span></h3>
+		<h4>PHONE <span class="checkout_required">(Required)</span></h4>
 		<ul>
 			<% if fields["new_phone_number"].present? %>
 				<li>
@@ -590,7 +590,7 @@
         </p>
 			</li>
 		</ul>
-		<h3>Please select your additional phone plans</h3>
+		<h4>Please select your additional phone plans</h4>
 		<ul>
 			<li>
 				<% if fields["get_200_minutes"].downcase == "included" %>

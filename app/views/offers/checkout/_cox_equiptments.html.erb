@@ -4,8 +4,8 @@
 		<% fields = get_in_hash(@package_bundles.find_by_product_id(product.id).checkout_fields) %>
 		<%#= fields %>
 		
-		<!-- <h3>Please configure your TV, Internet &amp; Home Phone Services</h3> -->
-		<h3>Configure your 1st TV <span class="checkout_required">(Required)</span></h3>
+		<!-- <h4>Please configure your TV, Internet &amp; Home Phone Services</h4> -->
+		<h4>Configure your 1st TV <span class="checkout_required">(Required)</span></h4>
 		<ul>
 			<% if fields["contour_record_dvr_1"].present? %>
 				<li>
@@ -79,7 +79,7 @@
 			<% end %>
 		</ul>
 		<!-- Second TV -->
-		<h3>Configure your 2nd TV</h4>
+		<h4>Configure your 2nd TV <small><a href="javascript:void(0);" onclick="resetSelectedItem(this);">Reset selected item</a></small></h4>
 		<ul>
 			<% if fields["contour_record_dvr_2"].present? %>
 				<li>
@@ -153,7 +153,7 @@
 			<% end %>
 		</ul>
 		<!-- Third TV -->
-		<h3>Configure your 3rd TV</h4>
+		<h4>Configure your 3rd TV <small><a href="javascript:void(0);" onclick="resetSelectedItem(this);">Reset selected item</a></small></h4>
 		<ul>
 			<% if fields["contour_record_dvr_3"].present? %>
 				<li>
@@ -227,7 +227,7 @@
 			<% end %>
 		</ul>
 		<!-- Fourth TV -->
-		<h3>Configure your 4th TV</h4>
+		<h4>Configure your 4th TV <small><a href="javascript:void(0);" onclick="resetSelectedItem(this);">Reset selected item</a></small></h4>
 		<ul>
 			<% if fields["contour_record_dvr_4"].present? %>
 				<li>
@@ -357,7 +357,7 @@
 		</div>
 		<!-- Premiumns  -->
 		<% if fields["premiums"].downcase == "required" %>
-			<h3>Premium Movie Channels</h3>
+			<h4>Premium Movie Channels</h4>
 			<!-- <p>
 				<small>
 					<strong>Note:</strong> 
@@ -430,7 +430,7 @@
 		<% end %>
 		<!-- TV Paks  -->
 		<% if fields["tv_paks"].downcase == "required" %>
-			<h3>TV Paks</h3>
+			<h4>TV Paks</h4>
 			<!-- <p>
 				<small>
 					<strong>Note:</strong> 
@@ -529,7 +529,7 @@
 		<% fields = get_in_hash(@package_bundles.find_by_product_id(product.id).checkout_fields) %>
 		<%#= fields %>
 		<% if fields["internet_equiptment"].downcase == "required" %>
-			<h3>Internet Equipment <span class="checkout_required">(Required)</span></h3>
+			<h4>Internet Equipment <span class="checkout_required">(Required)</span></h4>
 			<ul>
 				<li>
 					<div class="radio">
@@ -580,12 +580,16 @@
 		<% end %>
 		
 		<% if fields["cox_teck_solutions"].downcase == "required" %>
-			<h3>Cox Tech Solutions</h3>
-			<p>
-				<small>
-					Online Only! Subscribe to Cox Tech Solutions online at a special monthly rate and we'll waive the $99.99 one-time PC Tune-Up fee! Cox Tech Solutions allows you to stay up and running with unlimited 24/7 premium tech support for your PC, laptop and tablet devices.
-				</small>
-			</p>
+			<h4>
+				Cox Tech Solutions
+				<small><a href="javascript:void(0);" onclick="resetSelectedItem(this);">Reset selected item</a></small>
+				<p>
+					<small>
+						Online Only! Subscribe to Cox Tech Solutions online at a special monthly rate and we'll waive the $99.99 one-time PC Tune-Up fee! Cox Tech Solutions allows you to stay up and running with unlimited 24/7 premium tech support for your PC, laptop and tablet devices.
+					</small>
+				</p>
+			</h4>
+			
 			<ul>
 				<li>
 					<div class="radio">
@@ -638,7 +642,7 @@
 		<% fields = get_in_hash(@package_bundles.find_by_product_id(product.id).checkout_fields) %>
 		<%#= fields %>
 		<% if fields["long_distance"].downcase == "required" %>
-			<h3>Long Distance</h3>
+			<h4>Long Distance</h4>
 			<ul>
 				<li>
 					<div class="checkbox">
@@ -673,7 +677,7 @@
 			</ul>
 		<% end %>
 		<% if fields["calling_features"].downcase == 'required' %>
-			<h3>Additional Calling Features</h3>
+			<h4>Additional Calling Features</h4>
 			<ul>
 				<li>
 					<div class="checkbox">
@@ -694,7 +698,7 @@
 		<% end %>
 
 		<% if fields["international_calling_plan"].downcase == 'required' %>
-			<h3>International Calling Plan</h3>
+			<h4>International Calling Plan</h4>
 			<ul>
 				<li>
 					<div class="checkbox">
@@ -714,7 +718,7 @@
 			</ul>
 		<% end %>
 		<% if fields["mexico_calling_plan"].downcase == 'required' %>
-			<h3>Mexico Calling Plans</h3>
+			<h4>Mexico Calling Plans</h4>
 			<ul>
 				<li>
 					<div class="checkbox">
@@ -734,12 +738,15 @@
 			</ul>
 		<% end %>
 		<% if fields["directory_listing"].downcase == 'required' %>
-			<h3>Directory Listing <span class="checkout_required">(Required)</span></h3>
-			<p>
-				<small>
-					How would you like your name to appear in the phone directory? Don't worry, you'll have a chance to review and make edits on the Order Summary page.
-				</small>
-			</p>
+			<h4>
+				Directory Listing <span class="checkout_required">(Required)</span>
+				<p>
+					<small>
+						How would you like your name to appear in the phone directory? Don't worry, you'll have a chance to review and make edits on the Order Summary page.
+					</small>
+				</p>
+			</h4>
+			
 			<ul>
 				<li>
 					<div class="radio">
@@ -797,12 +804,15 @@
 			</ul>
 		<% end %>
 		<% if fields["telephone_outlet_installation"].downcase == 'required' %>
-			<h3>Telephone Outlet(s) Installation</h3>
-			<p>
-				<small>
-					Do you need any additional Telephone Outlets for your home?
-				</small>
-			</p>
+			<h4>
+				Telephone Outlet(s) Installation
+				<p>
+					<small>
+						Do you need any additional Telephone Outlets for your home?
+					</small>
+				</p>
+			</h4>
+			
 			<ul>
 				<li>
 					<div class="checkbox">
@@ -822,13 +832,15 @@
 			</ul>
 		<% end %>
 		<% if fields["telephone_no_porting"].downcase == 'required' %>
-			<h3>Telephone Number Porting <span class="checkout_required">(Required)</span></h3>
-			<h4>Would you like to keep your current number?</h4>
-			<p>
-				<small>
-					Do you need any additional Telephone Outlets for your home?
-				</small>
-			</p>
+			<h4>Telephone Number Porting 
+				<span class="checkout_required">(Required)</span>
+				<p>
+					<small>
+						Would you like to keep your current number?
+					</small>
+				</p>
+			</h4>
+			
 			<ul>
 				<li>
 					<div class="radio">
@@ -856,7 +868,7 @@
 		<% end %>
 		
 		<% if fields["cox_service_protection_plan"].downcase == 'required' %>
-			<h3>Cox Service Protection Plan </h3>
+			<h4>Cox Service Protection Plan </h4>
 			<ul>
 				<li>
 					<div class="checkbox">
@@ -881,7 +893,7 @@
 			</ul>
 		<% end %>
 		<% if fields["service_agreement"].downcase == 'yes' %>
-			<h3>Service Agreement</h3>
+			<h4>Service Agreement</h4>
 			<ul>
 				<li>
 					You can change the service agreement term to better fit your needs. This term will apply to all selected services. Any change to your service term may alter your package, bundle pricing or discounts. Save more on your monthly cost by selecting a longer service agreement term.
