@@ -179,7 +179,7 @@ window.loadPackages = (elem) ->
 	$.getScript($pagination.find("li.next a").attr("href"))
 
 	$pagination.show()
-	$pagination.html("<i class=\'fa fa-circle-o-notch fa-spin fa-3x\'></i>")
+	$pagination.html("<i class=\'fa fa-spinner fa-spin fa-3x\'></i>")
 
 	$(elem).prop("disabled", "disabled")
 

@@ -8,7 +8,7 @@ class Checkout < ApplicationMailer
   def notify_admin(order)
     @greeting = "Hi Admin"
     @order = order
-    mail to: UtilityNavigator::Application.config.admin_notifications_email.first, subject: "New Order, Order ##{@order.id}"
+    mail to: UtilityNavigator::Application.config.admin_notifications_email, subject: "New Order, Order ##{@order.id}"
   end
 
   def notify_user(order, user)
