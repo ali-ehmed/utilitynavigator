@@ -1,4 +1,4 @@
-<div class="">
+<div class="checkout_application">
 	<% case product.name.downcase %>
 	<% when "cable" %>
 		<% fields = get_in_hash(@package_bundles.find_by_product_id(product.id).checkout_fields) %>
