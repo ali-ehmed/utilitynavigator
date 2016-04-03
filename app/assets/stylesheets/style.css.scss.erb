@@ -19,8 +19,15 @@ header {
 //Package Details
 #package-details {
   .packages {
-    height: 405px;
-    overflow-y: scroll;
+    .offers-package-desc {
+      height: 300px;
+      overflow-y: scroll;
+      margin: 18px 0px;
+    }
+    .offers-package-heading {
+      height: 62px;
+      border-bottom: 1px solid rgba(138, 207, 248, 0.37);
+    }
   }
   
   .price-info {
@@ -294,38 +301,51 @@ header {
         }
       }
     }
-    .package-heading {
-      text-align:center;
-      font-size: 20px;
-      font-weight: bold;
-    }
-    .package-price {
-      text-align:center;
-      font-size: 35px;
-      font-weight: bold;
-      color: #9932cc;
-      .per-month {
-        font-size: 14px;
-        font-weight: 500;
-      }
-    }
-    .package-button {
-      margin-right: -15px;
-      margin-left: -15px;
-      margin-bottom: -15px;
-      a {
+    .panel-body {
+      //height: 350px;
+
+      .package-heading {
+        text-align:center;
+        font-size: 20px;
         font-weight: bold;
-        padding: 11px 0px;
-        font-size: 18px;
-        color: #000;
-        background-color: #F1C40F;
-        border-color: #F1C40F;
+        height: 50px;
+      }
+      .package-price {
+        text-align:center;
+        font-size: 35px;
+        font-weight: bold;
+        color: #9932cc;
+        .per-month {
+          font-size: 14px;
+          font-weight: 500;
+        }
+      }
+      .package-button {
+        margin-right: -15px;
+        margin-left: -15px;
+        margin-bottom: -15px;
+        a {
+          font-weight: bold;
+          padding: 11px 0px;
+          font-size: 18px;
+          color: #000;
+          background-color: #F1C40F;
+          border-color: #F1C40F;
+        }
+      }
+
+      .package-desc {
+        height: 200px;    
+        overflow-y: scroll;
+        margin-bottom: 10px;
       }
     }
+    
     .see-more-btn {
       border-width: 3px;
       font-weight: bold;  
     }
+
     .channel-comparison-link {
       font-weight: bold;
       color: rgba(0, 0, 0, 0.72);
@@ -587,14 +607,6 @@ li > a.filtering {
 div.packages-category-name {
   li.active > a {
     color: #9932CC;
-  }
-}
-
-div.packages-tab-content {
-  .panel .package-desc {
-    height: 200px;    
-    overflow-y: scroll;
-    margin-bottom: 10px;
   }
 }
 

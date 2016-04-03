@@ -112,9 +112,6 @@ ActiveAdmin.register Package do
 					bundle_params = package_bundle_params.select {|k,v| bundle_keys_by_product.include?(k) }
 					# params.select_keys(bundle_keys_by_product)
 
-					logger.debug "-----#{bundle_params}-----"
-					logger.debug "-----#{bundle_keys_by_product}-----"
-
 					@package.package_bundles.build do |package_bundle|
 						package_bundle.product_id = product.id
 						package_bundle.field = bundle_params
@@ -128,8 +125,6 @@ ActiveAdmin.register Package do
 						end
 						package_bundle.save
 					end
-
-					logger.debug "=====#{@package.package_bundles.inspect}======"
 				end
 
 

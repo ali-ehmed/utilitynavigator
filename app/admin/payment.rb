@@ -1,5 +1,5 @@
 ActiveAdmin.register Payment, as: "Orders" do
-
+  actions :all, only: [:show, :index]
 	index do
     selectable_column
     column :package do |order|

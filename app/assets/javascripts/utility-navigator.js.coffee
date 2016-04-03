@@ -36,19 +36,18 @@ navbarActiveLink = ->
 			$a.css('background-image', 'url("assets/arrow-charter.png")')
 			break
 
-offerSearchNotice = ->
-	$(document).on "click", '.offer-btn', (e) ->
-		e.preventDefault()
-		$('html, body').animate { scrollTop: 0 }, 'slow', ->
-			$('.pop-msg').popover("show")
-			$('.pop-msg').on 'shown.bs.popover', ->
-			  $(@).next().find(".popover-title").css("background-color", "#9932CC")
-			  $(@).next().find(".popover-content").css("color", "#232121")
-			  $(@).next().css("width", "100%")
-			  return
+window.offerSearchNotice = () ->
+	$('body').animate { scrollTop: 0 }, 'slow', ->
+		$('.pop-msg').popover("show")
+		$('.pop-msg').on 'shown.bs.popover', ->
+		  $(@).next().find(".popover-title").css("background-color", "#9932CC")
+		  $(@).next().find(".popover-content").css("color", "#232121")
+		  $(@).next().css("width", "100%")
+		  return
 
- $(document).on 'click', (e) ->
- 	$(".search-form-popover-title").closest(".popover").popover("hide")
+closeSearchNotice = () ->
+	$(document).on 'click', (e) ->
+		$(".search-form-popover-title").closest(".popover").popover("hide")
 
 scrollingReviewNote = ->
 	(($) ->
@@ -505,7 +504,7 @@ $(document).on 'page:change', ->
 	### Initializing ###
 
 	navbarActiveLink()
-	offerSearchNotice()
+	closeSearchNotice()
 	scrollingReviewNote() if navigator.userAgent.toLowerCase().indexOf("mobile") == -1
 	comparePakages()
 	removeActiveIconProviders()

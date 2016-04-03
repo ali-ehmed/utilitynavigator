@@ -1,5 +1,5 @@
 # Ali Ahmed :-> (Software Engineer - Ruby on Rails)
-# Custom logic to load all the channels from the loop.
+# Custom logic to load all the channels from the exel.
 class Channel
 	def initialize(file)
 		@exel = file
@@ -22,7 +22,7 @@ class Channel
 			row = Hash[[header, @exel.row(row_id)].transpose]
 			is_present = false
 
-			# this checks if channel already present in the array
+			# this checks if channel already presents in the array
 			# then just set the channel type in the channel type keys and return present
 			channels_name.select do |channel| 
 				if channel["channel"] == row["channel_name"]

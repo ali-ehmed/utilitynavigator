@@ -38,20 +38,24 @@
 							<div class="panel-body">
 								<div class="row">
 									<div class="col-md-9 col-sm-9">
-										<div class="row">
-											<div class="col-md-4 col-sm-4">
-												<%= provider_logo(package.provider) %>
-											</div>
-											<div class="form-group"></div>
-											<div class="col-md-8 col-sm-8">
-												<label><%= package.package_name %></label>
-												<%= link_to "Plan Details", "#", class: "detail-link", "data-toggle" => "modal", "data-target" => "#plan_details_#{package.id}" %>
-												<%= render partial: "shared/plan_details", locals: { package: package } %>
+										<div class="offers-package-heading">
+											<div class="row">
+												<div class="col-md-4 col-sm-4">
+													<%= provider_logo(package.provider) %>
+												</div>
+												<div class="form-group"></div>
+												<div class="col-md-8 col-sm-8">
+													<label><%= package.package_name %></label>
+													<%= link_to "Plan Details", "#", class: "detail-link", "data-toggle" => "modal", "data-target" => "#plan_details_#{package.id}" %>
+													<%= render partial: "shared/plan_details", locals: { package: package } %>
+												</div>
 											</div>
 										</div>
-										<p>
+										
+
+										<div class="offers-package-desc">
 											<%= package.package_description.blank? ? "N/A" : package.package_description.html_safe %>
-										</p>
+										</div>
 										
 										<%= link_to "More Info & Promotions", "#", class: "detail-link", class: "detail-link", "data-toggle" => "modal", "data-target" => "#promotions_#{package.id}" %>
 										<%= render partial: "shared/promotions", locals: { package: package } %>
