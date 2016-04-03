@@ -265,7 +265,7 @@ $admin = {
 	}
 }
 
-$(document).on("ready", function(){
+$(document).ready(function () {
 	// Initially products checkboxes are disabled for packages
 
 	$("fieldset.package-products *").attr("disabled", "disabled").off('click');

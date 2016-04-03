@@ -11,8 +11,8 @@
 // about supported directives.
 //
 //= require jquery
+//= require jquery.turbolinks
 //= require jquery_ujs
-//= require turbolinks
 //= require bootstrap-notify
 //= require bootstrap-sprockets
 //= require moment
@@ -20,6 +20,7 @@
 //= require jquery.cookie
 //= require common/constant
 //= require jasny-bootstrap.min
+//= require turbolinks
 //= require_tree .
 
 

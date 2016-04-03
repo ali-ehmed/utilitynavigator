@@ -32,6 +32,6 @@ signInUser = function() {
 	})
 }
 
-$(document).on("ready page:change", function() {
+$(document).ready(function () {
 	signInUser();
 })

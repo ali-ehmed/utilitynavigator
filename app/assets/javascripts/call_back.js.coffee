@@ -37,7 +37,7 @@ dismissForm = ->
     $(@).find("input[type='submit']").text("Submit")
     $(@).find("input[type='text'],textarea,input[type='email'],input[type='tel']").val("")
 
-$(document).on "ready page:change", ->
+$(document).ready ->
   dismissForm()
   dt = new Date()
   

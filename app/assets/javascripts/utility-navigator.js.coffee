@@ -500,7 +500,7 @@ searchProviders = ->
       console.log 'no location found'
       return
 
-$(document).on 'page:change', ->
+$(document).ready ->
 	### Initializing ###
 
 	navbarActiveLink()
