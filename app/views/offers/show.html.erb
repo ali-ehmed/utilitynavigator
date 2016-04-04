@@ -46,6 +46,7 @@
 												<div class="form-group"></div>
 												<div class="col-md-8 col-sm-8">
 													<label><%= package.package_name %></label>
+													<br />
 													<%= link_to "Plan Details", "#", class: "detail-link", "data-toggle" => "modal", "data-target" => "#plan_details_#{package.id}" %>
 													<%= render partial: "shared/plan_details", locals: { package: package } %>
 												</div>

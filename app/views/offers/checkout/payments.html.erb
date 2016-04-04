@@ -10,103 +10,109 @@
 						</h2>
 					  <footer>Configure your equipment &amp; setup installation</footer>
 					</blockquote>
-					<%= f.simple_fields_for :user do |form_user| %>
-						<div class="panel panel-default">
-							<div class="panel-body">
-								<div class="panel panel-primary">
-									<div class="panel-heading">
-										<div class="panel-title"><strong>Your General Information</strong></div>
-									</div>
-									<div class="panel-body">
-										<div class="row">
-											<div class="col-md-6">
-												<div class="form-group">
-													<%= form_user.input :first_name, placeholder: "First Name" %>
-												</div>
-											</div>
-											<div class="col-md-6">
-												<div class="form-group">
-													<%= form_user.input :last_name, placeholder: "Last Name" %>
-												</div>
-											</div>
+					<% unless user_signed_in? %>
+						<%= f.simple_fields_for :user do |form_user| %>
+							<div class="panel panel-default">
+								<div class="panel-body">
+									<div class="panel panel-primary">
+										<div class="panel-heading">
+											<div class="panel-title"><strong>Your General Information</strong></div>
 										</div>
-										<div class="row">
-											<div class="col-md-6">
-												<div class="form-group">
-													<%= form_user.input :email, placeholder: "Email" %>
+										<div class="panel-body">
+											<div class="row">
+												<div class="col-md-6">
+													<div class="form-group">
+														<%= form_user.input :first_name, placeholder: "First Name" %>
+													</div>
+												</div>
+												<div class="col-md-6">
+													<div class="form-group">
+														<%= form_user.input :last_name, placeholder: "Last Name" %>
+													</div>
 												</div>
 											</div>
-											<div class="col-md-6">
-												<div class="form-group">
-													<%= form_user.input :date_of_birth, :as => :date, :start_year => Date.today.year - 12, :end_year => 1900, :order => [:day, :month, :year], :required => true %>
+											<div class="row">
+												<div class="col-md-6">
+													<div class="form-group">
+														<%= form_user.input :email, placeholder: "Email" %>
+													</div>
+												</div>
+												<div class="col-md-6">
+													<div class="form-group">
+														<%= form_user.input :date_of_birth, :as => :date, :start_year => Date.today.year - 12, :end_year => 1900, :order => [:day, :month, :year], :required => true %>
+													</div>
 												</div>
 											</div>
+											<fieldset>
+												<legend>Contact Details</legend>
+												<div class="row">
+													<div class="col-md-6">
+														<div class="form-group">
+															<%= form_user.input :cell_number, placeholder: "Cell Number" %>
+														</div>
+													</div>
+													<div class="col-md-6">
+														<div class="form-group">
+															<%= form_user.input :home_number, placeholder: "Home Number" %>
+														</div>
+													</div>
+												</div>
+												<div class="row">
+													<div class="col-md-6">
+														<div class="form-group">
+															<%= form_user.input :zip_code, placeholder: "Zip Code", input_html: { value: zip_code } %>
+														</div>
+													</div>
+													<div class="col-md-6">
+														<div class="form-group">
+															<%= form_user.input :address, placeholder: "Address", input_html: {  value: user_address } %>
+														</div>
+													</div>
+												</div>
+											</fieldset>
+											<fieldset>
+												<legend>Security</legend>
+												<div class="row">
+													<div class="col-md-4">
+														<div class="form-group">
+															<%= form_user.input :driver_license, placeholder: "Driver License" %>
+														</div>
+													</div>
+													<div class="col-md-1 text-center">
+														<div style="margin: 27px auto;">
+															<strong>OR</strong>
+														</div>													
+													</div>
+													<div class="col-md-3">
+														<div class="form-group">
+															<%= form_user.input :social_security, placeholder: "Social Security" %>
+														</div>
+													</div>
+													<div class="col-md-4">
+														<div class="form-group">
+															<%= form_user.input :four_digit_no, placeholder: "4 Digit No" %>
+														</div>
+													</div>
+												</div>
+												<div class="row">
+													<div class="col-md-6">
+														<div class="form-group">
+															<%= form_user.input :state_issue, placeholder: "State Change" %>
+														</div>
+													</div>
+												</div>
+											</fieldset>
 										</div>
-										<fieldset>
-											<legend>Contact Details</legend>
-											<div class="row">
-												<div class="col-md-6">
-													<div class="form-group">
-														<%= form_user.input :cell_number, placeholder: "Cell Number" %>
-													</div>
-												</div>
-												<div class="col-md-6">
-													<div class="form-group">
-														<%= form_user.input :home_number, placeholder: "Home Number" %>
-													</div>
-												</div>
-											</div>
-											<div class="row">
-												<div class="col-md-6">
-													<div class="form-group">
-														<%= form_user.input :zip_code, placeholder: "Zip Code", input_html: { value: zip_code } %>
-													</div>
-												</div>
-												<div class="col-md-6">
-													<div class="form-group">
-														<%= form_user.input :address, placeholder: "Address", input_html: {  value: user_address } %>
-													</div>
-												</div>
-											</div>
-										</fieldset>
-										<fieldset>
-											<legend>Security</legend>
-											<div class="row">
-												<div class="col-md-4">
-													<div class="form-group">
-														<%= form_user.input :driver_license, placeholder: "Driver License" %>
-													</div>
-												</div>
-												<div class="col-md-1 text-center">
-													<div style="margin: 27px auto;">
-														<strong>OR</strong>
-													</div>													
-												</div>
-												<div class="col-md-3">
-													<div class="form-group">
-														<%= form_user.input :social_security, placeholder: "Social Security" %>
-													</div>
-												</div>
-												<div class="col-md-4">
-													<div class="form-group">
-														<%= form_user.input :four_digit_no, placeholder: "4 Digit No" %>
-													</div>
-												</div>
-											</div>
-											<div class="row">
-												<div class="col-md-6">
-													<div class="form-group">
-														<%= form_user.input :state_issue, placeholder: "State Change" %>
-													</div>
-												</div>
-											</div>
-										</fieldset>
 									</div>
 								</div>
 							</div>
-						</div>
+						<% end %>
+					<% else %>
+						<h3 class="page-header">
+							View your Cart Details
+						</h3>
 					<% end %>
-					<div class="panel panel-danger">
+					<!-- <div class="panel panel-danger">
 						<div class="panel-heading">
 							<div class="panel-title">
 								<strong>Enter Your Credit Card Information</strong>
@@ -125,7 +131,6 @@
 								</div>
 							</div>
 							<div class="form-group">
-							<!-- <label>*CVV Code</label> -->
 								<%= f.input :security_code, placeholder: "CVV", class: "form-control", required: true %>
 							</div>
 
@@ -139,8 +144,8 @@
 	              </div>
 							</div>
 						</div>
-					</div>
-					<div class="panel panel-success">
+					</div> -->
+					<!-- <div class="panel panel-success">
 						<div class="panel-heading">
 							<div class="panel-title">
 								<h3>Choose your Preferred Timings</h3>
@@ -209,7 +214,7 @@
 								</div>
 							<% end %>
 						</div>
-					</div>
+					</div> -->
 				</div>
 				<div class="col-md-3 col-sm-3 follow-equiptments on-payment">
 					<div class="panel panel-default">

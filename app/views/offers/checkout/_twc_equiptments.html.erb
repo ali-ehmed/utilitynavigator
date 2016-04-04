@@ -276,7 +276,13 @@
 	          <label class="label-checkbox">
 	            The Movie Channel ($9.99 monthly)
 	          </label>
-	          Catch critically acclaimed original series and Hollywood blockbusters!
+	          <a role="button" data-toggle="collapse" href="#collapsemovie_channel" aria-expanded="false" aria-controls="collapseExample" class="view_more">View Details</a>
+						<div class="collapse" id="collapsemovie_channel">
+		          <p class="well">
+		          	Catch critically acclaimed original series and Hollywood blockbusters!
+		          </p>
+	          </div>
+	          
 	        </div>
 				</li>
 				<li>
@@ -285,9 +291,12 @@
 	          <label class="label-checkbox">
 	            Starz ($9.99 monthly)
 	          </label>
-	          <p>
-	          	STARZ® and STARZ® Play offer 300+ movies every month on six channels and deliver breakthrough original programming
-	          </p>
+	          <a role="button" data-toggle="collapse" href="#collapsestarz" aria-expanded="false" aria-controls="collapseExample" class="view_more">View Details</a>
+						<div class="collapse" id="collapsestarz">
+		          <p class="well">
+		          	STARZ® and STARZ® Play offer 300+ movies every month on six channels and deliver breakthrough original programming
+		          </p>
+	          </div>
 	        </div>
 				</li>
 			</ul>
@@ -405,7 +414,7 @@
 
 
 		<% if fields["modem"].present? %>
-			<h4>Internet Modem <span class="checkout_required">(Required)</span></h4>
+			<h4>Internet Modem <span class="checkout_required">(Required)</span> <small><a href="javascript:void(0);" onclick="resetSelectedItem(this);">Reset selected item</a></small></h4>
 			<% if fields["modem"].downcase == "included" or fields["modem"].blank? %>
 				Modem is included in this package
 			<% else %>
@@ -475,7 +484,7 @@
 		<% fields = get_in_hash(@package_bundles.find_by_product_id(product.id).checkout_fields) %>
 		<%#= fields %>
 
-		<h4>PHONE <span class="checkout_required">(Required)</span></h4>
+		<h4>PHONE <span class="checkout_required">(Required)</span> <small><a href="javascript:void(0);" onclick="resetSelectedItem(this);">Reset selected item</a></small></h4>
 		<ul>
 			<% if fields["new_phone_number"].present? %>
 				<li>
@@ -492,7 +501,7 @@
           <a role="button" data-toggle="collapse" href="#collapsephone" aria-expanded="false" aria-controls="collapseExample" class="view_more">View Details</a>
 					<div class="collapse" id="collapsephone">
 	          <p class="well">
-	          	Get a new phone number with Time Warner Cable Home Phone and avoid the waiting time to have your existing number ported. Activation Fees vary by market.
+	          	Get a new phone number with Time Warner Cable &reg; TV Home Phone and avoid the waiting time to have your existing number ported. Activation Fees vary by market.
 	          </p>
           </div>
 				</li>

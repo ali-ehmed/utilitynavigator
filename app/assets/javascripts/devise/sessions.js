@@ -33,5 +33,5 @@ signInUser = function() {
 }
 
 $(document).ready(function () {
-	signInUser();
+	// signInUser();
 })

@@ -114,7 +114,7 @@ class User < ActiveRecord::Base
   end
 
   def card_number
-    return "" if payments.blank?
+    return "" if payments.blank? or payments.last.card_last4.blank?
     payments.last.card_last4.split(//).first(4).join 
   end
 

@@ -473,7 +473,7 @@
 		<%#= fields %>
 
 		<% if fields["modem"].present? %>
-			<h4>Modem <span class="checkout_required">(Required)</span></h4>
+			<h4>Modem <span class="checkout_required">(Required)</span> <small><a href="javascript:void(0);" onclick="resetSelectedItem(this);">Reset selected item</a></small></h4>
 			<% if fields["modem"].downcase == "included" %>
 				Internet plan requires modem to connect internet service (FREE)
 			<% else %>
@@ -531,7 +531,7 @@
 		<% fields = get_in_hash(@package_bundles.find_by_product_id(product.id).checkout_fields) %>
 
 		<%#= fields %>
-		<h4>PHONE <span class="checkout_required">(Required)</span></h4>
+		<h4>PHONE <span class="checkout_required">(Required)</span> <small><a href="javascript:void(0);" onclick="resetSelectedItem(this);">Reset selected item</a></small></h4>
 		<ul>
 			<% if fields["new_phone_number"].present? %>
 				<li>

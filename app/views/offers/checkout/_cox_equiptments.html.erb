@@ -529,7 +529,7 @@
 		<% fields = get_in_hash(@package_bundles.find_by_product_id(product.id).checkout_fields) %>
 		<%#= fields %>
 		<% if fields["internet_equiptment"].downcase == "required" %>
-			<h4>Internet Equipment <span class="checkout_required">(Required)</span></h4>
+			<h4>Internet Equipment <span class="checkout_required">(Required)</span> <small><a href="javascript:void(0);" onclick="resetSelectedItem(this);">Reset selected item</a></small></h4>
 			<ul>
 				<li>
 					<div class="checkbox" style="padding-left: 5px;">
@@ -739,7 +739,7 @@
 		<% end %>
 		<% if fields["directory_listing"].downcase == 'required' %>
 			<h4>
-				Directory Listing <span class="checkout_required">(Required)</span>
+				Directory Listing <span class="checkout_required">(Required)</span> <small><a href="javascript:void(0);" onclick="resetSelectedItem(this);">Reset selected item</a></small>
 				<p>
 					<small>
 						How would you like your name to appear in the phone directory? Don't worry, you'll have a chance to review and make edits on the Order Summary page.
@@ -833,7 +833,7 @@
 		<% end %>
 		<% if fields["telephone_no_porting"].downcase == 'required' %>
 			<h4>Telephone Number Porting 
-				<span class="checkout_required">(Required)</span>
+				<span class="checkout_required">(Required)</span> <small><a href="javascript:void(0);" onclick="resetSelectedItem(this);">Reset selected item</a></small>
 				<p>
 					<small>
 						Would you like to keep your current number?
