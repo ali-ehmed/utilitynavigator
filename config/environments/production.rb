@@ -17,7 +17,7 @@ Rails.application.configure do
   # Store sql result in cache memory
   config.cache_store = :memory_store
 
-  config.serve_static_files = true
+  config.serve_static_files = false
 
   # Enable Rack::Cache to put a simple HTTP cache in front of your application
   # Add `rack-cache` to your Gemfile before enabling this.

@@ -6,7 +6,7 @@
         <%= tv_package.package_name %>
       </div>
       <div class="package-price">
-        <%= number_to_currency(tv_package.price) %> <span class="per-month">/ month</span>
+        <%= number_to_currency(tv_package.price.gsub("$", "")) %> <span class="per-month">/ month</span>
       </div>
       <div class="package-desc">
         <%= tv_package.package_description.html_safe %>  

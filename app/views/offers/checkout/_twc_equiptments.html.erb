@@ -367,24 +367,26 @@
 				</li>
 			</ul>
 		<% end %>
-		<h4>More Spanish Entertainment for Everyone</h4>
-		<ul>
-			<li>
-				<div class="checkbox">
-          <%= check_box_tag :spanish_programming, false, false, {:class => "styled", data: { price: 5.00 }, onchange: "calculateEquiptmentCosts(this);"}  %>
-          <label class="label-checkbox">
-            Spanish Programming ($5.00 Monthly)
-          </label>
-          <br />
-          <a role="button" data-toggle="collapse" href="#collapsespanish_programming" aria-expanded="false" aria-controls="collapseExample" class="view_more">View Details</a>
-					<div class="collapse" id="collapsespanish_programming">
-	          <p class="well">
-	          	More than 40 Spanish-language channels, including Discovery Espanol, ESPN Deportes HD and Mun2.
-	          </p>
-          </div>
-        </div>
-			</li>
-		</ul>
+		<% if fields["more_spanish_entertainment_for_everyone"].downcase == "required" %>
+			<h4>More Spanish Entertainment for Everyone</h4>
+			<ul>
+				<li>
+					<div class="checkbox">
+	          <%= check_box_tag :spanish_programming, false, false, {:class => "styled", data: { price: 5.00 }, onchange: "calculateEquiptmentCosts(this);"}  %>
+	          <label class="label-checkbox">
+	            Spanish Programming ($5.00 Monthly)
+	          </label>
+	          <br />
+	          <a role="button" data-toggle="collapse" href="#collapsespanish_programming" aria-expanded="false" aria-controls="collapseExample" class="view_more">View Details</a>
+						<div class="collapse" id="collapsespanish_programming">
+		          <p class="well">
+		          	More than 40 Spanish-language channels, including Discovery Espanol, ESPN Deportes HD and Mun2.
+		          </p>
+	          </div>
+	        </div>
+				</li>
+			</ul>
+		<% end %>
 		<% if fields["epix_offer"].present? %>
 			<h4>EPIX Offer <span class="checkout_required"></span></h4>
 			<ul>
