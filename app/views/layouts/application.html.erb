@@ -1,14 +1,14 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <%# cache "UN=v9/assets" do %>
+    <% cache "UN=v9/assets" do %>
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
       <title><%= content_for?(:title) ? yield(:title) : "Utility Navigator" %></title>
       <meta name="description" content="<%= content_for?(:description) ? yield(:description) : "My Application" %>">
       <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true %>
       <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
       <%= favicon_link_tag("favicon.png") %>
-    <%# end %>
+    <% end %>
     <%= csrf_meta_tags %>
   </head>
   <body>
