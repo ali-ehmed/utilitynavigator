@@ -49,11 +49,11 @@ class User < ActiveRecord::Base
 
   validates_presence_of :address, :zip_code, :cell_number, :home_number, :date_of_birth, :first_name, :last_name, :address
 
-  validate :validate_social_security
+  # validate :validate_social_security
 
   validates_length_of :zip_code, :minimum => 5, :maximum => 5
 
-  validates_length_of :social_security, :minimum => 9, :maximum => 9
+  # validates_length_of :social_security, :minimum => 9, :maximum => 9
 
   validates_length_of :cell_number, :home_number, :minimum => 10, :maximum => 10
 

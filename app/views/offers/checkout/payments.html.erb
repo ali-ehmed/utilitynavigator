@@ -73,7 +73,7 @@
 											<fieldset>
 												<legend>Security</legend>
 												<div class="row">
-													<div class="col-md-4">
+													<!-- <div class="col-md-4">
 														<div class="form-group">
 															<%= form_user.input :driver_license, placeholder: "Driver License" %>
 														</div>
@@ -87,20 +87,25 @@
 														<div class="form-group">
 															<%= form_user.input :social_security, placeholder: "Social Security" %>
 														</div>
-													</div>
-													<div class="col-md-4">
+													</div> -->
+													<div class="col-md-6">
 														<div class="form-group">
 															<%= form_user.input :four_digit_no, placeholder: "4 Digit No" %>
 														</div>
 													</div>
-												</div>
-												<div class="row">
 													<div class="col-md-6">
 														<div class="form-group">
 															<%= form_user.input :state_issue, placeholder: "State Change" %>
 														</div>
 													</div>
 												</div>
+												<!-- <div class="row">
+													<div class="col-md-6">
+														<div class="form-group">
+															<%= form_user.input :state_issue, placeholder: "State Change" %>
+														</div>
+													</div>
+												</div> -->
 											</fieldset>
 										</div>
 									</div>
@@ -112,6 +117,12 @@
 							View your Cart Details
 						</h3>
 					<% end %>
+					<div class="checkbox">
+             <%= check_box("payment", "user_agreement", { class: 'styled' }, "true", "false") %>
+              <label>
+                Do you agree the <a href="<%= page_path("privacy_policy") %>" target="_blank">Privacy Policy</a> &amp; <a href="<%= page_path("terms_conditions") %>" target="_blank">Terms of use</a>?
+              </label>
+          </div>
 					<!-- <div class="panel panel-danger">
 						<div class="panel-heading">
 							<div class="panel-title">

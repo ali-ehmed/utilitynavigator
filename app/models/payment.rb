@@ -33,19 +33,26 @@ class Payment < ActiveRecord::Base
 
 	validates_length_of :card_exp_month, :minimum => 1, :maximum => 12, if: :payment_after_install
 
+	validate :validate_agreement
 	# after_initialize :default_fields
 	
 	def render_payment_step
 		'offers/checkout/payments'
 	end
 
-	attr_accessor :security_code, :pay_at_installation
+	attr_accessor :security_code, :pay_at_installation, :user_agreement
 
 	def payment_after_install
 		if self.pay_at_installation == "false"
 			true
 		end
 	end
+
+	def validate_agreement
+    if self.user_agreement.blank?
+      self.errors[:base] << "You must accept the Terms of use & Privacy Policy"
+    end
+  end
 
 	RESERVED_MESSAGE = "<strong>Dear User!</strong> <p> Your order has been placed. Soon our administration will contact you. </p> Thank You".html_safe
 

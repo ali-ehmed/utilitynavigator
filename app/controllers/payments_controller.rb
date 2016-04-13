@@ -59,7 +59,7 @@ class PaymentsController < ApplicationController
   private 
 
   def payment_params
-  	params.require(:payment).permit(:package_id, :card_last4, :card_exp_month, :card_exp_year, :security_code, :pay_at_installation, 
+  	params.require(:payment).permit(:package_id, :card_last4, :card_exp_month, :card_exp_year, :security_code, :pay_at_installation, :user_agreement,
   																	user_attributes: [:first_name, :last_name, :email, :address, 
   																										:zip_code, :cell_number, :date_of_birth, 
   																										:home_number, :driver_license, 

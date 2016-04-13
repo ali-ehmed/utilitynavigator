@@ -15,6 +15,6 @@ class PackageBundle < ActiveRecord::Base
 	belongs_to :package
 	belongs_to :product
 
-	PREMIUMS = ["EPIC", "HBO", "Cinemax", "Starz"]
+	PREMIUMS = ["EPIX", "HBO", "Cinemax", "Starz"]
 	TV_SPECTRUM = ["Select", "Gold", "Silver"]
 end
