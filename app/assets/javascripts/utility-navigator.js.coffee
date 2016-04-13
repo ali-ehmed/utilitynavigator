@@ -103,8 +103,8 @@ window.resetSelectedItem = (elem) ->
     if $($radios[x]).attr("checked")
       $radios[x].checked = false
 
-      equiptment_cost -= parseFloat($($radios[x]).data("price"))
-      total_cost -= parseFloat($($radios[x]).data("price"))
+      equiptment_cost -= parseFloat($($radios[x]).data("price").replace("$", ""))
+      total_cost -= parseFloat($($radios[x]).data("price").replace("$", ""))
       
       document.getElementById("equiptment_cost").value = equiptment_cost.toFixed(2)
       document.getElementById("total_cost").value = total_cost.toFixed(2)
@@ -132,8 +132,8 @@ window.calculateEquiptmentCosts = (elem) ->
 			$elem = $(this)
 			if $elem.val() == "true"
 				
-				equiptment_cost -= parseFloat($elem.data("price"))
-				total_cost -= parseFloat($elem.data("price"))
+				equiptment_cost -= parseFloat($elem.data("price").replace("$", ""))
+				total_cost -= parseFloat($elem.data("price").replace("$", ""))
 				
 				document.getElementById("equiptment_cost").value = equiptment_cost
 				document.getElementById("total_cost").value = total_cost
@@ -146,18 +146,18 @@ window.calculateEquiptmentCosts = (elem) ->
 		
 		if elem.value == "false" 		
 			elem.value = "true"
-			if $.isNumeric(elem.dataset.price)
-				equiptment_cost += parseFloat(elem.dataset.price)
-				total_cost += parseFloat(elem.dataset.price)
+			if $.isNumeric(elem.dataset.price.replace("$", ""))
+				equiptment_cost += parseFloat(elem.dataset.price.replace("$", ""))
+				total_cost += parseFloat(elem.dataset.price.replace("$", ""))
 
 				equiptment_cost = equiptment_cost.toFixed(2)
 				total_cost = total_cost.toFixed(2)
 		else
 			elem.value = "false"
 			$(elem).removeAttr("checked")
-			if $.isNumeric(elem.dataset.price)
-				equiptment_cost -= parseFloat(elem.dataset.price)
-				total_cost -= parseFloat(elem.dataset.price)
+			if $.isNumeric(elem.dataset.price.replace("$", ""))
+				equiptment_cost -= parseFloat(elem.dataset.price.replace("$", ""))
+				total_cost -= parseFloat(elem.dataset.price.replace("$", ""))
 
 				equiptment_cost = equiptment_cost.toFixed(2)
 				total_cost = total_cost.toFixed(2)
