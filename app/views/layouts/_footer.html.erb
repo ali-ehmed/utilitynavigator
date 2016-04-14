@@ -38,11 +38,24 @@
 						<!-- <script type="text/javascript" src="https://seal.websecurity.norton.com/getseal?host_name=utilitynavigators.com&amp;size=XS&amp;use_flash=NO&amp;use_transparent=YES&amp;lang=en"></script> -->
 
 						<script type="text/javascript">
-							$(document).on("page:change", function(){
-								$.getScript("https://seal.websecurity.norton.com/getseal?host_name=utilitynavigators.com&amp;size=XS&amp;use_flash=NO&amp;use_transparent=YES&amp;lang=en",function(){
-				          console.log("Loaded")
-						    });
-							})
+							(function(app, $, undefined) {
+
+							  //public
+							  app.init = function() {
+
+							    var url = "https://seal.websecurity.norton.com/getseal?host_name=utilitynavigators.com&amp;size=XS&amp;use_flash=NO&amp;use_transparent=YES&amp;lang=en";
+							    $.getScript(url, function() {
+							      doStuff();
+							    });
+							  };
+
+							  //private
+							  var doStuff = function() {
+							  	console.log("loaded")
+							  };
+
+							}(window.app = window.app || {}, jQuery));
+							window.onload = app.init;
 							// script = document.createElement('script');
 					  //   var seal_tag = document.getElementById("seal");
 					  //   script.type = 'text/javascript';
