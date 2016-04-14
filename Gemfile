@@ -63,5 +63,4 @@ group :development do
   gem 'capistrano-rails', '~> 1.1', '>= 1.1.6'
   gem 'capistrano-rbenv', '~> 2.0', '>= 2.0.4'
   gem 'capistrano-rails-console', '~> 1.0', '>= 1.0.2'
-  gem 'capistrano3-nginx', '~> 2.0'
 end
