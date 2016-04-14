@@ -281,6 +281,18 @@ validatePreferredTimings = ->
       return false
     true
 
+radioValidations = (array) ->
+	$val = true
+	$.each array, ->
+		if !$(this).attr("checked")
+      $val = false
+      return true
+    else
+    	$val = true
+    	return false
+      
+	return $val
+
 # Validatings On Extra Equipment
 validateExtraEquiptment = ->
   $('form#extra_equiptments_form').on 'submit', (e) ->
@@ -288,62 +300,63 @@ validateExtraEquiptment = ->
     $provider = $('#package_provider').data("provider")
     $errors = []
     
-    first_tv = $("input[name='first_tv']:checked")
-    first_tv_radio_btns = $("input[name='first_tv']")
+    first_tv = $("input[name='first_tv']")
 
-    fourth_tv = $("input[name='fourth_tv']:checked")
-    fourth_outlet = $("input[name='4th_tv_outlet']:checked")
+    fourth_tv = $("input[name='fourth_tv']")
+    fourth_outlet = $("input[name='4th_tv_outlet']")
 
-    phone = $("input[name='phone']:checked")
-    phone_radio_btns = $("input[name='phone']")
-    modem = $("input[name='modem']:checked")
+    phone = $("input[name='phone']")
+    modem = $("input[name='modem']")
 
-    internet_equiptment = $("input[name='internet_equiptment']:checked")
-    directory_listing = $("input[name='directory_listing']:checked")
-    current_telephone_number = $("input[name='current_telephone_number']:checked")
-    service_agreement = $("input[name='service_agreement']:checked")
+    internet_equiptment = $("input[name='internet_equiptment']")
+    directory_listing = $("input[name='directory_listing']")
+    current_telephone_number = $("input[name='current_telephone_number']")
+    service_agreement = $("input[name='service_agreement']")
 
     installation = $("input[name='installation']")
-    checked_installation = $("input[name='installation']:checked")
 
-    if first_tv.length == 0 and first_tv_radio_btns.length >= 3
-      $errors.push("Please configure 1st TV")
-      $valid = false
+    if first_tv.length >= 3
+    	if radioValidations(first_tv) == false
+    		$errors.push("Please configure 1st TV")
+    		$valid = false
 
-    if installation.length and !checked_installation.length
+    if installation.length and !installation.attr("checked")
       $errors.push("Please select Installation")
       $valid = false
 
     if $provider == "twc"
-	    if fourth_tv.length > 0 and fourth_outlet.length == 0
-        $errors.push("Please select 4th Outlet Avtivation fees")
-	      $valid = false
+	    if fourth_tv.length > 0
+	    	if radioValidations(fourth_tv) == true and !fourth_outlet.attr("checked")
+	    		$errors.push("Please select 4th Outlet Avtivation fees")
+	    		$valid = false
 
     if $provider == "twc" or $provider == "charter"
-	    if modem.length == 0
-        $errors.push("Please select modem")
-	      $valid = false
+	    if modem.length > 0
+	    	if radioValidations(modem) == false
+        	$errors.push("Please select modem")
+        	$valid = false
 
-      if phone.length == 0 and phone_radio_btns.length > 1
-        $errors.push("Choose one of the phone service")
-	      $valid = false
+    	if phone.length > 0
+    		if radioValidations(phone) == false
+    			$errors.push("Choose one of the phone service")
+    			$valid = false
 
     if $provider == "cox"
-    	if internet_equiptment.length == 0
+    	if internet_equiptment.length > 0 and radioValidations(internet_equiptment) == false
         $errors.push("Please select internet equiptment")
 	      $valid = false
 
-      if directory_listing.length == 0
+      if directory_listing.length > 0 and radioValidations(directory_listing) == false
         $errors.push("Please select directory listing")
 	      $valid = false
 
-    	if current_telephone_number.length == 0
+    	if current_telephone_number.length > 0 and radioValidations(current_telephone_number) == false
         $errors.push("Please select telephone number porting")
 	      $valid = false
-
-      if service_agreement.length == 0
-        $errors.push("Please select service agreement")
-	      $valid = false
+	      
+      if service_agreement.length > 0 and radioValidations(service_agreement) == false
+      	$errors.push("Please select service agreement")
+      	$valid = false
 
     if $errors.length == 0
     	$valid = true

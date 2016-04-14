@@ -900,7 +900,7 @@
 				</li>
 				<li>
 					<div class="checkbox" style="padding-left: 5px;">
-	          <%= radio_button_tag :service_agreement, false, false, {id: "service_agreement_lock_1"}  %>
+	          <%= radio_button_tag :service_agreement, false, false, {id: "service_agreement_lock_1", data: { price: 0 }, onchange: "calculateEquiptmentCosts(this);"}  %>
 	          <label class="label-checkbox" for="service_agreement_lock_1">
 	            Don't lock in my rate
 	          </label>
@@ -908,7 +908,7 @@
 				</li>
 				<li>
 					<div class="checkbox" style="padding-left: 5px;">
-	          <%= radio_button_tag :service_agreement, false, false, {id: "service_agreement_lock_2"}  %>
+	          <%= radio_button_tag :service_agreement, false, false, {id: "service_agreement_lock_2", data: { price: 0 }, onchange: "calculateEquiptmentCosts(this);"}  %>
 	          <label class="label-checkbox" for="service_agreement_lock_2">
 	            Lock in my rate for 24 months
 	          </label>
