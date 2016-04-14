@@ -49,7 +49,7 @@ class Payment < ActiveRecord::Base
 	end
 
 	def validate_agreement
-    if self.user_agreement.blank?
+    if self.user_agreement == "false"
       self.errors[:base] << "You must accept the Terms of use & Privacy Policy"
     end
   end
