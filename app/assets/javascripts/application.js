@@ -20,11 +20,10 @@
 //= require jquery.cookie
 //= require common/constant
 //= require jasny-bootstrap.min
-//= require turbolinks
+
 //= require_tree .
 
-
-// 
+// require turbolinks
 
 $(document).ready(function(){
 	// Notify
