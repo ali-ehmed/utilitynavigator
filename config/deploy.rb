@@ -69,12 +69,8 @@ namespace :deploy do
 	# This is the standard Phusion Passenger restart code. You will probably already
 	# have something like this (if you have already got Capistrano set up).
 
-	desc 'Add this to add the deploy:ping task:'
 	task :start do ; end
   task :stop do ; end
-  # task :restart, roles: :app, except: { no_release: true } do
-  #   run "#{try_sudo} touch #{File.join(current_path,'tmp','restart.txt')}"
-  # end
 
   task :ping do
     system "curl --silent #{fetch(:ping_url)}"
@@ -86,6 +82,8 @@ namespace :deploy do
       # within release_path do
       #   execute :rake, 'cache:clear'
       # end
+
+      # Restart NGINX under deploy
       run "#{try_sudo} touch #{File.join(current_path,'tmp','restart.txt')}"
     end
   end
