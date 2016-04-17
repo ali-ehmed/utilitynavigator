@@ -77,7 +77,7 @@ namespace :deploy do
     # run "#{sudo} touch #{File.join(current_path,'tmp','restart.txt')}"
     on roles(:app), in: :sequence do
        execute! :sudo, "touch #{File.join(current_path,'tmp','restart.txt')}"
-       execute! :sudo, :service, :nginx, :restart
+       # execute! :sudo, :service, :nginx, :restart
     end
   end
 
