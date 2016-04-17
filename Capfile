@@ -22,6 +22,7 @@ require 'capistrano/bundler'
 require 'capistrano/rails'
 require 'capistrano/rails/console'
 require 'capistrano/rails/assets'
+require 'sshkit/sudo'
 #require 'capistrano/passenger'
 
 # Load custom tasks from `lib/capistrano/tasks` if you have any defined

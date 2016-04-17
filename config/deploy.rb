@@ -42,6 +42,8 @@ set :keep_assets, 2
 
 # Add this to the settings section at the top:
 set :ping_url, "https://www.utilitynaigators.com/ping"
+set :pty, true
+# set :use_sudo, false
 
 namespace :deploy do
 	desc 'Runs rake db:seed'
@@ -71,6 +73,13 @@ namespace :deploy do
 
 	task :start do ; end
   task :stop do ; end
+  task :restart do
+    # run "#{sudo} touch #{File.join(current_path,'tmp','restart.txt')}"
+    on roles(:app), in: :sequence do
+       execute! :sudo, "touch #{File.join(current_path,'tmp','restart.txt')}"
+       execute! :sudo, :service, :nginx, :restart
+    end
+  end
 
   task :ping do
     system "curl --silent #{fetch(:ping_url)}"
@@ -82,12 +91,10 @@ namespace :deploy do
       # within release_path do
       #   execute :rake, 'cache:clear'
       # end
-
-      # Restart NGINX under deploy
-      run "#{try_sudo} touch #{File.join(current_path,'tmp','restart.txt')}"
     end
   end
 end
 
 # Add this to automatically ping the server after a restart:
 after "deploy:restart", "deploy:ping"
+after :deploy, "deploy:restart"
