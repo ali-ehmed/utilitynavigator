@@ -40,6 +40,9 @@ set :linked_dirs, %w{log tmp/pids tmp/cache tmp/sockets vendor/bundle public/sys
 
 set :keep_assets, 2
 
+# Add this to the settings section at the top:
+set :ping_url, "https://www.utilitynaigators.com/ping"
+
 namespace :deploy do
 	desc 'Runs rake db:seed'
 	task :seed => [:set_rails_env] do
@@ -63,13 +66,30 @@ namespace :deploy do
 	  end
 	end
 
+	# This is the standard Phusion Passenger restart code. You will probably already
+	# have something like this (if you have already got Capistrano set up).
+
+	desc 'Add this to add the deploy:ping task:'
+	task :start do ; end
+  task :stop do ; end
+  # task :restart, roles: :app, except: { no_release: true } do
+  #   run "#{try_sudo} touch #{File.join(current_path,'tmp','restart.txt')}"
+  # end
+
+  task :ping do
+    system "curl --silent #{fetch(:ping_url)}"
+  end
+
   after :restart, :clear_cache do
     on roles(:web), in: :groups, limit: 3, wait: 10 do
       # Here we can do anything such as:
       # within release_path do
       #   execute :rake, 'cache:clear'
       # end
+      run "#{try_sudo} touch #{File.join(current_path,'tmp','restart.txt')}"
     end
   end
-
 end
+
+# Add this to automatically ping the server after a restart:
+after "deploy:restart", "deploy:ping"
