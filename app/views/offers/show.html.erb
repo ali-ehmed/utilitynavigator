@@ -66,7 +66,7 @@
 									<div class="col-md-3 col-sm-3">
 										<div class="price-info">
 											<strong>Starting at</strong>
-											<strong class="price"><%= package.price %></strong>
+											<strong class="price"><%= package.price.present? ? number_to_currency(package.price) : package.price %></strong>
 											per month
 											<br />
 											<strong class="price-information"><%= package.price_info %></strong>

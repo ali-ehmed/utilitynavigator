@@ -54,7 +54,7 @@ class Payment < ActiveRecord::Base
     end
   end
 
-	RESERVED_MESSAGE = "<strong>Dear User!</strong> <p> Your order has been placed. Soon our administration will contact you. </p> Thank You".html_safe
+	RESERVED_MESSAGE = "<strong>Dear User!</strong> <p> Your order has been placed. Utility Navigators will be contacting you. </p> Thank You".html_safe
 
 	def send_admin_notification
 		Checkout.notify_admin(self).deliver_now!
