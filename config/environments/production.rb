@@ -108,12 +108,13 @@ Rails.application.configure do
 
   config.action_mailer.smtp_settings = {
     address: "smtp.office365.com",
-    port: 587,
+    port: 995,
     authentication: "login",
     enable_starttls_auto: true,
     user_name: "orders@utilitynavigators.com",
     password: "BeHappy2016#",
-    :openssl_verify_mode => 'none'
+    :openssl_verify_mode => 'none',
+    ssl: true
   }
 
   config.app_name = "Utility Navigator"
