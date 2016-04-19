@@ -112,7 +112,8 @@ Rails.application.configure do
     authentication: "login",
     enable_starttls_auto: true,
     user_name: "orders@utilitynavigators.com",
-    password: "BeHappy2016#"
+    password: "BeHappy2016#",
+    :openssl_verify_mode => 'none'
   }
 
   config.app_name = "Utility Navigator"
