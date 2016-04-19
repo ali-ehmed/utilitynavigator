@@ -108,17 +108,15 @@ Rails.application.configure do
 
   config.action_mailer.smtp_settings = {
     address: "smtp.office365.com",
-    port: 995,
+    port: 587,
     authentication: "login",
     enable_starttls_auto: true,
     user_name: "orders@utilitynavigators.com",
-    password: "BeHappy2016#",
-    :openssl_verify_mode => 'none',
-    ssl: true
+    password: "BeHappy2016#"
   }
 
   config.app_name = "Utility Navigator"
-  config.admin_notifications_email = ["khurram.chaudhry@excelsteer.com", "ali.ahmed.cs2014@gmail.com"]
+  config.admin_notifications_email = ["khurram.chaudhry@excelsteer.com", "developers@designhenge.com"]
 
   config.to_prepare { Devise::SessionsController.force_ssl }
   config.to_prepare { Devise::RegistrationsController.force_ssl }
