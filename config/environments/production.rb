@@ -96,17 +96,27 @@ Rails.application.configure do
   #   password: UtilityNavigator::Application.secrets.password
   # }
 
+  # config.action_mailer.smtp_settings = {
+  #   address: "smtp.designhenge.com",
+  #   port: 25,
+  #   authentication: "plain",
+  #   enable_starttls_auto: true,
+  #   user_name: "test@designhenge.com",
+  #   password: "TESTing123",
+  #   :openssl_verify_mode => 'none'
+  # }
+
   config.action_mailer.smtp_settings = {
-    address: "smtp.designhenge.com",
-    port: 25,
-    authentication: "plain",
+    address: "smtp.office365.com",
+    port: 587,
+    authentication: "login",
     enable_starttls_auto: true,
-    user_name: "test@designhenge.com",
-    password: "TESTing123",
+    user_name: "orders@utilitynavigators.com",
+    password: "BeHappy2016#",
     :openssl_verify_mode => 'none'
   }
 
-  config.app_name = "Utility Network"
+  config.app_name = "Utility Navigator"
   config.admin_notifications_email = ["khurram.chaudhry@excelsteer.com", "developers@designhenge.com"]
 
   config.to_prepare { Devise::SessionsController.force_ssl }
