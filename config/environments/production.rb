@@ -117,7 +117,7 @@ Rails.application.configure do
   }
 
   config.app_name = "Utility Navigator"
-  config.admin_notifications_email = ["khurram.chaudhry@excelsteer.com", "ali.ahmed.cs2014@gmail.com"]
+  config.admin_notifications_email = ["khurram.chaudhry@excelsteer.com"]
 
   config.to_prepare { Devise::SessionsController.force_ssl }
   config.to_prepare { Devise::RegistrationsController.force_ssl }
