@@ -35,7 +35,7 @@ module ApplicationHelper
     HTML
 
     html.html_safe
-  end
+	end
 
 	def devise_mapping
 	  Devise.mappings[:user]
