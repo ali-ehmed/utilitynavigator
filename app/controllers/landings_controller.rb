@@ -21,13 +21,13 @@ class LandingsController < ApplicationController
 	def twc
 		# simply redering providers with twc
 
-		@provider_banner = "twc-banner.png"
+		@provider_banner = "twc-banner-1.png"
 		render :providers
 	end
 
 	def cox
 		# simply redering providers with cox
-		
+
 		@provider_banner = "cox-banner.png"
 		render :providers
 	end
@@ -46,7 +46,7 @@ class LandingsController < ApplicationController
 		ids = params[:package_ids]
 
 		@packages = Package.where("id in (?)", ids)
-		
+
 		respond_to do |format|
 			format.js
 		end
