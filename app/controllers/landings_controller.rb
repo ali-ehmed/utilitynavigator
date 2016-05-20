@@ -21,7 +21,7 @@ class LandingsController < ApplicationController
 	def twc
 		# simply redering providers with twc
 
-		@provider_banner = "twc-banner-1.png"
+		@provider_banner = "twc-banner.png"
 		render :providers
 	end
 
