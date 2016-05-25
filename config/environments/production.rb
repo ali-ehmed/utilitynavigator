@@ -117,6 +117,7 @@ Rails.application.configure do
   }
 
   config.app_name = "Utility Navigator"
+  config.application_url = "utilitynavigators.com"
   config.admin_notifications_email = ["khurram.chaudhry@excelsteer.com"]
 
   config.to_prepare { Devise::SessionsController.force_ssl }

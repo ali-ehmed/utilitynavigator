@@ -69,5 +69,6 @@ Rails.application.configure do
     :openssl_verify_mode => 'none'
   }
 
+  config.application_url = "utilitynavigators.com"
   config.admin_notifications_email = ["ali.ahmed.cs2014@gmail.com", "afaqamir46@gmail.com"]
 end
