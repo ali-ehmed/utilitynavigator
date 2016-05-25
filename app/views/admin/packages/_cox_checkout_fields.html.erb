@@ -17,7 +17,7 @@
 						</label>
 						<%= ff.select "checkout_select", options_for_select(["Free", "Not Include", "Add Price"]), {prompt: "--Select--"}, class: "package_select_field", onchange: "$packages.addPriceField(this);" %>
 
-						<%= ff.text_field "contour_record_dvr_#{count}", style: "display: none;", class: "admin_checkout_price", value: "Included" %>
+						<%= ff.text_field "contour_record_dvr_#{count}", style: "display: none;width: calc(78% - 22px);", onblur: "$packages.packagePriceValidation(this);", class: "admin_checkout_price", value: "Included" %>
 					</li>
 					<li>
 						<label for="provider_name" class="label">
@@ -25,7 +25,7 @@
 						</label>
 						<%= ff.select "checkout_select", options_for_select(["Free", "Not Include", "Add Price"]), {prompt: "--Select--"}, class: "package_select_field", onchange: "$packages.addPriceField(this);" %>
 
-						<%= ff.text_field "contour_hd_dvr_#{count}", style: "display: none;", class: "admin_checkout_price", value: "Included" %>
+						<%= ff.text_field "contour_hd_dvr_#{count}", style: "display: none;width: calc(78% - 22px);", onblur: "$packages.packagePriceValidation(this);", class: "admin_checkout_price", value: "Included" %>
 
 					</li>
 					<li>
@@ -34,7 +34,7 @@
 						</label>
 						<%= ff.select "checkout_select", options_for_select(["Free", "Not Include", "Add Price"]), {prompt: "--Select--"}, class: "package_select_field", onchange: "$packages.addPriceField(this);" %>
 
-						<%= ff.text_field "contour_hd_receiver_#{count}", style: "display: none;", class: "admin_checkout_price", value: "Included" %>
+						<%= ff.text_field "contour_hd_receiver_#{count}", style: "display: none;width: calc(78% - 22px);", onblur: "$packages.packagePriceValidation(this);", class: "admin_checkout_price", value: "Included" %>
 					</li>
 					<li>
 						<label for="provider_name" class="label">
@@ -42,7 +42,7 @@
 						</label>
 						<%= ff.select "checkout_select", options_for_select(["Free", "Not Include", "Add Price"]), {prompt: "--Select--"}, class: "package_select_field", onchange: "$packages.addPriceField(this);" %>
 
-						<%= ff.text_field "mini_box_#{count}", style: "display: none;", class: "admin_checkout_price", value: "Included" %>
+						<%= ff.text_field "mini_box_#{count}", style: "display: none;width: calc(78% - 22px);", onblur: "$packages.packagePriceValidation(this);", class: "admin_checkout_price", value: "Included" %>
 					</li>
 					<li>
 						<label for="provider_name" class="label">
@@ -50,7 +50,7 @@
 						</label>
 						<%= ff.select "checkout_select", options_for_select(["Free", "Not Include", "Add Price"]), {prompt: "--Select--"}, class: "package_select_field", onchange: "$packages.addPriceField(this);" %>
 
-						<%= ff.text_field "cable_card_#{count}", style: "display: none;", class: "admin_checkout_price", value: "Included" %>
+						<%= ff.text_field "cable_card_#{count}", style: "display: none;width: calc(78% - 22px);", onblur: "$packages.packagePriceValidation(this);", class: "admin_checkout_price", value: "Included" %>
 					</li>
 				</ol>
 			<% end %>

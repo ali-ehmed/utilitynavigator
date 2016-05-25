@@ -23,9 +23,14 @@ class Provider < ActiveRecord::Base
 	validates_presence_of :name
 	after_save :creating_preferences
 
+	# Constants for broadband provider api
 	COX_COMMUNICATION = "Cox"
 	TIMEWARNER_COMMUNICATION = "Time Warner"
 	CHARTERSPETCRUM_COMMUNICATION = "Charter"
+
+	COX = "COX"
+	CHARTER_SPECTRUM = "Charter Spectrum"
+	TIME_WARNER = "Time Warner"
 
 	# has_attached_file :logo, styles: { medium: "300x300>", thumb: "100x100>" }, default_url: "/images/:style/missing.png"
   

@@ -39,5 +39,6 @@ class Offers::CheckoutController < ApplicationController
 
 	def set_package
 		@package = Package.find(params[:offer_id])
+		@charter_fields_for_internet = @package.package_bundles.joins(:product).where("products.name = 'Internet'").first.checkout_fields
 	end
 end

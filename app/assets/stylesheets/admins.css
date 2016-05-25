@@ -22,14 +22,14 @@ fieldset.package-products > legend {
 }
 
 .product-validate {
-  border: 2px solid #F56262 !important;
-  padding: 5px 0px 0px 5px !important;
+  border-left: 2px solid #F56262 !important;
+  padding: 3px 0px 2px 5px !important;
   margin-bottom: 5px;
   margin-top: 5px;
   border-radius: 3px;
 }
 li.product-errors {
-	font-size: bold;
+	font-weight: bold;
 }
 
 table td.fields, th.fields {
@@ -59,4 +59,8 @@ table td.fields, th.fields {
 .admin_checkout_price {
   margin-left: 20%;
   margin-top: 15px;
+}
+
+form input[type=text], form input[type=password], form input[type=email], form input[type=number], form input[type=url], form input[type=tel], form input[type=date], form textarea {
+  width: calc(100% - 22px);
 }

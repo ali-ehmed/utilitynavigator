@@ -258,18 +258,15 @@
 											<strong>Installation Price</strong>
 										</li>
 										<li class="pull-right">
-											<% if @package.installation_price.downcase == "free" %>
-									  		Free
-								  		<% else %>
-								  			<%= number_to_currency(@package.installation_price) %>
-								  		<% end %>
+								  		<%= hidden_field_tag :installation_cost, @equiptment_params["installation_cost"] %>
+											<%= number_to_currency(@equiptment_params["installation_cost"]) %>
 										</li>
 									</ul>
 								</li>
 								<li>
 									<ul class="list-inline">
 										<li>
-											<strong>Extra Equiptment Price</strong>
+											<strong>Equiptment Price</strong>
 										</li>
 										<li class="pull-right">
 											<%= hidden_field_tag :equiptment_cost, @equiptment_params["equiptment_cost"] %>

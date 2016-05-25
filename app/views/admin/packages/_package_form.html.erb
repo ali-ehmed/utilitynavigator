@@ -14,28 +14,27 @@
 			</li>
 			<li class="string input optional stringish">
 				<%= f.label :package_description %>
-				<div id="package_description_input">
-					<%= f.input :package_description, input_html: { class: "package-content" } %>
-				</div>
+				<br />
+				<%= f.input :package_description, input_html: { class: "package-content" } %>
 			</li>
 			<li class="string input optional stringish" id="package_price_info_input">
-				<%= f.input :price_info, hint: "Price Info should not be more than 70 characters" %>
-				<span class="price-info-error" style="display:none;color: red;"><strong>Error: </strong>Price Info must not exceed 70 characters</span>
+				<%= f.input :price_info, input_html: { onblur: "$packages.packageCharacterLengthValidation(this, 72);" } %>
+				<strong>Hint: </strong>Price Info should not be more than 70 characters
 			</li>
 			<li class="string input optional stringish" id="package_price_input">
-				<%= f.input :price %>
+				<%= f.input :price, input_html: { onblur: "$packages.packagePriceValidation(this);" } %>
 			</li>
 			<li class="string input optional stringish" id="package_monthly_fee_after_promotion_input">
-				<%= f.input :monthly_fee_after_promotion %>
+				<%= f.input :monthly_fee_after_promotion, input_html: { onblur: "$packages.packageCharacterLengthValidation(this, 50);" } %>
+				<strong>Hint: </strong>Monthly Fee Text should not be more than 70 characters
 			</li>
 			<li class="string input optional stringish" id="package_installation_price_input">
-				<%= f.input :installation_price %>
+				<%= f.input :installation_price, input_html: { onblur: "$packages.packagePriceValidation(this);" } %>
 			</li>
 			<li class="string input optional stringish">
 				<%= f.label :promotions %>
-				<div id="package_promotions_input">
-					<%= f.input :promotions, input_html: { class: "package-promotions" } %>
-				</div>
+				<br />
+				<%= f.input :promotions, input_html: { class: "package-promotions" } %>
 			</li>
 		</ol>
 	</fieldset>

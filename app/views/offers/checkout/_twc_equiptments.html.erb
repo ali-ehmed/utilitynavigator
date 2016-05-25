@@ -154,7 +154,7 @@
 				<% else %>
 					<li>
 						<div class="checkbox">
-		          <%= check_box_tag "4th_tv_outlet", false, false, {:class => "styled",  data: { price: fields["4th_tv_install_4"] }, onchange: "calculateEquiptmentCosts(this);"}  %>
+		          <%= check_box_tag "4th_tv_outlet", false, false, {:class => "styled",  data: { price: fields["4th_tv_install_4"], installation: true }, onchange: "calculateEquiptmentCosts(this);"}  %>
 		          <label class="label-checkbox">
 		            4th Outlet Activation Fee ($<%= fields["4th_tv_install_4"] %>)
 		          </label>
@@ -276,6 +276,7 @@
 	          <label class="label-checkbox">
 	            The Movie Channel ($9.99 monthly)
 	          </label>
+	          <br />
 	          <a role="button" data-toggle="collapse" href="#collapsemovie_channel" aria-expanded="false" aria-controls="collapseExample" class="view_more">View Details</a>
 						<div class="collapse" id="collapsemovie_channel">
 		          <p class="well">
@@ -291,6 +292,7 @@
 	          <label class="label-checkbox">
 	            Starz ($9.99 monthly)
 	          </label>
+	          <br />
 	          <a role="button" data-toggle="collapse" href="#collapsestarz" aria-expanded="false" aria-controls="collapseExample" class="view_more">View Details</a>
 						<div class="collapse" id="collapsestarz">
 		          <p class="well">
@@ -367,7 +369,7 @@
 				</li>
 			</ul>
 		<% end %>
-		<% if fields["more_spanish_entertainment_for_everyone"].downcase == "required" %>
+		<% if fields["more_spanish_entertainment_for_everyone"].present? and fields["more_spanish_entertainment_for_everyone"].downcase == "required" %>
 			<h4>More Spanish Entertainment for Everyone</h4>
 			<ul>
 				<li>
@@ -393,6 +395,9 @@
 				<li>
 					<% if fields["epix_offer"].downcase == "included" %>
 						EPIX Offer (Included)
+						<p>
+		        	If you would like to add EPIX free for 12 months.
+		        </p>
 					<% else %>
 						<div class="checkbox">
 		          <%= check_box_tag :epix_offer, false, false, {:class => "styled", data: { price: fields["epix_offer"] }, onchange: "calculateEquiptmentCosts(this);"}  %>
@@ -400,10 +405,13 @@
 		            EPIX Offer ($<%= fields["epix_offer"] %>)
 		          </label>
 		        </div>
+	          <a role="button" data-toggle="collapse" href="#collapseEpix" aria-expanded="false" aria-controls="collapseExample" class="view_more">View Details</a>
+						<div class="collapse" id="collapseEpix">
+		          <p class="well">
+		          	Price increase after 12 months.
+		          </p>
+	          </div>
 	        <% end %>
-	        <p>
-	        	If you would like to add EPIX free for 12 months.
-	        </p>
 				</li>
 			</ul>
 		<% end %>
@@ -450,7 +458,12 @@
 		<% if fields["wifi"].present? %>
 			<h4>WiFi Service &amp; Equiptment <small><a href="javascript:void(0);" onclick="resetSelectedItem(this);">Reset selected item</a></small></h4>
 			<% if fields["wifi"].downcase == "included"%>
-				WiFi Service is included in this package
+				<a role="button" data-toggle="collapse" href="#collapseWifiService" aria-expanded="false" aria-controls="collapseExample" class="view_more">View Details</a>
+				<div class="collapse" id="collapseWifiService">
+          <p class="well">
+          	WiFi Service is included in this package
+          </p>
+        </div>
 			<% else %>
 				<ul>
 					<li>
@@ -571,7 +584,7 @@
 				<a role="button" data-toggle="collapse" href="#collapsesign_up_global_penny" aria-expanded="false" aria-controls="collapseExample" class="view_more">View Details</a>
 				<div class="collapse" id="collapsesign_up_global_penny">
 	        <p class="well">
-	        	Our pay-as-you-go plan gives you penny per minute rates to over 40 countries and highly competitive rates to everywhere else. And it is free for 12 months when you sign up for any Triple Play package.
+	        	Our pay-as-you-go plan gives you penny per minute rates to over 40 countries and highly competitive rates to everywhere else.
 	        </p>
 	      </div>
 			<% end %>

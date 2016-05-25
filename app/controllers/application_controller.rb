@@ -7,9 +7,16 @@ class ApplicationController < ActionController::Base
   include ActionView::Context
 
   before_action :make_action_mailer_use_request_host_and_protocol
+  before_action :check_domain
   before_action :configure_permitted_parameters, if: :devise_controller?
 
   helper_method :zip_code, :user_address, :broadband_search
+
+  def check_domain
+    unless request.original_url.starts_with? "https://www"
+      redirect_to "https://www.#{root_url}#{request.original_fullpath}" if Rails.env.production?
+    end
+  end
 
   protected
 

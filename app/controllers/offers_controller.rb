@@ -18,16 +18,14 @@ class OffersController < ApplicationController
 			session[:user_address] = user_address
 		end
 
-		@twc = Package.time_warner
-		@charter = Package.charter_spectrum
-		@cox = Package.cox
-
-		logger.debug user_address
-
 		unless broadband_search.to_s == "zero_results"
 			@providers = broadband_search
 			@packages = Package.broadband_providers(@providers).paginate(:page => params[:page], :per_page => 6)
 		end
+
+		@count_twc = @packages.try("time_warner").count || 0
+		@count_charter = @packages.try("charter_spectrum").count || 0
+		@count_cox = @packages.try("cox").count || 0
 
 		respond_to do |format|
 			format.html
@@ -41,6 +39,7 @@ class OffersController < ApplicationController
 		@results = @address.search_providers(@location)
 
 		logger.debug @results
+		
 		if @results == "error".to_sym
 			render json: { status: :error, msg: "There was a problem while fetching data." }
 		else

@@ -94,48 +94,67 @@ window.settingFilterActive = (elem) ->
 
 window.resetSelectedItem = (elem) ->
 	$this = $(elem)
-	equiptment_cost = parseFloat(document.getElementById("equiptment_cost").value)
+
 	total_cost = parseFloat(document.getElementById("total_cost").value)
 	$radios = $this.closest("h4").next().find("li input")
 
 	x = 0
 	while x < $radios.length
-    if $($radios[x]).attr("checked")
+		if $radios[x].dataset.installation == "true"
+			_cost = parseFloat(document.getElementById("installation_cost").value)
+		else
+			_cost = parseFloat(document.getElementById("equiptment_cost").value)
+
+		if $($radios[x]).attr("checked")
       $radios[x].checked = false
 
-      equiptment_cost -= parseFloat(String($($radios[x]).data("price")).replace("$", ""))
+      _cost -= parseFloat(String($($radios[x]).data("price")).replace("$", ""))
       total_cost -= parseFloat(String($($radios[x]).data("price")).replace("$", ""))
-      
-      document.getElementById("equiptment_cost").value = equiptment_cost.toFixed(2)
+
+      if $radios[x].dataset.installation == "true"
+      	document.getElementById("installation_cost").value = _cost.toFixed(2)
+      else
+      	document.getElementById("equiptment_cost").value = _cost.toFixed(2)
+
       document.getElementById("total_cost").value = total_cost.toFixed(2)
 
       $($radios[x]).val("false")
       $($radios[x]).removeAttr("checked")
 
-      $(".equiptment_cost_span").text(equiptment_cost.toFixed(2))
+      if $radios[x].dataset.installation == "true"
+      	$(".installation_cost_span").text(_cost.toFixed(2))
+      else
+      	$(".equiptment_cost_span").text(_cost.toFixed(2))
+
       $(".total_cost_span").text("$" + total_cost.toFixed(2))
-      
-      # return
     x++
     
 # This method is calculating the extra equiptment cost
 window.calculateEquiptmentCosts = (elem) ->
-	equiptment_cost = parseFloat(document.getElementById("equiptment_cost").value)
+	if elem.dataset.installation == "true"
+		_cost = parseFloat(document.getElementById("installation_cost").value)
+	else
+		_cost = parseFloat(document.getElementById("equiptment_cost").value)
+
 	total_cost = parseFloat(document.getElementById("total_cost").value)
 	
 	$this = $(elem)
 
 	if $this.attr("type") == "radio"
-		# uncheckOtherSingletonSelect($this, total_cost, equiptment_cost)
+
 		$radios = $this.closest("ul").find("input[type='radio']")
 		$.each $radios, ->
 			$elem = $(this)
 			if $elem.val() == "true"
 				
-				equiptment_cost -= parseFloat(String($elem.data("price")).replace("$", ""))
+				_cost -= parseFloat(String($elem.data("price")).replace("$", ""))
 				total_cost -= parseFloat(String($elem.data("price")).replace("$", ""))
 				
-				document.getElementById("equiptment_cost").value = equiptment_cost
+				if elem.dataset.installation == "true"
+					document.getElementById("installation_cost").value = _cost
+				else
+					document.getElementById("equiptment_cost").value = _cost
+
 				document.getElementById("total_cost").value = total_cost
 				$elem.val("false")
 				$elem.removeAttr("checked")
@@ -147,25 +166,32 @@ window.calculateEquiptmentCosts = (elem) ->
 		if elem.value == "false" 		
 			elem.value = "true"
 			if $.isNumeric(elem.dataset.price.replace("$", ""))
-				equiptment_cost += parseFloat(String(elem.dataset.price).replace("$", ""))
+				_cost += parseFloat(String(elem.dataset.price).replace("$", ""))
 				total_cost += parseFloat(String(elem.dataset.price).replace("$", ""))
 
-				equiptment_cost = equiptment_cost.toFixed(2)
+				_cost = _cost.toFixed(2)
 				total_cost = total_cost.toFixed(2)
 		else
 			elem.value = "false"
 			$(elem).removeAttr("checked")
 			if $.isNumeric(elem.dataset.price.replace("$", ""))
-				equiptment_cost -= parseFloat(String(elem.dataset.price).replace("$", ""))
+				_cost -= parseFloat(String(elem.dataset.price).replace("$", ""))
 				total_cost -= parseFloat(String(elem.dataset.price).replace("$", ""))
 
-				equiptment_cost = equiptment_cost.toFixed(2)
+				_cost = _cost.toFixed(2)
 				total_cost = total_cost.toFixed(2)
 
-		document.getElementById("equiptment_cost").value = equiptment_cost
+		if elem.dataset.installation == "true"
+			document.getElementById("installation_cost").value = _cost
+		else
+			document.getElementById("equiptment_cost").value = _cost
+
 		document.getElementById("total_cost").value = total_cost
 
-	$(".equiptment_cost_span").text(equiptment_cost)
+	if elem.dataset.installation == "true"
+		$(".installation_cost_span").text(_cost)
+	else
+		$(".equiptment_cost_span").text(_cost)
 	$(".total_cost_span").text("$" + total_cost)
 
 # For custom pagination in filters
@@ -307,6 +333,7 @@ validateExtraEquiptment = ->
 
     phone = $("input[name='phone']")
     modem = $("input[name='modem']")
+    wifi_service = $("input[name='wifi']")
 
     internet_equiptment = $("input[name='internet_equiptment']")
     directory_listing = $("input[name='directory_listing']")
@@ -314,15 +341,18 @@ validateExtraEquiptment = ->
     service_agreement = $("input[name='service_agreement']")
 
     installation = $("input[name='installation']")
+    wifi_installation = $("input[name='wifi_installation']")
 
     if first_tv.length >= 3
     	if radioValidations(first_tv) == false
     		$errors.push("Please configure 1st TV")
     		$valid = false
 
-    if installation.length and !installation.attr("checked")
-      $errors.push("Please select Installation")
-      $valid = false
+    # if installation.length and !installation.attr("checked")
+    if installation.length > 0
+    	if radioValidations(installation) == false
+	      $errors.push("Please select Installation")
+	      $valid = false
 
     if $provider == "twc"
 	    if fourth_tv.length > 0
@@ -336,9 +366,20 @@ validateExtraEquiptment = ->
         	$errors.push("Please select modem")
         	$valid = false
 
+    	if wifi_service.length > 0 and modem.length > 0 and radioValidations(modem) == true
+    		if radioValidations(wifi_service) == false
+	    		$errors.push("Please also select wifi.")
+	    		$valid = false
+
     	if phone.length > 0
     		if radioValidations(phone) == false
     			$errors.push("Choose one of the phone service")
+    			$valid = false
+    
+    if $provider == "charter"
+    	if wifi_installation.length > 0 and radioValidations(wifi_service) == true
+    		if radioValidations(wifi_installation) == false
+    			$errors.push("Please also select wifi installation.")
     			$valid = false
 
     if $provider == "cox"
@@ -503,7 +544,7 @@ searchProviders = ->
 		    	$.notify({
 		        icon: 'glyphicon glyphicon-warning-sign'
 		        title: '<strong>Instructions:</strong><br />'
-		        message: 'Something went wrong'
+		        message: 'Something went wrong. Please try again.'
 		      }, type: 'danger')
 			}
       return
