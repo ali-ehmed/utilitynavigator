@@ -14,7 +14,7 @@ class ApplicationController < ActionController::Base
 
   def check_domain
     unless request.original_url.starts_with? "https://www"
-      redirect_to "https://www.#{root_url}#{request.original_fullpath}" if Rails.env.production?
+      redirect_to "www.#{root_url}#{request.original_fullpath}" if Rails.env.production?
     end
   end
 
