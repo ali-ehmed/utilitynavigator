@@ -45,13 +45,13 @@
   	</li>  	
   <% end %>
   <% if @package.provider.name == Provider::CHARTER_SPECTRUM %>
-  	<% fields = get_in_hash(@charter_fields_for_internet) %>
+  	<% fields = get_in_hash(@charter_fields) %>
   	<li>
   		<% if fields["wifi_installation"].present? %>
 	  		<% if fields["wifi_installation"].downcase == "included" %>
 	  			WiFi Installation Service is included in this package
 	  		<% else %>
-	  			<div class="checkbox" style="padding-left: 5px;">
+	  			<div class="checkbox">
 						<%= check_box_tag :wifi_installation, false, false, {:class => "styled", data: { price: fields["wifi_installation"].to_f, installation: true }, onchange: "calculateEquiptmentCosts(this);"}  %>
 		        <label class="label-checkbox" for="self_installation">
 		          Schedule an appointment for a technician to install my WiFi services ($<%= fields["wifi_installation"].to_f %> One Time)

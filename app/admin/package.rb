@@ -95,6 +95,9 @@ ActiveAdmin.register Package do
 
 			@package.charter_tv_spectrum = package_bundle_params["charter_tv_spectrum"]
 
+			@package.protection_plan_service = params["protection_plan_service"] || ""
+			@package.lock_rates_agreement = params["lock_rates_agreement"] || ""
+
 			if @package.save
 				@product_ids = params[:product_ids].map(&:to_i)
 				@products = Product.where("id in (?)", @product_ids)
@@ -160,7 +163,7 @@ ActiveAdmin.register Package do
 
 		def initialize_params
 			params.require(:package).permit(:provider_id, :package_type_id, :price, :price_info, :package_description,
-																			:package_name, :promotions, :promotion_disclaimer, :monthly_fee_after_promotion, :installation_price)
+																			:package_name, :promotions, :promotion_disclaimer, :plan_details, :monthly_fee_after_promotion, :installation_price)
 		end
 	end
 

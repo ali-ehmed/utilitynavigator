@@ -40,10 +40,12 @@ window.validPackageForm = true;
 
 // Packages object
 window.$packages = {
-	errorTemplate: function(message) {
+	errorTemplate: function(message, elem) {
+		elem = elem == undefined ? "" : elem;
 		message = message == undefined ? "" : message;
-		template = '<p class="display-error-'+ message.length +'" style="color: red;"><strong>'+ message +'</p>';
-		if($(".display-error-" + message.length).length === 0) {
+		template = '<p class="display-error" style="color: red;"><strong>Error: </strong>'+ message +'</p>';
+
+		if(!elem.next().hasClass("display-error")) {
 			return template;
 		}
 
@@ -80,7 +82,7 @@ window.$packages = {
 		console.log($elem.val().length);
 
 		if($elem.val().length > c_length) {
-			$elem.after($packages.errorTemplate("Field not exceed "+ c_length +" characters"));
+			$elem.after($packages.errorTemplate("Field not exceed "+ c_length +" characters", $elem));
 			window.validPackageForm = false;
 		} else {
 			$elem.next().remove();
@@ -92,7 +94,7 @@ window.$packages = {
 		
 		if(isNaN($elem.val()) === true) {
 			console.log(isNaN($elem.val()));
-			$elem.after($packages.errorTemplate("Price must be a demical value"));
+			$elem.after($packages.errorTemplate("Price must be a demical value", $elem));
 			window.validPackageForm = false;
 		} else {
 			$elem.next().remove();
@@ -115,6 +117,18 @@ window.$packages = {
 		console.log($this.next().val());
 
 		$this.next().hide();
+		return;
+	},
+	setRequiredFields: function(elem) {
+		$this = $(elem);
+
+		if($this.val() === "Required" || $this.val() === "Include") {
+			$this.closest("li").next().show();
+			return;
+		} else {
+			$this.closest("li").next().hide();
+		}
+		
 		return;
 	},
 	// Products Type and Products 
@@ -148,7 +162,7 @@ window.$packages = {
 				if($checked_boxes.length > 2 || $checked_boxes.length < 2) {
 
 					$packages.validationClass($element.closest("li"), "true");
-					$error.text("You should select 2 Product");
+					$error.text("You should select 2 Products");
 
 				} else {
 
@@ -161,7 +175,7 @@ window.$packages = {
 				if($checked_boxes.length < 3) {
 
 					$packages.validationClass($element.closest("li"), "true");
-					$error.text("You should select 3 Product");
+					$error.text("You should select 3 Products");
 
 				} else {
 
@@ -308,6 +322,7 @@ $(document).ready(function () {
 	// Froala Editor
 	$('.package-content').froalaEditor();
 	$('.package-promotions').froalaEditor();
+	$('.package-plan-details').froalaEditor();
 
 	$("a#approval_statuses").closest("li").css("border-bottom", "solid 5px #ebebeb")
 });

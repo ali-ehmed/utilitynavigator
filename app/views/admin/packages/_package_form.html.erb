@@ -17,6 +17,11 @@
 				<br />
 				<%= f.input :package_description, input_html: { class: "package-content" } %>
 			</li>
+			<li class="string input optional stringish">
+				<%= f.label :plan_details %>
+				<br />
+				<%= f.input :plan_details, input_html: { class: "package-plan-details" } %>
+			</li>
 			<li class="string input optional stringish" id="package_price_info_input">
 				<%= f.input :price_info, input_html: { onblur: "$packages.packageCharacterLengthValidation(this, 72);" } %>
 				<strong>Hint: </strong>Price Info should not be more than 70 characters

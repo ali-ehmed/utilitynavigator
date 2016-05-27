@@ -59,14 +59,16 @@
 			<label class="label">
 				Premium Movie Channels
 			</label>
-			<%= ff.select :premiums, options_for_select(["Required", "Free"]) %>
+			<%= ff.select :premiums, options_for_select(["Required", "Free"]), {prompt: "--Select--"}, onChange: "$packages.setRequiredFields(this);" %>
 		</li>
+		<%= render partial: "admin/packages/shared/items_for_premiums_cox", locals: { ff: ff } %>
 		<li>
 			<label class="label">
 				TV Paks
 			</label>
-			<%= ff.select :tv_paks, options_for_select(["Required", "Free"]) %>
+			<%= ff.select :tv_paks, options_for_select(["Required", "Free"]), {prompt: "--Select--"}, onChange: "$packages.setRequiredFields(this);" %>
 		</li>
+		<%= render partial: "admin/packages/shared/items_for_tv_paks_cox", locals: { ff: ff } %>
 	<% end %>
 <% elsif product.name.downcase == :internet.to_s %>
 	<%= fields_for :internet do |ff| %>
@@ -138,18 +140,6 @@
 				Directory Name
 			</label>
 			<%= ff.select :directory_name, options_for_select(["Required", "Free"]) %>
-		</li>
-		<li>
-			<label class="label">
-				Cox Service Protection Plan
-			</label>
-			<%= ff.select :cox_service_protection_plan, options_for_select(["Required", "Free"]) %>
-		</li>
-		<li>
-			<label class="label">
-				Service Agreement
-			</label>
-			<%= ff.select :service_agreement, options_for_select(["Yes", "Not for this package"]) %>
 		</li>
 	<% end %>
 <% end %>

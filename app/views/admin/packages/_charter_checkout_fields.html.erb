@@ -43,8 +43,9 @@
 			<label class="label">
 				Premiums
 			</label>
-			<%= ff.select :premiums, options_for_select(["Required", "Free"]) %>
+			<%= ff.select :premiums, options_for_select(["Required", "Free"]), {prompt: "--Select--"}, onChange: "$packages.setRequiredFields(this);" %>
 		</li>
+		<%= render partial: "admin/packages/shared/items_for_premiums_charter", locals: { ff: ff } %>
 		<li>
 			<label class="label">
 				Digital Tier 1

@@ -1,0 +1,35 @@
+<li style="display:none;">
+	<legend><span>Set items for TV Paks</span></legend>
+	<ol>
+		<li>
+			<label for="provider_name" class="label">
+				Variety Pak
+			</label>
+			<%= ff.text_field "variety_pak", style: "width: calc(78% - 22px);", onblur: "$packages.packagePriceValidation(this);" %>
+		</li>
+		<li>
+			<label for="provider_name" class="label">
+				Disney on Demand
+			</label>
+			<%= ff.text_field "disney_on_demand", style: "width: calc(78% - 22px);", onblur: "$packages.packagePriceValidation(this);" %>
+		</li>
+		<li>
+			<label for="provider_name" class="label">
+				TWC Movie Pass
+			</label>
+			<%= ff.text_field "twc_movie_pass", style: "width: calc(78% - 22px);", onblur: "$packages.packagePriceValidation(this);" %>
+		</li>
+		<li>
+			<label for="provider_name" class="label">
+				HD Pass
+			</label>
+			<%= ff.text_field "hd_pass", style: "width: calc(78% - 22px);", onblur: "$packages.packagePriceValidation(this);" %>
+		</li>
+		<li>
+			<label for="provider_name" class="label">
+				Latino Pak
+			</label>
+			<%= ff.text_field "latino_pak", style: "width: calc(78% - 22px);", onblur: "$packages.packagePriceValidation(this);" %>
+		</li>
+	</ol>
+</li>

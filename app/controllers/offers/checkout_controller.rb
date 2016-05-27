@@ -2,7 +2,7 @@ class Offers::CheckoutController < ApplicationController
 	include Wicked::Wizard
 	include ApplicationHelper
 
-	before_action :set_package, only: [:show]
+	before_action :set_package, only: [:show, :charter_installation]
 
 	steps *Package.checkout_steps
 
@@ -38,7 +38,16 @@ class Offers::CheckoutController < ApplicationController
 	private 
 
 	def set_package
-		@package = Package.find(params[:offer_id])
-		@charter_fields_for_internet = @package.package_bundles.joins(:product).where("products.name = 'Internet'").first.checkout_fields
+		begin
+			@package = Package.find(params[:offer_id])
+		rescue ActiveRecord::RecordNotFound
+			flash[:error] = "Package not found"
+  		redirect_to offers_path
+		end
+	end
+
+	def charter_installation
+		@charter_fields = @package.package_bundles.joins(:product).where("products.name = 'Internet'")
+														  .first.try(:checkout_fields)
 	end
 end

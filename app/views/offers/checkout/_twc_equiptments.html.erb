@@ -246,147 +246,167 @@
 		<% if fields["more_fun_with_more_entertainment"].downcase == "required" %>
 			<h4>More Fun with More Entertainment</h4>
 			<ul>
-				<li>
-					<div class="checkbox">
-	          <%= check_box_tag :hbo, false, false, {:class => "styled", data: { price: 15.00 }, onchange: "calculateEquiptmentCosts(this);"}  %>
-	          <label class="label-checkbox">
-	            HBO ($15.00 monthly)
-	          </label>
-	        </div>
-				</li>
-				<li>
-					<div class="checkbox">
-	          <%= check_box_tag :cinemax, false, false, {:class => "styled", data: { price: 9.99 }, onchange: "calculateEquiptmentCosts(this);"}  %>
-	          <label class="label-checkbox">
-	            Cinemax ($9.99 monthly)
-	          </label>
-	        </div>
-				</li>
-				<li>
-					<div class="checkbox">
-	          <%= check_box_tag :showtime, false, false, {:class => "styled", data: { price: 9.99 }, onchange: "calculateEquiptmentCosts(this);"}  %>
-	          <label class="label-checkbox">
-	            Showtime ($9.99 monthly)
-	          </label>
-	        </div>
-				</li>
-				<li>
-					<div class="checkbox">
-	          <%= check_box_tag :movie_channel, false, false, {:class => "styled", data: { price: 9.99 }, onchange: "calculateEquiptmentCosts(this);"}  %>
-	          <label class="label-checkbox">
-	            The Movie Channel ($9.99 monthly)
-	          </label>
-	          <br />
-	          <a role="button" data-toggle="collapse" href="#collapsemovie_channel" aria-expanded="false" aria-controls="collapseExample" class="view_more">View Details</a>
-						<div class="collapse" id="collapsemovie_channel">
-		          <p class="well">
-		          	Catch critically acclaimed original series and Hollywood blockbusters!
-		          </p>
-	          </div>
-	          
-	        </div>
-				</li>
-				<li>
-					<div class="checkbox">
-	          <%= check_box_tag :starz, false, false, {:class => "styled", data: { price: 9.99 }, onchange: "calculateEquiptmentCosts(this);"}  %>
-	          <label class="label-checkbox">
-	            Starz ($9.99 monthly)
-	          </label>
-	          <br />
-	          <a role="button" data-toggle="collapse" href="#collapsestarz" aria-expanded="false" aria-controls="collapseExample" class="view_more">View Details</a>
-						<div class="collapse" id="collapsestarz">
-		          <p class="well">
-		          	STARZ&reg; and STARZ&reg; Play offer 300+ movies every month on six channels and deliver breakthrough original programming
-		          </p>
-	          </div>
-	        </div>
-				</li>
+				<% if fields["hbo"].present? %>
+					<li>
+						<div class="checkbox">
+		          <%= check_box_tag :hbo, false, false, {:class => "styled", data: { price: fields["hbo"] }, onchange: "calculateEquiptmentCosts(this);"}  %>
+		          <label class="label-checkbox">
+		            HBO ($<%= fields["hbo"] %> monthly)
+		          </label>
+		        </div>
+					</li>
+				<% end %>
+				<% if fields["cinemax"].present? %>
+					<li>
+						<div class="checkbox">
+		          <%= check_box_tag :cinemax, false, false, {:class => "styled", data: { price: fields["cinemax"] }, onchange: "calculateEquiptmentCosts(this);"}  %>
+		          <label class="label-checkbox">
+		            Cinemax ($<%= fields["cinemax"] %> monthly)
+		          </label>
+		        </div>
+					</li>
+				<% end %>
+				<% if fields["showtime"].present? %>
+					<li>
+						<div class="checkbox">
+		          <%= check_box_tag :showtime, false, false, {:class => "styled", data: { price: fields["showtime"] }, onchange: "calculateEquiptmentCosts(this);"}  %>
+		          <label class="label-checkbox">
+		            Showtime ($<%= fields["showtime"] %> monthly)
+		          </label>
+		        </div>
+					</li>
+				<% end %>
+				<% if fields["movie_channel"].present? %>
+					<li>
+						<div class="checkbox">
+		          <%= check_box_tag :movie_channel, false, false, {:class => "styled", data: { price: fields["movie_channel"] }, onchange: "calculateEquiptmentCosts(this);"}  %>
+		          <label class="label-checkbox">
+		            The Movie Channel ($<%= fields["movie_channel"] %> monthly)
+		          </label>
+		          <br />
+		          <a role="button" data-toggle="collapse" href="#collapsemovie_channel" aria-expanded="false" aria-controls="collapseExample" class="view_more">View Details</a>
+							<div class="collapse" id="collapsemovie_channel">
+			          <p class="well">
+			          	Catch critically acclaimed original series and Hollywood blockbusters!
+			          </p>
+		          </div>
+		          
+		        </div>
+					</li>
+				<% end %>
+				<% if fields["starz"].present? %>
+					<li>
+						<div class="checkbox">
+		          <%= check_box_tag :starz, false, false, {:class => "styled", data: { price: fields["starz"] }, onchange: "calculateEquiptmentCosts(this);"}  %>
+		          <label class="label-checkbox">
+		            Starz ($<%= fields["starz"] %> monthly)
+		          </label>
+		          <br />
+		          <a role="button" data-toggle="collapse" href="#collapsestarz" aria-expanded="false" aria-controls="collapseExample" class="view_more">View Details</a>
+							<div class="collapse" id="collapsestarz">
+			          <p class="well">
+			          	STARZ&reg; and STARZ&reg; Play offer 300+ movies every month on six channels and deliver breakthrough original programming
+			          </p>
+		          </div>
+		        </div>
+					</li>
+				<% end %>
 			</ul>
 		<% end %>
 		<!-- More Entertainment for every one  -->
 		<% if fields["more_fun_for_everyone"].downcase == "required" %>
 			<h4>More Entertainment for Everyone</h4>
 			<ul>
-				<li>
-					<div class="checkbox">
-	          <%= check_box_tag :twc_sports, false, false, {:class => "styled", data: { price: 10.00 }, onchange: "calculateEquiptmentCosts(this);"}  %>
-	          <label class="label-checkbox">
-	            TWC Sports Pass ($10.00 monthly)
-	          </label>
-	          <br />
-	          <a role="button" data-toggle="collapse" href="#collapsetwc_sports" aria-expanded="false" aria-controls="collapseExample" class="view_more">View Details</a>
-						<div class="collapse" id="collapsetwc_sports">
-		          <p class="well">
-		          	Get more games, events and exclusive online content with more than a dozen popular sports channels like NFL RedZone, FOX Soccer Plus, CBS Sports Network and Tennis Channel.
-		          </p>
-	          </div>
-	        </div>
-				</li>
-				<li>
-					<div class="checkbox">
-	          <%= check_box_tag :disney_on_demand, false, false, {:class => "styled", data: { price: 3.99 }, onchange: "calculateEquiptmentCosts(this);"}  %>
-	          <label class="label-checkbox">
-	            Disney On Demand ($3.99 monthly)
-	          </label>
-	          <br />
-	          <a role="button" data-toggle="collapse" href="#collapsedisney_on_demand" aria-expanded="false" aria-controls="collapseExample" class="view_more">View Details</a>
-						<div class="collapse" id="collapsedisney_on_demand">
-		          <p class="well">
-		          	Kids will love having access anytime to the most popular Disney Channel&reg; and Playhouse Disney series. Plus, watch original movies and series up to one week before they air on Disney Channel.
-		          </p>
-	          </div>
-	        </div>
-				</li>
-				<li>
-					<div class="checkbox">
-	          <%= check_box_tag :twc_movie_pass, false, false, {:class => "styled", data: { price: 10.00 }, onchange: "calculateEquiptmentCosts(this);"}  %>
-	          <label class="label-checkbox">
-	            TWC Movie Pass ($10.00 monthly)
-	          </label>
-	          <br />
-	          <a role="button" data-toggle="collapse" href="#collapsetwc_movie_pass" aria-expanded="false" aria-controls="collapseExample" class="view_more">View Details</a>
-						<div class="collapse" id="collapsetwc_movie_pass">
-		          <p class="well">
-		          	Includes Encore, Fox Movie Channel, Sundance and more!
-		          </p>
-	          </div>
-	        </div>
-				</li>
-				<li>
-					<div class="checkbox">
-	          <%= check_box_tag :hd_pass, false, false, {:class => "styled", data: { price: 6.95 }, onchange: "calculateEquiptmentCosts(this);"}  %>
-	          <label class="label-checkbox">
-	            HD Pass ($6.95 monthly)
-	          </label>
-	          <br />
-	          <a role="button" data-toggle="collapse" href="#collapsehd_pass" aria-expanded="false" aria-controls="collapseExample" class="view_more">View Details</a>
-						<div class="collapse" id="collapsehd_pass">
-		          <p class="well">
-		          	Expand your HD experience with a wide range of programming from Smithsonian HD, MAV TV HD, MGM HD and Universal HD.
-		          </p>
-	          </div>
-	        </div>
-				</li>
+				<% if fields["twc_sports"].present? %>
+					<li>
+						<div class="checkbox">
+		          <%= check_box_tag :twc_sports, false, false, {:class => "styled", data: { price: fields["twc_sports"] }, onchange: "calculateEquiptmentCosts(this);"}  %>
+		          <label class="label-checkbox">
+		            TWC Sports Pass ($<%= fields["twc_sports"] %> monthly)
+		          </label>
+		          <br />
+		          <a role="button" data-toggle="collapse" href="#collapsetwc_sports" aria-expanded="false" aria-controls="collapseExample" class="view_more">View Details</a>
+							<div class="collapse" id="collapsetwc_sports">
+			          <p class="well">
+			          	Get more games, events and exclusive online content with more than a dozen popular sports channels like NFL RedZone, FOX Soccer Plus, CBS Sports Network and Tennis Channel.
+			          </p>
+		          </div>
+		        </div>
+					</li>
+				<% end %>
+				<% if fields["disney_on_demand"].present? %>
+					<li>
+						<div class="checkbox">
+		          <%= check_box_tag :disney_on_demand, false, false, {:class => "styled", data: { price: fields["disney_on_demand"] }, onchange: "calculateEquiptmentCosts(this);"}  %>
+		          <label class="label-checkbox">
+		            Disney On Demand ($<%= fields["disney_on_demand"] %> monthly)
+		          </label>
+		          <br />
+		          <a role="button" data-toggle="collapse" href="#collapsedisney_on_demand" aria-expanded="false" aria-controls="collapseExample" class="view_more">View Details</a>
+							<div class="collapse" id="collapsedisney_on_demand">
+			          <p class="well">
+			          	Kids will love having access anytime to the most popular Disney Channel&reg; and Playhouse Disney series. Plus, watch original movies and series up to one week before they air on Disney Channel.
+			          </p>
+		          </div>
+		        </div>
+					</li>
+				<% end %>
+				<% if fields["twc_movie_pass"].present? %>
+					<li>
+						<div class="checkbox">
+		          <%= check_box_tag :twc_movie_pass, false, false, {:class => "styled", data: { price: fields["twc_movie_pass"] }, onchange: "calculateEquiptmentCosts(this);"}  %>
+		          <label class="label-checkbox">
+		            TWC Movie Pass ($<%= fields["twc_movie_pass"] %> monthly)
+		          </label>
+		          <br />
+		          <a role="button" data-toggle="collapse" href="#collapsetwc_movie_pass" aria-expanded="false" aria-controls="collapseExample" class="view_more">View Details</a>
+							<div class="collapse" id="collapsetwc_movie_pass">
+			          <p class="well">
+			          	Includes Encore, Fox Movie Channel, Sundance and more!
+			          </p>
+		          </div>
+		        </div>
+					</li>
+				<% end %>
+				<% if fields["hd_pass"].present? %>
+					<li>
+						<div class="checkbox">
+		          <%= check_box_tag :hd_pass, false, false, {:class => "styled", data: { price: fields["hd_pass"] }, onchange: "calculateEquiptmentCosts(this);"}  %>
+		          <label class="label-checkbox">
+		            HD Pass ($<%= fields["hd_pass"] %> monthly)
+		          </label>
+		          <br />
+		          <a role="button" data-toggle="collapse" href="#collapsehd_pass" aria-expanded="false" aria-controls="collapseExample" class="view_more">View Details</a>
+							<div class="collapse" id="collapsehd_pass">
+			          <p class="well">
+			          	Expand your HD experience with a wide range of programming from Smithsonian HD, MAV TV HD, MGM HD and Universal HD.
+			          </p>
+		          </div>
+		        </div>
+					</li>
+				<% end %>
 			</ul>
 		<% end %>
 		<% if fields["more_spanish_entertainment_for_everyone"].present? and fields["more_spanish_entertainment_for_everyone"].downcase == "required" %>
 			<h4>More Spanish Entertainment for Everyone</h4>
 			<ul>
-				<li>
-					<div class="checkbox">
-	          <%= check_box_tag :spanish_programming, false, false, {:class => "styled", data: { price: 5.00 }, onchange: "calculateEquiptmentCosts(this);"}  %>
-	          <label class="label-checkbox">
-	            Spanish Programming ($5.00 Monthly)
-	          </label>
-	          <br />
-	          <a role="button" data-toggle="collapse" href="#collapsespanish_programming" aria-expanded="false" aria-controls="collapseExample" class="view_more">View Details</a>
-						<div class="collapse" id="collapsespanish_programming">
-		          <p class="well">
-		          	More than 40 Spanish-language channels, including Discovery Espanol, ESPN Deportes HD and Mun2.
-		          </p>
-	          </div>
-	        </div>
-				</li>
+				<% if fields["spanish_programming"].present? %>
+					<li>
+						<div class="checkbox">
+		          <%= check_box_tag :spanish_programming, false, false, {:class => "styled", data: { price: fields["spanish_programming"] }, onchange: "calculateEquiptmentCosts(this);"}  %>
+		          <label class="label-checkbox">
+		            Spanish Programming ($<%= fields["spanish_programming"] %> Monthly)
+		          </label>
+		          <br />
+		          <a role="button" data-toggle="collapse" href="#collapsespanish_programming" aria-expanded="false" aria-controls="collapseExample" class="view_more">View Details</a>
+							<div class="collapse" id="collapsespanish_programming">
+			          <p class="well">
+			          	More than 40 Spanish-language channels, including Discovery Espanol, ESPN Deportes HD and Mun2.
+			          </p>
+		          </div>
+		        </div>
+					</li>
+				<% end %>
 			</ul>
 		<% end %>
 		<% if fields["epix_offer"].present? %>

@@ -277,112 +277,128 @@
 		<% if fields["premiums"].downcase == "required" %>
 			<h4>Premium Channels</h4>
 			<ul>
-				<li>
-					<div class="checkbox">
-	          <%= check_box_tag :hbo, false, false, {:class => "styled", data: { price: 15.00 }, onchange: "calculateEquiptmentCosts(this);"}  %>
-	          <label class="label-checkbox">
-	            HBO ($15.00 monthly)
-	          </label>
-	          <br />
-	          <a role="button" data-toggle="collapse" href="#collaspehbo" aria-expanded="false" aria-controls="collapseExample" class="view_more">View Details</a>
-						<div class="collapse" id="collaspehbo">
-				      <p class="well">
-				      	8 channels of award-winning shows and movies, HBO on Demand, and watch HBO on your mobile device with HBO GO
-				      </p>
-				    </div>
-	        </div>
-				</li>
-				<li>
-					<div class="checkbox">
-	          <%= check_box_tag :cinemax, false, false, {:class => "styled", data: { price: 15.00 }, onchange: "calculateEquiptmentCosts(this);"}  %>
-	          <label class="label-checkbox">
-	            Cinemax ($15.00 monthly)
-	          </label>
-	          <br />
-	          <a role="button" data-toggle="collapse" href="#collaspecinemax" aria-expanded="false" aria-controls="collapseExample" class="view_more">View Details</a>
-						<div class="collapse" id="collaspecinemax">
-				      <p class="well">
-				      	9 channels of classic and blockbuster movies, Cinemax on Demand on your mobile device with MAX GO
-				      </p>
-				    </div>
-	        </div>
-				</li>
-				<li>
-					<div class="checkbox">
-	          <%= check_box_tag :showtime, false, false, {:class => "styled", data: { price: 15.00 }, onchange: "calculateEquiptmentCosts(this);"}  %>
-	          <label class="label-checkbox">
-	            Showtime ($15.00 monthly)
-	          </label>
-	          <br />
-	          <a role="button" data-toggle="collapse" href="#collaspshowtime" aria-expanded="false" aria-controls="collapseExample" class="view_more">View Details</a>
-						<div class="collapse" id="collaspshowtime">
-				      <p class="well">
-				      	6 Channels of Emmy Award-winning shows and tons of movies plus Showtime on Demand.
-				      </p>
-				    </div>
-	        </div>
-				</li>
-				<li>
-					<div class="checkbox">
-	          <%= check_box_tag :movie_channel, false, false, {:class => "styled", data: { price: 15.00 }, onchange: "calculateEquiptmentCosts(this);"}  %>
-	          <label class="label-checkbox">
-	            The Movie Channel ($15.00 monthly)
-	          </label>
-	          <br />
-	          <a role="button" data-toggle="collapse" href="#collaspmovie_channel" aria-expanded="false" aria-controls="collapseExample" class="view_more">View Details</a>
-						<div class="collapse" id="collaspmovie_channel">
-				      <p class="well">
-				      	3 channels of movies, including The Movie Channel on Demand, plus, get the deepest behind-the-scenes dish and insider trivia.
-				      </p>
-				    </div>
-	        </div>
-				</li>
-				<li>
-					<div class="checkbox">
-	          <%= check_box_tag :epix, false, false, {:class => "styled", data: { price: 15.00 }, onchange: "calculateEquiptmentCosts(this);"}  %>
-	          <label class="label-checkbox">
-	            EPIX ($15.00 monthly)
-	          </label>
-	          <br />
-	          <a role="button" data-toggle="collapse" href="#collaspepix" aria-expanded="false" aria-controls="collapseExample" class="view_more">View Details</a>
-						<div class="collapse" id="collaspepix">
-				      <p class="well">
-				      	Watch the biggest movies, original programming and a library of classics On Demand and online
-				      </p>
-				    </div>
-	        </div>
-				</li>
-				<li>
-					<div class="checkbox">
-	          <%= check_box_tag :starz, false, false, {:class => "styled", data: { price: 15.00 }, onchange: "calculateEquiptmentCosts(this);"}  %>
-	          <label class="label-checkbox">
-	            Starz ($15.00 monthly)
-	          </label>
-	          <br />
-	          <a role="button" data-toggle="collapse" href="#collaspstarz" aria-expanded="false" aria-controls="collapseExample" class="view_more">View Details</a>
-						<div class="collapse" id="collaspstarz">
-				      <p class="well">
-				      	5 channels of movies and new shows for the entire family plus Starz on Demand.
-				      </p>
-				    </div>
-	        </div>
-				</li>
-				<li>
-					<div class="checkbox">
-	          <%= check_box_tag :encore, false, false, {:class => "styled", data: { price: 15.00 }, onchange: "calculateEquiptmentCosts(this);"}  %>
-	          <label class="label-checkbox">
-	            Encore ($15.00 monthly)
-	          </label>
-	          <br />
-	          <a role="button" data-toggle="collapse" href="#collaspencore" aria-expanded="false" aria-controls="collapseExample" class="view_more">View Details</a>
-						<div class="collapse" id="collaspencore">
-				      <p class="well">
-				      	6 channels of mysteries, western, dramas, and more plus Encore on Demand.
-				      </p>
-				    </div>
-	        </div>
-				</li>
+				<% if fields["hbo"].present? %>
+					<li>
+						<div class="checkbox">
+		          <%= check_box_tag :hbo, false, false, {:class => "styled", data: { price: fields["hbo"] }, onchange: "calculateEquiptmentCosts(this);"}  %>
+		          <label class="label-checkbox">
+		            HBO ($<%= fields["hbo"] %> monthly)
+		          </label>
+		          <br />
+		          <a role="button" data-toggle="collapse" href="#collaspehbo" aria-expanded="false" aria-controls="collapseExample" class="view_more">View Details</a>
+							<div class="collapse" id="collaspehbo">
+					      <p class="well">
+					      	8 channels of award-winning shows and movies, HBO on Demand, and watch HBO on your mobile device with HBO GO
+					      </p>
+					    </div>
+		        </div>
+					</li>
+				<% end %>
+				<% if fields["cinemax"].present? %>
+					<li>
+						<div class="checkbox">
+		          <%= check_box_tag :cinemax, false, false, {:class => "styled", data: { price: fields["cinemax"] }, onchange: "calculateEquiptmentCosts(this);"}  %>
+		          <label class="label-checkbox">
+		            Cinemax ($<%= fields["cinemax"] %> monthly)
+		          </label>
+		          <br />
+		          <a role="button" data-toggle="collapse" href="#collaspecinemax" aria-expanded="false" aria-controls="collapseExample" class="view_more">View Details</a>
+							<div class="collapse" id="collaspecinemax">
+					      <p class="well">
+					      	9 channels of classic and blockbuster movies, Cinemax on Demand on your mobile device with MAX GO
+					      </p>
+					    </div>
+		        </div>
+					</li>
+				<% end %>
+				<% if fields["showtime"].present? %>
+					<li>
+						<div class="checkbox">
+		          <%= check_box_tag :showtime, false, false, {:class => "styled", data: { price: fields["showtime"] }, onchange: "calculateEquiptmentCosts(this);"}  %>
+		          <label class="label-checkbox">
+		            Showtime ($<%= fields["showtime"] %> monthly)
+		          </label>
+		          <br />
+		          <a role="button" data-toggle="collapse" href="#collaspshowtime" aria-expanded="false" aria-controls="collapseExample" class="view_more">View Details</a>
+							<div class="collapse" id="collaspshowtime">
+					      <p class="well">
+					      	6 Channels of Emmy Award-winning shows and tons of movies plus Showtime on Demand.
+					      </p>
+					    </div>
+		        </div>
+					</li>
+				<% end %>
+				<% if fields["movie_channel"].present? %>
+					<li>
+						<div class="checkbox">
+		          <%= check_box_tag :movie_channel, false, false, {:class => "styled", data: { price: fields["movie_channel"] }, onchange: "calculateEquiptmentCosts(this);"}  %>
+		          <label class="label-checkbox">
+		            The Movie Channel ($<%= fields["movie_channel"] %> monthly)
+		          </label>
+		          <br />
+		          <a role="button" data-toggle="collapse" href="#collaspmovie_channel" aria-expanded="false" aria-controls="collapseExample" class="view_more">View Details</a>
+							<div class="collapse" id="collaspmovie_channel">
+					      <p class="well">
+					      	3 channels of movies, including The Movie Channel on Demand, plus, get the deepest behind-the-scenes dish and insider trivia.
+					      </p>
+					    </div>
+		        </div>
+					</li>
+				<% end %>
+				<% if fields["epix"].present? %>
+					<li>
+						<div class="checkbox">
+		          <%= check_box_tag :epix, false, false, {:class => "styled", data: { price: fields["epix"] }, onchange: "calculateEquiptmentCosts(this);"}  %>
+		          <label class="label-checkbox">
+		            EPIX ($<%= fields["epix"] %> monthly)
+		          </label>
+		          <br />
+		          <a role="button" data-toggle="collapse" href="#collaspepix" aria-expanded="false" aria-controls="collapseExample" class="view_more">View Details</a>
+							<div class="collapse" id="collaspepix">
+					      <p class="well">
+					      	Watch the biggest movies, original programming and a library of classics On Demand and online
+					      </p>
+					    </div>
+		        </div>
+					</li>
+				<% end %>
+				<% if fields["starz"].present? %>
+					<li>
+						<div class="checkbox">
+		          <%= check_box_tag :starz, false, false, {:class => "styled", data: { price: fields["starz"] }, onchange: "calculateEquiptmentCosts(this);"}  %>
+		          <label class="label-checkbox">
+		            Starz ($<%= fields["starz"] %> monthly)
+		          </label>
+		          <br />
+		          <a role="button" data-toggle="collapse" href="#collaspstarz" aria-expanded="false" aria-controls="collapseExample" class="view_more">View Details</a>
+							<div class="collapse" id="collaspstarz">
+					      <p class="well">
+					      	5 channels of movies and new shows for the entire family plus Starz on Demand.
+					      </p>
+					    </div>
+		        </div>
+					</li>
+				<% end %>
+				<% if fields["encore"].present? %>
+					<li>
+						<div class="checkbox">
+		          <%= check_box_tag :encore, false, false, {:class => "styled", data: { price: fields["encore"] }, onchange: "calculateEquiptmentCosts(this);"}  %>
+		          <label class="label-checkbox">
+		            Encore ($<%= fields["encore"] %> monthly)
+		          </label>
+		          <br />
+		          <a role="button" data-toggle="collapse" href="#collaspencore" aria-expanded="false" aria-controls="collapseExample" class="view_more">View Details</a>
+							<div class="collapse" id="collaspencore">
+					      <p class="well">
+					      	6 channels of mysteries, western, dramas, and more plus Encore on Demand.
+					      </p>
+					    </div>
+		        </div>
+					</li>
+				<% end %>
 			</ul>
+		<% else %>
+			Premium Channels are included in this package.
 		<% end %>
 		<% if fields["international_channels"].downcase == "required" %>
 			<h4>International Channels</h4>
