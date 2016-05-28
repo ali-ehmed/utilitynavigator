@@ -3,6 +3,7 @@ class Offers::CheckoutController < ApplicationController
 	include ApplicationHelper
 
 	before_action :set_package, only: [:show, :charter_installation]
+	before_action :charter_installation, only: [:show]
 
 	steps *Package.checkout_steps
 
