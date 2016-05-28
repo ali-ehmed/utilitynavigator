@@ -2,8 +2,8 @@ class Offers::CheckoutController < ApplicationController
 	include Wicked::Wizard
 	include ApplicationHelper
 
-	before_action :set_package, only: [:show, :charter_installation]
-	before_action :charter_installation, only: [:show]
+	before_action :set_package, only: [:show, :installation_fields]
+	before_action :installation_fields, only: [:show]
 
 	steps *Package.checkout_steps
 
@@ -41,14 +41,18 @@ class Offers::CheckoutController < ApplicationController
 	def set_package
 		begin
 			@package = Package.find(params[:offer_id])
+			@provider = @package.provider
 		rescue ActiveRecord::RecordNotFound
 			flash[:error] = "Package not found"
   		redirect_to offers_path
 		end
 	end
 
-	def charter_installation
-		@charter_fields = @package.package_bundles.joins(:product).where("products.name = 'Internet'")
-														  .first.try(:checkout_fields)
+	def installation_fields
+		@charter_installation = @package.package_bundles.joins(:product).where("products.name = 'Internet'")
+														  .first.try(:checkout_fields) if @package.provider.name == Provider::CHARTER_SPECTRUM
+
+	  @cox_installation = @package.package_bundles.joins(:product).where("products.name = 'Phone'")
+														  .first.try(:checkout_fields) if @package.provider.name == Provider::COX
 	end
 end

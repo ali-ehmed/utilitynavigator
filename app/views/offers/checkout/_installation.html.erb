@@ -14,7 +14,7 @@
 			<div class="checkbox" style="padding-left: 5px;">
 				<%= radio_button_tag :installation, false, false, {id: "installation", data: { price: @package.installation_price, installation: true }, onchange: "calculateEquiptmentCosts(this);"}  %>
         <label class="label-checkbox" for="installation">
-          Schedule an appointment for a technician to install my services (<%= @package.installation_price %>) 
+          Schedule an appointment for a technician to install my services ($<%= @package.installation_price %>) 
         </label>
       </div>
     <% else %>
@@ -23,42 +23,76 @@
       </label>
     <% end %>
 	</li>
-	<% if @package.provider.name == Provider::TIME_WARNER %>
-  	<li>
-  		<div class="checkbox" style="padding-left: 5px;">
-				<%= radio_button_tag :installation, false, false, {id: "self_installation", data: { price: 0, installation: true }, onchange: "calculateEquiptmentCosts(this);"}  %>
-        <label class="label-checkbox" for="self_installation">
-          I’ll do a self-install ($0)
-        </label>
-      </div>
-      <a role="button" data-toggle="collapse" href="#collapseSelfInstall" aria-expanded="false" aria-controls="collapseExample" class="view_more">View Details</a>
-			<div class="collapse" id="collapseSelfInstall">
-				<div class="well">
-					<p>
-          	For self-install option you will receive a call after placing your order about connectivity of self-install if available for this address. You may also call us to enquire about this first. 
-          </p>
-          <p>
-          	Example Snapshot doesn’t have all the option shown above but we will need to design all the menus as above.
-          </p>
-				</div>
-      </div>
-  	</li>  	
-  <% end %>
+	<li>
+		<div class="checkbox" style="padding-left: 5px;">
+			<%= radio_button_tag :installation, false, false, {id: "self_installation", data: { price: 0, installation: true }, onchange: "calculateEquiptmentCosts(this);"}  %>
+      <label class="label-checkbox" for="self_installation">
+        I’ll do a self-install ($0)
+      </label>
+    </div>
+    <a role="button" data-toggle="collapse" href="#collapseSelfInstall" aria-expanded="false" aria-controls="collapseExample" class="view_more">View Details</a>
+		<div class="collapse" id="collapseSelfInstall">
+			<div class="well">
+				<p>
+        	For self-install option you will receive a call after placing your order about connectivity of self-install if available for this address. You may also call us to enquire about this first. 
+        </p>
+			</div>
+    </div>
+	</li>
+
+  <hr />
+  <!-- CHARTER Installation -->
   <% if @package.provider.name == Provider::CHARTER_SPECTRUM %>
-  	<% fields = get_in_hash(@charter_fields) %>
+    <% fields = get_in_hash(@charter_installation) %>
+    <li>
+      <% if fields["wifi_installation"].present? %>
+        <% if fields["wifi_installation"].downcase == "included" %>
+          WiFi Installation Service is included in this package
+        <% else %>
+          <div class="checkbox">
+            <%= check_box_tag :wifi_installation, false, false, {:class => "styled", data: { price: fields["wifi_installation"].to_f, installation: true }, onchange: "calculateEquiptmentCosts(this);"}  %>
+            <label class="label-checkbox" for="self_installation">
+              Schedule an appointment for a technician to install my WiFi services ($<%= fields["wifi_installation"].to_f %> One Time)
+            </label>
+          </div>
+        <% end %>
+      <% end %>
+    </li>   
+  <% end %>
+
+  <!-- COX Installation -->
+  <% if @package.provider.name == Provider::COX %>
+  	<% fields = get_in_hash(@cox_installation) %>
   	<li>
-  		<% if fields["wifi_installation"].present? %>
-	  		<% if fields["wifi_installation"].downcase == "included" %>
-	  			WiFi Installation Service is included in this package
-	  		<% else %>
-	  			<div class="checkbox">
-						<%= check_box_tag :wifi_installation, false, false, {:class => "styled", data: { price: fields["wifi_installation"].to_f, installation: true }, onchange: "calculateEquiptmentCosts(this);"}  %>
-		        <label class="label-checkbox" for="self_installation">
-		          Schedule an appointment for a technician to install my WiFi services ($<%= fields["wifi_installation"].to_f %> One Time)
-		        </label>
-		      </div>
-	  		<% end %>
-  		<% end %>
+
+      <!-- Telephone outlet installation -->
+      <% if fields["telephone_outlet_installation"].downcase == 'required' %>
+        <h4>
+          Telephone Outlet(s) Installation
+          <p>
+            <small>
+              Do you need any additional Telephone Outlets for your home?
+            </small>
+          </p>
+        </h4>
+        
+        <!-- Outlet Installation -->
+        <% if fields["outlet_installation"].present? %>
+          <div class="checkbox">
+            <%= check_box_tag :outlet_installation, false, false, {:class => "styled", data: { price: fields["outlet_installation"], installation: true }, onchange: "calculateEquiptmentCosts(this);"}  %>
+            <label class="label-checkbox">
+               Outlet Installation, ($<%= fields["outlet_installation"] %> monthly)
+            </label>
+            <br />
+            <a role="button" data-toggle="collapse" href="#collaspeoutlet_install" aria-expanded="false" aria-controls="collapseExample" class="view_more">View Details</a>
+            <div class="collapse" id="collaspeoutlet_install">
+              <p class="well">
+                Installation of additional phone jack wired and installed
+              </p>
+            </div>
+          </div>
+        <% end %>
+      <% end %>
   	</li>  	
   <% end %>
 </ul>

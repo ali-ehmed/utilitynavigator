@@ -54,21 +54,21 @@
 			</label>
 			<%= ff.select :more_fun_with_more_entertainment, options_for_select(["Required", "Free"]), {prompt: "--Select--"}, onChange: "$packages.setRequiredFields(this);" %>
 		</li>
-		<%= render partial: "admin/packages/shared/items_for_more_entertainment_twc", locals: { ff: ff } %>
+		<%= render partial: "admin/packages/shared/twc/items_for_more_entertainment", locals: { ff: ff } %>
 		<li>
 			<label class="label">
 				More Fun for Every one
 			</label>
 			<%= ff.select :more_fun_for_everyone, options_for_select(["Required", "Free"]), {prompt: "--Select--"}, onChange: "$packages.setRequiredFields(this);" %>
 		</li>
-		<%= render partial: "admin/packages/shared/items_for_more_fun_twc", locals: { ff: ff } %>
+		<%= render partial: "admin/packages/shared/twc/items_for_more_fun", locals: { ff: ff } %>
 		<li>
 			<label class="label">
 				More spanish entertainment for everyone
 			</label>
 			<%= ff.select :more_spanish_entertainment_for_everyone, options_for_select(["Required", "Free"]), {prompt: "--Select--"}, onChange: "$packages.setRequiredFields(this);" %>
 		</li>
-		<%= render partial: "admin/packages/shared/items_for_more_spanish_entertainment_twc", locals: { ff: ff } %>
+		<%= render partial: "admin/packages/shared/shared/twc/items_for_more_spanish_entertainment", locals: { ff: ff } %>
 		<li>
 			<label class="label">
 				EPIX Offer

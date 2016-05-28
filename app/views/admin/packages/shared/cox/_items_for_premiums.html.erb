@@ -1,0 +1,14 @@
+<!-- Premiums -->
+<li style="display:none;">
+	<legend><span>Set items for Long Distance</span></legend>
+	<ol>
+		<% %w(hbo cinemax showtime starz).each do |fields| %>
+			<li>
+				<label for="provider_name" class="label">
+					<%= fields.humanize %>
+				</label>
+				<%= ff.text_field fields.to_sym, style: "width: calc(78% - 22px);", onblur: "$packages.packagePriceValidation(this);" %>
+			</li>
+		<% end %>
+	</ol>
+</li>

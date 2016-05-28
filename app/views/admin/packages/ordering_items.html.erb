@@ -20,48 +20,47 @@
 				<% end %>
 			</ol>
 		</fieldset>
-
-		<!-- Cox Provider other details -->
-		<% if @provider.name == Provider::COX %>
-			<fieldset class="inputs">
-				<ol>
-					<li>
-						<label class="label">
-							Cox Service Protection Plan
-						</label>
-						<%= select_tag :cox_service_protection_plan, options_for_select(["Free", "Required"]), onChange: "$packages.setRequiredFields(this);" %>
-					</li>
-					<li style="display:none;">
-						<legend><span>Set price for Cox Service Protection Plan</span></legend>
-						<ol>
-							<li>
-								<label for="provider_name" class="label">
-									Protection Plan
-								</label>
-								<%= text_field_tag "protection_plan_service", params["protection_plan_service"], style: "width: calc(78% - 22px);", onblur: "$packages.packagePriceValidation(this);" %>
-							</li>
-						</ol>
-					</li>
-					<li>
-						<label class="label">
-							Service Agreement
-						</label>
-						<%= select_tag :service_agreement, options_for_select(["Not Include", "Include"]), onChange: "$packages.setRequiredFields(this);" %>
-					</li>
-					<li style="display:none;">
-						<legend><span>Set price for Service Agreement</span></legend>
-						<ol>
-							<li>
-								<label for="provider_name" class="label">
-									Agreement Price
-								</label>
-								<%= text_field_tag "lock_rates_agreement", params["lock_rates_agreement"], style: "width: calc(78% - 22px);", onblur: "$packages.packagePriceValidation(this);" %>
-							</li>
-						</ol>
-					</li>
-				</ol>
-			</fieldset>	
-		<% end %>
+	<% end %>
+	<!-- Cox Provider other details -->
+	<% if @provider.name == Provider::COX %>
+		<fieldset class="inputs">
+			<ol>
+				<li>
+					<label class="label">
+						Cox Service Protection Plan
+					</label>
+					<%= select_tag :cox_service_protection_plan, options_for_select(["Free", "Required"]), onChange: "$packages.setRequiredFields(this);" %>
+				</li>
+				<li style="display:none;">
+					<legend><span>Set price for Cox Service Protection Plan</span></legend>
+					<ol>
+						<li>
+							<label for="provider_name" class="label">
+								Protection Plan
+							</label>
+							<%= text_field_tag "protection_plan_service", params["protection_plan_service"], style: "width: calc(78% - 22px);", onblur: "$packages.packagePriceValidation(this);" %>
+						</li>
+					</ol>
+				</li>
+				<li>
+					<label class="label">
+						Service Agreement
+					</label>
+					<%= select_tag :service_agreement, options_for_select(["Not Include", "Include"]), onChange: "$packages.setRequiredFields(this);" %>
+				</li>
+				<li style="display:none;">
+					<legend><span>Set price for Service Agreement</span></legend>
+					<ol>
+						<li>
+							<label for="provider_name" class="label">
+								Agreement Price
+							</label>
+							<%= text_field_tag "lock_rates_agreement", params["lock_rates_agreement"], style: "width: calc(78% - 22px);", onblur: "$packages.packagePriceValidation(this);" %>
+						</li>
+					</ol>
+				</li>
+			</ol>
+		</fieldset>	
 	<% end %>
 	<%= button_tag "Create Package", type: :submit %>
 	<%= link_to "Cancel", admin_packages_path %>

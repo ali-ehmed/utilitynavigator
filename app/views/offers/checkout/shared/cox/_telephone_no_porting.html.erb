@@ -1,0 +1,41 @@
+<!-- Telephone no porting -->
+
+<% if fields["telephone_no_porting"].downcase == 'required' %>
+	<h4>Telephone Number Porting 
+		<span class="checkout_required">(Required)</span> <small><a href="javascript:void(0);" onclick="resetSelectedItem(this);">Reset selected item</a></small>
+		<p>
+			<small>
+				Would you like to keep your current number?
+			</small>
+		</p>
+	</h4>
+	
+	<ul>
+		<li>
+			<div class="checkbox" style="padding-left: 5px;">
+        <%= radio_button_tag :current_telephone_number, false, false, {id: "current_telephone_number_1", data: { price: 0 }, onchange: "calculateEquiptmentCosts(this);"}  %>
+        <label class="label-checkbox" for="current_telephone_number_1">
+          I want to keep my current telephone number
+        </label>
+      </div>
+		</li>
+
+		<!-- Provide new phone number -->
+		<% if fields["provide_new_phone_number"].present? %>
+			<li>
+				<div class="checkbox" style="padding-left: 5px;">
+          <%= radio_button_tag :current_telephone_number, false, false, {id: "current_telephone_number_2", data: { price: fields["provide_new_phone_number"] || 0 }, onchange: "calculateEquiptmentCosts(this);"}  %>
+          <label class="label-checkbox" for="current_telephone_number_2">
+            Please provide me with a new telephone number, ($<%= fields["provide_new_phone_number"] || 0 %>)
+          </label>
+        </div>
+			</li>
+		<% end %>
+	</ul>
+  <a role="button" data-toggle="collapse" href="#collaspecurrent_telephone_number" aria-expanded="false" aria-controls="collapseExample" class="view_more">View Details</a>
+	<div class="collapse" id="collaspecurrent_telephone_number">
+    <p class="well">
+    	Your new number will be provided upon installation.
+    </p>
+  </div>
+<% end %>

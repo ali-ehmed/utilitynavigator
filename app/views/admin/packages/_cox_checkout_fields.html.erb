@@ -61,14 +61,14 @@
 			</label>
 			<%= ff.select :premiums, options_for_select(["Required", "Free"]), {prompt: "--Select--"}, onChange: "$packages.setRequiredFields(this);" %>
 		</li>
-		<%= render partial: "admin/packages/shared/items_for_premiums_cox", locals: { ff: ff } %>
+		<%= render partial: "admin/packages/shared/cox/items_for_premiums", locals: { ff: ff } %>
 		<li>
 			<label class="label">
 				TV Paks
 			</label>
 			<%= ff.select :tv_paks, options_for_select(["Required", "Free"]), {prompt: "--Select--"}, onChange: "$packages.setRequiredFields(this);" %>
 		</li>
-		<%= render partial: "admin/packages/shared/items_for_tv_paks_cox", locals: { ff: ff } %>
+		<%= render partial: "admin/packages/shared/cox/items_for_tv_paks", locals: { ff: ff } %>
 	<% end %>
 <% elsif product.name.downcase == :internet.to_s %>
 	<%= fields_for :internet do |ff| %>
@@ -76,14 +76,18 @@
 			<label class="label">
 				Internet Equiptment
 			</label>
-			<%= ff.select :internet_equiptment, options_for_select(["Required", "Free"]) %>
+			<%= ff.select :internet_equiptment, options_for_select(["Required", "Free"]), {prompt: "--Select--"}, onChange: "$packages.setRequiredFields(this);" %>
 		</li>
+		<%= render partial: "admin/packages/shared/cox/items_for_internet_equiptment", locals: { ff: ff } %>
+
 		<li>
 			<label class="label">
 				Cox Tech Solutions 
 			</label>
-			<%= ff.select :cox_teck_solutions, options_for_select(["Required", "Free"]) %>
+			<%= ff.select :cox_teck_solutions, options_for_select(["Required", "Free"]), {prompt: "--Select--"}, onChange: "$packages.setRequiredFields(this);" %>
 		</li>
+		<%= render partial: "admin/packages/shared/cox/items_for_cox_tech_solutions", locals: { ff: ff } %>
+
 	<% end %>
 <% else %>
 	<%= fields_for :phone do |ff| %>
@@ -91,50 +95,140 @@
 			<label class="label">
 				Long Distance
 			</label>
-			<%= ff.select :long_distance, options_for_select(["Required", "Free"]) %>
+			<%= ff.select :long_distance, options_for_select(["Required", "Free"]), {prompt: "--Select--"}, onChange: "$packages.setRequiredFields(this);" %>
 		</li>
+		<!-- Long distance item -->
+		<%= render partial: "admin/packages/shared/cox/items_for_long_distance", locals: { ff: ff } %>
+
 		<li>
 			<label class="label">
 				Additional Calling Features
 			</label>
-			<%= ff.select :calling_features, options_for_select(["Required", "Free"]) %>
+			<%= ff.select :calling_features, options_for_select(["Required", "Free"]), {prompt: "--Select--"}, onChange: "$packages.setRequiredFields(this);" %>
 		</li>
+
+		<!-- Voice mail -->
+		<li style="display:none;">
+			<legend><span>Set item for Calling feature</span></legend>
+			<ol>
+				<li>
+					<label for="provider_name" class="label">
+						Voice Mail
+					</label>
+					<%= ff.text_field "voice_mail", style: "width: calc(78% - 22px);", onblur: "$packages.packagePriceValidation(this);" %>
+				</li>
+			</ol>
+		</li>
+
 		<li>
 			<label class="label">
 				International Calling Plan
 			</label>
-			<%= ff.select :international_calling_plan, options_for_select(["Required", "Free"]) %>
+			<%= ff.select :international_calling_plan, options_for_select(["Required", "Free"]), {prompt: "--Select--"}, onChange: "$packages.setRequiredFields(this);" %>
 		</li>
+
+		<!-- Simply Worldwide -->
+		<li style="display:none;">
+			<legend><span>Set item for International Calling feature</span></legend>
+			<ol>
+				<li>
+					<label for="provider_name" class="label">
+						Simply Worldwide
+					</label>
+					<%= ff.text_field "simply_worldwide", style: "width: calc(78% - 22px);", onblur: "$packages.packagePriceValidation(this);" %>
+				</li>
+			</ol>
+		</li>
+
 		<li>
 			<label class="label">
 				Mexico Calling Plan
 			</label>
-			<%= ff.select :mexico_calling_plan, options_for_select(["Required", "Free"]) %>
+			<%= ff.select :mexico_calling_plan, options_for_select(["Required", "Free"]), {prompt: "--Select--"}, onChange: "$packages.setRequiredFields(this);" %>
 		</li>
+
+		<!-- Mexico 200 plan -->
+		<li style="display:none;">
+			<legend><span>Set item for Mexico Calling Plan</span></legend>
+			<ol>
+				<li>
+					<label for="provider_name" class="label">
+						Mexico 200
+					</label>
+					<%= ff.text_field "mexico_200", style: "width: calc(78% - 22px);", onblur: "$packages.packagePriceValidation(this);" %>
+				</li>
+			</ol>
+		</li>
+
 		<li>
 			<label class="label">
 				Directory Listing
 			</label>
-			<%= ff.select :directory_listing, options_for_select(["Required", "Free"]) %>
+			<%= ff.select :directory_listing, options_for_select(["Required", "Free"]), {prompt: "--Select--"}, onChange: "$packages.setRequiredFields(this);" %>
 		</li>
+		<!-- Directory Listing -->
+		<%= render partial: "admin/packages/shared/cox/items_for_directory_listing", locals: { ff: ff } %>
+
 		<li>
 			<label class="label">
 				Telephone Outlet Installation Additional
 			</label>
-			<%= ff.select :telephone_outlet_installation, options_for_select(["Required", "Free"]) %>
+			<%= ff.select :telephone_outlet_installation, options_for_select(["Required", "Free"]), {prompt: "--Select--"}, onChange: "$packages.setRequiredFields(this);" %>
 		</li>
+
+		<!-- Outlet installation -->
+		<li style="display:none;">
+			<legend><span>Set item for Outlet installation</span></legend>
+			<ol>
+				<li>
+					<label for="provider_name" class="label">
+						Outlet installation
+					</label>
+					<%= ff.text_field "outlet_installation", style: "width: calc(78% - 22px);", onblur: "$packages.packagePriceValidation(this);" %>
+				</li>
+			</ol>
+		</li>
+
 		<li>
 			<label class="label">
 				Telephone Equipment (EMTA) 
 			</label>
-			<%= ff.select :telephone_equiptment, options_for_select(["Required", "Free"]) %>
+			<%= ff.select :telephone_equiptment, options_for_select(["Required", "Free"]), {prompt: "--Select--"}, onChange: "$packages.setRequiredFields(this);" %>
 		</li>
+
+		<!-- Telephone EMTA -->
+		<li style="display:none;">
+			<legend><span>Set item for Telephone EMTA</span></legend>
+			<ol>
+				<li>
+					<label for="provider_name" class="label">
+						Telephone EMTA
+					</label>
+					<%= ff.text_field "telephone_emta", style: "width: calc(78% - 22px);", onblur: "$packages.packagePriceValidation(this);" %>
+				</li>
+			</ol>
+		</li>
+
 		<li>
 			<label class="label">
 				Telephone Number porting
 			</label>
-			<%= ff.select :telephone_no_porting, options_for_select(["Required", "Free"]) %>
+			<%= ff.select :telephone_no_porting, options_for_select(["Required", "Free"]), {prompt: "--Select--"}, onChange: "$packages.setRequiredFields(this);" %>
 		</li>
+
+		<!-- Provider phone number service -->
+		<li style="display:none;">
+			<legend><span>Set item for Provider phone number service</span></legend>
+			<ol>
+				<li>
+					<label for="provider_name" class="label">
+						Outlet installation
+					</label>
+					<%= ff.text_field "provide_new_phone_number", style: "width: calc(78% - 22px);", onblur: "$packages.packagePriceValidation(this);" %>
+				</li>
+			</ol>
+		</li>
+
 		<li>
 			<label class="label">
 				Directory Name

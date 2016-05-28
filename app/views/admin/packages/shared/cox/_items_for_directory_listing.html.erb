@@ -1,0 +1,14 @@
+<!-- Directory Listing -->
+<li style="display:none;">
+	<legend><span>Set items for Directory Listin</span></legend>
+	<ol>
+		<% %w(published_directory_listing name_and_number_only_directory_listing name_and_number_in_411_directory_listing non_published_directory_listing).each do |fields| %>
+			<li>
+				<label for="provider_name" class="label">
+					<%= fields.humanize %>
+				</label>
+				<%= ff.text_field fields.to_sym, style: "width: calc(78% - 22px);", onblur: "$packages.packagePriceValidation(this);" %>
+			</li>
+		<% end %>
+	</ol>
+</li>

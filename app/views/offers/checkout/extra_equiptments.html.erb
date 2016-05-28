@@ -21,6 +21,11 @@
 								</div>
 								<%= render partial: "#{@package.provider.acronym}_equiptments", locals: { product: product, package: @package } %>
 							<% end %>
+
+							<% if @provider.name == Provider::COX %>
+								<%= render partial: "offers/checkout/shared/cox/cox_additional_details" %>
+							<% end %>
+
 							<%= render partial: "installation" %>
 						</div>
 					</div>

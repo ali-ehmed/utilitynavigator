@@ -1,0 +1,56 @@
+<!-- Cox Tech Solutions -->
+
+<% if fields["cox_teck_solutions"].downcase == "required" %>
+	<h4>
+		Cox Tech Solutions
+		<small><a href="javascript:void(0);" onclick="resetSelectedItem(this);">Reset selected item</a></small>
+		<p>
+			<small>
+				Online Only! Subscribe to Cox Tech Solutions online at a special monthly rate and we'll waive the $99.99 one-time PC Tune-Up fee! Cox Tech Solutions allows you to stay up and running with unlimited 24/7 premium tech support for your PC, laptop and tablet devices.
+			</small>
+		</p>
+	</h4>
+	
+	<ul>
+		<!-- Multi Devise -->
+		<% if fields["multi_device_support"].present? %>
+			<li>
+				<div class="checkbox" style="padding-left: 5px;">
+          <%= radio_button_tag :cox_tech_solutions, false, false, {id: "cox_solution_1", data: { price: fields["multi_device_support"] }, onchange: "calculateEquiptmentCosts(this);"}  %>
+
+          <label class="label-checkbox" for="cox_solution_1">
+            Multi-device support, ($<%= fields["multi_device_support"] %>)
+          </label>
+        </div>
+			</li>
+		<% end %>
+
+		<!-- Single Devise -->
+		<% if fields["single_device_support"].present? %>
+			<li>
+				<div class="checkbox" style="padding-left: 5px;">
+          <%= radio_button_tag :cox_tech_solutions, false, false, {id: "cox_solution_2", data: { price: fields["single_device_support"] }, onchange: "calculateEquiptmentCosts(this);"}  %>
+
+          <label class="label-checkbox" for="cox_solution_2">
+            Single device support, ($<%= fields["single_device_support"] %>)
+          </label>
+        </div>
+			</li>
+		<% end %>
+		<li>
+			<div class="checkbox" style="padding-left: 5px;">
+        <%= radio_button_tag :cox_tech_solutions, false, false, {id: "cox_solution_none", data: { price: 0 }, onchange: "calculateEquiptmentCosts(this);"}  %>
+
+        <label class="label-checkbox" for="cox_solution_none">
+          None. I don't want Cox Tech Solutions
+        </label>
+      </div>
+		</li>
+	</ul>
+  <a role="button" data-toggle="collapse" href="#collaspecox_tech_solutions" aria-expanded="false" aria-controls="collapseExample" class="view_more">View Details</a>
+	<div class="collapse" id="collaspecox_tech_solutions">
+    <p class="well">
+    	Cox Tech Solutions (CTS) is your personal IT concierge, available 24/7 for support, training and advice. It's designed to help you get the most out of your in-home technology by providing real-time diagnoses and resolutions for PC crashes, virus removal, home network support, training, technology education and much more. This option covers a single device, including a PC, tablet or laptop.
+    </p>
+  </div>
+<% end %>
