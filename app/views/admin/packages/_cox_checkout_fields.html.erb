@@ -9,7 +9,7 @@
 						<label for="is_required" class="label">
 							Is Required
 						</label>
-						<%#= ff.select "is_required_#{count}", options_for_select(["Required", "Optional", "Free"]) %>
+						<%#= ff.select "is_required_#{count}", options_for_select(["Required", "Optional", "Not Include"]) %>
 					</li> -->
 					<li>
 						<label for="provider_name" class="label">
@@ -59,14 +59,14 @@
 			<label class="label">
 				Premium Movie Channels
 			</label>
-			<%= ff.select :premiums, options_for_select(["Required", "Free"]), {prompt: "--Select--"}, onChange: "$packages.setRequiredFields(this);" %>
+			<%= ff.select :premiums, options_for_select(["Required", "Not Include"]), {prompt: "--Select--"}, onChange: "$packages.setRequiredFields(this);" %>
 		</li>
 		<%= render partial: "admin/packages/shared/cox/items_for_premiums", locals: { ff: ff } %>
 		<li>
 			<label class="label">
 				TV Paks
 			</label>
-			<%= ff.select :tv_paks, options_for_select(["Required", "Free"]), {prompt: "--Select--"}, onChange: "$packages.setRequiredFields(this);" %>
+			<%= ff.select :tv_paks, options_for_select(["Required", "Not Include"]), {prompt: "--Select--"}, onChange: "$packages.setRequiredFields(this);" %>
 		</li>
 		<%= render partial: "admin/packages/shared/cox/items_for_tv_paks", locals: { ff: ff } %>
 	<% end %>
@@ -76,7 +76,7 @@
 			<label class="label">
 				Internet Equiptment
 			</label>
-			<%= ff.select :internet_equiptment, options_for_select(["Required", "Free"]), {prompt: "--Select--"}, onChange: "$packages.setRequiredFields(this);" %>
+			<%= ff.select :internet_equiptment, options_for_select(["Required", "Not Include"]), {prompt: "--Select--"}, onChange: "$packages.setRequiredFields(this);" %>
 		</li>
 		<%= render partial: "admin/packages/shared/cox/items_for_internet_equiptment", locals: { ff: ff } %>
 
@@ -84,7 +84,7 @@
 			<label class="label">
 				Cox Tech Solutions 
 			</label>
-			<%= ff.select :cox_teck_solutions, options_for_select(["Required", "Free"]), {prompt: "--Select--"}, onChange: "$packages.setRequiredFields(this);" %>
+			<%= ff.select :cox_teck_solutions, options_for_select(["Required", "Not Include"]), {prompt: "--Select--"}, onChange: "$packages.setRequiredFields(this);" %>
 		</li>
 		<%= render partial: "admin/packages/shared/cox/items_for_cox_tech_solutions", locals: { ff: ff } %>
 
@@ -95,7 +95,7 @@
 			<label class="label">
 				Long Distance
 			</label>
-			<%= ff.select :long_distance, options_for_select(["Required", "Free"]), {prompt: "--Select--"}, onChange: "$packages.setRequiredFields(this);" %>
+			<%= ff.select :long_distance, options_for_select(["Required", "Not Include"]), {prompt: "--Select--"}, onChange: "$packages.setRequiredFields(this);" %>
 		</li>
 		<!-- Long distance item -->
 		<%= render partial: "admin/packages/shared/cox/items_for_long_distance", locals: { ff: ff } %>
@@ -104,7 +104,7 @@
 			<label class="label">
 				Additional Calling Features
 			</label>
-			<%= ff.select :calling_features, options_for_select(["Required", "Free"]), {prompt: "--Select--"}, onChange: "$packages.setRequiredFields(this);" %>
+			<%= ff.select :calling_features, options_for_select(["Required", "Not Include"]), {prompt: "--Select--"}, onChange: "$packages.setRequiredFields(this);" %>
 		</li>
 
 		<!-- Voice mail -->
@@ -124,7 +124,7 @@
 			<label class="label">
 				International Calling Plan
 			</label>
-			<%= ff.select :international_calling_plan, options_for_select(["Required", "Free"]), {prompt: "--Select--"}, onChange: "$packages.setRequiredFields(this);" %>
+			<%= ff.select :international_calling_plan, options_for_select(["Required", "Not Include"]), {prompt: "--Select--"}, onChange: "$packages.setRequiredFields(this);" %>
 		</li>
 
 		<!-- Simply Worldwide -->
@@ -144,7 +144,7 @@
 			<label class="label">
 				Mexico Calling Plan
 			</label>
-			<%= ff.select :mexico_calling_plan, options_for_select(["Required", "Free"]), {prompt: "--Select--"}, onChange: "$packages.setRequiredFields(this);" %>
+			<%= ff.select :mexico_calling_plan, options_for_select(["Required", "Not Include"]), {prompt: "--Select--"}, onChange: "$packages.setRequiredFields(this);" %>
 		</li>
 
 		<!-- Mexico 200 plan -->
@@ -164,7 +164,7 @@
 			<label class="label">
 				Directory Listing
 			</label>
-			<%= ff.select :directory_listing, options_for_select(["Required", "Free"]), {prompt: "--Select--"}, onChange: "$packages.setRequiredFields(this);" %>
+			<%= ff.select :directory_listing, options_for_select(["Required", "Not Include"]), {prompt: "--Select--"}, onChange: "$packages.setRequiredFields(this);" %>
 		</li>
 		<!-- Directory Listing -->
 		<%= render partial: "admin/packages/shared/cox/items_for_directory_listing", locals: { ff: ff } %>
@@ -173,7 +173,7 @@
 			<label class="label">
 				Telephone Outlet Installation Additional
 			</label>
-			<%= ff.select :telephone_outlet_installation, options_for_select(["Required", "Free"]), {prompt: "--Select--"}, onChange: "$packages.setRequiredFields(this);" %>
+			<%= ff.select :telephone_outlet_installation, options_for_select(["Required", "Not Include"]), {prompt: "--Select--"}, onChange: "$packages.setRequiredFields(this);" %>
 		</li>
 
 		<!-- Outlet installation -->
@@ -193,7 +193,7 @@
 			<label class="label">
 				Telephone Equipment (EMTA) 
 			</label>
-			<%= ff.select :telephone_equiptment, options_for_select(["Required", "Free"]), {prompt: "--Select--"}, onChange: "$packages.setRequiredFields(this);" %>
+			<%= ff.select :telephone_equiptment, options_for_select(["Required", "Not Include"]), {prompt: "--Select--"}, onChange: "$packages.setRequiredFields(this);" %>
 		</li>
 
 		<!-- Telephone EMTA -->
@@ -213,7 +213,7 @@
 			<label class="label">
 				Telephone Number porting
 			</label>
-			<%= ff.select :telephone_no_porting, options_for_select(["Required", "Free"]), {prompt: "--Select--"}, onChange: "$packages.setRequiredFields(this);" %>
+			<%= ff.select :telephone_no_porting, options_for_select(["Required", "Not Include"]), {prompt: "--Select--"}, onChange: "$packages.setRequiredFields(this);" %>
 		</li>
 
 		<!-- Provider phone number service -->
@@ -233,7 +233,7 @@
 			<label class="label">
 				Directory Name
 			</label>
-			<%= ff.select :directory_name, options_for_select(["Required", "Free"]) %>
+			<%= ff.select :directory_name, options_for_select(["Required", "Not Include"]) %>
 		</li>
 	<% end %>
 <% end %>

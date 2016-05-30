@@ -20,12 +20,19 @@ class OffersController < ApplicationController
 
 		unless broadband_search.to_s == "zero_results"
 			@providers = broadband_search
-			@packages = Package.broadband_providers(@providers).paginate(:page => params[:page], :per_page => 6)
+			@packages = Package.broadband_providers(@providers)
 		end
 
-		@count_twc = @packages.try("time_warner").count || 0
-		@count_charter = @packages.try("charter_spectrum").count || 0
-		@count_cox = @packages.try("cox").count || 0
+		# Applying product filters
+		if params[:filters] and params[:filters].present?
+			@packages = @packages.where("products.name in (?) and package_types.name = ?", params[:filters], Package::SINGLE_PLAY)
+		end
+
+		@count_twc = @packages.try("time_warner").length || 0
+		@count_charter = @packages.try("charter_spectrum").length || 0
+		@count_cox = @packages.try("cox").length || 0
+
+		@packages = @packages.paginate(:page => params[:page], :per_page => 6)
 
 		respond_to do |format|
 			format.html

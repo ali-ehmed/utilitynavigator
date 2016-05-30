@@ -13,9 +13,7 @@
  */
 fieldset.package-products {
 	padding: 11px 0px 11px 0px;
-  background: rgb(191, 191, 191);
   border-radius: 5px;
-  cursor: no-drop;
 }
 fieldset.package-products > legend {
   padding-left: 8px;			

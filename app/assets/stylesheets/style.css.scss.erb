@@ -29,8 +29,17 @@ header {
   height: 504px !important;
 }
 .home_form {
-  position: relative;
-  width: 496px;  
+  position: absolute;
+  width: 496px;
+  z-index: 1;
+  top: 20%;
+  left: 13%;
+
+  @media (max-width: 768px) {
+    display: block;
+    position: static;
+    width: 100%; 
+  }
 }
 
 .checkout_application {
@@ -383,7 +392,7 @@ header {
     //left: -114px;
     //right: 153px;
 
-    margin-top: -40px;
+    // margin-top: -40px;
     @media (max-width: 1024px) {
       position: static;
     }
@@ -453,7 +462,7 @@ header {
   @media (max-width: 768px) {
     .mobile-view {
       display: block;
-      padding: 83px 10px 25px 10px;
+      padding: 20px 10px 25px 10px;
       background: rgba(17, 17, 17, 0.72);
       .home_form {
         width: 100%; 

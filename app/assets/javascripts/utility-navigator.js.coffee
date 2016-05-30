@@ -233,13 +233,14 @@ window.$compare_checkboxex = []
 window.$compare_url = []
 
 checkedCompareBoxes = () ->
-	window.$compare_checkboxex = []
-	$.each $("#package-details").find("input:checked"), (i) ->
-		$this = $(this)
-		i += 1
-		window.$compare_checkboxex.push($this.data("package-id"))
-	
-	console.log window.$compare_checkboxex
+  window.$compare_checkboxex = []
+  $.each $("#package-details").find("input:checked"), (i) ->
+    $this = $(this)
+    i += 1
+    window.$compare_checkboxex.push($this.data("package-id"))
+    window.$compare_checkboxex = window.$compare_checkboxex.filter(Number)
+
+  console.log window.$compare_checkboxex
 
 window.compareMe = (elem) ->
 	checkedCompareBoxes()
@@ -458,7 +459,7 @@ loadChannels = ->
 		e.preventDefault()
 		$link = $(this)
 		$link.html("<i class=\'fa fa-spinner fa-spin\'></i> Loading Channels")
-		$.get('/load_channels', (data) ->
+		$.get('/load_channels', {provider: $link.data("provider")}, (data) ->
 			# console.log data
 		).done(->
 			$link.html("CHANNEL COMPARISON")
@@ -525,7 +526,7 @@ searchProviders = ->
 		    	$form.find("button[type='submit']").html '<i class=\'fa fa-circle-o-notch fa-spin\'></i> We are looking up the packages'
 
 		    	# Pausing slider
-		    	$('.carousel').carousel('pause')
+		    	# $('.carousel').carousel('pause')
 		    success: (response) ->
 		    	if response.status == "error"
 		    		$.notify({
@@ -576,6 +577,6 @@ $(document).ready ->
 	# For Search Filters
 	# This is custom pagination, as it needs to be hidden 
 	# and See More btn should appear instead
-	if $(".packages-category-name").length
+	if $(".has_packages").length
 		$(".pagination").css("margin", "0px 0px")
 		$(".pagination").hide()

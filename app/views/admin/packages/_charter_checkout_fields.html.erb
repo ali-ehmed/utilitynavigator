@@ -9,7 +9,7 @@
 						<label for="is_required" class="label">
 							Is Required
 						</label>
-						<%#= ff.select "is_required_#{count}", options_for_select(["Required", "Optional", "Free"]) %>
+						<%#= ff.select "is_required_#{count}", options_for_select(["Required", "Optional", "Not Include"]) %>
 					</li> -->
 					<li>
 						<label for="provider_name" class="label">
@@ -43,26 +43,26 @@
 			<label class="label">
 				Premiums
 			</label>
-			<%= ff.select :premiums, options_for_select(["Required", "Free"]), {prompt: "--Select--"}, onChange: "$packages.setRequiredFields(this);" %>
+			<%= ff.select :premiums, options_for_select(["Required", "Not Include"]), {prompt: "--Select--"}, onChange: "$packages.setRequiredFields(this);" %>
 		</li>
 		<%= render partial: "admin/packages/shared/charter/items_for_premiums", locals: { ff: ff } %>
 		<li>
 			<label class="label">
 				Digital Tier 1
 			</label>
-			<%= ff.select :digital_tier_1, options_for_select(["Required", "Free"]) %>
+			<%= ff.select :digital_tier_1, options_for_select(["Required", "Not Include"]) %>
 		</li>
 		<li>
 			<label class="label">
 				Digital Tier 2
 			</label>
-			<%= ff.select :digital_tier_2, options_for_select(["Required", "Free"]) %>
+			<%= ff.select :digital_tier_2, options_for_select(["Required", "Not Include"]) %>
 		</li>
 		<li>
 			<label class="label">
 				International Channels
 			</label>
-			<%= ff.select :international_channels, options_for_select(["Required", "Free"]) %>
+			<%= ff.select :international_channels, options_for_select(["Required", "Not Include"]) %>
 		</li>
 	<% end %>
 <% elsif product.name.downcase == :internet.to_s %>
@@ -114,19 +114,19 @@
 			<label class="label">
 				Get 200 Minutes
 			</label>
-			<%= ff.select :get_200_minutes, options_for_select(["Required", "Free"]) %>
+			<%= ff.select :get_200_minutes, options_for_select(["Required", "Not Include"]) %>
 		</li>
 		<li>
 			<label class="label">
 				Mexico 500
 			</label>
-			<%= ff.select :mexico_500, options_for_select(["Required", "Free"]) %>
+			<%= ff.select :mexico_500, options_for_select(["Required", "Not Include"]) %>
 		</li>
 		<li>
 			<label class="label">
 				Get 500 Minutes
 			</label>
-			<%= ff.select :get_500_minutes, options_for_select(["Required", "Free"]) %>
+			<%= ff.select :get_500_minutes, options_for_select(["Required", "Not Include"]) %>
 		</li>
 	<% end %>
 <% end %>

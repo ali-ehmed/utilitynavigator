@@ -5,6 +5,10 @@
       <%= render partial: "shared/search_deals" %>
     </div>
     <div class="desktop-view">
+    
+      <!-- Search form -->
+      <%= render partial: "shared/search_deals" %>
+
       <div id="bannerImage" class="carousel slide">  
         <div class="carousel-inner">
           <div class="item active">
@@ -13,11 +17,7 @@
             <!-- Search Box -->
             <div class="container">
               <div class="carousel-caption">
-                <div class="row">
-                  <div class="col-md-6" style="margin-left: -8.3%;">
-                    <%= render partial: "shared/search_deals" %>    
-                  </div>
-                </div>
+                <!-- Caption -->
               </div>
             </div>
           </div>
@@ -108,7 +108,7 @@
 
   <div class="section-3">
     <div class="container">
-      <div class="packages-category-name">
+      <div class="packages-category-name has_packages">
         <ul class="list-inline">
           <li class="active">
             <a href="#filter_with_tv" class="filtering" aria-controls="tv" role="tab" data-toggle="tab" onclick="settingFilterActive(this);">

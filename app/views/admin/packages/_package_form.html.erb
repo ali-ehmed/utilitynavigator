@@ -43,32 +43,64 @@
 			</li>
 		</ol>
 	</fieldset>
-	<% if @package.new_record? %>
-		<fieldset class="inputs">
-			<legend><span>Select Provider &amp; Package Type</span></legend>
-			<ol>
+	<fieldset class="inputs">
+		<legend><span>Select Provider &amp; Package Type</span></legend>
+		<ol>
+			<% if @package.new_record? %>
 				<li>
 					<%= f.association :provider,:as => :select,:include_blank => "--Select--", input_html: { onchange: "$packages.validatingProvider(this);" } %>
 				</li>
 				<li>
 					<%= f.association :package_type,:as => :select,:include_blank => "--Select--", input_html: { onchange: "$packages.enableProducts(this);" } %>
 				</li>
+			<% else %>
 				<li>
-					<fieldset class="choices package-products">
-						<legend class="label"><label>Choose Products</label></legend>
-						<ol class="choices-group">
-							<li class="product-errors"></li>
+					<%= f.association :provider,:as => :select,:include_blank => "--Select--", input_html: { onchange: "$packages.validatingProvider(this);" }, disabled: true %>
+				</li>
+				<li>
+					<%= f.association :package_type,:as => :select,:include_blank => "--Select--", input_html: { onchange: "$packages.enableProducts(this);" }, disabled: true %>
+				</li>
+			<% end %>
+			<li>
+				<fieldset class="choices package-products">
+					<legend class="label"><label>Choose Products</label></legend>
+					<ol class="choices-group">
+						<li class="product-errors"></li>
+						
+						<% if @package.new_record? %>
 							<% Product.all.each do |product| %>
 								<li class="choice">
-									<%= check_box_tag "product_ids[]", product.id, false, onchange: "$packages.validatingProducts(this);" %> <%= product.name %>
+									<%= check_box_tag "product_ids[]", product.id, false, onchange: "$packages.validatingProducts(this);" %>
+
+									<%= product.name %>
 								</li>
 							<% end %>
-						</ol>
-					</fieldset>
-				</li>
-			</ol>
-		</fieldset>
-	<% end %>
+						<% else %>
+
+							<% @package.package_bundles.each do |p_bundle| %>
+								<li class="choice">
+									<strong>
+										<%= p_bundle.product.try(:name) %>
+									</strong>
+									<br />
+									<small>
+										<%= link_to "Edit ordering items for #{p_bundle.product.try(:name)}", edit_ordering_items_admin_package_path(@package.id, product_id: p_bundle.product_id) %> 
+										<!-- | <%#= link_to "Remove Product", remove_package_product_admin_package_path(@package.id, product_id: p_bundle.product_id), method: :delete, data: { confirm: "Are you sure?" } %> -->
+									</small>
+								</li>
+							<% end %>
+
+							<%# unless @package.package_bundles.count >= 3 %>
+								<!-- <br /> -->
+								<%#= link_to "Add New", "" %>
+							<%# end %>
+
+						<% end %>
+					</ol>
+				</fieldset>
+			</li>
+		</ol>
+	</fieldset>
 	<fieldset class="actions">
 		<ol>
 			<li class="action input_action " id="provider_submit_action">

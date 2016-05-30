@@ -25,6 +25,9 @@
 	</div>
 </div>
 <div id="package-details">
+	<!-- Search filters -->
+	<%= render partial: "shared/searched_filters" %>
+	
 	<div class="container">
 		<% if @packages.blank? %>
 			<div class="alert alert-danger">

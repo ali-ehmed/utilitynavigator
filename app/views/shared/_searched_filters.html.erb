@@ -1,0 +1,72 @@
+<%= form_tag offers_path, method: :get do %>
+	<div class="providers">
+		<div class="section-3">
+	    <div class="container">
+	      <div class="packages-category-name">
+	        <ul class="list-inline">
+	          <li>
+	            <a href="javascript:void(0);" class="filtering" aria-controls="tv" role="tab" onclick="applyFilters(this);" data-value="Cable">
+	              TV
+	              
+	            	<% if params["filters"] and params["filters"].include?("Cable") %>
+	            		<%= check_box_tag "filters[]", "Cable", true, class: "hidden" %>
+	              	<span class="package-filter" style="background-image: url(<%= asset_path('filter-circle-select.png') %>);"></span>
+	            	<% else %>
+	            		<%= check_box_tag "filters[]", "Cable", false, class: "hidden" %>
+	            		<span class="package-filter"></span>
+	            	<% end %>
+
+	            </a>
+	          </li>
+	          <li>
+	            <a href="javascript:void(0);" class="filtering" aria-controls="internet" role="tab" onclick="applyFilters(this);" data-value="Internet">
+	              INTERNET
+
+	              <% if params["filters"] and params["filters"].include?("Internet") %>
+	              	<%= check_box_tag "filters[]", "Internet", true, class: "hidden" %>
+	              	<span class="package-filter" style="background-image: url(<%= asset_path('filter-circle-select.png') %>);"></span>
+	            	<% else %>
+	            		<%= check_box_tag "filters[]", "Internet", false, class: "hidden" %>
+	            		<span class="package-filter"></span>
+	            	<% end %>
+
+	            </a>
+	          </li>
+	          <li>
+	            <a href="javascript:void(0);" class="filtering" aria-controls="phone" role="tab" onclick="applyFilters(this);" data-value="Phone">
+	              PHONE
+
+	              <% if params["filters"] and params["filters"].include?("Phone") %>
+	              	<%= check_box_tag "filters[]", "Phone", true, class: "hidden" %>
+	              	<span class="package-filter" style="background-image: url(<%= asset_path('filter-circle-select.png') %>);"></span>
+	            	<% else %>
+	            		<%= check_box_tag "filters[]", "Phone", false, class: "hidden" %>
+	            		<span class="package-filter"></span>
+	            	<% end %>
+	            	
+	            </a>
+	          </li>
+	        </ul>
+	      </div>
+	    </div>
+	  </div>
+	</div>
+<% end %>
+
+<script type="text/javascript">
+	$(function() {
+		window.applyFilters = (function(elem) {
+			$elem = $(elem);
+			$form = $elem.closest("form");
+			$field = $elem.find("input[type='checkbox']");
+
+			if($field.attr("checked")) {
+				$field.removeAttr("checked");
+			} else {
+				$field.prop("checked", "checked");
+			}
+
+			return $form.submit();
+		});
+	});
+</script>

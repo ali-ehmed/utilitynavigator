@@ -1,5 +1,6 @@
 class LandingsController < ApplicationController
 	before_action :authenticate_user!, only: [ :dashboard ]
+	before_action :set_providers, only: [ :load_channels ]
 
 	%w(twc cox charter_spectrum).each do |provider|
 		scope_name = if provider == "twc" then "time_warner" else provider end
@@ -45,7 +46,7 @@ class LandingsController < ApplicationController
 	def compare_packages
 		ids = params[:package_ids]
 
-		@packages = Package.where("id in (?)", ids)
+		@packages = Package.where("id in (?)", ids.reject(&:empty?))
 
 		respond_to do |format|
 			format.js
@@ -54,7 +55,7 @@ class LandingsController < ApplicationController
 
 	def load_channels
 		@file = Roo::Spreadsheet.open(File.join(Rails.root, 'lib','channel_list_ordered.xlsx'))
-		@channels, @channel_names = Channel.new(@file).load_all
+		@channels, @channel_names = Channel.new(@file).load_all(@provider)
 
 		sleep 1
 
@@ -64,6 +65,18 @@ class LandingsController < ApplicationController
 	end
 
 	private
+
+	def set_providers
+		@provider = ""
+
+		if params[:provider] == "twc"
+			@provider << "Time Warner"
+		elsif params[:provider] == "charter_spectrum"
+			@provider << "Charter Spectrum"
+		else
+			@provider << "COX"
+		end	
+	end
 
 	def filteration(provider)
 		@tv_packages = Package.method(provider).call.tv_filter.paginate(:page => params[:page], :per_page => 3)

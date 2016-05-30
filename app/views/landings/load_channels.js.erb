@@ -1,4 +1,4 @@
 console.log("Spreadsheet opened")
 
-$(".channels").html("<%= escape_javascript(render partial: 'shared/channel_list', locals: { channels: @channels, channel_names: @channel_names }) %>")
+$(".channels").html("<%= escape_javascript(render partial: 'shared/channel_list', locals: { channels: @channels, channel_names: @channel_names, provider_name: @provider }) %>")
 $("#channel-list").modal("show");

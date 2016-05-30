@@ -51,7 +51,19 @@ class Package < ActiveRecord::Base
 	scope :tv_filter, -> { joins(:package_type, :package_bundles => :product).where("products.name iLIKE '%Cable%' and package_types.name = ?", SINGLE_PLAY) }
 	scope :bundle_filter, -> { joins(:package_type).where("package_types.name iLIKE ? or package_types.name iLIKE ? or package_types.name iLIKE ?", SINGLE_PLAY, DOUBLE_PLAY, TRIPLE_PLAY) }
 
-	scope :broadband_providers, -> (providers) { joins(:provider).where("providers.name in (?)", providers).order("created_at desc") }
+	scope :broadband_providers, -> (providers) { joins(:provider, :package_type, :package_bundles => :product)
+																							 .select("packages.id, 
+																							 					package_name, 
+																						 						provider_id, 
+																						 						plan_details, 
+																						 						price_info, 
+																						 						price, 
+																						 						package_description, 
+																						 						promotions")
+																							 .group("packages.id, package_name")
+																							 .where("providers.name in (?)", providers)
+																							 .order("CAST(coalesce(price, '0') AS double precision) asc")
+																							}
 
 	CABLE_TV = ["Primary TV", "2nd TV", "3rd TV", "4th TV"]
 

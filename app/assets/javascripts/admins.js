@@ -66,10 +66,12 @@ window.$packages = {
 
 			$(this).removeAttr('checked');
 			$("li.product-errors").text("");
+			$(this).closest("li").removeClass("product-validate");
 
-		})
+		});
 
 		if(!elem.value) {
+			$("li.product-errors").text("Please Select Products");
 			$("fieldset.package-products *").attr("disabled", "disabled").off('click');
 			$("fieldset.package-products").css("cursor", "no-drop");
 			$("fieldset.package-products").css("background", "rgb(191, 191, 191)");
@@ -108,7 +110,7 @@ window.$packages = {
 			$this.next().show();
 			$this.next().val("");
 			return;
-		} else if ($this.val() === "Free") {
+		} else if ($this.val() === "Free" || "Included") {
 			$this.next().val("Included");
 		} else {
 			$this.next().val("");
@@ -121,11 +123,23 @@ window.$packages = {
 	},
 	setRequiredFields: function(elem) {
 		$this = $(elem);
+		$sub_fields = $this.closest("li").next().find("input[type='text']");
 
 		if($this.val() === "Required" || $this.val() === "Include") {
 			$this.closest("li").next().show();
+			
+			$.each($sub_fields, function() {
+				$(this).val("");
+			});
+
 			return;
 		} else {
+			
+			$this.val("Not Include")
+			$.each($sub_fields, function() {
+				$(this).val("Not Include");
+			});
+
 			$this.closest("li").next().hide();
 		}
 		
@@ -206,12 +220,10 @@ window.$packages = {
 		}
 	},
 	disableSubmission: function() {
-		$form_btn = $("#new_package").find("input[type='submit']");
-		$form_btn.attr("disabled", "disabled").off('click');
+		window.validPackageForm = false
 	},
 	enableSubmission: function() {
-		$form_btn = $("#new_package").find("input:submit");
-		$form_btn.removeAttr('disabled');
+		window.validPackageForm = true
 	},
 	validatingProvider: function(elem) {
 		$package_type =  document.getElementById("package_package_type_id");
@@ -281,7 +293,7 @@ window.$provider_zipcodes = {
 // Initializing
 $admin = {
 	init: function(){
-		$packages.disableSubmission();
+		// $packages.disableSubmission();
 		$admin.settingFlash();
 		$admin.submitPackageForm();
 	},
@@ -317,7 +329,11 @@ $(document).ready(function () {
 	$admin.init();
 
 	// Initially products checkboxes are disabled for packages
-	$("fieldset.package-products *").attr("disabled", "disabled").off('click');
+	if($("#package_package_type_id").val() == "") {
+		$("fieldset.package-products").css("background-color", "rgb(191, 191, 191)");
+  	$("fieldset.package-products").css("cursor", "no-drop");
+		$("fieldset.package-products *").attr("disabled", "disabled").off('click');
+	}
 
 	// Froala Editor
 	$('.package-content').froalaEditor();

@@ -210,4 +210,39 @@ ActiveAdmin.register Package do
 			format.html
 		end
 	end
+
+	member_action :edit_ordering_items, method: :get do 
+		@package = Package.find(params[:id])
+		@package_bundle = @package.package_bundles.find_by_product_id(params[:product_id])
+		@checkout_fields = @package_bundle.checkout_fields
+	end
+
+	member_action :update_ordering_items, method: :put do 
+		@package = Package.find(params[:id])
+		@package_bundle = @package.package_bundles.find_by_product_id(params[:product_id])
+		@package_bundle.update_attribute(:checkout_fields, params[@package_bundle.product.name.downcase.to_sym])
+
+		redirect_to edit_admin_package_path(@package.id), notice: "Package Updated"
+	end
+
+	member_action :remove_package_product, method: :delete do 
+		@package = Package.find(params[:id])
+		@package_bundle = @package.package_bundles.find_by_product_id(params[:product_id])
+		@package_bundle.destroy
+		
+		case @package.package_bundles.count
+		when 1
+			@package_type = PackageType.find_by_name(Package::SINGLE_PLAY)
+		when 2
+			@package_type = PackageType.find_by_name(Package::DOUBLE_PLAY)
+		when 3
+			@package_type = PackageType.find_by_name(Package::TRIPLE_PLAY)
+		end
+
+		@package.package_type_id = @package_type.id
+		@package.save
+		
+		@product = Product.find(params[:product_id])
+		redirect_to edit_admin_package_path(@package.id), notice: "Package Product '#{@product.name}' Created"
+	end
 end

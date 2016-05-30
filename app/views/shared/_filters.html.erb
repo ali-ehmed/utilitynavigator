@@ -14,7 +14,7 @@
 
     <div class="row">
       <div class="col-md-4">
-        <a href="#" class="channel-comparison-link">CHANNEL COMPARISON</a>
+        <a href="#" class="channel-comparison-link" data-provider="<%= params[:action] %>">CHANNEL COMPARISON</a>
       </div>
       <div class="col-md-4 text-center">
         <%= will_paginate @tv_packages, renderer: BootstrapPagination::Rails %>
@@ -42,7 +42,7 @@
     
     <div class="row">
       <div class="col-md-4">
-        <a href="#" class="channel-comparison-link">CHANNEL COMPARISON</a>
+        <a href="#" class="channel-comparison-link" data-provider="<%= params[:action] %>">CHANNEL COMPARISON</a>
       </div>
       <div class="col-md-4 text-center">
         <%= will_paginate @internet_packages, renderer: BootstrapPagination::Rails %>
@@ -70,7 +70,7 @@
 
     <div class="row">
       <div class="col-md-4">
-        <a href="#" class="channel-comparison-link">CHANNEL COMPARISON</a>
+        <a href="#" class="channel-comparison-link" data-provider="<%= params[:action] %>">CHANNEL COMPARISON</a>
       </div>
       <div class="col-md-4 text-center">
         <%= will_paginate @phone_packages, renderer: BootstrapPagination::Rails %>
@@ -98,7 +98,7 @@
 
     <div class="row">
       <div class="col-md-4">
-        <a href="#" class="channel-comparison-link">CHANNEL COMPARISON</a>
+        <a href="#" class="channel-comparison-link" data-provider="<%= params[:action] %>">CHANNEL COMPARISON</a>
       </div>
       <div class="col-md-4 text-center">
         <%= will_paginate @bundle_packages, renderer: BootstrapPagination::Rails %>

@@ -24,11 +24,7 @@ Rails.application.routes.draw do
   get "/load_channels" => "landings#load_channels"
 
   devise_for :users, controllers: { sessions: "users/sessions", :registrations => "users/registrations" }
-  # devise_scope :user do
-  #   get "/" => "landings#index"
-  # end
   
-  # devise_for :users
   resources :call_back, only: [:create]
   root to: 'landings#index'
 end
