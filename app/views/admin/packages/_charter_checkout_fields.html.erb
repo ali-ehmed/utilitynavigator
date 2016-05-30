@@ -52,18 +52,47 @@
 			</label>
 			<%= ff.select :digital_tier_1, options_for_select(["Required", "Not Include"]) %>
 		</li>
+
+		<!-- 50 additional channel -->
+		<li style="display:none;">
+			<legend><span>Set item for Digital Tier 1</span></legend>
+			<ol>
+				<li>
+					<label for="provider_name" class="label">
+						Voice Mail
+					</label>
+					<%= ff.text_field "50_additional_channels", style: "width: calc(78% - 22px);", onblur: "$packages.packagePriceValidation(this);" %>
+				</li>
+			</ol>
+		</li>
+
 		<li>
 			<label class="label">
 				Digital Tier 2
 			</label>
 			<%= ff.select :digital_tier_2, options_for_select(["Required", "Not Include"]) %>
 		</li>
+
+		<!-- 25 additional channel -->
+		<li style="display:none;">
+			<legend><span>Set item for Digital Tier 2</span></legend>
+			<ol>
+				<li>
+					<label for="provider_name" class="label">
+						Voice Mail
+					</label>
+					<%= ff.text_field "25_additional_channels", style: "width: calc(78% - 22px);", onblur: "$packages.packagePriceValidation(this);" %>
+				</li>
+			</ol>
+		</li>
+
 		<li>
 			<label class="label">
 				International Channels
 			</label>
 			<%= ff.select :international_channels, options_for_select(["Required", "Not Include"]) %>
 		</li>
+		<%= render partial: "admin/packages/shared/charter/items_for_international_channels", locals: { ff: ff } %>
 	<% end %>
 <% elsif product.name.downcase == :internet.to_s %>
 	<%= fields_for :internet do |ff| %>

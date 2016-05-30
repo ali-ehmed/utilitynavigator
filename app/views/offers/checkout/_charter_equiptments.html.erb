@@ -232,12 +232,14 @@
 		<ul>
 			<li>
 				<% if fields["digital_tier_1"].downcase == "required" %>
-					<div class="checkbox">
-	          <%= check_box_tag :digital_tier_1, false, false, {:class => "styled", data: { price: 12.00 }, onchange: "calculateEquiptmentCosts(this);"}  %>
-	          <label class="label-checkbox">
-	            50 additional channels ($12.00 monthly)
-	          </label>
-	        </div>
+					<% if fields["50_additional_channels"].present? %>
+						<div class="checkbox">
+		          <%= check_box_tag :50_additional_channels, false, false, {:class => "styled", data: { price: fields["50_additional_channels"] }, onchange: "calculateEquiptmentCosts(this);"}  %>
+		          <label class="label-checkbox">
+		            50 additional channels ($<%= fields["50_additional_channels"] %> monthly)
+		          </label>
+		        </div>
+	        <% end %>
         <% else %>
         	<label>50 additional channels (Free)</label>
         <% end %>
@@ -255,11 +257,13 @@
 		<ul>
 			<li>
 				<% if fields["digital_tier_2"].downcase == "required" %>
-					<div class="checkbox">
-	          <%= check_box_tag :digital_tier_2, false, false, {:class => "styled", data: { price: 12.00 }, onchange: "calculateEquiptmentCosts(this);"}  %>
-	          <label class="label-checkbox">
-	            25 additional channels ($12.00 monthly)
-	          </label>
+					<% if fields["25_additional_channels"].present? %>
+						<div class="checkbox">
+		          <%= check_box_tag :25_additional_channels, false, false, {:class => "styled", data: { price: fields["25_additional_channels"] }, onchange: "calculateEquiptmentCosts(this);"}  %>
+		          <label class="label-checkbox">
+		            25 additional channels ($<%= fields["25_additional_channels"] %> monthly)
+		          </label>
+	          <% end %>
 	        </div>
         <% else %>
         	<label>25 additional channels (Free)</label>
@@ -403,81 +407,91 @@
 		<% if fields["international_channels"].downcase == "required" %>
 			<h4>International Channels</h4>
 			<ul>
-				<li>
-					<div class="checkbox">
-	          <%= check_box_tag :flipino_view, false, false, {:class => "styled", data: { price: 19.00 }, onchange: "calculateEquiptmentCosts(this);"}  %>
-	          <label class="label-checkbox">
-	            Filipino View ($19.99 monthly)
-	          </label>
-	          <br />
-	          <a role="button" data-toggle="collapse" href="#collaspflipino_view" aria-expanded="false" aria-controls="collapseExample" class="view_more">View Details</a>
-						<div class="collapse" id="collaspflipino_view">
-				      <p class="well">
-				      	6 Filipino Networks 
-				      </p>
-				    </div>
-	        </div>
-				</li>
-				<li>
-					<div class="checkbox">
-	          <%= check_box_tag :french_view, false, false, {:class => "styled", data: { price: 6.99 }, onchange: "calculateEquiptmentCosts(this);"}  %>
-	          <label class="label-checkbox">
-	            French View ($6.99 monthly)
-	          </label>
-	          <br />
-	          <a role="button" data-toggle="collapse" href="#collaspfrench_view" aria-expanded="false" aria-controls="collapseExample" class="view_more">View Details</a>
-						<div class="collapse" id="collaspfrench_view">
-				      <p class="well">
-				      	French Networks
-				      </p>
-				    </div>
-	        </div>
-				</li>
-				<li>
-					<div class="checkbox">
-	          <%= check_box_tag :latino_view, false, false, {:class => "styled", data: { price: 6.99 }, onchange: "calculateEquiptmentCosts(this);"}  %>
-	          <label class="label-checkbox">
-	            Latino View ($6.99 monthly)
-	          </label>
-	          <br />
-	          <a role="button" data-toggle="collapse" href="#collasplatino_view" aria-expanded="false" aria-controls="collapseExample" class="view_more">View Details</a>
-						<div class="collapse" id="collasplatino_view">
-				      <p class="well">
-				      	Up to 45 channels in Spanish
-				      </p>
-				    </div>
-	        </div>
-				</li>
-				<li>
-					<div class="checkbox">
-	          <%= check_box_tag :se_asian_view, false, false, {:class => "styled", data: { price: 29.99 }, onchange: "calculateEquiptmentCosts(this);"}  %>
-	          <label class="label-checkbox">
-	            SE Asian View ($29.99 monthly) 
-	          </label>
-	          <br />
-	          <a role="button" data-toggle="collapse" href="#collaspese_asian_view" aria-expanded="false" aria-controls="collapseExample" class="view_more">View Details</a>
-						<div class="collapse" id="collaspese_asian_view">
-				      <p class="well">
-				      	SE Asian Networks
-				      </p>
-				    </div>
-	        </div>
-				</li>
-				<li>
-					<div class="checkbox">
-	          <%= check_box_tag :tv_japan, false, false, {:class => "styled", data: { price: 14.99 }, onchange: "calculateEquiptmentCosts(this);"}  %>
-	          <label class="label-checkbox">
-	            TV Japan ($14.99 monthly)
-	          </label>
-	          <br />
-	          <a role="button" data-toggle="collapse" href="#collaspetv_japan" aria-expanded="false" aria-controls="collapseExample" class="view_more">View Details</a>
-						<div class="collapse" id="collaspetv_japan">
-				      <p class="well">
-				      	Japanese Networks
-				      </p>
-				    </div>
-	        </div>
-				</li>
+				<% if fields["flipino_view"].present? %>
+					<li>
+						<div class="checkbox">
+		          <%= check_box_tag :flipino_view, false, false, {:class => "styled", data: { price: fields["flipino_view"] }, onchange: "calculateEquiptmentCosts(this);"}  %>
+		          <label class="label-checkbox">
+		            Filipino View ($<%= fields["flipino_view"] %> monthly)
+		          </label>
+		          <br />
+		          <a role="button" data-toggle="collapse" href="#collaspflipino_view" aria-expanded="false" aria-controls="collapseExample" class="view_more">View Details</a>
+							<div class="collapse" id="collaspflipino_view">
+					      <p class="well">
+					      	6 Filipino Networks 
+					      </p>
+					    </div>
+		        </div>
+					</li>
+				<% end %>
+				<% if fields["french_view"].present? %>
+					<li>
+						<div class="checkbox">
+		          <%= check_box_tag :french_view, false, false, {:class => "styled", data: { price: fields["french_view"] }, onchange: "calculateEquiptmentCosts(this);"}  %>
+		          <label class="label-checkbox">
+		            French View ($<%= fields["french_view"] %> monthly)
+		          </label>
+		          <br />
+		          <a role="button" data-toggle="collapse" href="#collaspfrench_view" aria-expanded="false" aria-controls="collapseExample" class="view_more">View Details</a>
+							<div class="collapse" id="collaspfrench_view">
+					      <p class="well">
+					      	French Networks
+					      </p>
+					    </div>
+		        </div>
+					</li>
+				<% end %>
+				<% if fields["latino_view"].present? %>
+					<li>
+						<div class="checkbox">
+		          <%= check_box_tag :latino_view, false, false, {:class => "styled", data: { price: fields["latino_view"] }, onchange: "calculateEquiptmentCosts(this);"}  %>
+		          <label class="label-checkbox">
+		            Latino View ($<%= fields["latino_view"] %> monthly)
+		          </label>
+		          <br />
+		          <a role="button" data-toggle="collapse" href="#collasplatino_view" aria-expanded="false" aria-controls="collapseExample" class="view_more">View Details</a>
+							<div class="collapse" id="collasplatino_view">
+					      <p class="well">
+					      	Up to 45 channels in Spanish
+					      </p>
+					    </div>
+		        </div>
+					</li>
+				<% end %>
+				<% if fields["se_asian_view"].present? %>
+					<li>
+						<div class="checkbox">
+		          <%= check_box_tag :se_asian_view, false, false, {:class => "styled", data: { price: fields["se_asian_view"] }, onchange: "calculateEquiptmentCosts(this);"}  %>
+		          <label class="label-checkbox">
+		            SE Asian View ($<%= fields["se_asian_view"] %> monthly) 
+		          </label>
+		          <br />
+		          <a role="button" data-toggle="collapse" href="#collaspese_asian_view" aria-expanded="false" aria-controls="collapseExample" class="view_more">View Details</a>
+							<div class="collapse" id="collaspese_asian_view">
+					      <p class="well">
+					      	SE Asian Networks
+					      </p>
+					    </div>
+		        </div>
+					</li>
+				<% end %>
+				<% if fields["tv_japan"].present? %>
+					<li>
+						<div class="checkbox">
+		          <%= check_box_tag :tv_japan, false, false, {:class => "styled", data: { price: fields["tv_japan"] }, onchange: "calculateEquiptmentCosts(this);"}  %>
+		          <label class="label-checkbox">
+		            TV Japan ($<%= fields["tv_japan"] %> monthly)
+		          </label>
+		          <br />
+		          <a role="button" data-toggle="collapse" href="#collaspetv_japan" aria-expanded="false" aria-controls="collapseExample" class="view_more">View Details</a>
+							<div class="collapse" id="collaspetv_japan">
+					      <p class="well">
+					      	Japanese Networks
+					      </p>
+					    </div>
+		        </div>
+					</li>
+				<% end %>
 			</ul>
 		<% end %>
 		<hr />
