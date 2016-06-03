@@ -75,7 +75,7 @@ class LandingsController < ApplicationController
 			@provider << "Charter Spectrum"
 		else
 			@provider << "COX"
-		end	
+		end
 	end
 
 	def filteration(provider)

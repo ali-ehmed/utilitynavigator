@@ -5,15 +5,15 @@
       <%= render partial: "shared/search_deals" %>
     </div>
     <div class="desktop-view">
-    
+
       <!-- Search form -->
       <%= render partial: "shared/search_deals" %>
 
-      <div id="bannerImage" class="carousel slide">  
+      <div id="bannerImage" class="carousel slide">
         <div class="carousel-inner">
           <div class="item active">
             <%= image_tag(@provider_banner, class: "slider-img") %>
-            
+
             <!-- Search Box -->
             <div class="container">
               <div class="carousel-caption">
@@ -52,7 +52,7 @@
           <% if params[:action] == "twc" %>
             <span class="heading">PREMIUM CHANNELS</span>
             <p>
-              With your choice of top channels and unique TWC programming passes, better TV starts with more of the best shows and movies. 
+              With your choice of top channels and unique TWC programming passes, better TV starts with more of the best shows and movies.
             </p>
             <p>Add these premium channels to your Preferred TV service.</p>
           <% elsif params[:action] == "cox" %>
@@ -81,7 +81,7 @@
           <% if params[:action] == "twc" %>
             <p>
               No matter the sport, no matter the season, you can view all your favorite events with the exclusive coverage that puts you at the game.
-              
+
             </p>
             <p>
               Enjoy sports with these channels added to your Preferred TV service.
@@ -92,7 +92,7 @@
             </p>
           <% else %>
             <p>
-              Whether you’re a fan of football, baseball, auto racing, tennis, soccer or bass fishing, it’s always game time with Charter Spectrum TV. Charter Spectrum TV packages include offerings like NFL Network, NFL RedZone, MLB Network, and ESPN GamePlan to get in the middle of your experience with national channels, regional channels, and seasonal subscriptions. To see all the sports channels that are available for your home, check out Channel Lineup  
+              Whether you’re a fan of football, baseball, auto racing, tennis, soccer or bass fishing, it’s always game time with Charter Spectrum TV. Charter Spectrum TV packages include offerings like NFL Network, NFL RedZone, MLB Network, and ESPN GamePlan to get in the middle of your experience with national channels, regional channels, and seasonal subscriptions. To see all the sports channels that are available for your home, check out Channel Lineup
             </p>
           <%  end %>
           <ul class="list-inline">
