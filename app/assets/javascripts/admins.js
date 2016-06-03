@@ -1,6 +1,6 @@
-/* 
+/*
 	author: -> Ali Ahmed (Software Engineer - Ruby On Rails)
-									Admin Panel Javascript 
+									Admin Panel Javascript
 */
 
 /* ********************************************************* */
@@ -93,7 +93,7 @@ window.$packages = {
 	},
 	packagePriceValidation: function(elem) {
 		$elem = $(elem);
-		
+
 		if(isNaN($elem.val()) === true) {
 			console.log(isNaN($elem.val()));
 			$elem.after($packages.errorTemplate("Price must be a demical value", $elem));
@@ -127,14 +127,14 @@ window.$packages = {
 
 		if($this.val() === "Required" || $this.val() === "Include") {
 			$this.closest("li").next().show();
-			
+
 			$.each($sub_fields, function() {
 				$(this).val("");
 			});
 
 			return;
 		} else {
-			
+
 			$this.val("Not Include")
 			$.each($sub_fields, function() {
 				$(this).val("Not Include");
@@ -142,10 +142,10 @@ window.$packages = {
 
 			$this.closest("li").next().hide();
 		}
-		
+
 		return;
 	},
-	// Products Type and Products 
+	// Products Type and Products
 	validatingProducts: function(elem) {
 		$element = $(elem);
 		$error = $("li.product-errors");
@@ -155,7 +155,7 @@ window.$packages = {
 		} else {
 			elem.dataset.checked = true
 		}
-		
+
 		$package_type =  document.getElementById("package_package_type_id");
 		$checked_boxes = $("fieldset.package-products").find("[data-checked='true']");
 
@@ -200,7 +200,7 @@ window.$packages = {
 				break;
 		}
 	},
-	
+
 	// Validation Error Dsiplay
 	validationClass: function(elem, has) {
 		if(has === "true") {
@@ -330,6 +330,7 @@ $(document).ready(function () {
 
 	// Initially products checkboxes are disabled for packages
 	if($("#package_package_type_id").val() == "") {
+		// window.validPackageForm = false;
 		$("fieldset.package-products").css("background-color", "rgb(191, 191, 191)");
   	$("fieldset.package-products").css("cursor", "no-drop");
 		$("fieldset.package-products *").attr("disabled", "disabled").off('click');
@@ -340,7 +341,7 @@ $(document).ready(function () {
 	$('.package-promotions').froalaEditor();
 	$('.package-plan-details').froalaEditor();
 
-	$("a#approval_statuses").closest("li").css("border-bottom", "solid 5px #ebebeb")
+	$("a#approval_statuses").closest("li").css("border-bottom", "solid 5px #ebebeb");
 });
 
 /* ******************** CUSTOM JS END ********************* */

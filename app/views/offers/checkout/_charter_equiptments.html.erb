@@ -3,7 +3,7 @@
 	<% when "cable" %>
 		<% fields = get_in_hash(@package_bundles.find_by_product_id(product.id).checkout_fields) %>
 		<%#= fields %>
-		
+
 		<!-- <h4>Please configure your TV, Internet &amp; Home Phone Services</h4> -->
 		<h4>Configure your 1st TV <span class="checkout_required">(Required)</span> <small><a href="javascript:void(0);" onclick="resetSelectedItem(this);">Reset selected item</a></small></h4>
 		<ul>
@@ -68,7 +68,7 @@
 				</li>
 			<% end %>
 			<% if fields["additional_hd_2"].present? %>
-				<li>	
+				<li>
 					<% if fields["additional_hd_2"].downcase == "included" %>
 						<p>HD Box (<%= fields["additional_hd_2"].capitalize %>)</p>
 					<% else %>
@@ -126,7 +126,7 @@
 		        </div>
 					</li>
 				<% end %>
-			<% end %>	
+			<% end %>
 			<% if fields["sd_box_3"].present? %>
 				<li>
 					<% if fields["sd_box_3"].downcase == "included" %>
@@ -234,7 +234,7 @@
 				<% if fields["digital_tier_1"].downcase == "required" %>
 					<% if fields["50_additional_channels"].present? %>
 						<div class="checkbox">
-		          <%= check_box_tag :50_additional_channels, false, false, {:class => "styled", data: { price: fields["50_additional_channels"] }, onchange: "calculateEquiptmentCosts(this);"}  %>
+		          <%= check_box_tag "50_additional_channels", false, false, {:class => "styled", data: { price: fields["50_additional_channels"] }, onchange: "calculateEquiptmentCosts(this);"}  %>
 		          <label class="label-checkbox">
 		            50 additional channels ($<%= fields["50_additional_channels"] %> monthly)
 		          </label>
@@ -259,7 +259,7 @@
 				<% if fields["digital_tier_2"].downcase == "required" %>
 					<% if fields["25_additional_channels"].present? %>
 						<div class="checkbox">
-		          <%= check_box_tag :25_additional_channels, false, false, {:class => "styled", data: { price: fields["25_additional_channels"] }, onchange: "calculateEquiptmentCosts(this);"}  %>
+		          <%= check_box_tag "25_additional_channels", false, false, {:class => "styled", data: { price: fields["25_additional_channels"] }, onchange: "calculateEquiptmentCosts(this);"}  %>
 		          <label class="label-checkbox">
 		            25 additional channels ($<%= fields["25_additional_channels"] %> monthly)
 		          </label>
@@ -276,7 +276,7 @@
       	NFL RED ZONE, FOX College Sports, Outdoor, ESPN Classic
       </p>
     </div>
-		
+
 		<!-- More Entertainment for every one  -->
 		<% if fields["premiums"].downcase == "required" %>
 			<h4>Premium Channels</h4>
@@ -418,7 +418,7 @@
 		          <a role="button" data-toggle="collapse" href="#collaspflipino_view" aria-expanded="false" aria-controls="collapseExample" class="view_more">View Details</a>
 							<div class="collapse" id="collaspflipino_view">
 					      <p class="well">
-					      	6 Filipino Networks 
+					      	6 Filipino Networks
 					      </p>
 					    </div>
 		        </div>
@@ -463,7 +463,7 @@
 						<div class="checkbox">
 		          <%= check_box_tag :se_asian_view, false, false, {:class => "styled", data: { price: fields["se_asian_view"] }, onchange: "calculateEquiptmentCosts(this);"}  %>
 		          <label class="label-checkbox">
-		            SE Asian View ($<%= fields["se_asian_view"] %> monthly) 
+		            SE Asian View ($<%= fields["se_asian_view"] %> monthly)
 		          </label>
 		          <br />
 		          <a role="button" data-toggle="collapse" href="#collaspese_asian_view" aria-expanded="false" aria-controls="collapseExample" class="view_more">View Details</a>
@@ -679,4 +679,3 @@
 		</ul>
 	<% end %>
 </div>
-

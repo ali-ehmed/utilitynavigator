@@ -43,24 +43,22 @@ ActiveAdmin.register Package do
 		    end
 		    row :monthly_fee_after_promotion
     	end
-    
+
     package.package_bundles.each do |bundle|
     	hash = bundle.field.gsub("=>", ":")
 	 		requirements = JSON.parse(hash)
 
-    	unless requirements.blank?
-	    	panel bundle.product.name do
-
-	    		table_for bundle do
+			unless requirements.blank?
+				panel bundle.product.name do
+					table_for bundle do
 				 		requirements.keys.map do |key|
 				 			column key, class: "fields" do
 				 				if requirements[key].kind_of?(Array) then requirements[key].join(", ") else requirements[key] end
 				 			end
 				 		end
-		      end
-
+					end
 	  		end
-	  	end
+			end
     end
   end
 
@@ -111,7 +109,7 @@ ActiveAdmin.register Package do
 						bundle_keys_by_product << preference.additional_field_weight.to_field.to_s
 					end
 
-					bundle_params = "" 
+					bundle_params = ""
 					bundle_params = package_bundle_params.select {|k,v| bundle_keys_by_product.include?(k) }
 					# params.select_keys(bundle_keys_by_product)
 
@@ -156,7 +154,7 @@ ActiveAdmin.register Package do
 				redirect_to admin_packages_path, notice: "Pakage Updated"
 			else
 				flash[:alert] = "Review errors below"
-				
+
 				render :edit
 			end
 		end
@@ -177,7 +175,7 @@ ActiveAdmin.register Package do
 		logger.debug "--#{initialize_params}"
 
 		if !@package.valid?
-			redirect_to new_admin_package_path, flash: { alert: "Review errors" }
+			redirect_to new_admin_package_path(package: params[:package]), flash: { alert: @package.errors.full_messages.map { |msg| content_tag(:li, msg) }.join.html_safe }
 			return
 		end
 
@@ -190,7 +188,7 @@ ActiveAdmin.register Package do
 		@provider_preferences = @provider.product_provider_preferences
 
 		if @provider_preferences.blank?
-			redirect_to new_admin_package_path, flash: { alert: "There are no preferences present for #{@provider.name}" }
+			redirect_to new_admin_package_path(package: params[:package]), flash: { alert: "There are no preferences present for #{@provider.name}" }
 			return
 		end
 
@@ -211,13 +209,13 @@ ActiveAdmin.register Package do
 		end
 	end
 
-	member_action :edit_ordering_items, method: :get do 
+	member_action :edit_ordering_items, method: :get do
 		@package = Package.find(params[:id])
 		@package_bundle = @package.package_bundles.find_by_product_id(params[:product_id])
 		@checkout_fields = @package_bundle.checkout_fields
 	end
 
-	member_action :update_ordering_items, method: :put do 
+	member_action :update_ordering_items, method: :put do
 		@package = Package.find(params[:id])
 		@package_bundle = @package.package_bundles.find_by_product_id(params[:product_id])
 		@package_bundle.update_attribute(:checkout_fields, params[@package_bundle.product.name.downcase.to_sym])
@@ -225,11 +223,11 @@ ActiveAdmin.register Package do
 		redirect_to edit_admin_package_path(@package.id), notice: "Package Updated"
 	end
 
-	member_action :remove_package_product, method: :delete do 
+	member_action :remove_package_product, method: :delete do
 		@package = Package.find(params[:id])
 		@package_bundle = @package.package_bundles.find_by_product_id(params[:product_id])
 		@package_bundle.destroy
-		
+
 		case @package.package_bundles.count
 		when 1
 			@package_type = PackageType.find_by_name(Package::SINGLE_PLAY)
@@ -241,7 +239,7 @@ ActiveAdmin.register Package do
 
 		@package.package_type_id = @package_type.id
 		@package.save
-		
+
 		@product = Product.find(params[:product_id])
 		redirect_to edit_admin_package_path(@package.id), notice: "Package Product '#{@product.name}' Created"
 	end

@@ -13,7 +13,7 @@
 					</li> -->
 					<li>
 						<label for="provider_name" class="label">
-							DVR Box &amp; Service 
+							DVR Box &amp; Service
 						</label>
 						<%= ff.select "checkout_select", options_for_select(["Free", "Not Include", "Add Price"]), {prompt: "--Select--"}, class: "package_select_field", onchange: "$packages.addPriceField(this);" %>
 
@@ -50,7 +50,7 @@
 			<label class="label">
 				Digital Tier 1
 			</label>
-			<%= ff.select :digital_tier_1, options_for_select(["Required", "Not Include"]) %>
+			<%= ff.select :digital_tier_1, options_for_select(["Required", "Not Include"]), {prompt: "--Select--"}, onChange: "$packages.setRequiredFields(this);" %>
 		</li>
 
 		<!-- 50 additional channel -->
@@ -59,7 +59,7 @@
 			<ol>
 				<li>
 					<label for="provider_name" class="label">
-						Voice Mail
+						50 Additional Channels
 					</label>
 					<%= ff.text_field "50_additional_channels", style: "width: calc(78% - 22px);", onblur: "$packages.packagePriceValidation(this);" %>
 				</li>
@@ -70,7 +70,7 @@
 			<label class="label">
 				Digital Tier 2
 			</label>
-			<%= ff.select :digital_tier_2, options_for_select(["Required", "Not Include"]) %>
+			<%= ff.select :digital_tier_2, options_for_select(["Required", "Not Include"]), {prompt: "--Select--"}, onChange: "$packages.setRequiredFields(this);" %>
 		</li>
 
 		<!-- 25 additional channel -->
@@ -79,7 +79,7 @@
 			<ol>
 				<li>
 					<label for="provider_name" class="label">
-						Voice Mail
+						25 Additional Channels
 					</label>
 					<%= ff.text_field "25_additional_channels", style: "width: calc(78% - 22px);", onblur: "$packages.packagePriceValidation(this);" %>
 				</li>
@@ -90,7 +90,7 @@
 			<label class="label">
 				International Channels
 			</label>
-			<%= ff.select :international_channels, options_for_select(["Required", "Not Include"]) %>
+			<%= ff.select :international_channels, options_for_select(["Required", "Not Include"]), {prompt: "--Select--"}, onChange: "$packages.setRequiredFields(this);" %>
 		</li>
 		<%= render partial: "admin/packages/shared/charter/items_for_international_channels", locals: { ff: ff } %>
 	<% end %>

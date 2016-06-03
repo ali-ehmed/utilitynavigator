@@ -96,6 +96,6 @@ namespace :deploy do
 end
 
 # Add this to automatically ping the server after a restart:
-# after "deploy:restart", "deploy:ping"
+after "deploy:restart", "deploy:ping"
 after :deploy, "deploy:restart"
 before :deploy, "deploy:restart"

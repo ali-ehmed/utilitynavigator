@@ -68,10 +68,10 @@ ActiveRecord::Schema.define(version: 20160527235108) do
     t.text     "address"
     t.string   "state"
     t.string   "zip"
+    t.time     "preferred_time"
     t.datetime "created_at",     null: false
     t.datetime "updated_at",     null: false
     t.string   "time_zone"
-    t.time     "preferred_time"
     t.date     "preferred_date"
   end
 

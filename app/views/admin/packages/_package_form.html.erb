@@ -10,36 +10,36 @@
 		<legend><span>General Details of Package</span></legend>
 		<ol>
 			<li class="string input optional stringish" id="package_name_input">
-				<%= f.input :package_name %>
+				<%= f.input :package_name, input_html: { value: params[:package] ? params[:package][:package_name] : nil } %>
 			</li>
 			<li class="string input optional stringish">
 				<%= f.label :package_description %>
 				<br />
-				<%= f.input :package_description, input_html: { class: "package-content" } %>
+				<%= f.input :package_description, input_html: { class: "package-content", value: params[:package] ? params[:package][:package_description] : nil } %>
 			</li>
 			<li class="string input optional stringish">
 				<%= f.label :plan_details %>
 				<br />
-				<%= f.input :plan_details, input_html: { class: "package-plan-details" } %>
+				<%= f.input :plan_details, input_html: { class: "package-plan-details", value: params[:package] ? params[:package][:plan_details] : nil } %>
 			</li>
 			<li class="string input optional stringish" id="package_price_info_input">
-				<%= f.input :price_info, input_html: { onblur: "$packages.packageCharacterLengthValidation(this, 72);" } %>
+				<%= f.input :price_info, input_html: { onblur: "$packages.packageCharacterLengthValidation(this, 72);", value: params[:package] ? params[:package][:price_info] : nil } %>
 				<strong>Hint: </strong>Price Info should not be more than 70 characters
 			</li>
 			<li class="string input optional stringish" id="package_price_input">
-				<%= f.input :price, input_html: { onblur: "$packages.packagePriceValidation(this);" } %>
+				<%= f.input :price, input_html: { onblur: "$packages.packagePriceValidation(this);", value: params[:package] ? params[:package][:price] : nil } %>
 			</li>
 			<li class="string input optional stringish" id="package_monthly_fee_after_promotion_input">
-				<%= f.input :monthly_fee_after_promotion, input_html: { onblur: "$packages.packageCharacterLengthValidation(this, 50);" } %>
+				<%= f.input :monthly_fee_after_promotion, input_html: { onblur: "$packages.packageCharacterLengthValidation(this, 50);", value: params[:package] ? params[:package][:monthly_fee_after_promotion] : nil } %>
 				<strong>Hint: </strong>Monthly Fee Text should not be more than 70 characters
 			</li>
 			<li class="string input optional stringish" id="package_installation_price_input">
-				<%= f.input :installation_price, input_html: { onblur: "$packages.packagePriceValidation(this);" } %>
+				<%= f.input :installation_price, input_html: { onblur: "$packages.packagePriceValidation(this);", value: params[:package] ? params[:package][:installation_price] : nil } %>
 			</li>
 			<li class="string input optional stringish">
 				<%= f.label :promotions %>
 				<br />
-				<%= f.input :promotions, input_html: { class: "package-promotions" } %>
+				<%= f.input :promotions, input_html: { class: "package-promotions", value: params[:package] ? params[:package][:promotions] : nil } %>
 			</li>
 		</ol>
 	</fieldset>
@@ -66,7 +66,7 @@
 					<legend class="label"><label>Choose Products</label></legend>
 					<ol class="choices-group">
 						<li class="product-errors"></li>
-						
+
 						<% if @package.new_record? %>
 							<% Product.all.each do |product| %>
 								<li class="choice">
@@ -84,7 +84,7 @@
 									</strong>
 									<br />
 									<small>
-										<%= link_to "Edit ordering items for #{p_bundle.product.try(:name)}", edit_ordering_items_admin_package_path(@package.id, product_id: p_bundle.product_id) %> 
+										<%= link_to "Edit ordering items for #{p_bundle.product.try(:name)}", edit_ordering_items_admin_package_path(@package.id, product_id: p_bundle.product_id) %>
 										<!-- | <%#= link_to "Remove Product", remove_package_product_admin_package_path(@package.id, product_id: p_bundle.product_id), method: :delete, data: { confirm: "Are you sure?" } %> -->
 									</small>
 								</li>
