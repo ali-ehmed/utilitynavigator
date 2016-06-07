@@ -28,83 +28,8 @@
 </div>
 <!-- Page Content -->
 <div class="providers">
-  <div class="section-1">
-    <div class="container">
-      <%= render partial: "shared/#{params[:action]}_content" %>
-    </div>
-  </div>
-
-  <div class="section-2">
-    <div class="container">
-      <div class="row">
-        <div class="col-md-4">
-          <span class="heading">
-            <% if params[:action] == "twc" %>
-              More Movies, More Sports More To Enjoy
-            <% elsif params[:action] == "cox" %>
-              More Reasons To Love TV
-            <% else %>
-              Entertainment for Everyone
-            <% end %>
-          </span>
-        </div>
-        <div class="col-md-4">
-          <% if params[:action] == "twc" %>
-            <span class="heading">PREMIUM CHANNELS</span>
-            <p>
-              With your choice of top channels and unique TWC programming passes, better TV starts with more of the best shows and movies.
-            </p>
-            <p>Add these premium channels to your Preferred TV service.</p>
-          <% elsif params[:action] == "cox" %>
-            <span class="heading">THE BEST IN ENTERTAINMENT</span>
-            <p>
-              HBO, SHOWTIME, STARZ and CINEMAX
-            </p>
-            <p>
-              Watch the best premium entertainment: hit shows, new movies and access to On DemandSM and online viewing.
-            </p>
-          <% else %>
-            <span class="heading">Premium Channels</span>
-            <p>With premium channels like HBO, SHOWTIME, AND STARZ you’ll have access to over 10,000 movies and original shows. Get ready to be entertained!</p>
-          <% end %>
-          <ul class="list-inline">
-            <li><%= image_tag("hbo-logo.png") %></li>
-            <li><%= image_tag("cinemax logo.png") %></li>
-            <li><%= image_tag("starz logo.png") %></li>
-            <li><%= image_tag("tmc logo.png") %></li>
-            <li><%= image_tag("showtime logo.png") %></li>
-            <li><%= image_tag("epix logo.png") %></li>
-          </ul>
-        </div>
-        <div class="col-md-4">
-          <span class="heading">SPORTS</span>
-          <% if params[:action] == "twc" %>
-            <p>
-              No matter the sport, no matter the season, you can view all your favorite events with the exclusive coverage that puts you at the game.
-
-            </p>
-            <p>
-              Enjoy sports with these channels added to your Preferred TV service.
-            </p>
-          <% elsif params[:action] == "cox" %>
-            <p>
-              Catch all the live sports actions with two exciting paks for one crowd-pleasing price! You’ll stay in the know with the Sports & Info Pak, featuring the NFL Network, NBA TV, NHL Network and more. And you’ll get your field-to-stream thrills with the Sports Pak 2, bringing you everything from BIG Ten Network, NFL RedZone and MLB Network to World Fishing Network and Universal Sports.
-            </p>
-          <% else %>
-            <p>
-              Whether you’re a fan of football, baseball, auto racing, tennis, soccer or bass fishing, it’s always game time with Charter Spectrum TV. Charter Spectrum TV packages include offerings like NFL Network, NFL RedZone, MLB Network, and ESPN GamePlan to get in the middle of your experience with national channels, regional channels, and seasonal subscriptions. To see all the sports channels that are available for your home, check out Channel Lineup
-            </p>
-          <%  end %>
-          <ul class="list-inline">
-            <li><%= image_tag("MBL logo.png") %></li>
-            <li><%= image_tag("NBA logo.png") %></li>
-            <li><%= image_tag("NHL logo.png") %></li>
-            <li><%= image_tag("direct kick logo.png") %></li>
-          </ul>
-        </div>
-      </div>
-    </div>
-  </div>
+  <!-- Section 1 and 2 -->
+  <%= render partial: "shared/contents/#{params[:action]}_content" %>
 
   <div class="section-3">
     <div class="container">
