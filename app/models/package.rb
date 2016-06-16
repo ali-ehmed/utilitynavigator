@@ -68,7 +68,7 @@ class Package < ActiveRecord::Base
 
 	scope :bundle_filter, -> {
 															joins(:package_type)
-															.where("package_types.name iLIKE ? or package_types.name iLIKE ? or package_types.name iLIKE ?", SINGLE_PLAY, DOUBLE_PLAY, TRIPLE_PLAY)
+															.where("package_types.name in (?)", [DOUBLE_PLAY, TRIPLE_PLAY])
 															.low_price_packages
 														}
 

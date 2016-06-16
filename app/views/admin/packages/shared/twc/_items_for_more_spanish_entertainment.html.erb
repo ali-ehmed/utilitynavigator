@@ -1,11 +1,15 @@
-<li style="display:none;">
-	<legend><span>Set items for More Spanish Entertainment</span></legend>
-	<ol>
-		<li>
-			<label for="provider_name" class="label">
-				Spanish Programming
-			</label>
-			<%= ff.text_field "spanish_programming", style: "width: calc(78% - 22px);", onblur: "$packages.packagePriceValidation(this);" %>
-		</li>
-	</ol>
-</li>
+<%= ff.fields_for :more_spanish_entertainment_for_everyone do |f| %>
+	<li style="display:none;">
+		<legend><span>Set items for More Spanish Entertainment</span></legend>
+		<ol>
+			<li>
+				<label for="provider_name" class="label">
+					Spanish Programming
+				</label>
+				<%= f.select "checkout_select", options_for_select(["Free", "Not Include", "Add Price"]), {prompt: "--Select--"}, class: "package_select_field", onchange: "$packages.addPriceField(this);" %>
+
+				<%= f.text_field "spanish_programming", style: "display: none;width: calc(78% - 22px);margin-left:20%;", onblur: "$packages.packagePriceValidation(this);", class: "admin_checkout_price", value: "Included" %>
+			</li>
+		</ol>
+	</li>
+<% end %>

@@ -52,21 +52,21 @@
 			<label class="label">
 				More Fun with More Entertainment
 			</label>
-			<%= ff.select :more_fun_with_more_entertainment, options_for_select(["Required", "Not Include"]), {prompt: "--Select--"}, onChange: "$packages.setRequiredFields(this);" %>
+			<%= ff.select :more_fun_with_more_entertainment_parent, options_for_select(["Required", "Not Include"]), {prompt: "--Select--"}, onChange: "$packages.setRequiredFields(this);" %>
 		</li>
 		<%= render partial: "admin/packages/shared/twc/items_for_more_entertainment", locals: { ff: ff } %>
 		<li>
 			<label class="label">
 				More Fun for Every one
 			</label>
-			<%= ff.select :more_fun_for_everyone, options_for_select(["Required", "Not Include"]), {prompt: "--Select--"}, onChange: "$packages.setRequiredFields(this);" %>
+			<%= ff.select :more_fun_parent, options_for_select(["Required", "Not Include"]), {prompt: "--Select--"}, onChange: "$packages.setRequiredFields(this);" %>
 		</li>
 		<%= render partial: "admin/packages/shared/twc/items_for_more_fun", locals: { ff: ff } %>
 		<li>
 			<label class="label">
 				More spanish entertainment for everyone
 			</label>
-			<%= ff.select :more_spanish_entertainment_for_everyone, options_for_select(["Required", "Not Include"]), {prompt: "--Select--"}, onChange: "$packages.setRequiredFields(this);" %>
+			<%= ff.select :more_spanish_entertainment_parent, options_for_select(["Required", "Not Include"]), {prompt: "--Select--"}, onChange: "$packages.setRequiredFields(this);" %>
 		</li>
 		<%= render partial: "admin/packages/shared/twc/items_for_more_spanish_entertainment", locals: { ff: ff } %>
 		<li>

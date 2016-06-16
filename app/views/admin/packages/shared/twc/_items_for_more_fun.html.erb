@@ -1,29 +1,17 @@
-<li style="display:none;">
-	<legend><span>Set items for More Fun For Everyone</span></legend>
-	<ol>
-		<li>
-			<label for="provider_name" class="label">
-				TWC Sports
-			</label>
-			<%= ff.text_field "twc_sports", style: "width: calc(78% - 22px);", onblur: "$packages.packagePriceValidation(this);" %>
-		</li>
-		<li>
-			<label for="provider_name" class="label">
-				Disney on Demand
-			</label>
-			<%= ff.text_field "disney_on_demand", style: "width: calc(78% - 22px);", onblur: "$packages.packagePriceValidation(this);" %>
-		</li>
-		<li>
-			<label for="provider_name" class="label">
-				TWC Movie Pass
-			</label>
-			<%= ff.text_field "twc_movie_pass", style: "width: calc(78% - 22px);", onblur: "$packages.packagePriceValidation(this);" %>
-		</li>
-		<li>
-			<label for="provider_name" class="label">
-				HD Pass
-			</label>
-			<%= ff.text_field "hd_pass", style: "width: calc(78% - 22px);", onblur: "$packages.packagePriceValidation(this);" %>
-		</li>
-	</ol>
-</li>
+<%= ff.fields_for :more_fun_for_everyone do |f| %>
+	<li style="display:none;">
+		<legend><span>Set items for More Fun For Everyone</span></legend>
+		<ol>
+			<% %w(twc_sports disney_on_demand twc_movie_pass hd_pass).each do |field| %>
+				<li>
+					<label for="provider_name" class="label">
+						<%= field.humanize %>
+					</label>
+					<%= f.select "checkout_select", options_for_select(["Free", "Not Include", "Add Price"]), {prompt: "--Select--"}, class: "package_select_field", onchange: "$packages.addPriceField(this);" %>
+
+					<%= f.text_field field.to_sym, style: "display: none;width: calc(78% - 22px);margin-left:20%;", onblur: "$packages.packagePriceValidation(this);", class: "admin_checkout_price", value: "Included" %>
+				</li>
+			<% end %>
+		</ol>
+	</li>
+<% end %>
