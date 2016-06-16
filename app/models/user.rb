@@ -40,8 +40,8 @@
 class User < ActiveRecord::Base
   # Include default devise modules. Others available are:
   # :lockable, :timeoutable and :omniauthable
-  devise :database_authenticatable, :trackable, :validatable
-          #:registerable, :confirmable, :rememberable, :recoverable
+  devise :database_authenticatable, :trackable, :validatable, :registerable
+          #:confirmable, :rememberable, :recoverable
 
   has_many :payments, dependent: :delete_all
 
@@ -59,8 +59,8 @@ class User < ActiveRecord::Base
   after_initialize :disable_password_on_create
   after_create :generate_password
 
-  has_attached_file :profile_image, styles: { medium: "300x300>", thumb: "100x100>" }, 
-                                    default_url: "user-login.png", 
+  has_attached_file :profile_image, styles: { medium: "300x300>", thumb: "100x100>" },
+                                    default_url: "user-login.png",
                                     :storage => :dropbox,
                                     :dropbox_credentials => Rails.root.join("config/initializers/dropbox.yml"),
                                     :dropbox_visibility => 'public'
@@ -100,7 +100,7 @@ class User < ActiveRecord::Base
     rand_string = generate_random_string
 
     attributes = {
-      :password => rand_string, 
+      :password => rand_string,
       :password_confirmation => rand_string
     }
 
@@ -113,7 +113,7 @@ class User < ActiveRecord::Base
 
   def card_number
     return "" if payments.blank? or payments.last.card_last4.blank?
-    payments.last.card_last4.split(//).first(4).join 
+    payments.last.card_last4.split(//).first(4).join
   end
 
   def card_expiry

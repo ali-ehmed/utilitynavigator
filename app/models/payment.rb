@@ -24,7 +24,7 @@ class Payment < ActiveRecord::Base
 
 	# validates :card_last4, :card_exp_year, :card_exp_month, :security_code, presence: true, if: :payment_after_install
 	# validates :card_last4, format: { :with => /[\d-]/, message: "must be like 99999-9999-9999-9" }, if: :payment_after_install
-	
+
 	after_create :send_admin_notification, :send_user_notification
 
 	enum :status => { pending: 0, approved: 1, declined: 2 }
@@ -35,7 +35,7 @@ class Payment < ActiveRecord::Base
 
 	validate :validate_agreement
 	# after_initialize :default_fields
-	
+
 	def render_payment_step
 		'offers/checkout/payments'
 	end
