@@ -1,47 +1,13 @@
 <li style="display:none;">
 	<legend><span>Set items for Premium Channels</span></legend>
 	<ol>
-		<li>
-			<label for="provider_name" class="label">
-				HBO
-			</label>
-			<%= ff.text_field "hbo", style: "width: calc(78% - 22px);", onblur: "$packages.packagePriceValidation(this);" %>
-		</li>
-		<li>
-			<label for="provider_name" class="label">
-				Cenimax
-			</label>
-			<%= ff.text_field "cinemax", style: "width: calc(78% - 22px);", onblur: "$packages.packagePriceValidation(this);" %>
-		</li>
-		<li>
-			<label for="provider_name" class="label">
-				Showtime
-			</label>
-			<%= ff.text_field "showtime", style: "width: calc(78% - 22px);", onblur: "$packages.packagePriceValidation(this);" %>
-		</li>
-		<li>
-			<label for="provider_name" class="label">
-				Movie Channel
-			</label>
-			<%= ff.text_field "movie_channel", style: "width: calc(78% - 22px);", onblur: "$packages.packagePriceValidation(this);" %>
-		</li>
-		<li>
-			<label for="provider_name" class="label">
-				Starz
-			</label>
-			<%= ff.text_field "starz", style: "width: calc(78% - 22px);", onblur: "$packages.packagePriceValidation(this);" %>
-		</li>
-		<li>
-			<label for="provider_name" class="label">
-				Epix
-			</label>
-			<%= ff.text_field "epix", style: "width: calc(78% - 22px);", onblur: "$packages.packagePriceValidation(this);" %>
-		</li>
-		<li>
-			<label for="provider_name" class="label">
-				Encore
-			</label>
-			<%= ff.text_field "encore", style: "width: calc(78% - 22px);", onblur: "$packages.packagePriceValidation(this);" %>
-		</li>
+		<% %w(hbo cinemax showtime movie_channel starz epix encore).each do |field| %>
+			<li>
+				<label for="provider_name" class="label">
+					<%= field.humanize %>
+				</label>
+				<%= ff.text_field field.to_sym, style: "width: calc(78% - 22px);", onblur: "$packages.packagePriceValidation(this);" %>
+			</li>
+		<% end %>
 	</ol>
 </li>

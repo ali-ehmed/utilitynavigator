@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get "sitemap.xml" => "sitemaps#index", :format => "xml", :as => :sitemap
   resources :payments
 
   get 'ping' => proc {|env| [200, {}, []] }
@@ -24,7 +25,7 @@ Rails.application.routes.draw do
   get "/load_channels" => "landings#load_channels"
 
   devise_for :users, controllers: { sessions: "users/sessions", :registrations => "users/registrations" }
-  
+
   resources :call_back, only: [:create]
   root to: 'landings#index'
 end

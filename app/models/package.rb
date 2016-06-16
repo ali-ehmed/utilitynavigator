@@ -29,6 +29,8 @@ class Package < ActiveRecord::Base
 
 	attr_accessor :product_ids, :charter_tv_spectrum
 
+	extend PackagesHelper
+
 	cattr_accessor :checkout_steps do
 		[:extra_equiptments, :payments]
 	end
@@ -40,7 +42,7 @@ class Package < ActiveRecord::Base
 	validates_presence_of :provider_id,
 												:price, :package_name, :package_description, :price_info, :promotions,
 												:plan_details, :installation_price
-												
+
 	validates :price_info, length: { maximum: 80 }
 
 	after_create :set_promotion_disclaimer
@@ -49,12 +51,30 @@ class Package < ActiveRecord::Base
 	scope :charter_spectrum, -> { joins(:provider).where("providers.name = 'Charter Spectrum'") }
 	scope :cox, -> { joins(:provider).where("providers.name = 'COX'") }
 
-	scope :phone_filter, -> { joins(:package_type, :package_bundles => :product).where("products.name iLIKE '%Phone%' and package_types.name = ?", SINGLE_PLAY) }
-	scope :internet_filter, -> { joins(:package_type, :package_bundles => :product).where("products.name iLIKE '%Internet%' and package_types.name = ?", SINGLE_PLAY) }
-	scope :tv_filter, -> { joins(:package_type, :package_bundles => :product).where("products.name iLIKE '%Cable%' and package_types.name = ?", SINGLE_PLAY) }
-	scope :bundle_filter, -> { joins(:package_type).where("package_types.name iLIKE ? or package_types.name iLIKE ? or package_types.name iLIKE ?", SINGLE_PLAY, DOUBLE_PLAY, TRIPLE_PLAY) }
+	scope :grouped_packages, -> { joins(:package_type, :package_bundles => :product) }
 
-	scope :broadband_providers, -> (providers) { joins(:provider, :package_type, :package_bundles => :product)
+	scope :phone_filter, -> { grouped_packages
+														.where("products.name iLIKE '%Phone%' and package_types.name = ?", SINGLE_PLAY)
+														.low_price_packages
+	 												}
+	scope :internet_filter, -> 	{ grouped_packages
+																.where("products.name iLIKE '%Internet%' and package_types.name = ?", SINGLE_PLAY)
+																.low_price_packages
+															}
+	scope :tv_filter, -> 	{ grouped_packages
+													.where("products.name iLIKE '%Cable%' and package_types.name = ?", SINGLE_PLAY)
+													.low_price_packages
+												}
+
+	scope :bundle_filter, -> {
+															joins(:package_type)
+															.where("package_types.name iLIKE ? or package_types.name iLIKE ? or package_types.name iLIKE ?", SINGLE_PLAY, DOUBLE_PLAY, TRIPLE_PLAY)
+															.low_price_packages
+														}
+
+	scope :low_price_packages, -> { order("CAST(coalesce(price, '0') AS double precision) asc") }
+
+	scope :broadband_providers, -> (providers) { grouped_packages.joins(:provider)
 																							 .select("packages.id,
 																							 					package_name,
 																						 						provider_id,
@@ -65,7 +85,7 @@ class Package < ActiveRecord::Base
 																						 						promotions")
 																							 .group("packages.id, package_name")
 																							 .where("providers.name in (?)", providers)
-																							 .order("CAST(coalesce(price, '0') AS double precision) asc")
+																							 .low_price_packages
 																							}
 
 	CABLE_TV = ["Primary TV", "2nd TV", "3rd TV", "4th TV"]
@@ -89,6 +109,13 @@ class Package < ActiveRecord::Base
 			else
 				read_attribute(:price_info).strip
 			end
+		end
+	end
+
+	class << self
+		def filter_with filters
+			where("products.name in (?) and package_types.name = ?", filters, get_package_type(filters))
+		  .having("count(distinct products.name) = ?", filters.length)
 		end
 	end
 end

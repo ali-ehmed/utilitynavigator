@@ -1,6 +1,7 @@
 class OffersController < ApplicationController
 	@@broadband_providers = []
-	
+	include PackagesHelper
+
 	def show
 		@packages = []
 
@@ -25,7 +26,7 @@ class OffersController < ApplicationController
 
 		# Applying product filters
 		if params[:filters] and params[:filters].present?
-			@packages = @packages.where("products.name in (?) and package_types.name = ?", params[:filters], Package::SINGLE_PLAY)
+			@packages = @packages.filter_with params[:filters]
 		end
 
 		@count_twc = @packages.try("time_warner").length || 0
@@ -46,7 +47,7 @@ class OffersController < ApplicationController
 		@results = @address.search_providers(@location)
 
 		logger.debug @results
-		
+
 		if @results == "error".to_sym
 			render json: { status: :error, msg: "There was a problem while fetching data." }
 		else

@@ -4,6 +4,7 @@ class Offers::CheckoutController < ApplicationController
 
 	before_action :set_package, only: [:show, :installation_fields]
 	before_action :installation_fields, only: [:show]
+	before_action :exclude_params, only: [:show]
 
 	steps *Package.checkout_steps
 
@@ -19,8 +20,7 @@ class Offers::CheckoutController < ApplicationController
 			end
 		when "payments"
 			@payment = Payment.new
-			current_user || @payment.build_user 
-			@equiptment_params = params.except(:utf8, :button, :controller, :action, :offer_id, :id)
+			current_user || @payment.build_user
 			session[:checkout_form_params] = @equiptment_params
 		end
 		render_wizard
@@ -30,11 +30,6 @@ class Offers::CheckoutController < ApplicationController
 		logger.debug "Update Step: #{step}"
 		redirect_to root_path, notice: Payment::RESERVED_MESSAGE
 	end
-
-	def set_package
-  	# @directory_name = @equiptment_params["directory_entered_name"] if @package.provider.cox?
-  	# @transfer_phone_number = @equiptment_params["transfer_phone_number"] if @package.provider.charter?
-  end
 
 	private 
 
@@ -47,6 +42,10 @@ class Offers::CheckoutController < ApplicationController
   		redirect_to offers_path
 		end
 	end
+
+	def exclude_params
+  	@equiptment_params = params.except(:utf8, :button, :controller, :action, :offer_id, :id)
+  end
 
 	def installation_fields
 		@charter_installation = @package.package_bundles.joins(:product).where("products.name = 'Internet'")

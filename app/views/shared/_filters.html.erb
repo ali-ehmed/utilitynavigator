@@ -20,7 +20,7 @@
         <%= will_paginate @tv_packages, renderer: BootstrapPagination::Rails %>
       </div>
       <div class="col-md-4">
-        <% if @tv_packages.count > 3 %>
+        <% if @tv_packages.length > 3 %>
           <button class="btn btn-default pull-right see-more-btn" id="see-more-cable-packages" data-product="cable" onclick="loadPackages(this);">SEE MORE PACKAGES</button>
         <% end %>
       </div>
@@ -39,7 +39,7 @@
         <% end %>
       </div>
     </div>
-    
+
     <div class="row">
       <div class="col-md-4">
         <a href="#" class="channel-comparison-link" data-provider="<%= params[:action] %>">CHANNEL COMPARISON</a>
@@ -48,7 +48,7 @@
         <%= will_paginate @internet_packages, renderer: BootstrapPagination::Rails %>
       </div>
       <div class="col-md-4">
-        <% if @internet_packages.count > 3 %>
+        <% if @internet_packages.length > 3 %>
           <button class="btn btn-default pull-right see-more-btn" id="see-more-internet-packages" data-product="internet" onclick="loadPackages(this);">SEE MORE PACKAGES</button>
         <% end %>
       </div>
@@ -76,12 +76,12 @@
         <%= will_paginate @phone_packages, renderer: BootstrapPagination::Rails %>
       </div>
       <div class="col-md-4">
-        <% if @phone_packages.count > 3 %>
+        <% if @phone_packages.length > 3 %>
           <button class="btn btn-default pull-right see-more-btn" id="see-more-phone-packages" data-product="phone" onclick="loadPackages(this);">SEE MORE PACKAGES</button>
         <% end %>
       </div>
     </div>
-    
+
   </div>
   <div role="tabpanel" class="tab-pane fade in" id="filter_with_bundles">
     <div class="row">
@@ -104,14 +104,14 @@
         <%= will_paginate @bundle_packages, renderer: BootstrapPagination::Rails %>
       </div>
       <div class="col-md-4">
-        <% if @bundle_packages.count > 3 %>
+        <% if @bundle_packages.length > 3 %>
           <button class="btn btn-default pull-right see-more-btn" id="see-more-bundle-packages" data-product="bundle" onclick="loadPackages(this);">SEE MORE PACKAGES</button>
         <% end %>
       </div>
     </div>
-    
+
   </div>
 </div>
 
-<div class="channels"> 
+<div class="channels">
 </div>
