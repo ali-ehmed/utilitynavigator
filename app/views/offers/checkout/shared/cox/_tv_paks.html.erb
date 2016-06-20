@@ -1,92 +1,52 @@
 <!-- TV Paks -->
 
-<% if fields["tv_paks"].downcase == "required" %>
+<% if fields["tv_paks"].present? %>
 	<h4>TV Paks</h4>
 	<ul>
-		<% if fields["variety_pak"].present? %>
-			<li>
-				<div class="checkbox">
-          <%= check_box_tag :variety_pak, false, false, {:class => "styled", data: { price: fields["variety_pak"] }, onchange: "calculateEquiptmentCosts(this);"}  %>
-          <label class="label-checkbox">
-            Variety Pak ($<%= fields["variety_pak"] %>)
-          </label>
-          <br />
-          <a role="button" data-toggle="collapse" href="#collapsevariety_pak" aria-expanded="false" aria-controls="collapseExample" class="view_more">View Details</a>
-					<div class="collapse" id="collapsevariety_pak">
-	          <p class="well">
-	          	Get access to dozens of our most popular networks and get the best in lifestyle and special-interest programming. You'll be able to watch channels like Disney Jr, Disney XD, Nick Toons, VH1 Classic, MTV2, Hallmark Channel, Oxygen, Cooking Channel, BBC America.
-	          </p>
-          </div>
-        </div>
-			</li>
-		<% end %>
-		<% if fields["disney_on_demand"].present? %>
-			<li>
-				<div class="checkbox">
-          <%= check_box_tag :disney_on_demand, false, false, {:class => "styled", data: { price: fields["disney_on_demand"] }, onchange: "calculateEquiptmentCosts(this);"}  %>
-          <label class="label-checkbox">
-            Movie Pak ($<%= fields["disney_on_demand"] %> monthly)
-          </label>
-          <br />
-          <a role="button" data-toggle="collapse" href="#collapdisney_on_demand" aria-expanded="false" aria-controls="collapseExample" class="view_more">View Details</a>
-					<div class="collapse" id="collapdisney_on_demand">
-	          <p class="well">
-	          	With some of our most popular movie channels, including Encore, you're sure to find entertainment to suit your mood. Enjoy channels such as ENCORE, Sundance, Epix, Fox Movie Channel.
-	          </p>
-          </div>
-        </div>
-			</li>
-		<% end %>
-		<% if fields["twc_movie_pass"].present? %>
-			<li>
-				<div class="checkbox">
-          <%= check_box_tag :twc_movie_pass, false, false, {:class => "styled", data: { price: fields["twc_movie_pass"] }, onchange: "calculateEquiptmentCosts(this);"}  %>
-          <label class="label-checkbox">
-            Sports and Information Pak ($<%= fields["twc_movie_pass"] %> monthly)
-          </label>
-          <br />
-          <a role="button" data-toggle="collapse" href="#collaptwc_movie_pass" aria-expanded="false" aria-controls="collapseExample" class="view_more">View Details</a>
-					<div class="collapse" id="collaptwc_movie_pass">
-	          <p class="well">
-	          	Stay up-to-date with your favorite teams with sports and informational programming, including channels like.
-	          </p>
-          </div>
-        </div>
-			</li>
-		<% end %>
-		<% if fields["hd_pass"].present? %>
-			<li>
-				<div class="checkbox">
-          <%= check_box_tag :hd_pass, false, false, {:class => "styled", data: { price: fields["hd_pass"] }, onchange: "calculateEquiptmentCosts(this);"}  %>
-          <label class="label-checkbox">
-            Sports Pak 2 ($<%= fields["hd_pass"] %> monthly)
-          </label>
-          <br />
-          <a role="button" data-toggle="collapse" href="#collaphd_pass" aria-expanded="false" aria-controls="collapseExample" class="view_more">View Details</a>
-					<div class="collapse" id="collaphd_pass">
-	          <p class="well">
-	          	Even more of your favorite sports with the best football coverage and exciting outdoor adventures, including channels like NFL Redzone, NBC Universal Sports, Outside TV, World Fishing Network and other great sports networks.
-	          </p>
-          </div>
-        </div>
-			</li>
-		<% end %>
-		<% if fields["latino_pak"].present? %>
-			<li>
-				<div class="checkbox">
-          <%= check_box_tag :latino_pak, false, false, {:class => "styled", data: { price: fields["latino_pak"] }, onchange: "calculateEquiptmentCosts(this);"}  %>
-          <label class="label-checkbox">
-            Latino Pak ($<%= fields["latino_pak"] %> monthly)
-          </label>
-          <br />
-          <a role="button" data-toggle="collapse" href="#collaspelatino_pak" aria-expanded="false" aria-controls="collapseExample" class="view_more">View Details</a>
-					<div class="collapse" id="collaspelatino_pak">
-	          <p class="well">
-	          	The Latino Pak provides nine channels that offer the best in Spanish language programming, including Telefutura, Galavision, Discovery en Español, CNN en Español, FOX Deportes, ESPN Deportes, Tr3s, Azteca, GolTV. Latino Pak available for additional charge with minimum of Contour TV.
-	          </p>
-          </div>
-        </div>
-			</li>
+		<% fields["tv_paks"].except("checkout_select").each do |key, val| %>
+			<% if key.present? %>
+				<li>
+					<% if val.downcase == "included" %>
+						<p>
+							<%= key.humanize %> (<%= val %>)
+						</p>
+					<% else %>
+						<div class="checkbox">
+							<%= check_box_tag key.to_sym, false, false, {:class => "styled", data: { price: val }, onchange: "calculateEquiptmentCosts(this);"}  %>
+							<label class="label-checkbox">
+								<%= key.humanize %> ($<%= val %> Monthly)
+							</label>
+						</div>
+					<% end %>
+
+					<!-- Custom Description -->
+					<a role="button" data-toggle="collapse" href="#collapse_<%= key %>" aria-expanded="false" aria-controls="collapseExample" class="view_more">View Details</a>
+					<div class="collapse" id="collapse_<%= key %>">
+						<% case key %>
+						<% when "variety_pak" %>
+							<p class="well">
+								Get access to dozens of our most popular networks and get the best in lifestyle and special-interest programming. You'll be able to watch channels like Disney Jr, Disney XD, Nick Toons, VH1 Classic, MTV2, Hallmark Channel, Oxygen, Cooking Channel, BBC America.
+							</p>
+						<% when "disney_on_demand" %>
+							<p class="well">
+								With some of our most popular movie channels, including Encore, you're sure to find entertainment to suit your mood. Enjoy channels such as ENCORE, Sundance, Epix, Fox Movie Channel.
+							</p>
+						<% when "twc_movie_pass" %>
+							<p class="well">
+								Stay up-to-date with your favorite teams with sports and informational programming, including channels like.
+							</p>
+						<% when "hd_pass" %>
+							<p class="well">
+								Even more of your favorite sports with the best football coverage and exciting outdoor adventures, including channels like NFL Redzone, NBC Universal Sports, Outside TV, World Fishing Network and other great sports networks.
+							</p>
+						<% when "latino_pak" %>
+							<p class="well">
+								The Latino Pak provides nine channels that offer the best in Spanish language programming, including Telefutura, Galavision, Discovery en Español, CNN en Español, FOX Deportes, ESPN Deportes, Tr3s, Azteca, GolTV. Latino Pak available for additional charge with minimum of Contour TV.
+							</p>
+						<% end %>
+					</div>
+				</li>
+			<% end %>
 		<% end %>
 	</ul>
 <% end %>

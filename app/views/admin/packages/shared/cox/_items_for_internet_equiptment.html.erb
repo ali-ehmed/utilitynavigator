@@ -1,14 +1,18 @@
 <!-- Internet equiptment -->
-<li style="display:none;">
-	<legend><span>Set items for Internet equiptments</span></legend>
-	<ol>
-		<% %w(premium_modem premium_dual_band_internet_and_wifi_modem internet_and_wifi_modem_single internet_and_wifi_modem_dual wifi_modem_dual_band internet_wifi_and_telephone_modem internet_and_telephone_modem).each do |fields| %>
-			<li>
-				<label for="provider_name" class="label">
-					<%= fields.humanize %>
-				</label>
-				<%= ff.text_field fields.to_sym, style: "width: calc(78% - 22px);", onblur: "$packages.packagePriceValidation(this);" %>
-			</li>
-		<% end %>
-	</ol>
-</li>
+<%= ff.fields_for :internet_equiptment do |f| %>
+	<li style="display:none;">
+		<legend><span>Set items for Internet equiptments</span></legend>
+		<ol>
+			<% %w(premium_modem premium_dual_band_internet_and_wifi_modem internet_and_wifi_modem_single internet_and_wifi_modem_dual wifi_modem_dual_band internet_wifi_and_telephone_modem internet_and_telephone_modem).each do |fields| %>
+				<li>
+					<label for="provider_name" class="label">
+						<%= fields.humanize %>
+					</label>
+					<%= f.select "checkout_select", options_for_select(["Include", "Not Include", "Add Price"]), {prompt: "--Select--"}, class: "package_select_field", onchange: "$packages.addPriceField(this);" %>
+
+					<%= f.text_field fields.to_sym, style: "display: none;width: calc(78% - 22px);margin-left:20%;", onblur: "$packages.packagePriceValidation(this);", class: "admin_checkout_price" %>
+				</li>
+			<% end %>
+		</ol>
+	</li>
+<% end %>

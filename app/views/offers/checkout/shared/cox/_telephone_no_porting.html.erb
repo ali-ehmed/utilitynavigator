@@ -1,7 +1,7 @@
 <!-- Telephone no porting -->
 
-<% if fields["telephone_no_porting"].downcase == 'required' %>
-	<h4>Telephone Number Porting 
+<% if fields["telephone_no_porting"].present? %>
+	<h4>Telephone Number Porting
 		<span class="checkout_required">(Required)</span> <small><a href="javascript:void(0);" onclick="resetSelectedItem(this);">Reset selected item</a></small>
 		<p>
 			<small>
@@ -9,7 +9,7 @@
 			</small>
 		</p>
 	</h4>
-	
+
 	<ul>
 		<li>
 			<div class="checkbox" style="padding-left: 5px;">
@@ -21,14 +21,20 @@
 		</li>
 
 		<!-- Provide new phone number -->
-		<% if fields["provide_new_phone_number"].present? %>
+		<% if fields["telephone_no_porting"].present? %>
 			<li>
-				<div class="checkbox" style="padding-left: 5px;">
-          <%= radio_button_tag :current_telephone_number, false, false, {id: "current_telephone_number_2", data: { price: fields["provide_new_phone_number"] || 0 }, onchange: "calculateEquiptmentCosts(this);"}  %>
-          <label class="label-checkbox" for="current_telephone_number_2">
-            Please provide me with a new telephone number, ($<%= fields["provide_new_phone_number"] || 0 %>)
-          </label>
-        </div>
+				<% if fields["telephone_no_porting"]["new_phone_number"].downcase == "included" %>
+					<label class="label-checkbox">
+						New telephone number charges (Included)
+					</label>
+				<% else %>
+					<div class="checkbox" style="padding-left: 5px;">
+	          <%= radio_button_tag :current_telephone_number, false, false, {id: "current_telephone_number_2", data: { price: fields["telephone_no_porting"]["new_phone_number"] || 0 }, onchange: "calculateEquiptmentCosts(this);"}  %>
+	          <label class="label-checkbox" for="current_telephone_number_2">
+	            Please provide me with a new telephone number, ($<%= fields["new_phone_number"] || 0 %>)
+	          </label>
+	        </div>
+				<% end %>
 			</li>
 		<% end %>
 	</ul>

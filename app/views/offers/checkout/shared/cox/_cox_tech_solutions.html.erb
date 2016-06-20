@@ -1,6 +1,6 @@
 <!-- Cox Tech Solutions -->
 
-<% if fields["cox_teck_solutions"].downcase == "required" %>
+<% if fields["cox_teck_solutions"].present? %>
 	<h4>
 		Cox Tech Solutions
 		<small><a href="javascript:void(0);" onclick="resetSelectedItem(this);">Reset selected item</a></small>
@@ -10,31 +10,43 @@
 			</small>
 		</p>
 	</h4>
-	
+
 	<ul>
 		<!-- Multi Devise -->
-		<% if fields["multi_device_support"].present? %>
+		<% if fields["cox_teck_solutions"]["multi_device_support"].present? %>
 			<li>
-				<div class="checkbox" style="padding-left: 5px;">
-          <%= radio_button_tag :cox_tech_solutions, false, false, {id: "cox_solution_1", data: { price: fields["multi_device_support"] }, onchange: "calculateEquiptmentCosts(this);"}  %>
+				<% if fields["cox_teck_solutions"]["multi_device_support"].downcase == "included" %>
+					<label class="label-checkbox">
+						Multi-device support (Included)
+					</label>
+				<% else %>
+					<div class="checkbox" style="padding-left: 5px;">
+	          <%= radio_button_tag :cox_tech_solutions, false, false, {id: "cox_solution_1", data: { price: fields["cox_teck_solutions"]["multi_device_support"] }, onchange: "calculateEquiptmentCosts(this);"}  %>
 
-          <label class="label-checkbox" for="cox_solution_1">
-            Multi-device support, ($<%= fields["multi_device_support"] %>)
-          </label>
-        </div>
+	          <label class="label-checkbox" for="cox_solution_1">
+	            Multi-device support, ($<%= fields["cox_teck_solutions"]["multi_device_support"] %> Monthly)
+	          </label>
+	        </div>
+				<% end %>
 			</li>
 		<% end %>
 
 		<!-- Single Devise -->
-		<% if fields["single_device_support"].present? %>
+		<% if fields["cox_teck_solutions"]["single_device_support"].present? %>
 			<li>
-				<div class="checkbox" style="padding-left: 5px;">
-          <%= radio_button_tag :cox_tech_solutions, false, false, {id: "cox_solution_2", data: { price: fields["single_device_support"] }, onchange: "calculateEquiptmentCosts(this);"}  %>
+				<% if fields["cox_teck_solutions"]["single_device_support"].downcase == "included" %>
+					<label class="label-checkbox">
+						Single device support (Included)
+					</label>
+				<% else %>
+					<div class="checkbox" style="padding-left: 5px;">
+	          <%= radio_button_tag :cox_tech_solutions, false, false, {id: "cox_solution_2", data: { price: fields["cox_teck_solutions"]["single_device_support"] }, onchange: "calculateEquiptmentCosts(this);"}  %>
 
-          <label class="label-checkbox" for="cox_solution_2">
-            Single device support, ($<%= fields["single_device_support"] %>)
-          </label>
-        </div>
+	          <label class="label-checkbox" for="cox_solution_2">
+	            Single device support, ($<%= fields["cox_teck_solutions"]["single_device_support"] %> Monthly)
+	          </label>
+	        </div>
+				<% end %>
 			</li>
 		<% end %>
 		<li>
@@ -47,8 +59,8 @@
       </div>
 		</li>
 	</ul>
-  <a role="button" data-toggle="collapse" href="#collaspecox_tech_solutions" aria-expanded="false" aria-controls="collapseExample" class="view_more">View Details</a>
-	<div class="collapse" id="collaspecox_tech_solutions">
+  <a role="button" data-toggle="collapse" href="#collaspe_cox_tech_solutions" aria-expanded="false" aria-controls="collapseExample" class="view_more">View Details</a>
+	<div class="collapse" id="collaspe_cox_tech_solutions">
     <p class="well">
     	Cox Tech Solutions (CTS) is your personal IT concierge, available 24/7 for support, training and advice. It's designed to help you get the most out of your in-home technology by providing real-time diagnoses and resolutions for PC crashes, virus removal, home network support, training, technology education and much more. This option covers a single device, including a PC, tablet or laptop.
     </p>

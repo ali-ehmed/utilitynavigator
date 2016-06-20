@@ -1,14 +1,18 @@
 <!-- Cox Tech Solutions -->
-<li style="display:none;">
-	<legend><span>Set items for Cox tech solutions</span></legend>
-	<ol>
-		<% %w(multi_device_support single_device_support).each do |field| %>
-			<li>
-				<label for="provider_name" class="label">
-					<%= field.humanize %>
-				</label>
-				<%= ff.text_field field.to_sym, style: "width: calc(78% - 22px);", onblur: "$packages.packagePriceValidation(this);" %>
-			</li>
-		<% end %>
-	</ol>
-</li>
+<%= ff.fields_for :cox_tech_solutions do |f| %>
+	<li style="display:none;">
+		<legend><span>Set items for Cox tech solutions</span></legend>
+		<ol>
+			<% %w(multi_device_support single_device_support).each do |fields| %>
+				<li>
+					<label for="provider_name" class="label">
+						<%= fields.humanize %>
+					</label>
+					<%= f.select "checkout_select", options_for_select(["Include", "Not Include", "Add Price"]), {prompt: "--Select--"}, class: "package_select_field", onchange: "$packages.addPriceField(this);" %>
+
+					<%= f.text_field fields.to_sym, style: "display: none;width: calc(78% - 22px);margin-left:20%;", onblur: "$packages.packagePriceValidation(this);", class: "admin_checkout_price" %>
+				</li>
+			<% end %>
+		</ol>
+	</li>
+<% end %>

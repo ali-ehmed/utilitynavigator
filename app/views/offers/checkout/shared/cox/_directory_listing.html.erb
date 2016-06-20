@@ -1,6 +1,6 @@
 <!-- Directory Listing -->
 
-<% if fields["directory_listing"].downcase == 'required' %>
+<% if fields["directory_listing"].present? %>
 	<h4>
 		Directory Listing <span class="checkout_required">(Required)</span> <small><a href="javascript:void(0);" onclick="resetSelectedItem(this);">Reset selected item</a></small>
 		<p>
@@ -9,66 +9,84 @@
 			</small>
 		</p>
 	</h4>
-	
+
 	<ul>
 
 		<!-- Published directory listing -->
-		<% if fields["published_directory_listing"].present? %>
+		<% if fields["directory_listing"]["published_directory_listing"].present? %>
 			<li>
-				<div class="checkbox" style="padding-left: 5px;">
-          <%= radio_button_tag :directory_listing, false, false, {:id => "directory_listing", data: { price: fields["published_directory_listing"] }, onchange: "calculateEquiptmentCosts(this);"}  %>
-          <label class="label-checkbox" for="directory_listing">
-            Published Directory Listing, ($<%= fields["published_directory_listing"] %>)
-          </label>
-          <p>
-          	Show my name, number and address in the White Pages and 411 listing
-          </p>
-        </div>
+				<% if fields["directory_listing"]["published_directory_listing"].downcase == "included" %>
+					<label class="label-checkbox">
+						Published Directory Listing, (Inlcuded)
+					</label>
+				<% else %>
+					<div class="checkbox" style="padding-left: 5px;">
+	          <%= radio_button_tag :directory_listing, false, false, {:id => "directory_listing", data: { price: fields["directory_listing"]["published_directory_listing"] }, onchange: "calculateEquiptmentCosts(this);"}  %>
+	          <label class="label-checkbox" for="directory_listing">
+	            Published Directory Listing, ($<%= fields["directory_listing"]["published_directory_listing"] %> Monthly)
+	          </label>
+	        </div>
+				<% end %>
+				<p>
+					Show my name, number and address in the White Pages and 411 listing
+				</p>
 			</li>
 		<% end %>
 
 		<!-- Name and number only directoy listing -->
-		<% if fields["name_and_number_only_directory_listing"].present? %>
+		<% if fields["directory_listing"]["name_and_number_only_directory_listing"].present? %>
 			<li>
-				<div class="checkbox" style="padding-left: 5px;">
-          <%= radio_button_tag :directory_listing, false, false, {:id => "name_and_number", data: { price: fields["name_and_number_only_directory_listing"] }, onchange: "calculateEquiptmentCosts(this);"}  %>
-          <label class="label-checkbox" for="name_and_number">
-            Name and Number Only Directory Listing, ($<%= fields["name_and_number_only_directory_listing"] %>)
-          </label>
-          <p>
-          	Show my name, number and address in the White Pages and 411 listing
-          </p>
-        </div>
+				<% if fields["directory_listing"]["name_and_number_only_directory_listing"].downcase == "included" %>
+					<label class="label-checkbox">
+						Name and Number Only Directory Listing, (Inlcuded)
+					</label>
+				<% else %>
+					<div class="checkbox" style="padding-left: 5px;">
+	          <%= radio_button_tag :directory_listing, false, false, {:id => "name_and_number", data: { price: fields["directory_listing"]["name_and_number_only_directory_listing"] }, onchange: "calculateEquiptmentCosts(this);"}  %>
+	          <label class="label-checkbox" for="name_and_number">
+	            Name and Number Only Directory Listing, ($<%= fields["directory_listing"]["name_and_number_only_directory_listing"] %> Monthly)
+	          </label>
+	        </div>
+				<% end %>
+				<p>
+					Show my name, number and address in the White Pages and 411 listing
+				</p>
 			</li>
 		<% end %>
 
 		<!-- Name and number in  411 directory listing -->
-		<% if fields["name_and_number_in_411_directory_listing"].present? %>
+		<% if fields["directory_listing"]["name_and_number_in_411_directory_listing"].present? %>
 			<li>
-				<div class="checkbox" style="padding-left: 5px;">
-          <%= radio_button_tag :directory_listing, false, false, {:id => "name_and_number_411", data: { price: fields["name_and_number_in_411_directory_listing"] }, onchange: "calculateEquiptmentCosts(this);"}  %>
-          <label class="label-checkbox" for="name_and_number_411">
-            Name and Number in 411 Directory Listing, ($<%= fields["name_and_number_in_411_directory_listing"] %> monthly)
-          </label>
-          <p>
-          	Show just my name and number in the 411 Listing
-          </p>
-        </div>
+				<% if fields["directory_listing"]["name_and_number_in_411_directory_listing"].downcase == "included" %>
+					<label class="label-checkbox">
+						Name and Number in 411 Directory Listing, (Inlcuded)
+					</label>
+				<% else %>
+					<div class="checkbox" style="padding-left: 5px;">
+	          <%= radio_button_tag :directory_listing, false, false, {:id => "name_and_number_411", data: { price: fields["directory_listing"]["name_and_number_in_411_directory_listing"] }, onchange: "calculateEquiptmentCosts(this);"}  %>
+	          <label class="label-checkbox" for="name_and_number_411">
+	            Name and Number in 411 Directory Listing, ($<%= fields["directory_listing"]["name_and_number_in_411_directory_listing"] %> Monthly)
+	          </label>
+	        </div>
+				<% end %>
+				<p>
+					Show just my name and number in the 411 Listing
+				</p>
 			</li>
 		<% end %>
 
 		<!-- Non published directory listing -->
-		<% if fields["non_published_directory_listing"].present? %>
+		<% if fields["directory_listing"]["non_published_directory_listing"].present? %>
 			<li>
 				<div class="checkbox" style="padding-left: 5px;">
-          <%= radio_button_tag :directory_listing, false, false, {:id => "non_published_directory", data: { price: fields["non_published_directory_listing"] }, onchange: "calculateEquiptmentCosts(this);"}  %>
+          <%= radio_button_tag :directory_listing, false, false, {:id => "non_published_directory", data: { price: fields["directory_listing"]["non_published_directory_listing"] }, onchange: "calculateEquiptmentCosts(this);"}  %>
           <label class="label-checkbox" for="non_published_directory">
-            Non Published Directory Listing, ($<%= fields["non_published_directory_listing"] %> monthly)
+            Non Published Directory Listing, ($<%= fields["directory_listing"]["non_published_directory_listing"] %> Monthly)
           </label>
-          <p>
-          	Don't list me in the White Pages or 411 Listing
-          </p>
         </div>
+				<p>
+					Don't list me in the White Pages or 411 Listing
+				</p>
 			</li>
 		<% end %>
 

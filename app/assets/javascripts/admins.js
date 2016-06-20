@@ -110,7 +110,7 @@ window.$packages = {
 			$this.next().show();
 			$this.next().val("");
 			return;
-		} else if ($this.val() === "Free" || "Included") {
+		} else if ($this.val() === "Include") {
 			$this.next().val("Included");
 		} else {
 			$this.next().val("");
@@ -124,11 +124,17 @@ window.$packages = {
 	setRequiredFields: function(elem) {
 		$this = $(elem);
 		$sub_fields = $this.closest("li").next().find("input[type='text']");
+		$sub_fields_header = $this.closest("li").next().find("select");
 
 		if($this.val() === "Required" || $this.val() === "Include") {
 			$this.closest("li").next().show();
 
 			$.each($sub_fields, function() {
+				$(this).hide();
+				$(this).val("");
+			});
+
+			$.each($sub_fields_header, function() {
 				$(this).val("");
 			});
 

@@ -3,7 +3,7 @@
 	<% when "cable" %>
 		<% fields = get_in_hash(@package_bundles.find_by_product_id(product.id).checkout_fields) %>
 		<%#= fields %>
-		
+
 		<!-- <h4>Please configure your TV, Internet &amp; Home Phone Services</h4> -->
 		<h4>Configure your 1st TV <span class="checkout_required">(Required)</span> <small><a href="javascript:void(0);" onclick="resetSelectedItem(this);">Reset selected item</a></small></h4>
 		<ul>
@@ -371,7 +371,7 @@
 
 		<!-- Internet Equiptment -->
 		<%= render partial: "offers/checkout/shared/cox/internet_equiptment", locals: { fields: fields } %>
-		
+
 		<!-- Cox Tech Solutions -->
 		<%= render partial: "offers/checkout/shared/cox/cox_tech_solutions", locals: { fields: fields } %>
 
@@ -386,78 +386,88 @@
 		<%= render partial: "offers/checkout/shared/cox/long_distance", locals: { fields: fields } %>
 
 		<!-- Calling features -->
-		<% if fields["calling_features"].downcase == 'required' %>
+		<% if fields["calling_features"].present? %>
 			<h4>Additional Calling Features</h4>
 			<ul>
 				<!-- Voice mail -->
-				<% if fields["voice_mail"].present? %>
-					<li>
+
+				<li>
+					<% if fields["calling_features"]["voice_mail"].downcase == "included" %>
+						<label class="label-checkbox">
+							Voice Mail, (Included)
+						</label>
+					<% else %>
 						<div class="checkbox">
-		          <%= check_box_tag :voice_mail, false, false, {:class => "styled", data: { price: fields["voice_mail"] }, onchange: "calculateEquiptmentCosts(this);"}  %>
+		          <%= check_box_tag :voice_mail, false, false, {:class => "styled", data: { price: fields["calling_features"]["voice_mail"] }, onchange: "calculateEquiptmentCosts(this);"}  %>
 		          <label class="label-checkbox">
-		            Voice Mail, ($<%= fields["voice_mail"] %>/Month)
+		            Voice Mail, ($<%= fields["calling_features"]["voice_mail"] %> Monthly)
 		          </label>
-		          <br />
-		          <a role="button" data-toggle="collapse" href="#collaspecalling_features" aria-expanded="false" aria-controls="collapseExample" class="view_more">View Details</a>
-							<div class="collapse" id="collaspecalling_features">
-			          <p class="well">
-			          	Voicemail - Never miss an important message again..
-			          </p>
-		          </div>
 		        </div>
-					</li>
-				<% end %>
+					<% end %>
+					<a role="button" data-toggle="collapse" href="#collaspecalling_features" aria-expanded="false" aria-controls="collapseExample" class="view_more">View Details</a>
+					<div class="collapse" id="collaspecalling_features">
+						<p class="well">
+							Voicemail - Never miss an important message again..
+						</p>
+					</div>
+				</li>
 			</ul>
 		<% end %>
 
 		<!-- International calling plan -->
-		<% if fields["international_calling_plan"].downcase == 'required' %>
+		<% if fields["international_calling_plan"].present? %>
 			<h4>International Calling Plan</h4>
 			<ul>
 
 				<!-- Simply World wide -->
-				<% if fields["simply_worldwide"].present? %>
-					<li>
+				<li>
+					<% if fields["international_calling_plan"]["simply_worldwide"].downcase == "included" %>
+						<label class="label-checkbox">
+							Simply Worldwide, (Included)
+						</label>
+					<% else %>
 						<div class="checkbox">
-		          <%= check_box_tag :simply_worldwide, false, false, {:class => "styled", data: { price: fields["simply_worldwide"] }, onchange: "calculateEquiptmentCosts(this);"}  %>
-		          <label class="label-checkbox">
-		            Simply Worldwide, ($<%= fields["simply_worldwide"] %> monthly)
-		          </label>
-		          <br />
-		          <a role="button" data-toggle="collapse" href="#collaspeinternational_calling_plan" aria-expanded="false" aria-controls="collapseExample" class="view_more">View Details</a>
-							<div class="collapse" id="collaspeinternational_calling_plan">
-			          <p class="well">
-			          	Simply Worldwide is simply a great deal. For a low monthly fee, enjoy a rate of just .07 cents per minute to over 230 of the most called countries"
-			          </p>
-		          </div>
-		        </div>
-					</li>
-				<% end %>
+							<%= check_box_tag :simply_worldwide, false, false, {:class => "styled", data: { price: fields["international_calling_plan"]["simply_worldwide"] }, onchange: "calculateEquiptmentCosts(this);"}  %>
+							<label class="label-checkbox">
+								Simply Worldwide, ($<%= fields["international_calling_plan"]["simply_worldwide"] %> monthly)
+							</label>
+						</div>
+					<% end %>
+					<a role="button" data-toggle="collapse" href="#collaspeinternational_calling_plan" aria-expanded="false" aria-controls="collapseExample" class="view_more">View Details</a>
+					<div class="collapse" id="collaspeinternational_calling_plan">
+						<p class="well">
+							Simply Worldwide is simply a great deal. For a low monthly fee, enjoy a rate of just .07 cents per minute to over 230 of the most called countries"
+						</p>
+					</div>
+				</li>
 			</ul>
 		<% end %>
 
 		<!-- Mexico Calling plan -->
-		<% if fields["mexico_calling_plan"].downcase == 'required' %>
+		<% if fields["mexico_calling_plan"].present? %>
 			<h4>Mexico Calling Plans</h4>
 			<ul>
 				<!-- Mexico 200 plan -->
-				<% if fields["mexico_200"].present? %>
-					<li>
+				<li>
+					<% if fields["mexico_calling_plan"]["mexico_200"].downcase == "included" %>
+						<label class="label-checkbox">
+							 Mexico 200, (Included)
+						</label>
+					<% else %>
 						<div class="checkbox">
-		          <%= check_box_tag :mexico_200, false, false, {:class => "styled", data: { price: fields["mexico_200"] }, onchange: "calculateEquiptmentCosts(this);"}  %>
+		          <%= check_box_tag :mexico_200, false, false, {:class => "styled", data: { price: fields["mexico_calling_plan"]["mexico_200"] }, onchange: "calculateEquiptmentCosts(this);"}  %>
 		          <label class="label-checkbox">
-		             Mexico 200, ($<%= fields["mexico_200"] %> Monthly)
+		             Mexico 200, ($<%= fields["mexico_calling_plan"]["mexico_200"] %> Monthly)
 		          </label>
-		          <br />
-		          <a role="button" data-toggle="collapse" href="#collaspemexico_calling_plan" aria-expanded="false" aria-controls="collapseExample" class="view_more">View Details</a>
-							<div class="collapse" id="collaspemexico_calling_plan">
-			          <p class="well">
-			          	Save more on calls to Mexico. Get 200 minutes to use any time on calls to landline phones in Mexico. Plus, get a low rate of 4 cents per minute for any minutes you use over 200.
-			          </p>
-		          </div>
 		        </div>
-					</li>
-				<% end %>
+					<% end %>
+					<a role="button" data-toggle="collapse" href="#collaspemexico_calling_plan" aria-expanded="false" aria-controls="collapseExample" class="view_more">View Details</a>
+					<div class="collapse" id="collaspemexico_calling_plan">
+						<p class="well">
+							Save more on calls to Mexico. Get 200 minutes to use any time on calls to landline phones in Mexico. Plus, get a low rate of 4 cents per minute for any minutes you use over 200.
+						</p>
+					</div>
+				</li>
 			</ul>
 		<% end %>
 
@@ -466,19 +476,22 @@
 
 
 		<!-- Telephone Equiptment EMTA -->
-		<% if fields["telephone_outlet_installation"].downcase == 'required' %>
+		<% if fields["telephone_equiptment"].present? %>
 			<h4>
 				Telephone Equiptment EMTA
 			</h4>
-			
 			<!-- telephone emta -->
 			<ul>
-				<% if fields["telephone_emta"].present? %>
+				<% if fields["telephone_equiptment"]["telephone_emta"].downcase == "included" %>
+					<label class="label-checkbox">
+						 Telephone EMTA, (Included)
+					</label>
+				<% else %>
 					<li>
 						<div class="checkbox">
-		          <%= check_box_tag :telephone_emta, false, false, {:class => "styled", data: { price: fields["telephone_emta"] }, onchange: "calculateEquiptmentCosts(this);"}  %>
+		          <%= check_box_tag :telephone_emta, false, false, {:class => "styled", data: { price: fields["telephone_equiptment"]["telephone_emta"] }, onchange: "calculateEquiptmentCosts(this);"}  %>
 		          <label class="label-checkbox">
-		             Telephone EMTA, ($<%= fields["telephone_emta"] %> monthly)
+		             Telephone EMTA, ($<%= fields["telephone_equiptment"]["telephone_emta"] %> Monthly)
 		          </label>
 		        </div>
 					</li>
@@ -490,4 +503,3 @@
 		<%= render partial: "offers/checkout/shared/cox/telephone_no_porting", locals: { fields: fields } %>
 	<% end %>
 </div>
-

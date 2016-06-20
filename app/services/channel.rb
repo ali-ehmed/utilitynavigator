@@ -12,8 +12,8 @@ class Channel
 
 		# getting all the providers in array
 		providers = Array.new
-		@excel.column(3).each do |provider|
-			providers << provider unless providers.include?(provider)
+		@excel.column(3).each do |provider_1|
+			providers << provider_1 unless providers.include?(provider_1)
 		end
 
 		return [] unless providers.include?(provider)
@@ -35,7 +35,7 @@ class Channel
 			if row["provider"] == provider
 				# this checks if channel already presents in the array
 				# then just set the channel type in the channel type keys and return present
-				channels_name.select do |channel| 
+				channels_name.select do |channel|
 					if channel["channel"] == row["channel_name"]
 
 						channel[row["channel_type"].downcase.tr(" ", "_")] = row["channel_type"]

@@ -1,45 +1,40 @@
 <!-- Long distance -->
 
-<% if fields["long_distance"].downcase == "required" %>
+<% if fields["long_distance"].present? %>
 	<h4>Long Distance</h4>
 	<ul>
+		<% fields["long_distance"].except("checkout_select").each do |key, val| %>
+			<% if key.present? %>
+				<li>
+					<% if val.downcase == "included" %>
+						<p>
+							<%= key.humanize %> (<%= val %>)
+						</p>
+					<% else %>
+						<div class="checkbox">
+							<%= check_box_tag key.to_sym, false, false, {:class => "styled", data: { price: val }, onchange: "calculateEquiptmentCosts(this);"}  %>
+							<label class="label-checkbox">
+								<%= key.humanize %> ($<%= val %><% if key == "simply_5_long_distance" then " Monthly" end %>)
+							</label>
+						</div>
+					<% end %>
 
-		<!-- Simply 5 long distance -->
-		<% if fields["simply_5_long_distance"].present? %>
-			<li>
-				<div class="checkbox">
-          <%= check_box_tag :simply_5_long_distance, false, false, {:class => "styled", data: { price: fields["simply_5_long_distance"] }, onchange: "calculateEquiptmentCosts(this);"}  %>
-          <label class="label-checkbox">
-            Simply 5 Long Distance, ($<%= fields["simply_5_long_distance"] %>)
-          </label>
-          <br />
-          <a role="button" data-toggle="collapse" href="#collaspelong_distance" aria-expanded="false" aria-controls="collapseExample" class="view_more">View Details</a>
-					<div class="collapse" id="collaspelong_distance">
-	          <p class="well">
-	          	Talk it up with friends and family across the country for just 5 cents per minute - far less than the standard long distance rate!
-	          </p>
-          </div>
-        </div>
-			</li>
-		<% end %>
-
-		<!-- Cox long distance -->
-		<% if fields["cox_long_distance"].present? %>
-			<li>
-				<div class="checkbox">
-          <%= check_box_tag :cox_long_distance, false, false, {:class => "styled", data: { price: fields["cox_long_distance"] }, onchange: "calculateEquiptmentCosts(this);"}  %>
-          <label class="label-checkbox">
-            Cox Long Distance
-          </label>
-          <br />
-          <a role="button" data-toggle="collapse" href="#collaspecox_long_distance" aria-expanded="false" aria-controls="collapseExample" class="view_more">View Details</a>
-					<div class="collapse" id="collaspecox_long_distance">
-	          <p class="well">
-	          	With Cox Long Distance, you pay just $<%= fields["cox_long_distance"] %>/min.
-	          </p>
-          </div>
-        </div>
-			</li>
+					<!-- Custom Description -->
+					<a role="button" data-toggle="collapse" href="#collapse_<%= key %>" aria-expanded="false" aria-controls="collapseExample" class="view_more">View Details</a>
+					<div class="collapse" id="collapse_<%= key %>">
+						<% case key %>
+						<% when "simply_5_long_distance" %>
+							<p class="well">
+								Talk it up with friends and family across the country for just 5 cents per minute - far less than the standard long distance rate!
+							</p>
+						<% when "cox_long_distance" %>
+							<p class="well">
+								With Cox Long Distance, you pay just ($<%= val %>/min).
+							</p>
+						<% end %>
+					</div>
+				</li>
+			<% end %>
 		<% end %>
 	</ul>
 <% end %>

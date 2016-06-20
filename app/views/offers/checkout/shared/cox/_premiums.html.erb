@@ -1,75 +1,47 @@
 <!-- Premiumns -->
-
-<% if fields["premiums"].downcase == "required" %>
+<% if fields["premiums"].present? %>
 	<h4>Premium Movie Channels</h4>
 	<ul>
-		<% if fields["hbo"].present? %>
-			<li>
-				<div class="checkbox">
-          <%= check_box_tag :hbo, false, false, {:class => "styled", data: { price: fields["hbo"] }, onchange: "calculateEquiptmentCosts(this);"}  %>
-          <label class="label-checkbox">
-            HBO ($<%= fields["hbo"] %> monthly)
-          </label>
-          <br />
-          <a role="button" data-toggle="collapse" href="#collapsehbo" aria-expanded="false" aria-controls="collapseExample" class="view_more">View Details</a>
-					<div class="collapse" id="collapsehbo">
-	          <p class="well">
-	          	The most original and innovative shows are on HBO. Keep up with the most talked-about programs on television and bring the biggest blockbusters into your living room with HBO.
-	          </p>
-          </div>
-        </div>
-			</li>
-		<% end %>
-		<% if fields["cinemax"].present? %>
-			<li>
-				<div class="checkbox">
-          <%= check_box_tag :cinemax, false, false, {:class => "styled", data: { price: fields["cinemax"] }, onchange: "calculateEquiptmentCosts(this);"}  %>
-          <label class="label-checkbox">
-            Cinemax ($<%= fields["cinemax"] %> monthly)
-          </label>
-          <br />
-          <a role="button" data-toggle="collapse" href="#collapsecinemax" aria-expanded="false" aria-controls="collapseExample" class="view_more">View Details</a>
-					<div class="collapse" id="collapsecinemax">
-	          <p class="well">
-	          	Cinemax has you covered with the best Hollywood hits and action-packed original series.
-	          </p>
-          </div>
-        </div>
-			</li>
-		<% end %>
-		<% if fields["showtime"].present? %>
-			<li>
-				<div class="checkbox">
-          <%= check_box_tag :showtime, false, false, {:class => "styled", data: { price: fields["showtime"] }, onchange: "calculateEquiptmentCosts(this);"}  %>
-          <label class="label-checkbox">
-            Showtime ($<%= fields["showtime"] %> monthly)
-          </label>
-          <br />
-          <a role="button" data-toggle="collapse" href="#collapseshowtime" aria-expanded="false" aria-controls="collapseExample" class="view_more">View Details</a>
-					<div class="collapse" id="collapseshowtime">
-	          <p class="well">
-	          	With the hottest Original Series, sports and movies anywhere, Showtime® is premium entertainment at its best.
-	          </p>
-          </div>
-        </div>
-			</li>
-		<% end %>
-		<% if fields["starz"].present? %>
-			<li>
-				<div class="checkbox">
-          <%= check_box_tag :starz, false, false, {:class => "styled", data: { price: fields["starz"] }, onchange: "calculateEquiptmentCosts(this);"}  %>
-          <label class="label-checkbox">
-            Starz ($<%= fields["starz"] %> monthly)
-          </label>
-          <br />
-          <a role="button" data-toggle="collapse" href="#collapsestarz" aria-expanded="false" aria-controls="collapseExample" class="view_more">View Details</a>
-					<div class="collapse" id="collapsestarz">
-	          <p class="well">
-	          	Contemporary hit movies, original series and documentaries on six premium channels, most available in HD and On Demand.
-	          </p>
-          </div>
-        </div>
-			</li>
+		<% fields["premiums"].except("checkout_select").each do |key, val| %>
+			<% if key.present? %>
+				<li>
+					<% if val.downcase == "included" %>
+						<p>
+							<%= key.humanize %> (<%= val %>)
+						</p>
+					<% else %>
+						<div class="checkbox">
+							<%= check_box_tag key.to_sym, false, false, {:class => "styled", data: { price: val }, onchange: "calculateEquiptmentCosts(this);"}  %>
+							<label class="label-checkbox">
+								<%= key.humanize %> ($<%= val %> Monthly)
+							</label>
+						</div>
+					<% end %>
+
+					<!-- Custom Description -->
+					<a role="button" data-toggle="collapse" href="#collapse_<%= key %>" aria-expanded="false" aria-controls="collapseExample" class="view_more">View Details</a>
+					<div class="collapse" id="collapse_<%= key %>">
+						<% case key %>
+						<% when "hbo" %>
+							<p class="well">
+								The most original and innovative shows are on HBO. Keep up with the most talked-about programs on television and bring the biggest blockbusters into your living room with HBO.
+							</p>
+						<% when "cinemax" %>
+							<p class="well">
+								Cinemax has you covered with the best Hollywood hits and action-packed original series.
+							</p>
+						<% when "showtime" %>
+							<p class="well">
+								With the hottest Original Series, sports and movies anywhere, Showtime ® is premium entertainment at its best.
+							</p>
+						<% when "starz" %>
+							<p class="well">
+								Contemporary hit movies, original series and documentaries on six premium channels, most available in HD and On Demand.
+							</p>
+						<% end %>
+					</div>
+				</li>
+			<% end %>
 		<% end %>
 	</ul>
 <% end %>

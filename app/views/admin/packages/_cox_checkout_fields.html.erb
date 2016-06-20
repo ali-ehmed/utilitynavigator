@@ -15,42 +15,42 @@
 						<label for="provider_name" class="label">
 							Contour Record 6 HD-DVR Receiver &amp; Service
 						</label>
-						<%= ff.select "checkout_select", options_for_select(["Free", "Not Include", "Add Price"]), {prompt: "--Select--"}, class: "package_select_field", onchange: "$packages.addPriceField(this);" %>
+						<%= ff.select "checkout_select", options_for_select(["Include", "Not Include", "Add Price"]), {prompt: "--Select--"}, class: "package_select_field", onchange: "$packages.addPriceField(this);" %>
 
-						<%= ff.text_field "contour_record_dvr_#{count}", style: "display: none;width: calc(78% - 22px);", onblur: "$packages.packagePriceValidation(this);", class: "admin_checkout_price", value: "Included" %>
+						<%= ff.text_field "contour_record_dvr_#{count}", style: "display: none;width: calc(78% - 22px);", onblur: "$packages.packagePriceValidation(this);", class: "admin_checkout_price" %>
 					</li>
 					<li>
 						<label for="provider_name" class="label">
 							Contour HD-DVR Receiver
 						</label>
-						<%= ff.select "checkout_select", options_for_select(["Free", "Not Include", "Add Price"]), {prompt: "--Select--"}, class: "package_select_field", onchange: "$packages.addPriceField(this);" %>
+						<%= ff.select "checkout_select", options_for_select(["Include", "Not Include", "Add Price"]), {prompt: "--Select--"}, class: "package_select_field", onchange: "$packages.addPriceField(this);" %>
 
-						<%= ff.text_field "contour_hd_dvr_#{count}", style: "display: none;width: calc(78% - 22px);", onblur: "$packages.packagePriceValidation(this);", class: "admin_checkout_price", value: "Included" %>
+						<%= ff.text_field "contour_hd_dvr_#{count}", style: "display: none;width: calc(78% - 22px);", onblur: "$packages.packagePriceValidation(this);", class: "admin_checkout_price" %>
 
 					</li>
 					<li>
 						<label for="provider_name" class="label">
 							Contour HD Receiver
 						</label>
-						<%= ff.select "checkout_select", options_for_select(["Free", "Not Include", "Add Price"]), {prompt: "--Select--"}, class: "package_select_field", onchange: "$packages.addPriceField(this);" %>
+						<%= ff.select "checkout_select", options_for_select(["Include", "Not Include", "Add Price"]), {prompt: "--Select--"}, class: "package_select_field", onchange: "$packages.addPriceField(this);" %>
 
-						<%= ff.text_field "contour_hd_receiver_#{count}", style: "display: none;width: calc(78% - 22px);", onblur: "$packages.packagePriceValidation(this);", class: "admin_checkout_price", value: "Included" %>
+						<%= ff.text_field "contour_hd_receiver_#{count}", style: "display: none;width: calc(78% - 22px);", onblur: "$packages.packagePriceValidation(this);", class: "admin_checkout_price" %>
 					</li>
 					<li>
 						<label for="provider_name" class="label">
 							Mini Box
 						</label>
-						<%= ff.select "checkout_select", options_for_select(["Free", "Not Include", "Add Price"]), {prompt: "--Select--"}, class: "package_select_field", onchange: "$packages.addPriceField(this);" %>
+						<%= ff.select "checkout_select", options_for_select(["Include", "Not Include", "Add Price"]), {prompt: "--Select--"}, class: "package_select_field", onchange: "$packages.addPriceField(this);" %>
 
-						<%= ff.text_field "mini_box_#{count}", style: "display: none;width: calc(78% - 22px);", onblur: "$packages.packagePriceValidation(this);", class: "admin_checkout_price", value: "Included" %>
+						<%= ff.text_field "mini_box_#{count}", style: "display: none;width: calc(78% - 22px);", onblur: "$packages.packagePriceValidation(this);", class: "admin_checkout_price" %>
 					</li>
 					<li>
 						<label for="provider_name" class="label">
 							Cable CARD
 						</label>
-						<%= ff.select "checkout_select", options_for_select(["Free", "Not Include", "Add Price"]), {prompt: "--Select--"}, class: "package_select_field", onchange: "$packages.addPriceField(this);" %>
+						<%= ff.select "checkout_select", options_for_select(["Include", "Not Include", "Add Price"]), {prompt: "--Select--"}, class: "package_select_field", onchange: "$packages.addPriceField(this);" %>
 
-						<%= ff.text_field "cable_card_#{count}", style: "display: none;width: calc(78% - 22px);", onblur: "$packages.packagePriceValidation(this);", class: "admin_checkout_price", value: "Included" %>
+						<%= ff.text_field "cable_card_#{count}", style: "display: none;width: calc(78% - 22px);", onblur: "$packages.packagePriceValidation(this);", class: "admin_checkout_price" %>
 					</li>
 				</ol>
 			<% end %>
@@ -59,14 +59,14 @@
 			<label class="label">
 				Premium Movie Channels
 			</label>
-			<%= ff.select :premiums, options_for_select(["Required", "Not Include"]), {prompt: "--Select--"}, onChange: "$packages.setRequiredFields(this);" %>
+			<%= ff.select :premiums_items, options_for_select(["Required", "Not Include"]), {prompt: "--Select--"}, onChange: "$packages.setRequiredFields(this);" %>
 		</li>
 		<%= render partial: "admin/packages/shared/cox/items_for_premiums", locals: { ff: ff } %>
 		<li>
 			<label class="label">
 				TV Paks
 			</label>
-			<%= ff.select :tv_paks, options_for_select(["Required", "Not Include"]), {prompt: "--Select--"}, onChange: "$packages.setRequiredFields(this);" %>
+			<%= ff.select :tv_paks_items, options_for_select(["Required", "Not Include"]), {prompt: "--Select--"}, onChange: "$packages.setRequiredFields(this);" %>
 		</li>
 		<%= render partial: "admin/packages/shared/cox/items_for_tv_paks", locals: { ff: ff } %>
 	<% end %>
@@ -76,15 +76,15 @@
 			<label class="label">
 				Internet Equiptment
 			</label>
-			<%= ff.select :internet_equiptment, options_for_select(["Required", "Not Include"]), {prompt: "--Select--"}, onChange: "$packages.setRequiredFields(this);" %>
+			<%= ff.select :internet_equiptment_items, options_for_select(["Required", "Not Include"]), {prompt: "--Select--"}, onChange: "$packages.setRequiredFields(this);" %>
 		</li>
 		<%= render partial: "admin/packages/shared/cox/items_for_internet_equiptment", locals: { ff: ff } %>
 
 		<li>
 			<label class="label">
-				Cox Tech Solutions 
+				Cox Tech Solutions
 			</label>
-			<%= ff.select :cox_teck_solutions, options_for_select(["Required", "Not Include"]), {prompt: "--Select--"}, onChange: "$packages.setRequiredFields(this);" %>
+			<%= ff.select :cox_teck_solutions_items, options_for_select(["Required", "Not Include"]), {prompt: "--Select--"}, onChange: "$packages.setRequiredFields(this);" %>
 		</li>
 		<%= render partial: "admin/packages/shared/cox/items_for_cox_tech_solutions", locals: { ff: ff } %>
 
@@ -95,7 +95,7 @@
 			<label class="label">
 				Long Distance
 			</label>
-			<%= ff.select :long_distance, options_for_select(["Required", "Not Include"]), {prompt: "--Select--"}, onChange: "$packages.setRequiredFields(this);" %>
+			<%= ff.select :long_distance_items, options_for_select(["Required", "Not Include"]), {prompt: "--Select--"}, onChange: "$packages.setRequiredFields(this);" %>
 		</li>
 		<!-- Long distance item -->
 		<%= render partial: "admin/packages/shared/cox/items_for_long_distance", locals: { ff: ff } %>
@@ -104,67 +104,79 @@
 			<label class="label">
 				Additional Calling Features
 			</label>
-			<%= ff.select :calling_features, options_for_select(["Required", "Not Include"]), {prompt: "--Select--"}, onChange: "$packages.setRequiredFields(this);" %>
+			<%= ff.select :calling_features_items, options_for_select(["Required", "Not Include"]), {prompt: "--Select--"}, onChange: "$packages.setRequiredFields(this);" %>
 		</li>
 
-		<!-- Voice mail -->
-		<li style="display:none;">
-			<legend><span>Set item for Calling feature</span></legend>
-			<ol>
-				<li>
-					<label for="provider_name" class="label">
-						Voice Mail
-					</label>
-					<%= ff.text_field "voice_mail", style: "width: calc(78% - 22px);", onblur: "$packages.packagePriceValidation(this);" %>
-				</li>
-			</ol>
-		</li>
+		<%= ff.fields_for :calling_features do |f| %>
+			<!-- Voice mail -->
+			<li style="display:none;">
+				<legend><span>Set item for Calling feature</span></legend>
+				<ol>
+					<li>
+						<label for="provider_name" class="label">
+							Voice Mail
+						</label>
+						<%= f.select "checkout_select", options_for_select(["Include", "Not Include", "Add Price"]), {prompt: "--Select--"}, class: "package_select_field", onchange: "$packages.addPriceField(this);" %>
+
+						<%= f.text_field "voice_mail", style: "display: none;width: calc(78% - 22px);margin-left:20%;", onblur: "$packages.packagePriceValidation(this);", class: "admin_checkout_price" %>
+					</li>
+				</ol>
+			</li>
+		<% end %>
 
 		<li>
 			<label class="label">
 				International Calling Plan
 			</label>
-			<%= ff.select :international_calling_plan, options_for_select(["Required", "Not Include"]), {prompt: "--Select--"}, onChange: "$packages.setRequiredFields(this);" %>
+			<%= ff.select :international_calling_plan_items, options_for_select(["Required", "Not Include"]), {prompt: "--Select--"}, onChange: "$packages.setRequiredFields(this);" %>
 		</li>
 
-		<!-- Simply Worldwide -->
-		<li style="display:none;">
-			<legend><span>Set item for International Calling feature</span></legend>
-			<ol>
-				<li>
-					<label for="provider_name" class="label">
-						Simply Worldwide
-					</label>
-					<%= ff.text_field "simply_worldwide", style: "width: calc(78% - 22px);", onblur: "$packages.packagePriceValidation(this);" %>
-				</li>
-			</ol>
-		</li>
+		<%= ff.fields_for :international_calling_plan do |f| %>
+			<!-- Simply Worldwide -->
+			<li style="display:none;">
+				<legend><span>Set item for International Calling feature</span></legend>
+				<ol>
+					<li>
+						<label for="provider_name" class="label">
+							Simply Worldwide
+						</label>
+						<%= f.select "checkout_select", options_for_select(["Include", "Not Include", "Add Price"]), {prompt: "--Select--"}, class: "package_select_field", onchange: "$packages.addPriceField(this);" %>
+
+						<%= f.text_field "simply_worldwide", style: "display: none;width: calc(78% - 22px);margin-left:20%;", onblur: "$packages.packagePriceValidation(this);", class: "admin_checkout_price" %>
+					</li>
+				</ol>
+			</li>
+		<% end %>
 
 		<li>
 			<label class="label">
 				Mexico Calling Plan
 			</label>
-			<%= ff.select :mexico_calling_plan, options_for_select(["Required", "Not Include"]), {prompt: "--Select--"}, onChange: "$packages.setRequiredFields(this);" %>
+			<%= ff.select :mexico_calling_plan_items, options_for_select(["Required", "Not Include"]), {prompt: "--Select--"}, onChange: "$packages.setRequiredFields(this);" %>
 		</li>
 
-		<!-- Mexico 200 plan -->
-		<li style="display:none;">
-			<legend><span>Set item for Mexico Calling Plan</span></legend>
-			<ol>
-				<li>
-					<label for="provider_name" class="label">
-						Mexico 200
-					</label>
-					<%= ff.text_field "mexico_200", style: "width: calc(78% - 22px);", onblur: "$packages.packagePriceValidation(this);" %>
-				</li>
-			</ol>
-		</li>
+		<%= ff.fields_for :mexico_calling_plan do |f| %>
+			<!-- Mexico 200 plan -->
+			<li style="display:none;">
+				<legend><span>Set item for Mexico Calling Plan</span></legend>
+				<ol>
+					<li>
+						<label for="provider_name" class="label">
+							Mexico 200
+						</label>
+						<%= f.select "checkout_select", options_for_select(["Include", "Not Include", "Add Price"]), {prompt: "--Select--"}, class: "package_select_field", onchange: "$packages.addPriceField(this);" %>
+
+						<%= f.text_field "mexico_200", style: "display: none;width: calc(78% - 22px);margin-left:20%;", onblur: "$packages.packagePriceValidation(this);", class: "admin_checkout_price" %>
+					</li>
+				</ol>
+			</li>
+		<% end %>
 
 		<li>
 			<label class="label">
 				Directory Listing
 			</label>
-			<%= ff.select :directory_listing, options_for_select(["Required", "Not Include"]), {prompt: "--Select--"}, onChange: "$packages.setRequiredFields(this);" %>
+			<%= ff.select :directory_listing_items, options_for_select(["Required", "Not Include"]), {prompt: "--Select--"}, onChange: "$packages.setRequiredFields(this);" %>
 		</li>
 		<!-- Directory Listing -->
 		<%= render partial: "admin/packages/shared/cox/items_for_directory_listing", locals: { ff: ff } %>
@@ -173,61 +185,73 @@
 			<label class="label">
 				Telephone Outlet Installation Additional
 			</label>
-			<%= ff.select :telephone_outlet_installation, options_for_select(["Required", "Not Include"]), {prompt: "--Select--"}, onChange: "$packages.setRequiredFields(this);" %>
+			<%= ff.select :telephone_outlet_installation_items, options_for_select(["Required", "Not Include"]), {prompt: "--Select--"}, onChange: "$packages.setRequiredFields(this);" %>
 		</li>
 
 		<!-- Outlet installation -->
-		<li style="display:none;">
-			<legend><span>Set item for Outlet installation</span></legend>
-			<ol>
-				<li>
-					<label for="provider_name" class="label">
-						Outlet installation
-					</label>
-					<%= ff.text_field "outlet_installation", style: "width: calc(78% - 22px);", onblur: "$packages.packagePriceValidation(this);" %>
-				</li>
-			</ol>
-		</li>
+		<%= ff.fields_for :telephone_outlet_installation do |f| %>
+			<li style="display:none;">
+				<legend><span>Set item for Outlet installation</span></legend>
+				<ol>
+					<li>
+						<label for="provider_name" class="label">
+							Outlet installation
+						</label>
+						<%= f.select "checkout_select", options_for_select(["Include", "Not Include", "Add Price"]), {prompt: "--Select--"}, class: "package_select_field", onchange: "$packages.addPriceField(this);" %>
+
+						<%= f.text_field "outlet_installation", style: "display: none;width: calc(78% - 22px);margin-left:20%;", onblur: "$packages.packagePriceValidation(this);", class: "admin_checkout_price" %>
+					</li>
+				</ol>
+			</li>
+		<% end %>
 
 		<li>
 			<label class="label">
-				Telephone Equipment (EMTA) 
+				Telephone Equipment (EMTA)
 			</label>
-			<%= ff.select :telephone_equiptment, options_for_select(["Required", "Not Include"]), {prompt: "--Select--"}, onChange: "$packages.setRequiredFields(this);" %>
+			<%= ff.select :telephone_equiptment_items, options_for_select(["Required", "Not Include"]), {prompt: "--Select--"}, onChange: "$packages.setRequiredFields(this);" %>
 		</li>
 
 		<!-- Telephone EMTA -->
-		<li style="display:none;">
-			<legend><span>Set item for Telephone EMTA</span></legend>
-			<ol>
-				<li>
-					<label for="provider_name" class="label">
-						Telephone EMTA
-					</label>
-					<%= ff.text_field "telephone_emta", style: "width: calc(78% - 22px);", onblur: "$packages.packagePriceValidation(this);" %>
-				</li>
-			</ol>
-		</li>
+		<%= ff.fields_for :telephone_equiptment do |f| %>
+			<li style="display:none;">
+				<legend><span>Set item for Telephone EMTA</span></legend>
+				<ol>
+					<li>
+						<label for="provider_name" class="label">
+							Telephone EMTA
+						</label>
+						<%= f.select "checkout_select", options_for_select(["Include", "Not Include", "Add Price"]), {prompt: "--Select--"}, class: "package_select_field", onchange: "$packages.addPriceField(this);" %>
+
+						<%= f.text_field "telephone_emta", style: "display: none;width: calc(78% - 22px);margin-left:20%;", onblur: "$packages.packagePriceValidation(this);", class: "admin_checkout_price" %>
+					</li>
+				</ol>
+			</li>
+		<% end %>
 
 		<li>
 			<label class="label">
 				Telephone Number porting
 			</label>
-			<%= ff.select :telephone_no_porting, options_for_select(["Required", "Not Include"]), {prompt: "--Select--"}, onChange: "$packages.setRequiredFields(this);" %>
+			<%= ff.select :telephone_no_porting_items, options_for_select(["Required", "Not Include"]), {prompt: "--Select--"}, onChange: "$packages.setRequiredFields(this);" %>
 		</li>
 
-		<!-- Provider phone number service -->
-		<li style="display:none;">
-			<legend><span>Set item for Provider phone number service</span></legend>
-			<ol>
-				<li>
-					<label for="provider_name" class="label">
-						Outlet installation
-					</label>
-					<%= ff.text_field "provide_new_phone_number", style: "width: calc(78% - 22px);", onblur: "$packages.packagePriceValidation(this);" %>
-				</li>
-			</ol>
-		</li>
+		<%= ff.fields_for :telephone_no_porting do |f| %>
+			<!-- Provider phone number service -->
+			<li style="display:none;">
+				<legend><span>Set item for New phone number service</span></legend>
+				<ol>
+					<li>
+						<label for="provider_name" class="label">
+							New phone number service
+						</label>
+						<%= f.select "checkout_select", options_for_select(["Include", "Not Include", "Add Price"]), {prompt: "--Select--"}, class: "package_select_field", onchange: "$packages.addPriceField(this);" %>
+
+						<%= f.text_field "new_phone_number", style: "display: none;width: calc(78% - 22px);margin-left:20%;", onblur: "$packages.packagePriceValidation(this);", class: "admin_checkout_price" %>
+					</li>
+				</ol>
+			</li>
+		<% end %>
 
 		<li>
 			<label class="label">
