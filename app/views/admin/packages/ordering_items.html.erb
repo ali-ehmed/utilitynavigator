@@ -7,7 +7,7 @@
 	</ol>
 </h3>
 <%= form_tag admin_packages_path(product_ids: @product_ids), method: :post do %>
-	<% for product in @products do %>	
+	<% for product in @products do %>
 		<fieldset class="inputs">
 			<legend><span><%= product.name %></span></legend>
 			<ol>
@@ -60,7 +60,7 @@
 					</ol>
 				</li>
 			</ol>
-		</fieldset>	
+		</fieldset>
 	<% end %>
 	<%= button_tag "Create Package", type: :submit %>
 	<%= link_to "Cancel", admin_packages_path %>

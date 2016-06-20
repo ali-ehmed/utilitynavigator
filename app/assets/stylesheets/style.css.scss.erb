@@ -38,7 +38,7 @@ header {
   @media (max-width: 768px) {
     display: block;
     position: static;
-    width: 100%; 
+    width: 100%;
   }
 }
 
@@ -52,16 +52,29 @@ header {
 #package-details {
   .packages {
     .offers-package-desc {
-      height: 300px;
+      height: 180px;
       overflow-y: scroll;
       margin: 18px 0px;
+      &::-webkit-scrollbar-thumb {
+          border-radius: 8px;
+          border: 1px solid white; /* should match background, can't be transparent */
+          background-color: rgba(0, 0, 0, .5);
+      }
+      &::-webkit-scrollbar:vertical {
+          width: 11px;
+      }
+      &::-webkit-scrollbar:horizontal {
+          height: 11px;
+      }
     }
+
+
     .offers-package-heading {
       min-height: 106px;
       border-bottom: 1px solid rgba(138, 207, 248, 0.37);
     }
   }
-  
+
   .price-info {
     background:url(<%= asset_path("price-tag-search.png") %>);
     background-size: 100% auto;
@@ -71,7 +84,7 @@ header {
     color: #fff;
     border-radius: 4px 4px 0px 0px;
     background-repeat: no-repeat;
-    
+
     .price {
       font-size: 25px;
       line-height: 40px;
@@ -116,7 +129,7 @@ header {
   color: #fff;
   margin-bottom: 25px;
   margin-top: -10px;
-  
+
   .address {
     background-color: #9932cc;
     padding: 35px 125px;
@@ -214,8 +227,8 @@ header {
     h1.page-header {
       font-weight: 900;
     }
-	}	
-	
+	}
+
 	.section-3 {
 		overflow-x: hidden;
 		background-color: #9932cc;
@@ -254,7 +267,7 @@ header {
 }
 
 .providers {
-  
+
   .section-1 {
     margin-top: 48px;
     .panel .panel-body {
@@ -289,7 +302,7 @@ header {
           margin-left: 17px;
         }
       }
-      
+
     }
   }
   .section-2 {
@@ -326,10 +339,13 @@ header {
           span.package-filter {
             background: url(<%= asset_path("filter-circle.png") %>);
             background-size: 100% auto;
-            padding: 2px 20px 0px 1px;
+            padding: 2px 20px 5px 1px;
             background-repeat: no-repeat;
             margin: 0px -5px 0px -10px;
           }
+        }
+        @media(max-width: 480px) {
+          font-size: 14.5px;
         }
       }
     }
@@ -367,15 +383,26 @@ header {
       }
 
       .package-desc {
-        height: 200px;    
+        height: 200px;
         overflow-y: scroll;
         margin-bottom: 10px;
+        &::-webkit-scrollbar-thumb {
+            border-radius: 8px;
+            border: 1px solid white;
+            background-color: rgba(0, 0, 0, .5);
+        }
+        &::-webkit-scrollbar:vertical {
+            width: 11px;
+        }
+        &::-webkit-scrollbar:horizontal {
+            height: 11px;
+        }
       }
     }
-    
+
     .see-more-btn {
       border-width: 3px;
-      font-weight: bold;  
+      font-weight: bold;
     }
 
     .channel-comparison-link {
@@ -415,7 +442,7 @@ header {
       color: #fff;
       background-color: #9932CC;
 
-      h4.search-title { 
+      h4.search-title {
         text-align: center;
         font-size: 27px;
         font-weight:bold;
@@ -465,7 +492,7 @@ header {
       padding: 20px 10px 25px 10px;
       background: rgba(17, 17, 17, 0.72);
       .home_form {
-        width: 100%; 
+        width: 100%;
       }
     }
     .desktop-view {
@@ -498,7 +525,7 @@ footer {
 			border-right: 0px;
 		}
 
-		
+
 		margin-bottom: 0px;
 		background-color: #393939;
 		color: #D3D9DF;
@@ -509,7 +536,7 @@ footer {
 	}
 }
 
-// Callback form 
+// Callback form
 #call_timings {
 	span.input-group-addon {
 		cursor: pointer;
@@ -524,7 +551,7 @@ footer {
 .checkout { font-size: 24px; }
 
 
-// Navbar 
+// Navbar
 nav.navbar-app {
 	background-color: #F8F8F8;
   // border-color: #F8F8F8;
@@ -547,10 +574,10 @@ nav.navbar-app {
     padding-bottom: 19px;
 	}
 
-	.active-link { 
-		background-color: #9932CC; 
-		a { 
-			color: #fff; 
+	.active-link {
+		background-color: #9932CC;
+		a {
+			color: #fff;
       font-weight: bold;
       background-repeat: no-repeat;
       background-position: center bottom;
@@ -564,8 +591,8 @@ nav.navbar-app {
 	}
 
 	li.active-link::after {
-		width: 0; 
-		height: 0; 
+		width: 0;
+		height: 0;
 		border-left: 5px solid transparent;
 		border-right: 5px solid transparent;
 
@@ -657,10 +684,10 @@ div.packages-category-name {
     line-height: 50px;
   }
   .profile_img {
-    img { 
-      border: 3px solid #fff; 
-      width: 150px;
-      height: 150px;
+    img {
+      border: 3px solid #fff;
+      width: 160px;
+      height: 160px;
     }
     @media(max-width: 480px) {
       img {
@@ -669,7 +696,7 @@ div.packages-category-name {
     }
   }
   .edit-profile {
-    color:#000; 
+    color:#000;
     font-weight: 500;
   }
 }

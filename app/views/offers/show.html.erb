@@ -27,11 +27,11 @@
 <div id="package-details">
 	<!-- Search filters -->
 	<%= render partial: "shared/searched_filters" %>
-	
+
 	<div class="container">
 		<% if @packages.blank? %>
 			<div class="alert alert-danger">
-				<strong>Sorry!</strong> Currently, our packages are not available in your area.
+				<strong>Sorry!</strong> There are no packages available.
 			</div>
 		<% else %>
 			<div class="row">
@@ -55,12 +55,12 @@
 												</div>
 											</div>
 										</div>
-										
+
 
 										<div class="offers-package-desc">
 											<%= package.package_description.blank? ? "N/A" : package.package_description.html_safe %>
 										</div>
-										
+
 										<%= link_to "More Info & Promotions", "#", class: "detail-link", class: "detail-link", "data-toggle" => "modal", "data-target" => "#promotions_#{package.id}" %>
 										<%= render partial: "shared/promotions", locals: { package: package } %>
 										<br /><br />
@@ -99,6 +99,7 @@
 			</ul>
 		<% end %>
 	</div>
+
 </div>
 
 <div id="comparison"></div>
@@ -121,4 +122,3 @@
     </div>
   </div>
 </div>
-

@@ -76,8 +76,8 @@ namespace :deploy do
   task :restart do
     # run "#{sudo} touch #{File.join(current_path,'tmp','restart.txt')}"
     on roles(:app), in: :sequence do
-       execute! :sudo, "touch #{File.join(current_path,'tmp','restart.txt')}"
-       # execute! :sudo, :service, :nginx, :restart
+      #  execute! :sudo, "touch #{File.join(current_path,'tmp','restart.txt')}"
+       execute! :sudo, :service, :nginx, :restart
     end
   end
 
@@ -97,5 +97,5 @@ end
 
 # Add this to automatically ping the server after a restart:
 after "deploy:restart", "deploy:ping"
-after :deploy, "deploy:restart"
-before :deploy, "deploy:restart"
+after :deploy, :restart
+before :deploy, :restart

@@ -7,7 +7,7 @@
 	          <li>
 	            <a href="javascript:void(0);" class="filtering" aria-controls="tv" role="tab" onclick="applyFilters(this);" data-value="Cable">
 	              TV
-	              
+
 	            	<% if params["filters"] and params["filters"].include?("Cable") %>
 	            		<%= check_box_tag "filters[]", "Cable", true, class: "hidden" %>
 	              	<span class="package-filter" style="background-image: url(<%= asset_path('filter-circle-select.png') %>);"></span>
@@ -43,7 +43,7 @@
 	            		<%= check_box_tag "filters[]", "Phone", false, class: "hidden" %>
 	            		<span class="package-filter"></span>
 	            	<% end %>
-	            	
+
 	            </a>
 	          </li>
 	        </ul>

@@ -59,7 +59,7 @@ class User < ActiveRecord::Base
   after_initialize :disable_password_on_create
   after_create :generate_password
 
-  has_attached_file :profile_image, styles: { medium: "300x300>", thumb: "100x100>" }
+  has_attached_file :profile_image, styles: { medium: "300x300#", thumb: "100x100>" }
                                     # default_url: "user-login.png",
                                     # :storage => :dropbox,
                                     # :dropbox_credentials => Rails.root.join("config/initializers/dropbox.yml"),

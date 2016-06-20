@@ -28,12 +28,12 @@ class ApplicationController < ActionController::Base
   end
 
   def configure_permitted_parameters
-    devise_parameter_sanitizer.for(:account_update) { |u| 
-      u.permit(:first_name, :last_name, :address, 
-              :zip_code, :cell_number, :date_of_birth, 
-              :home_number, :driver_license, 
+    devise_parameter_sanitizer.for(:account_update) { |u|
+      u.permit(:first_name, :last_name, :address,
+              :zip_code, :cell_number, :date_of_birth,
+              :home_number, :driver_license,
               :social_security, :four_digit_no,
-              :email, :password, :password_confirmation, 
+              :email, :password, :password_confirmation,
               :current_password, :profile_image) 
     }
   end
