@@ -3,30 +3,32 @@
 		<div class="section-3">
 	    <div class="container">
 	      <div class="packages-category-name">
+					<div class="filters_heading">
+	          Filters
+	        </div>
 	        <ul class="list-inline">
 	          <li>
 	            <a href="javascript:void(0);" class="filtering" aria-controls="tv" role="tab" onclick="applyFilters(this);" data-value="Cable">
 	              TV
 
-	            	<% if params["filters"] and params["filters"].include?("Cable") %>
-	            		<%= check_box_tag "filters[]", "Cable", true, class: "hidden" %>
+	            	<% if params["filters"] and params["filters"].include?("tv_filter") %>
+	            		<%= check_box_tag "filters", "tv_filter", true, class: "hidden" %>
 	              	<span class="package-filter" style="background-image: url(<%= asset_path('filter-circle-select.png') %>);"></span>
 	            	<% else %>
-	            		<%= check_box_tag "filters[]", "Cable", false, class: "hidden" %>
+	            		<%= check_box_tag "filters", "tv_filter", false, class: "hidden" %>
 	            		<span class="package-filter"></span>
 	            	<% end %>
-
 	            </a>
 	          </li>
 	          <li>
 	            <a href="javascript:void(0);" class="filtering" aria-controls="internet" role="tab" onclick="applyFilters(this);" data-value="Internet">
 	              INTERNET
 
-	              <% if params["filters"] and params["filters"].include?("Internet") %>
-	              	<%= check_box_tag "filters[]", "Internet", true, class: "hidden" %>
+	              <% if params["filters"] and params["filters"].include?("internet_filter") %>
+	              	<%= check_box_tag "filters", "internet_filter", true, class: "hidden" %>
 	              	<span class="package-filter" style="background-image: url(<%= asset_path('filter-circle-select.png') %>);"></span>
 	            	<% else %>
-	            		<%= check_box_tag "filters[]", "Internet", false, class: "hidden" %>
+	            		<%= check_box_tag "filters", "internet_filter", false, class: "hidden" %>
 	            		<span class="package-filter"></span>
 	            	<% end %>
 
@@ -36,14 +38,26 @@
 	            <a href="javascript:void(0);" class="filtering" aria-controls="phone" role="tab" onclick="applyFilters(this);" data-value="Phone">
 	              PHONE
 
-	              <% if params["filters"] and params["filters"].include?("Phone") %>
-	              	<%= check_box_tag "filters[]", "Phone", true, class: "hidden" %>
+	              <% if params["filters"] and params["filters"].include?("phone_filter") %>
+	              	<%= check_box_tag "filters", "phone_filter", true, class: "hidden" %>
 	              	<span class="package-filter" style="background-image: url(<%= asset_path('filter-circle-select.png') %>);"></span>
 	            	<% else %>
-	            		<%= check_box_tag "filters[]", "Phone", false, class: "hidden" %>
+	            		<%= check_box_tag "filters", "phone_filter", false, class: "hidden" %>
 	            		<span class="package-filter"></span>
 	            	<% end %>
+	            </a>
+	          </li>
+						<li>
+	            <a href="javascript:void(0);" class="filtering" aria-controls="bundles" role="tab" onclick="applyFilters(this);" data-value="Bundles">
+	              BUNDLES
 
+	              <% if params["filters"] and params["filters"].include?("bundle_filter") %>
+	              	<%= check_box_tag "filters", "bundle_filter", true, class: "hidden" %>
+	              	<span class="package-filter" style="background-image: url(<%= asset_path('filter-circle-select.png') %>);"></span>
+	            	<% else %>
+	            		<%= check_box_tag "filters", "bundle_filter", false, class: "hidden" %>
+	            		<span class="package-filter"></span>
+	            	<% end %>
 	            </a>
 	          </li>
 	        </ul>
@@ -60,11 +74,14 @@
 			$form = $elem.closest("form");
 			$field = $elem.find("input[type='checkbox']");
 
-			if($field.attr("checked")) {
-				$field.removeAttr("checked");
-			} else {
-				$field.prop("checked", "checked");
-			}
+			$.each($form.find("input[type='checkbox']"), function() {
+				if($(this).attr("checked")) {
+					$(this).removeAttr("checked");
+				}
+			});
+
+			$field.prop("checked", "checked");
+
 
 			return $form.submit();
 		});

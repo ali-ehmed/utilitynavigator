@@ -26,7 +26,7 @@ class OffersController < ApplicationController
 
 		# Applying product filters
 		if params[:filters] and params[:filters].present?
-			@packages = @packages.filter_with params[:filters]
+			@packages = @packages.send(params[:filters])
 		end
 
 		@count_twc = @packages.try("time_warner").length || 0

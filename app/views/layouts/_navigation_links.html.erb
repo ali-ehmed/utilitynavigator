@@ -13,7 +13,7 @@
 </li>
 <% unless current_user %>
   <li>
-    <a data-controls-modal="login" data-keyboard="false" data-toggle="modal" data-target="#login">
+    <a href="#" data-controls-modal="login" data-keyboard="false" data-toggle="modal" data-target="#login">
       <strong>Login</strong>
     </a>
   </li>
@@ -35,66 +35,3 @@
     </ul>
   </li>
 <% end %>
-<%# unless user_signed_in? %>
-  <!-- <li>
-    <%#= link_to 'Sign In', new_user_session_path %>
-  </li> -->
-<%# else %>
-  <!-- <li>
-    <%#= link_to 'Sign out', destroy_user_session_path, method: :delete %>
-  </li> -->
-<%# end %>
-<!-- <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown">Portfolio <b class="caret"></b></a>
-  <ul class="dropdown-menu">
-    <li>
-      <%= link_to '1 Column Portfolio', page_path('portfolio-1-col') %>
-    </li>
-    <li>
-      <%= link_to '2 Column Portfolio', page_path('portfolio-2-col') %>
-    </li>
-    <li>
-      <%= link_to '3 Column Portfolio', page_path('portfolio-3-col') %>
-    </li>
-    <li>
-      <%= link_to '4 Column Portfolio', page_path('portfolio-4-col') %>
-    </li>
-    <li>
-      <%= link_to 'Single Portfolio Item', page_path('portfolio-item') %>
-    </li>
-  </ul>
-</li>
-<li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown">Blog <b class="caret"></b></a>
-  <ul class="dropdown-menu">
-    <li>
-      <%= link_to 'Blog Home 1', page_path('blog-home-1') %>
-    </li>
-    <li>
-      <%= link_to 'Blog Home 2', page_path('blog-home-2') %>
-    </li>
-    <li>
-      <%= link_to 'Blog Post', page_path('blog-post') %>
-    </li>
-  </ul>
-</li>
-<li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown">Other Pages <b class="caret"></b></a>
-  <ul class="dropdown-menu">
-    <li>
-      <%= link_to 'Full Width Page', page_path('full-width') %>
-    </li>
-    <li>
-      <%= link_to 'Sidebar Page', page_path('sidebar') %>
-    </li>
-    <li>
-      <%= link_to 'FAQ', page_path('faq') %>
-    </li>
-    <li>
-      <%= link_to '404', page_path('404') %>
-    </li>
-    <li>
-      <%= link_to 'Pricing Table', page_path('pricing') %>
-    </li>
-  </ul>
-</li> -->

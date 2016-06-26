@@ -79,9 +79,9 @@ class LandingsController < ApplicationController
 	end
 
 	def filteration(provider)
-		@tv_packages = Package.method(provider).call.tv_filter.paginate(:page => params[:page], :per_page => 3)
-		@internet_packages = Package.method(provider).call.internet_filter.paginate(:page => params[:page], :per_page => 3)
-		@phone_packages = Package.method(provider).call.phone_filter.paginate(:page => params[:page], :per_page => 3)
-		@bundle_packages = Package.method(provider).call.bundle_filter.paginate(:page => params[:page], :per_page => 3)
+		@tv_packages = Package.method(provider).call.tv_filter.paginate(:page => params[:page], :per_page => Package::PACKAGE_PER_PAGE_LENGTH)
+		@internet_packages = Package.method(provider).call.internet_filter.paginate(:page => params[:page], :per_page => Package::PACKAGE_PER_PAGE_LENGTH)
+		@phone_packages = Package.method(provider).call.phone_filter.paginate(:page => params[:page], :per_page => Package::PACKAGE_PER_PAGE_LENGTH)
+		@bundle_packages = Package.method(provider).call.bundle_filter.paginate(:page => params[:page], :per_page => Package::PACKAGE_PER_PAGE_LENGTH)
 	end
 end

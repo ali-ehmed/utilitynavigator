@@ -39,6 +39,9 @@ class Package < ActiveRecord::Base
 	DOUBLE_PLAY = "Double play"
 	TRIPLE_PLAY = "Triple play"
 
+	# Length of packages displaying bottom on provider pages
+	PACKAGE_PER_PAGE_LENGTH = 3
+
 	validates_presence_of :provider_id,
 												:price, :package_name, :package_description, :price_info, :promotions,
 												:plan_details, :installation_price
