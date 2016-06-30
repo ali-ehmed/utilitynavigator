@@ -4,207 +4,7 @@
 		<% fields = get_in_hash(@package_bundles.find_by_product_id(product.id).checkout_fields) %>
 		<%#= fields %>
 
-		<!-- <h4>Please configure your TV, Internet &amp; Home Phone Services</h4> -->
-		<h4>Configure your 1st TV <span class="checkout_required">(Required)</span> <small><a href="javascript:void(0);" onclick="resetSelectedItem(this);">Reset selected item</a></small></h4>
-		<ul>
-			<% if fields["dvr_box_1"].present? %>
-				<li>
-					<% if fields["dvr_box_1"].downcase == "included" %>
-						<p>Enhanced DVR Box &amp; Service (<%= fields["dvr_box_1"].capitalize %>)</p>
-					<% else %>
-						<div class="checkbox" style="padding-left: 5px;">
-		          <%= radio_button_tag :first_tv, false, false, {id: "first_tv_1", data: { price: fields["dvr_box_1"] }, onchange: "calculateEquiptmentCosts(this);"}  %>
-		          <label class="label-checkbox" for="first_tv_1">
-		            Enhanced DVR Box &amp; Service ($<%= fields["dvr_box_1"] %> Monthly)
-		          </label>
-		        </div>
-	        <% end %>
-				</li>
-			<% end %>
-			<% if fields["additional_hd_1"].present? %>
-				<li>
-					<% if fields["additional_hd_1"].downcase == "included" %>
-						<p>HD Box (<%= fields["additional_hd_1"].capitalize %>)</p>
-					<% else %>
-						<div class="checkbox" style="padding-left: 5px;">
-		          <%= radio_button_tag :first_tv, false, false, {id: "first_tv_2", data: { price: fields["additional_hd_1"] }, onchange: "calculateEquiptmentCosts(this);"}  %>
-		          <label class="label-checkbox" for="first_tv_2">
-		            HD Box ($<%= fields["additional_hd_1"] %> Monthly)
-		          </label>
-		        </div>
-	        <% end %>
-				</li>
-			<% end %>
-			<% if fields["dta_1"].present? %>
-				<li>
-					<% if fields["dta_1"].downcase == "included" %>
-						<p>DTA Box (<%= fields["dta_1"].capitalize %>)</p>
-					<% else %>
-						<div class="checkbox" style="padding-left: 5px;">
-		          <%= radio_button_tag :first_tv, false, false, {id: "first_tv_3", data: { price: fields["dta_1"] }, onchange: "calculateEquiptmentCosts(this);"}  %>
-		          <label class="label-checkbox" for="first_tv_3">
-		            DTA Box ($<%= fields["dta_1"] %> Monthly)
-		          </label>
-		        </div>
-	        <% end %>
-				</li>
-			<% end %>
-		</ul>
-
-		<!-- Second TV -->
-		<h4>Configure your 2nd TV <small><a href="javascript:void(0);" onclick="resetSelectedItem(this);">Reset selected item</a></small></h4>
-		<ul>
-			<% if fields["dvr_box_2"].present? %>
-				<li>
-					<% if fields["dvr_box_2"].downcase == "included" %>
-						<p>Enhanced DVR Box &amp; Service (<%= fields["dvr_box_2"].capitalize %>)</p>
-					<% else %>
-						<div class="checkbox" style="padding-left: 5px;">
-		          <%= radio_button_tag :second_tv, false, false, {id: "second_tv_1", data: { price: fields["dvr_box_2"] }, onchange: "calculateEquiptmentCosts(this);"}  %>
-		          <label class="label-checkbox" for="second_tv_1">
-		            Enhanced DVR Box &amp; Service ($<%= fields["dvr_box_2"] %> Monthly)
-		          </label>
-		        </div>
-	        <% end %>
-				</li>
-			<% end %>
-			<% if fields["additional_hd_2"].present? %>
-				<li>
-					<% if fields["additional_hd_2"].downcase == "included" %>
-						<p>HD Box (<%= fields["additional_hd_2"].capitalize %>)</p>
-					<% else %>
-						<div class="checkbox" style="padding-left: 5px;">
-		          <%= radio_button_tag :second_tv, false, false, {id: "second_tv_2",  data: { price: fields["additional_hd_2"] }, onchange: "calculateEquiptmentCosts(this);"}  %>
-		          <label class="label-checkbox" for="second_tv_2">
-		            HD Box ($<%= fields["additional_hd_2"] %> Monthly)
-		          </label>
-		        </div>
-	        <% end %>
-				</li>
-			<% end %>
-			<% if fields["dta_2"].present? %>
-				<% if fields["dta_2"].downcase == "included" %>
-					<p>DTA Box (<%= fields["dta_2"].capitalize %>)</p>
-				<% else %>
-					<li>
-						<div class="checkbox" style="padding-left: 5px;">
-		          <%= radio_button_tag :second_tv, false, false, {id: "second_tv_3", data: { price: fields["dta_2"] }, onchange: "calculateEquiptmentCosts(this);"}  %>
-		          <label class="label-checkbox" for="second_tv_3">
-		            DTA Box ($<%= fields["dta_2"] %> Monthly)
-		          </label>
-		        </div>
-					</li>
-				<% end %>
-			<% end %>
-		</ul>
-
-		<!-- Third TV -->
-		<h4>Configure your 3rd TV <small><a href="javascript:void(0);" onclick="resetSelectedItem(this);">Reset selected item</a></small></h4>
-		<ul>
-			<% if fields["dvr_box_3"].present? %>
-				<% if fields["dvr_box_3"].downcase == "included" %>
-					<p>Enhanced DVR Box &amp; Service (<%= fields["dvr_box_3"].capitalize %>)</p>
-				<% else %>
-					<li>
-						<div class="checkbox" style="padding-left: 5px;">
-		          <%= radio_button_tag :third_tv, false, false, {id: "third_tv_1", data: { price: fields["dvr_box_3"] }, onchange: "calculateEquiptmentCosts(this);"}  %>
-		          <label class="label-checkbox" for="third_tv_1">
-		            Enhanced DVR Box &amp; Service ($<%= fields["dvr_box_3"] %> Monthly)
-		          </label>
-		        </div>
-					</li>
-				<% end %>
-			<% end %>
-			<% if fields["additional_hd_3"].present? %>
-				<% if fields["additional_hd_3"].downcase == "included" %>
-					 <p>HD Box (<%= fields["additional_hd_3"].capitalize %>)</p>
-				<% else %>
-					<li>
-						<div class="checkbox" style="padding-left: 5px;">
-		          <%= radio_button_tag :third_tv, false, false, {id: "third_tv_2", data: { price: fields["additional_hd_3"] }, onchange: "calculateEquiptmentCosts(this);"}  %>
-		          <label class="label-checkbox" for="third_tv_2">
-		            HD Box ($<%= fields["additional_hd_3"] %> Monthly)
-		          </label>
-		        </div>
-					</li>
-				<% end %>
-			<% end %>
-			<% if fields["dta_3"].present? %>
-				<% if fields["dta_3"].downcase == "included" %>
-					<p>DTA Box (<%= fields["dta_3"].capitalize %>)</p>
-				<% else %>
-					<li>
-						<div class="checkbox" style="padding-left: 5px;">
-		          <%= radio_button_tag :third_tv, false, false, {id: "third_tv_3", data: { price: fields["dta_3"] }, onchange: "calculateEquiptmentCosts(this);"}  %>
-		          <label class="label-checkbox" for="third_tv_3">
-		            DTA Box ($<%= fields["dta_3"] %> Monthly)
-		          </label>
-		        </div>
-					</li>
-				<% end %>
-			<% end %>
-		</ul>
-
-		<!-- Fourth TV -->
-		<h4>Configure your 4th TV <small><a href="javascript:void(0);" onclick="resetSelectedItem(this);">Reset selected item</a></small></h4>
-		<ul>
-			<% if fields["4th_tv_install_4"].present? %>
-				<% if fields["4th_tv_install_4"].downcase == "included" %>
-					<p>4th Outlet Activation (<%= fields["4th_tv_install_4"].capitalize %>)</p>
-				<% else %>
-					<li>
-						<div class="checkbox">
-		          <%= check_box_tag "4th_tv_outlet", false, false, {:class => "styled",  data: { price: fields["4th_tv_install_4"], installation: true }, onchange: "calculateEquiptmentCosts(this);"}  %>
-		          <label class="label-checkbox">
-		            4th Outlet Activation Fee <em>(One Time Fee)</em> ($<%= fields["4th_tv_install_4"] %>)
-		          </label>
-		        </div>
-					</li>
-				<% end %>
-			<% end %>
-			<% if fields["dvr_box_4"].present? %>
-				<% if fields["dvr_box_4"].downcase == "included" %>
-					<p>Enhanced DVR Box &amp; Service (<%= fields["dvr_box_4"].capitalize %>)</p>
-				<% else %>
-					<li>
-						<div class="checkbox" style="padding-left: 5px;">
-		          <%= radio_button_tag :fourth_tv, false, false, {id: "fourth_tv_1", data: { price: fields["dvr_box_4"] }, onchange: "calculateEquiptmentCosts(this);"}  %>
-		          <label class="label-checkbox" for="fourth_tv_1">
-		            Enhanced DVR Box &amp; Service ($<%= fields["dvr_box_4"] %> Monthly)
-		          </label>
-		        </div>
-					</li>
-				<% end %>
-			<% end %>
-			<% if fields["additional_hd_4"].present? %>
-				<% if fields["additional_hd_4"].downcase == "included" %>
-					<p>HD Box (<%= fields["additional_hd_4"].capitalize %>)</p>
-				<% else %>
-					<li>
-						<div class="checkbox" style="padding-left: 5px;">
-		          <%= radio_button_tag :fourth_tv, false, false, {id: "fourth_tv_2", data: { price: fields["additional_hd_4"] }, onchange: "calculateEquiptmentCosts(this);"}  %>
-		          <label class="label-checkbox" for="fourth_tv_2">
-		            HD Box ($<%= fields["additional_hd_4"] %> Monthly)
-		          </label>
-		        </div>
-					</li>
-				<% end %>
-			<% end %>
-			<% if fields["dta_4"].present? %>
-				<% if fields["dta_4"].downcase == "included" %>
-					<p>DTA Box (<%= fields["dta_4"].capitalize %>)</p>
-				<% else %>
-					<li>
-						<div class="checkbox" style="padding-left: 5px;">
-		          <%= radio_button_tag :fourth_tv, false, false, {id: "fourth_tv_3", data: { price: fields["dta_4"] }, onchange: "calculateEquiptmentCosts(this);"}  %>
-		          <label class="label-checkbox" for="fourth_tv_3">
-		            DTA Box ($<%= fields["dta_4"] %> Monthly)
-		          </label>
-		        </div>
-					</li>
-				<% end %>
-			<% end %>
-		</ul>
+		<%= render partial: "offers/checkout/shared/televisions", locals: { fields: fields } %>
 		<!-- Details -->
 		<h4>
 			(<a role="button" data-toggle="collapse" href="#collapseDetailsTV" aria-expanded="false" aria-controls="collapseExample">Equiptment Description</a>)
@@ -248,7 +48,7 @@
 			<h4>More Fun with More Entertainment</h4>
 			<ul>
 				<% fields["more_fun_with_more_entertainment"].except("checkout_select").each do |key, val| %>
-					<% if key.present? %>
+					<% if val.present? %>
 						<li>
 							<% if val.downcase == "included" %>
 								<p>
@@ -291,7 +91,7 @@
 			<h4>More Entertainment for Everyone</h4>
 			<ul>
 				<% fields["more_fun_for_everyone"].except("checkout_select").each do |key, val| %>
-					<% if key.present? %>
+					<% if val.present? %>
 						<li>
 							<% if val.downcase == "included" %>
 								<p>

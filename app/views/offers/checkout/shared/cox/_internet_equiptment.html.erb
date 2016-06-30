@@ -6,7 +6,7 @@
 	</h4>
 	<ul>
 		<% fields["internet_equiptment"].except("checkout_select").each do |key, val| %>
-			<% if key.present? %>
+			<% if val.present? %>
 				<li>
 					<% if val.downcase == "included" %>
 						<p>

@@ -3,7 +3,7 @@
 	<h4>Premium Movie Channels</h4>
 	<ul>
 		<% fields["premiums"].except("checkout_select").each do |key, val| %>
-			<% if key.present? %>
+			<% if val.present? %>
 				<li>
 					<% if val.downcase == "included" %>
 						<p>

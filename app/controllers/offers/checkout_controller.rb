@@ -2,11 +2,11 @@ class Offers::CheckoutController < ApplicationController
 	include Wicked::Wizard
 	include ApplicationHelper
 
-	before_action :set_package, only: [:show, :installation_fields]
+	before_action :set_package, only: [:show, :installation_fields, :update]
 	before_action :installation_fields, only: [:show]
 	before_action :exclude_params, only: [:show]
 
-	steps *Package.checkout_steps
+	steps(*Package.checkout_steps)
 
 	def show
 		logger.debug "Step: #{step}"
@@ -21,17 +21,21 @@ class Offers::CheckoutController < ApplicationController
 		when "payments"
 			@payment = Payment.new
 			current_user || @payment.build_user
-			session[:checkout_form_params] = @equiptment_params
 		end
 		render_wizard
 	end
-	
+
 	def update
 		logger.debug "Update Step: #{step}"
+		case step
+		when "payments"
+			session[:checkout_form_params] = @equiptment_params
+			render_wizard @package
+		end
 		redirect_to root_path, notice: Payment::RESERVED_MESSAGE
 	end
 
-	private 
+	private
 
 	def set_package
 		begin
@@ -45,7 +49,7 @@ class Offers::CheckoutController < ApplicationController
 
 	def exclude_params
   	@equiptment_params = params.except(:utf8, :button, :controller, :action, :offer_id, :id)
-  end
+	end
 
 	def installation_fields
 		@charter_installation = @package.package_bundles.joins(:product).where("products.name = 'Internet'")

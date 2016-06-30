@@ -2,7 +2,8 @@
 <div class="extra_equiptments">
 	<div class="container">
 		<!-- Checkout Form -->
-		<%= form_tag offer_checkout_path(@package, Package.checkout_steps.second.to_s), method: :get, id: "extra_equiptments_form" do %>
+		<!-- offer_checkout_path(@package, Package.checkout_steps.second.to_s), method: :get -->
+		<%= form_for @package, url: wizard_path, method: :put, id: "extra_equiptments_form" do %>
 			<div class="row">
 				<div class="col-md-9 col-sm-9">
 					<blockquote>

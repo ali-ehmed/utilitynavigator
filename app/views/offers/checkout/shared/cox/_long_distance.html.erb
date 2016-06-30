@@ -4,7 +4,7 @@
 	<h4>Long Distance</h4>
 	<ul>
 		<% fields["long_distance"].except("checkout_select").each do |key, val| %>
-			<% if key.present? %>
+			<% if val.present? %>
 				<li>
 					<% if val.downcase == "included" %>
 						<p>

@@ -4,9 +4,6 @@ Rails.application.routes.draw do
 
   get 'ping' => proc {|env| [200, {}, []] }
 
-  devise_for :admin_users, ActiveAdmin::Devise.config
-  ActiveAdmin.routes(self)
-
   resources :offers, only: :index do
     resources :checkout, controller: 'offers/checkout'do
       post "/" => "offers/checkout#show"
@@ -23,6 +20,9 @@ Rails.application.routes.draw do
 
   get "/compare_packages" => "landings#compare_packages"
   get "/load_channels" => "landings#load_channels"
+
+  devise_for :admin_users, ActiveAdmin::Devise.config
+  ActiveAdmin.routes(self)
 
   # devise_for :users, controllers: { sessions: "users/sessions", :registrations => "users/registrations" }
   devise_for :users, :skip => [:registrations], controllers: { sessions: "users/sessions", :registrations => "users/registrations" }
