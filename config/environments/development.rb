@@ -61,7 +61,7 @@ Rails.application.configure do
 
   config.action_mailer.smtp_settings = {
     address: "smtp.office365.com",
-    port: 587,
+    port: 25,
     authentication: "login",
     enable_starttls_auto: true,
     user_name: "orders@utilitynavigators.com",

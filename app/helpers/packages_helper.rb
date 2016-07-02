@@ -10,6 +10,10 @@ module PackagesHelper
     end
   end
 
+  # this helper is very imp, as it has all the cable tvs
+  # which are added from admin panel on the basis of Providers
+  # if there is to add a new field in tv section the add the newly field
+  # name in this array
   def provider_televisions(count_num)
 		[
 			"dvr_box_#{count_num}",
@@ -25,6 +29,10 @@ module PackagesHelper
 		]
   end
 
+  # this is a custom names for fields as the names are on the basis of numbers
+  # e.g 'dvr_box_1', 'additional_hd_1'.
+  # this method is poping the number from field name and
+  # returning a different label
   def custom_tv_names(name)
     one_time_fee = ""
 
@@ -58,5 +66,15 @@ module PackagesHelper
     end
 
     (str + one_time_fee).html_safe
+  end
+
+  def channel_provider_names(provider)
+    if provider == Provider::TIME_WARNER
+      "twc"
+    elsif provider == Provider::CHARTER_SPECTRUM
+      "charter_spectrum"
+    else
+      "cox"
+    end
   end
 end

@@ -40,12 +40,12 @@ dismissForm = ->
 $(document).ready ->
   dismissForm()
   dt = new Date()
-  
+
   $(".time_fields").datetimepicker
     format: 'hh:mm A'
 
   $(".date_fields").datetimepicker
-    format: 'MM/DD/YYYY'
+    format: 'YYYY-DD-MM'
     minDate: dt
 
   $(".date_fields").find("input[type='text']").val("")

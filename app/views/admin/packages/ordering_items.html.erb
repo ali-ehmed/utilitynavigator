@@ -1,9 +1,10 @@
 <h3>
 	<strong>Note:</strong>
 	<ol>
-		<li>All the fields are <strong>Free</strong> by default</li>
-		<li>Donot Enter <strong>$</strong> sign for Prices</li>
-		<li>Selecting <strong>Not Include</strong> will remove the field from package</li>
+		<li>Selecting <strong>Include</strong> will include the item in this package</li>
+		<li>Selecting <strong>Add Price</strong> will allow you to add the price for the item</li>
+		<li>Selecting <strong>Not Include</strong> will remove the item from package</li>
+		<li>If item is not selected then it will not be included in the package neither on edit page.</li>
 	</ol>
 </h3>
 <%= form_tag admin_packages_path(product_ids: @product_ids), method: :post do %>
@@ -29,35 +30,15 @@
 					<label class="label">
 						Cox Service Protection Plan
 					</label>
-					<%= select_tag :cox_service_protection_plan, options_for_select(["Free", "Required"]), onChange: "$packages.setRequiredFields(this);" %>
-				</li>
-				<li style="display:none;">
-					<legend><span>Set price for Cox Service Protection Plan</span></legend>
-					<ol>
-						<li>
-							<label for="provider_name" class="label">
-								Protection Plan
-							</label>
-							<%= text_field_tag "protection_plan_service", params["protection_plan_service"], style: "width: calc(78% - 22px);", onblur: "$packages.packagePriceValidation(this);" %>
-						</li>
-					</ol>
+					<%= select_tag "checkout_select", options_for_select(["Include", "Not Include", "Add Price"]), prompt: "--Select--", class: "package_select_field", onchange: "$packages.addPriceField(this);" %>
+					<%= text_field_tag :protection_plan_service, params[:protection_plan_service], style: "display: none;width: calc(78% - 22px);", onblur: "$packages.packagePriceValidation(this);", class: "admin_checkout_price" %>
 				</li>
 				<li>
 					<label class="label">
-						Service Agreement
+						Service Agreement <br /> (Lock Rates Agreement)
 					</label>
-					<%= select_tag :service_agreement, options_for_select(["Not Include", "Include"]), onChange: "$packages.setRequiredFields(this);" %>
-				</li>
-				<li style="display:none;">
-					<legend><span>Set price for Service Agreement</span></legend>
-					<ol>
-						<li>
-							<label for="provider_name" class="label">
-								Agreement Price
-							</label>
-							<%= text_field_tag "lock_rates_agreement", params["lock_rates_agreement"], style: "width: calc(78% - 22px);", onblur: "$packages.packagePriceValidation(this);" %>
-						</li>
-					</ol>
+					<%= select_tag "checkout_select", options_for_select(["Not Include", "Add Price"]), prompt: "--Select--", class: "package_select_field", onchange: "$packages.addPriceField(this);" %>
+					<%= text_field_tag :lock_rates_agreement, params[:lock_rates_agreement], style: "display: none;width: calc(78% - 22px);", onblur: "$packages.packagePriceValidation(this);", class: "admin_checkout_price" %>
 				</li>
 			</ol>
 		</fieldset>

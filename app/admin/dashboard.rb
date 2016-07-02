@@ -14,12 +14,12 @@ ActiveAdmin.register_page "Dashboard" do
       column do
         panel "Recent Orders" do
           # ul do
-          #   Payment.all.limit(5).map do |post|
+          #   Order.all.limit(5).map do |post|
           #     li "Hello"
           #   end
           # end
-          if Payment.all.present?
-            table_for Payment.order("created_at desc").limit(5) do
+          if Order.all.present?
+            table_for Order.order("created_at desc").limit(5) do
               column :orders do |order|
                 "Order ##{order.id}"
                 link_to "Order ##{order.id}", admin_order_path(order.id)

@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   get "sitemap.xml" => "sitemaps#index", :format => "xml", :as => :sitemap
-  resources :payments
+  resources :orders
 
   get 'ping' => proc {|env| [200, {}, []] }
 

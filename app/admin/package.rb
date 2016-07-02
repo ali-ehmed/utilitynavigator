@@ -8,6 +8,7 @@ ActiveAdmin.register Package do
     column :package_name
     column :price
     column :installation_price
+		column :self_installation
     column :provider do |package|
     	package.try(:provider).try(:name)
     end

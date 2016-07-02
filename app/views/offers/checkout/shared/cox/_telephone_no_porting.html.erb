@@ -24,14 +24,12 @@
 		<% if fields["telephone_no_porting"].present? %>
 			<li>
 				<% if fields["telephone_no_porting"]["new_phone_number"].downcase == "included" %>
-					<label class="label-checkbox">
-						New telephone number charges (Included)
-					</label>
+					New telephone number charges (Included)
 				<% else %>
 					<div class="checkbox" style="padding-left: 5px;">
 	          <%= radio_button_tag :current_telephone_number, false, false, {id: "current_telephone_number_2", data: { price: fields["telephone_no_porting"]["new_phone_number"] || 0 }, onchange: "calculateEquiptmentCosts(this);"}  %>
 	          <label class="label-checkbox" for="current_telephone_number_2">
-	            Please provide me with a new telephone number, ($<%= fields["new_phone_number"] || 0 %>)
+	            Please provide me with a new telephone number, ($<%= fields["telephone_no_porting"]["new_phone_number"] || 0 %>)
 	          </label>
 	        </div>
 				<% end %>

@@ -24,16 +24,18 @@ class OffersController < ApplicationController
 			@packages = Package.broadband_providers(@providers)
 		end
 
-		# Applying product filters
-		if params[:filters] and params[:filters].present?
-			@packages = @packages.send(params[:filters])
+		if @packages.length > 0
+			# Applying product filters
+			if params[:filters] and params[:filters].present?
+				@packages = @packages.send(params[:filters])
+			end
+
+			@count_twc = @packages.try("time_warner").length
+			@count_charter = @packages.try("charter_spectrum").length
+			@count_cox = @packages.try("cox").length
+
+			@packages = @packages.paginate(:page => params[:page], :per_page => 6)
 		end
-
-		@count_twc = @packages.try("time_warner").length || 0
-		@count_charter = @packages.try("charter_spectrum").length || 0
-		@count_cox = @packages.try("cox").length || 0
-
-		@packages = @packages.paginate(:page => params[:page], :per_page => 6)
 
 		respond_to do |format|
 			format.html

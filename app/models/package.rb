@@ -24,15 +24,16 @@ class Package < ActiveRecord::Base
 	has_many :package_bundles
 	accepts_nested_attributes_for :package_bundles
 
-	has_many :payments, dependent: :delete_all
-	accepts_nested_attributes_for :payments
+	has_many :orders, dependent: :delete_all
+	accepts_nested_attributes_for :orders
 
 	attr_accessor :product_ids, :charter_tv_spectrum
+	after_initialize :default_values
 
 	extend PackagesHelper
 
 	cattr_accessor :checkout_steps do
-		[:extra_equiptments, :payments]
+		[:extra_equiptments, :reserve_order]
 	end
 
 	SINGLE_PLAY = "Single play"
@@ -121,4 +122,9 @@ class Package < ActiveRecord::Base
 		  .having("count(distinct products.name) = ?", filters.length)
 		end
 	end
+
+	private
+		def default_values
+			self.self_installation = true
+		end
 end

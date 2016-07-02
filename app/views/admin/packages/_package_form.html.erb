@@ -1,45 +1,41 @@
-<h3>
-	Note:
-	<ol>
-		<li>Donot add <strong>$</strong> in price fields.</li>
-		<li>Any field must filled with <strong>Free</strong> if you want to include in that field in this package.</li>
-	</ol>
-</h3>
 <%= simple_form_for [:admin, @package], url: @url, method: @http_method do |f| %>
 	<fieldset class="inputs">
 		<legend><span>General Details of Package</span></legend>
 		<ol>
 			<li class="string input optional stringish" id="package_name_input">
-				<%= f.input :package_name, input_html: { value: params[:package] ? params[:package][:package_name] : nil } %>
+				<%= f.input :package_name, input_html: { value: params[:package] ? params[:package][:package_name] : @package.try(:package_name) } %>
 			</li>
 			<li class="string input optional stringish">
 				<%= f.label :package_description %>
 				<br />
-				<%= f.input :package_description, input_html: { class: "package-content", value: params[:package] ? params[:package][:package_description] : nil } %>
+				<%= f.input :package_description, input_html: { class: "package-content", value: params[:package] ? params[:package][:package_description] : @package.try(:package_description) } %>
 			</li>
 			<li class="string input optional stringish">
 				<%= f.label :plan_details %>
 				<br />
-				<%= f.input :plan_details, input_html: { class: "package-plan-details", value: params[:package] ? params[:package][:plan_details] : nil } %>
+				<%= f.input :plan_details, input_html: { class: "package-plan-details", value: params[:package] ? params[:package][:plan_details] : @package.try(:plan_details) } %>
 			</li>
 			<li class="string input optional stringish" id="package_price_info_input">
-				<%= f.input :price_info, input_html: { onblur: "$packages.packageCharacterLengthValidation(this, 72);", value: params[:package] ? params[:package][:price_info] : nil } %>
+				<%= f.input :price_info, input_html: { onblur: "$packages.packageCharacterLengthValidation(this, 72);", value: params[:package] ? params[:package][:price_info] : @package.try(:price_info) } %>
 				<strong>Hint: </strong>Price Info should not be more than 70 characters
 			</li>
 			<li class="string input optional stringish" id="package_price_input">
-				<%= f.input :price, input_html: { onblur: "$packages.packagePriceValidation(this);", value: params[:package] ? params[:package][:price] : nil } %>
+				<%= f.input :price, input_html: { onblur: "$packages.packagePriceValidation(this);", value: params[:package] ? params[:package][:price] : @package.try(:price) } %>
 			</li>
 			<li class="string input optional stringish" id="package_monthly_fee_after_promotion_input">
-				<%= f.input :monthly_fee_after_promotion, input_html: { onblur: "$packages.packageCharacterLengthValidation(this, 50);", value: params[:package] ? params[:package][:monthly_fee_after_promotion] : nil } %>
+				<%= f.input :monthly_fee_after_promotion, input_html: { onblur: "$packages.packageCharacterLengthValidation(this, 50);", value: params[:package] ? params[:package][:monthly_fee_after_promotion] : @package.try(:monthly_fee_after_promotion) } %>
 				<strong>Hint: </strong>Monthly Fee Text should not be more than 70 characters
 			</li>
 			<li class="string input optional stringish" id="package_installation_price_input">
-				<%= f.input :installation_price, input_html: { onblur: "$packages.packagePriceValidation(this);", value: params[:package] ? params[:package][:installation_price] : nil } %>
+				<%= f.input :installation_price, input_html: { onblur: "$packages.packagePriceValidation(this);", value: params[:package] ? params[:package][:installation_price] : @package.try(:installation_price) } %>
+			</li>
+			<li class="string input optional stringish" id="package_self_installation_input">
+				<%= f.input :self_installation, :as => :select, :collection => [["Include", true], ["Not Include", false]], selected: params[:package] ? params[:package][:self_installation] : @package.try(:self_installation) %>
 			</li>
 			<li class="string input optional stringish">
 				<%= f.label :promotions %>
 				<br />
-				<%= f.input :promotions, input_html: { class: "package-promotions", value: params[:package] ? params[:package][:promotions] : nil } %>
+				<%= f.input :promotions, input_html: { class: "package-promotions", value: params[:package] ? params[:package][:promotions] : @package.try(:promotions) } %>
 			</li>
 		</ol>
 	</fieldset>

@@ -1,11 +1,11 @@
-ActiveAdmin.register Payment, as: "Orders" do
+ActiveAdmin.register Order do
   actions :all, only: [:show, :index]
 	index do
     selectable_column
     column :package do |order|
       "#{order.try("package").try("package_name")}"
     end
-    
+
     column :user do |order|
     	link_to order.user.full_name, admin_user_path(order.user)
     end
@@ -17,7 +17,7 @@ ActiveAdmin.register Payment, as: "Orders" do
     column :package_type do |order|
        order.try("package").try("package_type").try("name")
     end
-    
+
     column "Placed At" do |order|
     	order.created_at.strftime("%d-%B-%Y")
     end

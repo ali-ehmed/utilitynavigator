@@ -1,35 +1,43 @@
 <% (1..4).each do |count_num_of_tvs| %>
-  <h4>Configure your <%= count_num_of_tvs.ordinalize %> TV
-    
-    <% if count_num_of_tvs == 1 %>
-      <span class="checkout_required">(Required)</span>
-    <% end %>
+  <!-- Pulling out matched elements from Provider Channels -->
+  <% matched_elems = provider_televisions(count_num_of_tvs).select_matched(fields.keys) %>
 
-    <small><a href="javascript:void(0);" onclick="resetSelectedItem(this);">Reset selected item</a></small>
-  </h4>
+  <!-- Seleting the matched elements -->
+  <% tv_items = fields.select {|k,v| matched_elems.include?(k) } %>
+  <% if tv_items.values.any? &:present? %>
+    <h4>Configure your <%= count_num_of_tvs.ordinalize %> TV
 
-  <ul>
-    <!-- Pulling out matched elements from Provider Channels -->
-    <% matched_elems = provider_televisions(count_num_of_tvs).select_matched(fields.keys) %>
-
-    <!-- Seleting the matched elements -->
-    <% fields.select {|k,v| matched_elems.include?(k) }.each_with_index do |(key, value), index| %>
-      <% count = index + 1 %>
-      <% if value.present? %>
-        <li>
-          <% if value.downcase == "included" %>
-            <p><%= custom_tv_names(key) %> (<%= value.capitalize %>)</p>
-
-          <% else %>
-            <div class="checkbox" style="padding-left: 5px;">
-              <%= radio_button_tag "#{count_num_of_tvs.ordinalize}_tv_#{count}", false, false, {id: "#{count_num_of_tvs.ordinalize}_tv_#{count}", data: { price: value }, onchange: "calculateEquiptmentCosts(this);"}  %>
-              <label class="label-checkbox" for="<%= count_num_of_tvs.ordinalize %>_tv_<%= count %>">
-                <%= custom_tv_names(key) %> ($<%= value %> Monthly)
-              </label>
-            </div>
-          <% end %>
-        </li>
+      <% if count_num_of_tvs == 1 %>
+        <span class="checkout_required">(Required)</span>
       <% end %>
-    <% end %>
-  </ul>
+
+      <small><a href="javascript:void(0);" onclick="resetSelectedItem(this);">Reset selected item</a></small>
+    </h4>
+
+    <ul>
+      <% tv_items.each_with_index do |(key, value), index| %>
+        <% count = index + 1 %>
+        <% if value.present? %>
+          <li>
+            <% if value.downcase == "included" %>
+              <p><%= custom_tv_names(key) %> (<%= value.capitalize %>)</p>
+
+            <% else %>
+              <div class="checkbox" style="padding-left: 5px;">
+                <%= radio_button_tag "#{count_num_of_tvs.ordinalize}_tv_#{count}", false, false, {id: "#{count_num_of_tvs.ordinalize}_tv_#{count}", data: { price: value }, onchange: "calculateEquiptmentCosts(this);"}  %>
+                <label class="label-checkbox" for="<%= count_num_of_tvs.ordinalize %>_tv_<%= count %>">
+                  <%= custom_tv_names(key) %> ($<%= value %> Monthly)
+                </label>
+              </div>
+            <% end %>
+          </li>
+        <% end %>
+      <% end %>
+    </ul>
+  <% else %>
+    <div class="alert alert-danger">
+      There no <strong>television equiptments</strong> in this package
+    </div>
+    <% break %>
+  <% end %>
 <% end %>

@@ -130,7 +130,9 @@ window.$packages = {
 			$this.closest("li").next().show();
 
 			$.each($sub_fields, function() {
-				$(this).hide();
+				if($(this).is(':visible')) {
+					$(this).hide();
+				}
 				$(this).val("");
 			});
 
@@ -141,9 +143,8 @@ window.$packages = {
 			return;
 		} else {
 
-			$this.val("Not Include")
 			$.each($sub_fields, function() {
-				$(this).val("Not Include");
+				$(this).val("");
 			});
 
 			$this.closest("li").next().hide();

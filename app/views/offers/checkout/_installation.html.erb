@@ -1,9 +1,9 @@
 <div class="bs-callout bs-callout-danger" style="background-color: #E0E0E0;" id="callout-collapse-dependency">
 	<h4 class="setup">
-		Installation <span class="checkout_required">(Required)</span>
+		Package Installation <span class="checkout_required">(Required)</span>
 	</h4>
 </div>
-<% unless @package.installation_price.downcase == "free" or @package.installation_price.downcase == "included" %>
+<% unless @package.installation_price.downcase == "included" %>
 	<h4>
 		<small><a href="javascript:void(0);" onclick="resetSelectedItem(this);">Reset selected item</a></small>
 	</h4>
@@ -14,7 +14,7 @@
 			<div class="checkbox" style="padding-left: 5px;">
 				<%= radio_button_tag :installation, false, false, {id: "installation", data: { price: @package.installation_price, installation: true }, onchange: "calculateEquiptmentCosts(this);"}  %>
         <label class="label-checkbox" for="installation">
-          Schedule an appointment for a technician to install my services ($<%= @package.installation_price %>) 
+          Schedule an appointment for a technician to install my services ($<%= @package.installation_price %> - <em>One time charges</em>) 
         </label>
       </div>
     <% else %>
@@ -23,26 +23,29 @@
       </label>
     <% end %>
 	</li>
-	<li>
-		<div class="checkbox" style="padding-left: 5px;">
-			<%= radio_button_tag :installation, false, false, {id: "self_installation", data: { price: 0, installation: true }, onchange: "calculateEquiptmentCosts(this);"}  %>
-      <label class="label-checkbox" for="self_installation">
-        I’ll do a self-install ($0)
-      </label>
-    </div>
-    <a role="button" data-toggle="collapse" href="#collapseSelfInstall" aria-expanded="false" aria-controls="collapseExample" class="view_more">View Details</a>
-		<div class="collapse" id="collapseSelfInstall">
-			<div class="well">
-				<p>
-        	For self-install option you will receive a call after placing your order about connectivity of self-install if available for this address. You may also call us to enquire about this first.
-        </p>
-			</div>
-    </div>
-	</li>
 
-  <hr />
+	<% if @package.self_installation.present? %>
+		<li>
+			<div class="checkbox" style="padding-left: 5px;">
+				<%= radio_button_tag :installation, false, false, {id: "self_installation", data: { price: 0, installation: true }, onchange: "calculateEquiptmentCosts(this);"}  %>
+	      <label class="label-checkbox" for="self_installation">
+	        I’ll do a self-install ($0)
+	      </label>
+	    </div>
+	    <a role="button" data-toggle="collapse" href="#collapseSelfInstall" aria-expanded="false" aria-controls="collapseExample" class="view_more">View Details</a>
+			<div class="collapse" id="collapseSelfInstall">
+				<div class="well">
+					<p>
+	        	For self-install option you will receive a call after placing your order about connectivity of self-install if available for this address. You may also call us to enquire about this first.
+	        </p>
+				</div>
+	    </div>
+		</li>
+	<% end %>
+
+  <!-- <hr /> -->
   <!-- CHARTER Installation -->
-  <% if @package.provider.name == Provider::CHARTER_SPECTRUM %>
+  <!-- <% if @package.provider.name == Provider::CHARTER_SPECTRUM %>
     <% fields = get_in_hash(@charter_installation) %>
     <li>
       <% if fields["wifi_installation"].present? %>
@@ -52,52 +55,48 @@
           <div class="checkbox">
             <%= check_box_tag :wifi_installation, false, false, {:class => "styled", data: { price: fields["wifi_installation"].to_f, installation: true }, onchange: "calculateEquiptmentCosts(this);"}  %>
             <label class="label-checkbox" for="self_installation">
-              Schedule an appointment for a technician to install my WiFi services ($<%= fields["wifi_installation"].to_f %> One Time)
+              Schedule an appointment for a technician to install my WiFi services ($<%= fields["wifi_installation"].to_f %> - <em>One time charges</em>)
             </label>
           </div>
         <% end %>
       <% end %>
     </li>
-  <% end %>
+  <% end %> -->
 
   <!-- COX Installation -->
-  <% if @package.provider.name == Provider::COX %>
+  <!-- <% if @package.provider.name == Provider::COX %>
   	<% fields = get_in_hash(@cox_installation) %>
-  	<li>
-
+  	<li> -->
       <!-- Telephone outlet installation -->
-      <% if fields["telephone_outlet_installation"].present? %>
-        <h4>
-          Telephone Outlet(s) Installation
-          <p>
-            <small>
-              Do you need any additional Telephone Outlets for your home?
-            </small>
-          </p>
-        </h4>
-
-        <!-- Outlet Installation -->
-        <% if fields["telephone_outlet_installation"]["outlet_installation"].present? %>
-					<% if fields["telephone_outlet_installation"]["outlet_installation"].downcase == "included" %>
-						<label class="label-checkbox">
-							 Outlet Installation, (Included)
-						</label>
-					<% else %>
-	          <div class="checkbox">
-	            <%= check_box_tag :outlet_installation, false, false, {:class => "styled", data: { price: fields["telephone_outlet_installation"]["outlet_installation"], installation: true }, onchange: "calculateEquiptmentCosts(this);"}  %>
-	            <label class="label-checkbox">
-	               Outlet Installation, ($<%= fields["telephone_outlet_installation"]["outlet_installation"] %> monthly)
-	            </label>
-	          </div>
-					<% end %>
-					<a role="button" data-toggle="collapse" href="#collaspeoutlet_install" aria-expanded="false" aria-controls="collapseExample" class="view_more">View Details</a>
-					<div class="collapse" id="collaspeoutlet_install">
-						<p class="well">
-							Installation of additional phone jack wired and installed
-						</p>
-					</div>
-        <% end %>
-      <% end %>
+      <!-- <% if fields["telephone_outlet_installation"].present? and fields["telephone_outlet_installation"]["outlet_installation"].present? %> -->
+      	<!-- Outlet Installation -->
+				<!-- <h4>
+					Telephone Outlet(s) Installation
+					<p>
+						<small>
+							Do you need any additional Telephone Outlets for your home?
+						</small>
+					</p>
+				</h4>
+				<% if fields["telephone_outlet_installation"]["outlet_installation"].downcase == "included" %>
+					<label class="label-checkbox">
+						 Outlet Installation, (Included)
+					</label>
+				<% else %>
+          <div class="checkbox">
+            <%= check_box_tag :outlet_installation, false, false, {:class => "styled", data: { price: fields["telephone_outlet_installation"]["outlet_installation"], installation: true }, onchange: "calculateEquiptmentCosts(this);"}  %>
+            <label class="label-checkbox">
+               Outlet Installation, ($<%= fields["telephone_outlet_installation"]["outlet_installation"] %> - <em>One time charges</em>)
+            </label>
+          </div>
+				<% end %>
+				<a role="button" data-toggle="collapse" href="#collaspeoutlet_install" aria-expanded="false" aria-controls="collapseExample" class="view_more">View Details</a>
+				<div class="collapse" id="collaspeoutlet_install">
+					<p class="well">
+						Installation of additional phone jack wired and installed
+					</p>
+				</div> -->
+      <!-- <% end %>
   	</li>
-  <% end %>
+  <% end %> -->
 </ul>

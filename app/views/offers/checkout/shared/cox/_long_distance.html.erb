@@ -1,6 +1,6 @@
 <!-- Long distance -->
 
-<% if fields["long_distance"].present? %>
+<% if fields["long_distance"].present? and fields["long_distance"].values.any? &:present? %>
 	<h4>Long Distance</h4>
 	<ul>
 		<% fields["long_distance"].except("checkout_select").each do |key, val| %>
@@ -29,7 +29,7 @@
 							</p>
 						<% when "cox_long_distance" %>
 							<p class="well">
-								With Cox Long Distance, you pay just ($<%= val %>/min).
+								With Cox Long Distance, you pay just <strong>(<%= val.downcase == "included" ? "Included" : "$#{val}/min" %>)</strong>.
 							</p>
 						<% end %>
 					</div>

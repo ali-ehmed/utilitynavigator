@@ -3,8 +3,8 @@ class Offers::CheckoutController < ApplicationController
 	include ApplicationHelper
 
 	before_action :set_package, only: [:show, :installation_fields, :update]
-	before_action :installation_fields, only: [:show]
-	before_action :exclude_params, only: [:show]
+	# before_action :installation_fields, only: [:show]
+	before_action :exclude_params, only: [:show, :update]
 
 	steps(*Package.checkout_steps)
 
@@ -18,21 +18,21 @@ class Offers::CheckoutController < ApplicationController
 			rescue Exception
 				redirect_to root_path, flash: { warning: "There was a problem, Please contact Tech Support Team!" }
 			end
-		when "payments"
-			@payment = Payment.new
-			current_user || @payment.build_user
+		when "reserve_order"
+			@order = Order.new
+			saved_equiptments
+			current_user || @order.build_user
 		end
 		render_wizard
 	end
 
 	def update
 		logger.debug "Update Step: #{step}"
-		case step
-		when "payments"
+		case step.to_s
+		when "extra_equiptments"
 			session[:checkout_form_params] = @equiptment_params
 			render_wizard @package
 		end
-		redirect_to root_path, notice: Payment::RESERVED_MESSAGE
 	end
 
 	private
@@ -48,7 +48,11 @@ class Offers::CheckoutController < ApplicationController
 	end
 
 	def exclude_params
-  	@equiptment_params = params.except(:utf8, :button, :controller, :action, :offer_id, :id)
+  	@equiptment_params = params.except(:authenticity_token, :utf8, :_method, :action, :controller, :offer_id, :id)
+	end
+
+	def saved_equiptments
+		@equiptments = session[:checkout_form_params]
 	end
 
 	def installation_fields

@@ -4,10 +4,10 @@
 		<% fields = get_in_hash(@package_bundles.find_by_product_id(product.id).checkout_fields) %>
 		<%#= fields %>
 		<%= render partial: "offers/checkout/shared/televisions", locals: { fields: fields } %>
-		
+
 		<!-- Details -->
 		<h4>
-			(<a role="button" data-toggle="collapse" href="#collapseDetailsTV" aria-expanded="false" aria-controls="collapseExample">Equiptment Description</a>)
+			(<a role="button" data-toggle="collapse" href="#collapseDetailsTV" aria-expanded="false" aria-controls="collapseExample">Television Equitpments Description</a>)
 		</h4>
 		<div class="collapse" id="collapseDetailsTV">
 		  <div class="well">
@@ -51,7 +51,7 @@
 				<li>
 					<% if fields["digital_tier_1"]["50_additional_channels"].downcase == "included" %>
 						<p>
-							50 additional channels (Free)
+							50 additional channels (Included)
 						</p>
 					<% else %>
 						<div class="checkbox">
@@ -78,7 +78,7 @@
 				<li>
 					<% if fields["digital_tier_2"]["25_additional_channels"].downcase == "included" %>
 						<p>
-							25 additional channels (Free)
+							25 additional channels (Included)
 						</p>
 					<% else %>
 						<div class="checkbox">
@@ -223,7 +223,7 @@
 			<h4>Modem <span class="checkout_required">(Required)</span> <small><a href="javascript:void(0);" onclick="resetSelectedItem(this);">Reset selected item</a></small></h4>
 			<% if fields["modem"].downcase == "included" %>
 				<p>
-					Internet plan requires modem to connect internet service (FREE)
+					Internet plan requires modem to connect internet service (Included)
 				</p>
 			<% else %>
 				<ul>
@@ -274,6 +274,27 @@
 				</ul>
 			<% end %>
 		<% end %>
+
+    <% if fields["wifi_installation"].present? %>
+			<h4>WiFi Installation</h4>
+
+			<% if fields["wifi_installation"].downcase == "included" %>
+        <p>
+        	WiFi Installation Service is included in this package
+        </p>
+      <% else %>
+				<ul>
+					<li>
+		        <div class="checkbox">
+		          <%= check_box_tag :wifi_installation, false, false, {:class => "styled", data: { price: fields["wifi_installation"].to_f, installation: true }, onchange: "calculateEquiptmentCosts(this);"}  %>
+		          <label class="label-checkbox" for="self_installation">
+		            Schedule an appointment for a technician to install my WiFi services ($<%= fields["wifi_installation"].to_f %> - <em>One time charges</em>)
+		          </label>
+		        </div>
+					</li>
+				</ul>
+      <% end %>
+    <% end %>
 		<hr />
 	<% else %>
 
@@ -295,7 +316,7 @@
 		        </div>
 	        <% else %>
             <p>
-            	New Phone Number (<%= fields["new_phone_number"] %>)
+            	New Phone Number (Included)
             </p>
         	<% end %>
           <a role="button" data-toggle="collapse" href="#collaspephone" aria-expanded="false" aria-controls="collapseExample" class="view_more">View Details</a>
@@ -317,7 +338,7 @@
 		        </div>
 	        <% else %>
             <p>
-            	Old Phone Number (<%= fields["old_phone_number"] %>)
+            	Old Phone Number (Included)
             </p>
         	<% end %>
           <a role="button" data-toggle="collapse" href="#collaspephone_1" aria-expanded="false" aria-controls="collapseExample" class="view_more">View Details</a>

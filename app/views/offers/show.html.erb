@@ -10,15 +10,15 @@
 				<ul class="list-inline">
 					<li class="text-center">
 						<%= image_tag("twc-search.png") %>
-						(<%= @count_twc %>)
+						(<%= @count_twc || 0 %>)
 					</li>
 					<li class="text-center">
 						<%= image_tag("cox-search.png") %>
-						(<%= @count_cox %>)
+						(<%= @count_cox || 0 %>)
 					</li>
 					<li class="text-center">
 						<%= image_tag("charter-search.png") %>
-						(<%= @count_charter %>)
+						(<%= @count_charter || 0 %>)
 					</li>
 				</ul>
 		</div>
@@ -63,6 +63,10 @@
 
 										<%= link_to "More Info & Promotions", "#", class: "detail-link", class: "detail-link", "data-toggle" => "modal", "data-target" => "#promotions_#{package.id}" %>
 										<%= render partial: "shared/promotions", locals: { package: package } %>
+										<% if package.package_bundles.map(&:product).map(&:name).include?("Cable") %>
+											<br />
+											<a href="#" class="channel-comparison-link" data-provider="<%= channel_provider_names(package.provider.try("name")) %>">CHANNEL COMPARISON</a>
+										<% end %>
 										<br /><br />
 										<%= link_to "CHOOSE THIS PLAN", offer_checkout_path(package, Package.checkout_steps.first.to_s), class: "btn btn-warning btn-lg choose-plan-btn" %>
 									</div>

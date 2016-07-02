@@ -5,7 +5,7 @@
 			<div class="checkbox">
         <%= check_box_tag :cox_service_protection_plan, false, false, {:class => "styled", data: { price: @package.protection_plan_service.to_f }, onchange: "calculateEquiptmentCosts(this);"}  %>
         <label class="label-checkbox">
-           Cox Service Protection Plan, $<%= @package.protection_plan_service.to_f %>
+           Cox Service Protection Plan, ($<%= @package.protection_plan_service.to_f %> Monthly)
         </label>
         <br />
         <a role="button" data-toggle="collapse" href="#collaspecox_service_protection_plan" aria-expanded="false" aria-controls="collapseExample" class="view_more">View Details</a>

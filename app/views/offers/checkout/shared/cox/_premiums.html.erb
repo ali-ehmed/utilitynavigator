@@ -1,5 +1,5 @@
 <!-- Premiumns -->
-<% if fields["premiums"].present? %>
+<% if fields["premiums"].present? and fields["premiums"].values.any? &:present? %>
 	<h4>Premium Movie Channels</h4>
 	<ul>
 		<% fields["premiums"].except("checkout_select").each do |key, val| %>

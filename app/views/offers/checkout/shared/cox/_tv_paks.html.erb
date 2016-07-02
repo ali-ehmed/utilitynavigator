@@ -1,6 +1,6 @@
 <!-- TV Paks -->
 
-<% if fields["tv_paks"].present? %>
+<% if fields["tv_paks"].present? and fields["tv_paks"].values.any? &:present? %>
 	<h4>TV Paks</h4>
 	<ul>
 		<% fields["tv_paks"].except("checkout_select").each do |key, val| %>

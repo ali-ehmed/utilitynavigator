@@ -1,7 +1,7 @@
 <div class="extra_equiptments">
 	<div class="container">
-		<%= simple_form_for @payment, url: :payments, method: :post, :html => {:novalidate => true} do |f| %>
-			<input name="payment[package_id]" type="hidden" value="<%= @package.id %>" />
+		<%= simple_form_for @order, url: :orders, method: :post, :html => {:novalidate => true} do |f| %>
+			<input name="order[package_id]" type="hidden" value="<%= @package.id %>" />
 			<div class="row">
 				<div class="col-md-9 col-sm-9">
 					<blockquote>
@@ -73,39 +73,12 @@
 											<fieldset>
 												<legend>Security</legend>
 												<div class="row">
-													<!-- <div class="col-md-4">
-														<div class="form-group">
-															<%= form_user.input :driver_license, placeholder: "Driver License" %>
-														</div>
-													</div>
-													<div class="col-md-1 text-center">
-														<div style="margin: 27px auto;">
-															<strong>OR</strong>
-														</div>													
-													</div>
-													<div class="col-md-3">
-														<div class="form-group">
-															<%= form_user.input :social_security, placeholder: "Social Security" %>
-														</div>
-													</div> -->
 													<div class="col-md-6">
 														<div class="form-group">
 															<%= form_user.input :four_digit_no, placeholder: "4 Digit No" %>
 														</div>
 													</div>
-													<!-- <div class="col-md-6">
-														<div class="form-group">
-															<%= form_user.input :state_issue, placeholder: "State Change" %>
-														</div>
-													</div> -->
 												</div>
-												<!-- <div class="row">
-													<div class="col-md-6">
-														<div class="form-group">
-															<%= form_user.input :state_issue, placeholder: "State Change" %>
-														</div>
-													</div>
-												</div> -->
 											</fieldset>
 										</div>
 									</div>
@@ -118,7 +91,7 @@
 						</h3>
 					<% end %>
 					<div class="checkbox">
-             <%= check_box("payment", "user_agreement", { class: 'styled' }, "true", "false") %>
+             <%= check_box("order", "user_agreement", { class: 'styled' }, "true", "false") %>
               <label style="padding-left: 8px;">
                 I agree with the <a href="<%= page_path("privacy_policy") %>" target="_blank">Privacy Policy</a> &amp; <a href="<%= page_path("terms_conditions") %>" target="_blank">Terms of use</a>.
               </label>
@@ -147,7 +120,7 @@
 
 							<div class="form-group">
 								<div class="checkbox">
-	                <%= check_box("payment", "pay_at_installation", { class: 'styled' }, "true", "false") %>
+	                <%= check_box("order", "pay_at_installation", { class: 'styled' }, "true", "false") %>
 
 									<label for="payment_pay_at_installation">
 									  Pay at the time of installation
@@ -258,10 +231,11 @@
 											<strong>Installation Price</strong>
 										</li>
 										<li class="pull-right">
-								  		<%= hidden_field_tag :installation_cost, @equiptment_params["installation_cost"] %>
-											<%= number_to_currency(@equiptment_params["installation_cost"]) %>
+								  		<%= hidden_field_tag :installation_cost, @equiptments["installation_cost"] %>
+											<%= number_to_currency(@equiptments["installation_cost"]) || "0.00" %>
 										</li>
 									</ul>
+									<em>(One time charges)</em>
 								</li>
 								<li>
 									<ul class="list-inline">
@@ -269,8 +243,8 @@
 											<strong>Equiptment Price</strong>
 										</li>
 										<li class="pull-right">
-											<%= hidden_field_tag :equiptment_cost, @equiptment_params["equiptment_cost"] %>
-											<%= number_to_currency(@equiptment_params["equiptment_cost"]) %>
+											<%= hidden_field_tag :equiptment_cost, @equiptments["equiptment_cost"] %>
+											<%= number_to_currency(@equiptments["equiptment_cost"]) || "0.00" %>
 										</li>
 									</ul>
 								</li>
@@ -293,9 +267,9 @@
 									Total
 								</li>
 								<li class="pull-right">
-									<%= hidden_field_tag :total_cost, @equiptment_params["total_cost"].to_f.round(2) %>
+									<%= hidden_field_tag :total_cost, @equiptments["total_cost"].to_f.round(2) %>
 									<span class="label label-success total_cost_span">
-							  		<%= number_to_currency(@equiptment_params["total_cost"]) %>
+							  		<%= number_to_currency(@equiptments["total_cost"]) || number_to_currency(@package.price) %>
 							  	</span>
 								</li>
 							</ul>
@@ -321,7 +295,7 @@
 	      </h4>
       </div>
       <div class="modal-body">
-        <%= render partial: "shared/order_details", locals: { equiptment_params: @equiptment_params, package: @package } %>
+        <%= render partial: "shared/order_details", locals: { equiptment_params: @equiptments, package: @package } %>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-warning" data-dismiss="modal">Close</button>

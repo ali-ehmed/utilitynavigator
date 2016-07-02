@@ -3,7 +3,7 @@
 	<div class="container">
 		<!-- Checkout Form -->
 		<!-- offer_checkout_path(@package, Package.checkout_steps.second.to_s), method: :get -->
-		<%= form_for @package, url: wizard_path, method: :put, id: "extra_equiptments_form" do %>
+		<%= form_for @package, url: wizard_path, method: :put, :html => { id: "extra_equiptments_form" } do %>
 			<div class="row">
 				<div class="col-md-9 col-sm-9">
 					<blockquote>
@@ -38,7 +38,7 @@
 								<ul class="list-inline">
 									<li>Plan Summary</li>
 									<li class="pull-right">
-										<%= link_to "Change Plan", offers_path %>
+										<%= link_to "Change Plan", offers_path(filters: "tv_filter") %>
 									</li>
 								</ul>
 							</div>

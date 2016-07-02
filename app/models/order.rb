@@ -1,6 +1,6 @@
 # == Schema Information
 #
-# Table name: payments
+# Table name: orders
 #
 #  id                :integer          not null, primary key
 #  user_id           :integer
@@ -16,7 +16,7 @@
 #  status            :integer          default(0)
 #
 
-class Payment < ActiveRecord::Base
+class Order < ActiveRecord::Base
 	belongs_to :user
 	accepts_nested_attributes_for :user
 
@@ -36,8 +36,8 @@ class Payment < ActiveRecord::Base
 	validate :validate_agreement
 	# after_initialize :default_fields
 
-	def render_payment_step
-		'offers/checkout/payments'
+	def render_order_step
+		'offers/checkout/reserve_order'
 	end
 
 	attr_accessor :security_code, :pay_at_installation, :user_agreement
