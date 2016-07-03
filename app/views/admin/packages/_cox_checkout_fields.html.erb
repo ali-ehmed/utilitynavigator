@@ -84,7 +84,7 @@
 			<label class="label">
 				Cox Tech Solutions
 			</label>
-			<%= ff.select :cox_teck_solutions_items, options_for_select(["Required", "Not Include"]), {prompt: "--Select--"}, onChange: "$packages.setRequiredFields(this);" %>
+			<%= ff.select :cox_tech_solutions_items, options_for_select(["Required", "Not Include"]), {prompt: "--Select--"}, onChange: "$packages.setRequiredFields(this);" %>
 		</li>
 		<%= render partial: "admin/packages/shared/cox/items_for_cox_tech_solutions", locals: { ff: ff } %>
 

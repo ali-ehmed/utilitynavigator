@@ -5,39 +5,15 @@
 <%= form_tag update_ordering_items_admin_package_path(@package.id, product_id: @package_bundle.product_id), method: :put do %>
 	<%= fields_for @package_bundle.product.name.downcase.to_sym do |f| %>
 		<fieldset class="inputs">
-			<legend><span>Set items <%= @package_bundle.product.name %></span></legend>
+			<legend><span>Set items for <%= @package_bundle.product.name %></span></legend>
 				<ol>
 					<% n_fields.each do |key, value| %>
-						<% if value.downcase == "not include" or value.downcase == "free" %>
-							<%= f.hidden_field key.to_sym, value: value %>
-						<% else %>
-							<li>
-								<label for="provider_name" class="label">
-									<%= key.humanize  %>
-								</label>
-
-								<% options = [["Free", "Included"], ["Not Included", ""], ["Add Price", "Add Price"]] %>
-
-								<% if value.downcase == "included" or value.blank? %>
-
-									<%= f.select "checkout_select", options_for_select(options, value), {prompt: "--Select--"}, class: "package_select_field", onchange: "$packages.addPriceField(this);" %>
-
-									<%= f.text_field key.to_sym, style: "display: none;width: calc(78% - 22px);", onblur: "$packages.packagePriceValidation(this);", class: "admin_checkout_price", value: "Included" %>
-
-								<% elsif value.downcase == "required" %>
-
-									<%= f.hidden_field key.to_sym, value: value %>
-
-								<% elsif value.is_number? %>
-
-									<%= f.select "checkout_select", options_for_select(["Free", "Not Include", "Add Price"], "Add Price"), {prompt: "--Select--"}, class: "package_select_field", onchange: "$packages.addPriceField(this);" %>
-
-									<%= f.text_field key.to_sym, style: "width: calc(78% - 22px);", onblur: "$packages.packagePriceValidation(this);", class: "admin_checkout_price", value: value %>
-
-								<% end %>
-
-							</li>
+						<% if value.is_a?(Hash) %>
+							<% next %>
 						<% end %>
+						<li>
+							<%= fields_editing_html(f, key, value, n_fields) %>
+						</li>
 					<% end %>
 				</ol>
 			<%= submit_tag "Update Items" %> | <%= link_to "Edit Package", edit_admin_package_path(@package.id) %>

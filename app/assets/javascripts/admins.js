@@ -3,37 +3,7 @@
 									Admin Panel Javascript
 */
 
-/* ********************************************************* */
-
-// Loading Froala Html Editor Libraries
-
 //= require jquery.cookie
-//= require froala_editor.min.js
-//= require plugins/align.min.js
-//= require plugins/char_counter.min.js
-//= require plugins/code_beautifier.min.js
-//= require plugins/entities.min.js
-//= require plugins/font_family.min.js
-//= require plugins/font_size.min.js
-//= require plugins/fullscreen.min.js
-//= require plugins/image.min.js
-//= require plugins/image_manager.min.js
-//= require plugins/inline_style.min.js
-//= require plugins/line_breaker.min.js
-//= require plugins/link.min.js
-//= require plugins/lists.min.js
-//= require plugins/paragraph_format.min.js
-//= require plugins/paragraph_style.min.js
-//= require plugins/quick_insert.min.js
-//= require plugins/quote.min.js
-//= require plugins/save.min.js
-//= require plugins/table.min.js
-//= require plugins/url.min.js
-
-/* ********************************************************* */
-
-
-/* ******************** CUSTOM JS START ********************* */
 
 // Setting valid form variable
 window.validPackageForm = true;
@@ -343,10 +313,20 @@ $(document).ready(function () {
 		$("fieldset.package-products *").attr("disabled", "disabled").off('click');
 	}
 
-	// Froala Editor
-	$('.package-content').froalaEditor();
-	$('.package-promotions').froalaEditor();
-	$('.package-plan-details').froalaEditor();
+	// Tinymce Editor
+	tinymce.init({
+	  selector: '.package-editor',
+	  height: 180,
+	  plugins: [
+	    'advlist autolink lists link image charmap print preview anchor',
+	    'searchreplace visualblocks code fullscreen',
+	    'insertdatetime media table contextmenu paste code'
+	  ],
+	  toolbar: 'insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image',
+		color_picker_callback: function(callback, value) {
+	    callback('#FF00FF');
+	  }
+	});
 
 	$("a#approval_statuses").closest("li").css("border-bottom", "solid 5px #ebebeb");
 });
