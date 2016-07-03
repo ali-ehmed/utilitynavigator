@@ -51,6 +51,9 @@ ActiveAdmin.register Package do
 
 			unless requirements.blank?
 				panel bundle.product.name do
+					h3 do
+						"Product Bundles"
+					end
 					table_for bundle do
 				 		requirements.keys.map do |key|
 				 			column key, class: "fields" do
@@ -58,7 +61,33 @@ ActiveAdmin.register Package do
 				 			end
 				 		end
 					end
-	  		end
+					h3 do
+						"Checkout Fields"
+					end
+					attributes_table_for bundle do
+				 		JSON.parse(bundle.checkout_fields.gsub("=>", ":")).each do |key, value|
+							unless key == "checkout_select"
+					 			row key, class: "fields" do
+									if !value.is_a?(String) and value.is_a?(Hash)
+										div class: "nested_fields_admin_preview"	do
+											table_for bundle do
+												value.each do |key, value|
+													unless key == "checkout_select"
+														column key, class: "fields" do
+															value == "" ? "N/A" : ""
+														end
+													end
+												end
+											end
+										end
+									else
+					 					value == "" ? "N/A" : ""
+									end
+					 			end
+							end
+				 		end
+					end
+				end
 			end
     end
   end
@@ -112,7 +141,6 @@ ActiveAdmin.register Package do
 
 					bundle_params = ""
 					bundle_params = package_bundle_params.select {|k,v| bundle_keys_by_product.include?(k) }
-					# params.select_keys(bundle_keys_by_product)
 
 					@package.package_bundles.build do |package_bundle|
 						package_bundle.product_id = product.id

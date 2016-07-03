@@ -100,6 +100,11 @@ ActiveAdmin.setup do |config|
   # Default:
   config.logout_link_path = :destroy_admin_user_session_path
 
+  #  == Adding Custom Template in Active Admin Footer
+  config.namespace :admin do |admin|
+    config.view_factory.footer = Admin::Footer
+  end
+
   # This setting changes the http method used when rendering the
   # link. For example :get, :delete, :put, etc..
   #
@@ -267,4 +272,8 @@ ActiveAdmin.setup do |config|
   # of those filters by default here.
   #
   # config.include_default_association_filters = true
+end
+
+module ActiveAdmin::ViewHelpers
+  include ApplicationHelper
 end

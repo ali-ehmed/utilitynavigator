@@ -1,22 +1,13 @@
-
-/*
- *= require froala_editor.min.css
- *= require froala_style.min.css
- *= require font-awesome
- *= require plugins/char_counter.min.css
- *= require plugins/fullscreen.min.css
- *= require plugins/image_manager.min.css
- *= require plugins/image.min.css
- *= require plugins/line_breaker.min.css
- *= require plugins/quick_insert.min.css
- *= require plugins/table.min.css
- */
+div.nested_fields_admin_preview {
+	width: 55%;
+  overflow: auto;
+}
 fieldset.package-products {
 	padding: 11px 0px 11px 0px;
   border-radius: 5px;
 }
 fieldset.package-products > legend {
-  padding-left: 8px;			
+  padding-left: 8px;
 }
 
 .product-validate {

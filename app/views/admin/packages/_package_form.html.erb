@@ -8,12 +8,12 @@
 			<li class="string input optional stringish">
 				<%= f.label :package_description %>
 				<br />
-				<%= f.input :package_description, input_html: { class: "package-content", value: params[:package] ? params[:package][:package_description] : @package.try(:package_description) } %>
+				<%= f.input :package_description, label: false, input_html: { class: "package-editor", value: params[:package] ? params[:package][:package_description] : @package.try(:package_description) } %>
 			</li>
 			<li class="string input optional stringish">
 				<%= f.label :plan_details %>
 				<br />
-				<%= f.input :plan_details, input_html: { class: "package-plan-details", value: params[:package] ? params[:package][:plan_details] : @package.try(:plan_details) } %>
+				<%= f.input :plan_details, label: false, input_html: { class: "package-editor", value: params[:package] ? params[:package][:plan_details] : @package.try(:plan_details) } %>
 			</li>
 			<li class="string input optional stringish" id="package_price_info_input">
 				<%= f.input :price_info, input_html: { onblur: "$packages.packageCharacterLengthValidation(this, 72);", value: params[:package] ? params[:package][:price_info] : @package.try(:price_info) } %>
@@ -35,7 +35,7 @@
 			<li class="string input optional stringish">
 				<%= f.label :promotions %>
 				<br />
-				<%= f.input :promotions, input_html: { class: "package-promotions", value: params[:package] ? params[:package][:promotions] : @package.try(:promotions) } %>
+				<%= f.input :promotions, label: false, input_html: { class: "package-editor", value: params[:package] ? params[:package][:promotions] : @package.try(:promotions) } %>
 			</li>
 		</ol>
 	</fieldset>
