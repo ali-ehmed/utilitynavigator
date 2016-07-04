@@ -1,0 +1,48 @@
+<h3>
+	<strong>Note:</strong>
+	<ol>
+		<li>Selecting <strong>Include</strong> will include the item in this package</li>
+		<li>Selecting <strong>Add Price</strong> will allow you to add the price for the item</li>
+		<li>Selecting <strong>Not Include</strong> will remove the item from package</li>
+		<li>If item is not selected then it will not be included in the package neither on edit page.</li>
+	</ol>
+</h3>
+<%= form_tag wizard_path, method: :put do %>
+	<% for product in @products do %>
+		<fieldset class="inputs">
+			<legend><span><%= product.name %></span></legend>
+			<ol>
+				<% if @provider.name == Provider::CHARTER_SPECTRUM %>
+					<%= render partial: "charter_checkout_fields", locals: { product: product } %>
+				<% elsif @provider.name == Provider::TIME_WARNER %>
+					<%= render partial: "twc_checkout_fields", locals: { product: product } %>
+				<% else %>
+					<%= render partial: "cox_checkout_fields", locals: { product: product } %>
+				<% end %>
+			</ol>
+		</fieldset>
+	<% end %>
+	<!-- Cox Provider other details -->
+	<% if @provider.name == Provider::COX %>
+		<fieldset class="inputs">
+			<ol>
+				<li>
+					<label class="label">
+						Cox Service Protection Plan
+					</label>
+					<%= select_tag "checkout_select", options_for_select(["Include", "Not Include", "Add Price"]), prompt: "--Select--", class: "package_select_field", onchange: "$packages.addPriceField(this);" %>
+					<%= text_field_tag :protection_plan_service, params[:protection_plan_service], style: "display: none;width: calc(78% - 22px);", onblur: "$packages.packagePriceValidation(this);", class: "admin_checkout_price" %>
+				</li>
+				<li>
+					<label class="label">
+						Service Agreement <br /> (Lock Rates Agreement)
+					</label>
+					<%= select_tag "checkout_select", options_for_select(["Not Include", "Add Price"]), prompt: "--Select--", class: "package_select_field", onchange: "$packages.addPriceField(this);" %>
+					<%= text_field_tag :lock_rates_agreement, params[:lock_rates_agreement], style: "display: none;width: calc(78% - 22px);", onblur: "$packages.packagePriceValidation(this);", class: "admin_checkout_price" %>
+				</li>
+			</ol>
+		</fieldset>
+	<% end %>
+	<%= button_tag "Create Package", type: :submit %>
+	<%= link_to "Cancel", admin_packages_path %>
+<% end %>

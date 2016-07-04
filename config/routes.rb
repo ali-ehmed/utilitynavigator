@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+  match '/admin/checkout/:id/packages/:package_id' => 'admin/checkout#show', via: :get, :as => :admin_checkout
+  match '/admin/checkout/:id/packages/:package_id' => 'admin/checkout#update', via: :put
+
   get "sitemap.xml" => "sitemaps#index", :format => "xml", :as => :sitemap
   resources :orders
 

@@ -7,13 +7,11 @@
 			</li>
 			<li class="string input optional stringish">
 				<%= f.label :package_description %>
-				<br />
-				<%= f.input :package_description, label: false, input_html: { class: "package-editor", value: params[:package] ? params[:package][:package_description] : @package.try(:package_description) } %>
+				<%= f.input :package_description, label: false, :wrapper_html => { :class => "package_content_alignment" }, input_html: { class: "package-editor", value: params[:package] ? params[:package][:package_description] : @package.try(:package_description) } %>
 			</li>
 			<li class="string input optional stringish">
 				<%= f.label :plan_details %>
-				<br />
-				<%= f.input :plan_details, label: false, input_html: { class: "package-editor", value: params[:package] ? params[:package][:plan_details] : @package.try(:plan_details) } %>
+				<%= f.input :plan_details, label: false, :wrapper_html => { :class => "package_content_alignment" }, input_html: { class: "package-editor", value: params[:package] ? params[:package][:plan_details] : @package.try(:plan_details) } %>
 			</li>
 			<li class="string input optional stringish" id="package_price_info_input">
 				<%= f.input :price_info, input_html: { onblur: "$packages.packageCharacterLengthValidation(this, 72);", value: params[:package] ? params[:package][:price_info] : @package.try(:price_info) } %>
@@ -34,8 +32,7 @@
 			</li>
 			<li class="string input optional stringish">
 				<%= f.label :promotions %>
-				<br />
-				<%= f.input :promotions, label: false, input_html: { class: "package-editor", value: params[:package] ? params[:package][:promotions] : @package.try(:promotions) } %>
+				<%= f.input :promotions, label: false, :wrapper_html => { :class => "package_content_alignment" }, input_html: { class: "package-editor", value: params[:package] ? params[:package][:promotions] : @package.try(:promotions) } %>
 			</li>
 		</ol>
 	</fieldset>
@@ -81,16 +78,9 @@
 									<br />
 									<small>
 										<%= link_to "Edit ordering items for #{p_bundle.product.try(:name)}", edit_ordering_items_admin_package_path(@package.id, product_id: p_bundle.product_id) %>
-										<!-- | <%#= link_to "Remove Product", remove_package_product_admin_package_path(@package.id, product_id: p_bundle.product_id), method: :delete, data: { confirm: "Are you sure?" } %> -->
 									</small>
 								</li>
 							<% end %>
-
-							<%# unless @package.package_bundles.count >= 3 %>
-								<!-- <br /> -->
-								<%#= link_to "Add New", "" %>
-							<%# end %>
-
 						<% end %>
 					</ol>
 				</fieldset>

@@ -71,10 +71,10 @@ ActiveAdmin.register Package do
 									if !value.is_a?(String) and value.is_a?(Hash)
 										div class: "nested_fields_admin_preview"	do
 											table_for bundle do
-												value.each do |key, value|
-													unless key == "checkout_select"
-														column key, class: "fields" do
-															value == "" ? "N/A" : ""
+												value.each do |checkout_key, checkout_value|
+													unless checkout_key == "checkout_select"
+														column checkout_key, class: "fields" do
+															checkout_value == "" ? "N/A" : ""
 														end
 													end
 												end
@@ -115,59 +115,72 @@ ActiveAdmin.register Package do
   end
 
 	controller do
-		def create
-			unlock_package_params = ActiveSupport::HashWithIndifferentAccess.new(session[:package_params])
-			@package = Package.new(unlock_package_params)
-
-			package_bundle_params = session[:package_bundles_params]
-
-			@package.charter_tv_spectrum = package_bundle_params["charter_tv_spectrum"]
-
-			@package.protection_plan_service = params["protection_plan_service"] || ""
-			@package.lock_rates_agreement = params["lock_rates_agreement"] || ""
-
-			if @package.save
-				@product_ids = params[:product_ids].map(&:to_i)
-				@products = Product.where("id in (?)", @product_ids)
-				@provider = Provider.find(@package.provider_id)
-
-				@provider_preferences = @provider.product_provider_preferences
-
-				for product in @products do
-					bundle_keys_by_product = Array.new
-					@provider_preferences.preferences_of_product(product.id).each do |preference|
-						bundle_keys_by_product << preference.additional_field_weight.to_field.to_s
-					end
-
-					bundle_params = ""
-					bundle_params = package_bundle_params.select {|k,v| bundle_keys_by_product.include?(k) }
-
-					@package.package_bundles.build do |package_bundle|
-						package_bundle.product_id = product.id
-						package_bundle.field = bundle_params
-						case product.name.downcase
-						when "cable"
-							package_bundle.checkout_fields = params[:cable]
-						when "internet"
-							package_bundle.checkout_fields = params[:internet]
-						else
-							package_bundle.checkout_fields = params[:phone]
-						end
-						package_bundle.save
-					end
-				end
-
-
-				redirect_to admin_packages_path, notice: "Package Created"
-			else
-				render :product_bundles, flash: { alert: "Something went wrong while creating a new package" }
-			end
-		end
+		before_action :proceed_package_incompletion, only: [:edit, :update]
 
 		def new
 			@package = Package.new
-			@url = product_bundles_admin_packages_path
+			@url = admin_packages_path
 			@http_method = :post
+		end
+
+		def create
+			# unlock_package_params = ActiveSupport::HashWithIndifferentAccess.new(session[:package_params])
+			# @package = Package.new(unlock_package_params)
+			#
+			# package_bundle_params = session[:package_bundles_params]
+			#
+			# @package.charter_tv_spectrum = package_bundle_params["charter_tv_spectrum"]
+			#
+			# @package.protection_plan_service = params["protection_plan_service"] || ""
+			# @package.lock_rates_agreement = params["lock_rates_agreement"] || ""
+			@package = Package.new(initialize_params)
+			if @package.save
+				# @product_ids = params[:product_ids].map(&:to_i)
+				# @products = Product.where("id in (?)", @product_ids)
+				# @provider = Provider.find(@package.provider_id)
+				#
+				# @provider_preferences = @provider.product_provider_preferences
+				#
+				# for product in @products do
+				# 	bundle_keys_by_product = Array.new
+				# 	@provider_preferences.preferences_of_product(product.id).each do |preference|
+				# 		bundle_keys_by_product << preference.additional_field_weight.to_field.to_s
+				# 	end
+				#
+				# 	bundle_params = ""
+				# 	bundle_params = package_bundle_params.select {|k,v| bundle_keys_by_product.include?(k) }
+				#
+				# 	@package.package_bundles.build do |package_bundle|
+				# 		package_bundle.product_id = product.id
+				# 		package_bundle.field = bundle_params
+				# 		case product.name.downcase
+				# 		when "cable"
+				# 			package_bundle.checkout_fields = params[:cable]
+				# 		when "internet"
+				# 			package_bundle.checkout_fields = params[:internet]
+				# 		else
+				# 			package_bundle.checkout_fields = params[:phone]
+				# 		end
+				# 		package_bundle.save
+				# 	end
+				# end
+
+				@product_ids = params[:product_ids].map(&:to_i)
+				@products = Product.where("id in (?)", @product_ids)
+
+				@products.each do |product|
+					product.package_bundles.create(package_id: @package.id)
+				end
+
+				if @provider.product_provider_preferences.blank?
+					redirect_to new_admin_package_path(package: initialize_params), flash: { alert: Package::NULL_PREFERENCES }
+					return
+				end
+
+				redirect_to admin_checkout_path(:package_bundles, @package.id), notice: Package::SECOND_STEP
+			else
+				redirect_to new_admin_package_path(package: initialize_params), flash: { alert: @package.errors.full_messages.map { |msg| content_tag(:li, msg) }.join.html_safe }
+			end
 		end
 
 		def edit
@@ -185,6 +198,16 @@ ActiveAdmin.register Package do
 				flash[:alert] = "Review errors below"
 
 				render :edit
+			end
+		end
+
+		private
+
+		def proceed_package_incompletion
+			if resource.package_bundles.map(&:field).any? == false
+				redirect_to admin_checkout_path(:package_bundles, resource.id), notice: Package::INCOMPLETE_PACKAGE_BUNDLES
+			elsif resource.package_bundles.map(&:checkout_fields).any? == false
+				redirect_to admin_checkout_path(:equiptment_items, resource.id), notice: Package::INCOMPLETE_EQUIPTMENT_ITEMS
 			end
 		end
 
