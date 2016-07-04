@@ -7,7 +7,7 @@
 		<li>If item is not selected then it will not be included in the package neither on edit page.</li>
 	</ol>
 </h3>
-<%= form_tag admin_packages_path(product_ids: @product_ids), method: :post do %>
+<%= form_tag wizard_path, method: :put do %>
 	<% for product in @products do %>
 		<fieldset class="inputs">
 			<legend><span><%= product.name %></span></legend>

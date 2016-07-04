@@ -66,25 +66,21 @@ ActiveAdmin.register Package do
 					end
 					attributes_table_for bundle do
 				 		JSON.parse(bundle.checkout_fields.gsub("=>", ":")).each do |key, value|
-							unless key == "checkout_select"
-					 			row key, class: "fields" do
-									if !value.is_a?(String) and value.is_a?(Hash)
-										div class: "nested_fields_admin_preview"	do
-											table_for bundle do
-												value.each do |key, value|
-													unless key == "checkout_select"
-														column key, class: "fields" do
-															value == "" ? "N/A" : ""
-														end
-													end
+				 			row key, class: "fields" do
+								if !value.is_a?(String) and value.is_a?(Hash)
+									div class: "nested_fields_admin_preview"	do
+										table_for bundle do
+											value.each do |checkout_key, checkout_value|
+												column checkout_key, class: "fields" do
+													checkout_value.blank? ? "N/A" : checkout_value
 												end
 											end
 										end
-									else
-					 					value == "" ? "N/A" : ""
 									end
-					 			end
-							end
+								else
+				 					value.blank? ? "N/A" : value
+								end
+				 			end
 				 		end
 					end
 				end
@@ -115,59 +111,34 @@ ActiveAdmin.register Package do
   end
 
 	controller do
+		before_action :proceed_package_incompletion, only: [:show, :edit, :update]
+
+		def new
+			@package = Package.new
+			@url = admin_packages_path
+			@http_method = :post
+		end
+
 		def create
-			unlock_package_params = ActiveSupport::HashWithIndifferentAccess.new(session[:package_params])
-			@package = Package.new(unlock_package_params)
-
-			package_bundle_params = session[:package_bundles_params]
-
-			@package.charter_tv_spectrum = package_bundle_params["charter_tv_spectrum"]
-
-			@package.protection_plan_service = params["protection_plan_service"] || ""
-			@package.lock_rates_agreement = params["lock_rates_agreement"] || ""
+			@package = Package.new(initialize_params)
 
 			if @package.save
 				@product_ids = params[:product_ids].map(&:to_i)
 				@products = Product.where("id in (?)", @product_ids)
-				@provider = Provider.find(@package.provider_id)
 
-				@provider_preferences = @provider.product_provider_preferences
-
-				for product in @products do
-					bundle_keys_by_product = Array.new
-					@provider_preferences.preferences_of_product(product.id).each do |preference|
-						bundle_keys_by_product << preference.additional_field_weight.to_field.to_s
-					end
-
-					bundle_params = ""
-					bundle_params = package_bundle_params.select {|k,v| bundle_keys_by_product.include?(k) }
-
-					@package.package_bundles.build do |package_bundle|
-						package_bundle.product_id = product.id
-						package_bundle.field = bundle_params
-						case product.name.downcase
-						when "cable"
-							package_bundle.checkout_fields = params[:cable]
-						when "internet"
-							package_bundle.checkout_fields = params[:internet]
-						else
-							package_bundle.checkout_fields = params[:phone]
-						end
-						package_bundle.save
-					end
+				@products.each do |product|
+					product.package_bundles.create(package_id: @package.id)
 				end
 
+				if @package.provider.product_provider_preferences.blank?
+					redirect_to new_admin_package_path(package: initialize_params), flash: { alert: Package::NULL_PREFERENCES }
+					return
+				end
 
-				redirect_to admin_packages_path, notice: "Package Created"
+				redirect_to admin_checkout_path(:package_bundles, @package.id), notice: Package::SECOND_STEP
 			else
-				render :product_bundles, flash: { alert: "Something went wrong while creating a new package" }
+				redirect_to new_admin_package_path(package: initialize_params), flash: { alert: @package.errors.full_messages.map { |msg| content_tag(:li, msg) }.join.html_safe }
 			end
-		end
-
-		def new
-			@package = Package.new
-			@url = product_bundles_admin_packages_path
-			@http_method = :post
 		end
 
 		def edit
@@ -188,88 +159,33 @@ ActiveAdmin.register Package do
 			end
 		end
 
+		private
+
+		def proceed_package_incompletion
+			if resource.package_bundles.map(&:field).any? == false
+				redirect_to admin_checkout_path(:package_bundles, resource.id), notice: Package::INCOMPLETE_PACKAGE_BUNDLES
+			elsif resource.package_bundles.map(&:checkout_fields).any? == false
+				redirect_to admin_checkout_path(:equiptment_items, resource.id), notice: Package::INCOMPLETE_EQUIPTMENT_ITEMS
+			end
+		end
+
 		def initialize_params
 			params.require(:package).permit(:provider_id, :package_type_id, :price, :price_info, :package_description,
 																			:package_name, :promotions, :promotion_disclaimer, :plan_details, :monthly_fee_after_promotion, :installation_price)
 		end
 	end
 
-	# permit_params :provider_id
-
-	collection_action :product_bundles, method: :post do
-		# @params = params[:package]
-		params.except(:promotions)
-
-		@package = Package.new(initialize_params)
-		logger.debug "--#{initialize_params}"
-
-		if !@package.valid?
-			redirect_to new_admin_package_path(package: params[:package]), flash: { alert: @package.errors.full_messages.map { |msg| content_tag(:li, msg) }.join.html_safe }
-			return
-		end
-
-		session[:package_params] = params[:package]
-
-		@product_ids = params[:product_ids].map(&:to_i)
-		@products = Product.where("id in (?)", @product_ids)
-		@provider = Provider.find(params[:package][:provider_id])
-
-		@provider_preferences = @provider.product_provider_preferences
-
-		if @provider_preferences.blank?
-			redirect_to new_admin_package_path(package: params[:package]), flash: { alert: "There are no preferences present for #{@provider.name}" }
-			return
-		end
-
-	 	respond_to do |format|
-			format.html
-		end
-	end
-
-
-	collection_action :ordering_items, method: :get do
-		session[:package_bundles_params] = params
-		@product_ids = params[:product_ids].map(&:to_i)
-		@products = Product.where("id in (?)", @product_ids)
-		@provider = Provider.find(params[:provider_id])
-
-		respond_to do |format|
-			format.html
-		end
-	end
-
-	member_action :edit_ordering_items, method: :get do
+	member_action :edit_equiptment_items, method: :get do
 		@package = Package.find(params[:id])
 		@package_bundle = @package.package_bundles.find_by_product_id(params[:product_id])
 		@checkout_fields = @package_bundle.checkout_fields
 	end
 
-	member_action :update_ordering_items, method: :put do
+	member_action :update_equiptment_items, method: :put do
 		@package = Package.find(params[:id])
 		@package_bundle = @package.package_bundles.find_by_product_id(params[:product_id])
 		@package_bundle.update_attribute(:checkout_fields, params[@package_bundle.product.name.downcase.to_sym])
 
-		redirect_to edit_admin_package_path(@package.id), notice: "Package Updated"
-	end
-
-	member_action :remove_package_product, method: :delete do
-		@package = Package.find(params[:id])
-		@package_bundle = @package.package_bundles.find_by_product_id(params[:product_id])
-		@package_bundle.destroy
-
-		case @package.package_bundles.count
-		when 1
-			@package_type = PackageType.find_by_name(Package::SINGLE_PLAY)
-		when 2
-			@package_type = PackageType.find_by_name(Package::DOUBLE_PLAY)
-		when 3
-			@package_type = PackageType.find_by_name(Package::TRIPLE_PLAY)
-		end
-
-		@package.package_type_id = @package_type.id
-		@package.save
-
-		@product = Product.find(params[:product_id])
-		redirect_to edit_admin_package_path(@package.id), notice: "Package Product '#{@product.name}' Created"
+		redirect_to edit_admin_package_path(@package.id), notice: "Package Equiptment Items Updated"
 	end
 end

@@ -53,7 +53,7 @@ searchProviders = ->
     $input_address = $full_address_json
     delete $full_address_json['apt']
     delete $full_address_json['filters']
-    
+
     console.log $input_address
 
     #Checking Validations of search inputs
@@ -127,5 +127,5 @@ searchProviders = ->
       console.log 'no location found'
       return
 
-$(document).ready ->
+$(document).on "page:change", ->
   searchProviders()

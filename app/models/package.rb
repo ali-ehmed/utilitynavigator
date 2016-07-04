@@ -21,7 +21,7 @@ class Package < ActiveRecord::Base
 	belongs_to :provider
 	belongs_to :package_type
 
-	has_many :package_bundles
+	has_many :package_bundles, dependent: :delete_all
 	accepts_nested_attributes_for :package_bundles
 
 	has_many :orders, dependent: :delete_all
@@ -39,6 +39,12 @@ class Package < ActiveRecord::Base
 	SINGLE_PLAY = "Single play"
 	DOUBLE_PLAY = "Double play"
 	TRIPLE_PLAY = "Triple play"
+
+	NULL_PREFERENCES = "There are no preferences present for this package"
+	SECOND_STEP = "Please provide items for package bundles"
+	FINAL_STEP = "Package has been created successfully"
+	INCOMPLETE_PACKAGE_BUNDLES = "Please provide all information of this package"
+	INCOMPLETE_EQUIPTMENT_ITEMS = "Please provide the equiptment items for this package"
 
 	# Length of packages displaying bottom on provider pages
 	PACKAGE_PER_PAGE_LENGTH = 3

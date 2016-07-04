@@ -34,7 +34,6 @@ module PackagesHelper
   # this method is poping the number from field name and
   # returning a different label
   def custom_tv_names(name, price)
-    one_time_fee = ""
     is_monthly = "Monthly"
 
     name = name.split("_")
@@ -65,8 +64,8 @@ module PackagesHelper
     when "cable_card"
       str = "Cable Card"
     end
-    "($ #{str} #{is_monthly})"
-    (str + one_time_fee).html_safe
+
+    return "#{str} ($#{price} #{is_monthly})"
   end
 
   def channel_provider_names(provider)
@@ -91,19 +90,19 @@ module PackagesHelper
       </label>
     }
 
-    selected_option = selected_options_of_field(field_val)
+    selected_option = selected_option_of_fields(field_val)
 
-    if checkout_select_options_1.map(&:last).include?(selected_option)
+    if select_options_non_subfields.map(&:last).include?(selected_option)
       if selected_option == "Add Price"
         hidden_class = ""
         text_box_value = field_val
       end
 
       html << %{
-        #{form.select "checkout_select", options_for_select(checkout_select_options_1, selected_option), {prompt: "--Select--"}, class: "package_select_field", onchange: "$packages.addPriceField(this);"}
+        #{form.select "checkout_select", options_for_select(select_options_non_subfields, selected_option), {prompt: "--Select--"}, class: "package_select_field", onchange: "$packages.addPriceField(this);"}
         #{form.text_field field_key.to_s, style: "#{hidden_class}width: calc(78% - 22px);", onblur: "$packages.packagePriceValidation(this);", class: "admin_checkout_price", value: text_box_value}
       }
-    elsif checkout_select_options_2.map(&:last).include?(selected_option)
+    elsif select_options_subfields.map(&:last).include?(selected_option)
 
       hash_field_name, hash_field_value = find_hash_values_from_fields(field_key, checkout_fields)
 
@@ -112,7 +111,7 @@ module PackagesHelper
       end
 
       html << %{
-        #{form.select field_key.to_s, options_for_select(checkout_select_options_2, field_val), {prompt: "--Select--"}, class: "package_select_field", onchange: "$packages.setRequiredFields(this);"}
+        #{form.select field_key.to_s, options_for_select(select_options_subfields, field_val), {prompt: "--Select--"}, class: "package_select_field", onchange: "$packages.setRequiredFields(this);"}
       }
       if hash_field_value.present?
         form.fields_for hash_field_name.to_sym do |nested_form|
@@ -123,7 +122,6 @@ module PackagesHelper
           }
           html << %{ <ol> }
 
-
           hash_field_value.each do |nested_field_key, nested_field_value|
             html << %{
               <li>
@@ -131,7 +129,6 @@ module PackagesHelper
               </li>
             }
           end
-
 
           html << %{ </ol> }
           html << %{ </li> }
@@ -143,15 +140,15 @@ module PackagesHelper
     html.html_safe
   end
 
-  def checkout_select_options_1
-    options = [["Include", "Included"], ["Not Include", ""], ["Add Price", "Add Price"]]
+  def select_options_non_subfields
+    [["Include", "Included"], ["Not Include", ""], ["Add Price", "Add Price"]]
   end
 
-  def checkout_select_options_2
-    options = [["Required", "Required"], ["Not Include", "Not Include"]]
+  def select_options_subfields
+    [["Required", "Required"], ["Not Include", "Not Include"]]
   end
 
-  def selected_options_of_field(field_val)
+  def selected_option_of_fields(field_val)
     selected_option = field_val
 
     if !field_val.is_a?(Hash) and selected_option.is_number?
