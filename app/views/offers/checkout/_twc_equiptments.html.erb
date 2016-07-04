@@ -44,7 +44,7 @@
 		<% if fields["more_fun_with_more_entertainment"].present? %>
 			<h4>More Fun with More Entertainment</h4>
 			<ul>
-				<% fields["more_fun_with_more_entertainment"].except("checkout_select").each do |key, val| %>
+				<% fields["more_fun_with_more_entertainment"].each do |key, val| %>
 					<% if val.present? %>
 						<li>
 							<% if val.downcase == "included" %>
@@ -87,7 +87,7 @@
 		<% if fields["more_fun_for_everyone"].present? %>
 			<h4>More Entertainment for Everyone</h4>
 			<ul>
-				<% fields["more_fun_for_everyone"].except("checkout_select").each do |key, val| %>
+				<% fields["more_fun_for_everyone"].each do |key, val| %>
 					<% if val.present? %>
 						<li>
 							<% if val.downcase == "included" %>
@@ -192,7 +192,6 @@
 
 		<!-- Fields For Internet -->
 		<% fields = get_in_hash(@package_bundles.find_by_product_id(product.id).checkout_fields) %>
-		<%#= fields %>
 
 		<% if fields["modem"].present? %>
 			<h4>Internet Modem <span class="checkout_required">(Required)</span> <small><a href="javascript:void(0);" onclick="resetSelectedItem(this);">Reset selected item</a></small></h4>
@@ -217,12 +216,6 @@
 		        </div>
 					</li>
 				</ul>
-				<!-- <div class="alert alert-info">
-					<strong>Please Note:</strong>
-					<p>
-						Time Warner Cable does not sell modems. If you don't have a modem when we install your Internet service, we'll install an Internet Modem for you. The standard monthly modem rate (above) will apply.)
-					</p>
-				</div> -->
 			<% end %>
 		<% end %>
 
@@ -254,12 +247,6 @@
 		        </div>
 					</li>
 				</ul>
-				<!-- <div class="alert alert-info">
-					<strong>Please Note:</strong>
-					<p>
-						Time Warner Cable does not sell modems. If you don't have a modem when we install your Internet service, we'll install an Internet Modem for you. The standard monthly modem rate (above) will apply.)
-					</p>
-				</div> -->
 			<% end %>
 		<% end %>
 		<hr />
@@ -268,7 +255,6 @@
 		<!-- Fields for Phone -->
 
 		<% fields = get_in_hash(@package_bundles.find_by_product_id(product.id).checkout_fields) %>
-		<%#= fields %>
 
 		<h4>PHONE <span class="checkout_required">(Required)</span> <small><a href="javascript:void(0);" onclick="resetSelectedItem(this);">Reset selected item</a></small></h4>
 		<ul>

@@ -5,7 +5,7 @@
 		<!-- <small><a href="javascript:void(0);" onclick="resetSelectedItem(this);">Reset selected item</a></small> -->
 	</h4>
 	<ul>
-		<% fields["internet_equiptment"].except("checkout_select").each do |key, val| %>
+		<% fields["internet_equiptment"].each do |key, val| %>
 			<% if val.present? %>
 				<li>
 					<% if val.downcase == "included" %>

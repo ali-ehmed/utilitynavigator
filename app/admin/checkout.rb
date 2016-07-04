@@ -14,7 +14,6 @@ ActiveAdmin.register Checkout do
     def show
       case step
       when :package_bundles
-        @provider = @package.provider
         @provider_preferences = @provider.product_provider_preferences
       end
       render_wizard
@@ -29,7 +28,7 @@ ActiveAdmin.register Checkout do
 
         @package.charter_tv_spectrum = params["charter_tv_spectrum"]
         @package.save
-        
+
         for product in @products do
         	@provider_preferences.preferences_of_product(product.id).each do |preference|
 						bundle_keys_by_product << preference.additional_field_weight.to_field.to_s
@@ -49,9 +48,10 @@ ActiveAdmin.register Checkout do
         @package.save
 
         for product in @products do
-          exclude_garbage_fields(params, product)
+          equiptment_items = exclude_garbage_fields(params, product)
           package_bundle = @package.package_bundles.find_by_product_id(product)
-          package_bundle.checkout_fields = params[product.to_sym]
+          package_bundle.checkout_fields = equiptment_items
+          logger.debug equiptment_items
           package_bundle.save
         end
 
@@ -64,12 +64,14 @@ ActiveAdmin.register Checkout do
     private
 
     def exclude_garbage_fields(params, product)
-      params[product.to_sym].delete("checkout_select")
-      params[product.to_sym].each do |key, value|
+      params[product.name.underscore.to_sym].delete("checkout_select")
+      params[product.name.underscore.to_sym].each do |key, value|
         if !value.is_a?(String) and value.is_a?(Hash)
           value.delete("checkout_select")
         end
       end
+
+      params[product.name.underscore.to_sym]
     end
 
     def set_package
@@ -81,6 +83,7 @@ ActiveAdmin.register Checkout do
       end
       @package_bundles = @package.package_bundles.includes(:product)
       @products = @package_bundles.map(&:product)
+      @provider = @package.provider
     end
   end
 end

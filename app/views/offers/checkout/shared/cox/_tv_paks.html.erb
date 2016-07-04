@@ -3,7 +3,7 @@
 <% if fields["tv_paks"].present? and fields["tv_paks"].values.any? &:present? %>
 	<h4>TV Paks</h4>
 	<ul>
-		<% fields["tv_paks"].except("checkout_select").each do |key, val| %>
+		<% fields["tv_paks"].each do |key, val| %>
 			<% if val.present? %>
 				<li>
 					<% if val.downcase == "included" %>

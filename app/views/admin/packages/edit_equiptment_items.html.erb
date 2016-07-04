@@ -1,18 +1,15 @@
 <% fields = get_in_hash(@checkout_fields) %>
-<% fields.delete("checkout_select") %>
-<% n_fields = fields %>
-
-<%= form_tag update_ordering_items_admin_package_path(@package.id, product_id: @package_bundle.product_id), method: :put do %>
+<%= form_tag update_equiptment_items_admin_package_path(@package.id, product_id: @package_bundle.product_id), method: :put do %>
 	<%= fields_for @package_bundle.product.name.downcase.to_sym do |f| %>
 		<fieldset class="inputs">
 			<legend><span>Set items for <%= @package_bundle.product.name %></span></legend>
 				<ol>
-					<% n_fields.each do |key, value| %>
+					<% fields.each do |key, value| %>
 						<% if value.is_a?(Hash) %>
 							<% next %>
 						<% end %>
 						<li>
-							<%= fields_editing_html(f, key, value, n_fields) %>
+							<%= fields_editing_html(f, key, value, fields) %>
 						</li>
 					<% end %>
 				</ol>

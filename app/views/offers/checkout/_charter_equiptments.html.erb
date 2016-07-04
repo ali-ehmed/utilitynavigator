@@ -102,7 +102,7 @@
 		<% if fields["premiums"].present? %>
 			<h4>Premium Channels</h4>
 			<ul>
-				<% fields["premiums"].except("checkout_select").each do |key, val| %>
+				<% fields["premiums"].each do |key, val| %>
 					<% if val.present? %>
 						<li>
 							<% if val.downcase == "included" %>
@@ -163,7 +163,7 @@
 			<h4>International Channels</h4>
 			<ul>
 
-				<% fields["international_channels"].except("checkout_select").each do |key, val| %>
+				<% fields["international_channels"].each do |key, val| %>
 					<% if val.present? %>
 						<li>
 							<% if val.downcase == "included" %>

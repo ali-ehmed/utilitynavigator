@@ -3,7 +3,7 @@
 <% if fields["long_distance"].present? and fields["long_distance"].values.any? &:present? %>
 	<h4>Long Distance</h4>
 	<ul>
-		<% fields["long_distance"].except("checkout_select").each do |key, val| %>
+		<% fields["long_distance"].each do |key, val| %>
 			<% if val.present? %>
 				<li>
 					<% if val.downcase == "included" %>
