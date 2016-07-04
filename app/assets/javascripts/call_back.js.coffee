@@ -45,7 +45,7 @@ $(document).on "page:change", ->
     format: 'hh:mm A'
 
   $(".date_fields").datetimepicker
-    format: 'YYYY-DD-MM'
+    format: 'DD-MM-YYYY'
     minDate: dt
 
   $(".date_fields").find("input[type='text']").val("")
