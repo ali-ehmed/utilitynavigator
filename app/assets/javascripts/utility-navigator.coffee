@@ -164,7 +164,7 @@ window.radioValidations = (array) ->
 
 # Loading Channels
 loadChannels = ->
-  $(document).on "click", "a.channel-comparison-link", (e) ->
+  $("a.channel-comparison-link").on "click", (e) ->
     e.preventDefault()
     $link = $(this)
     $link.html '<i class=\'fa fa-spinner fa-spin\'></i> Loading Channels'
@@ -187,7 +187,7 @@ $(document).on "page:change", ->
   #geocodeLatitideAndLongtitude()
   validatePreferredTimings()
   loadChannels()
-  
+
   $('[data-toggle="popover"]').popover()
   $('[data-toggle="tooltip"]').tooltip()
 
