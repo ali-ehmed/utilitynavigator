@@ -22,19 +22,17 @@ String::capitalize = ->
   @charAt(0).toUpperCase() + @slice(1)
 
 navbarActiveLink = ->
-	$a = $('.navbar-links').find("a[href=\"#{@location.pathname}\"]")
-	$a.parent().addClass "active-link"
+  $a = $('.navbar-links').find('a[href="' + @location.pathname + '"]')
+  $a.parent().addClass 'active-link'
 
-	switch $a.text()
-		when "TWC"
-			$a.css('background-image', 'url("assets/arrow-twc.png")')
-			break
-		when "COX"
-			$a.css('background-image', 'url("assets/arrow-cox.png")')
-			break
-		when "CHARTER"
-			$a.css('background-image', 'url("assets/arrow-charter.png")')
-			break
+  switch $a.text()
+    when 'TWC'
+      $a.css 'background-image', 'url("assets/arrow-twc.png")'
+    when 'COX'
+      $a.css 'background-image', 'url("assets/arrow-cox.png")'
+    when 'CHARTER'
+      $a.css 'background-image', 'url("assets/arrow-charter.png")'
+  return
 
 window.offerSearchNotice = () ->
 	$('body').animate { scrollTop: 0 }, 'slow', ->
@@ -180,23 +178,24 @@ loadChannels = ->
       false
   return
 
-$(document).ready ->
+$(document).on "page:change", ->
   ### Initializing ###
-	navbarActiveLink()
-	closeSearchNotice()
-	scrollingReviewNote() if navigator.userAgent.toLowerCase().indexOf("mobile") == -1
-	removeActiveIconProviders()
-	#geocodeLatitideAndLongtitude()
-	validatePreferredTimings()
-	loadChannels()
+  navbarActiveLink()
+  closeSearchNotice()
+  scrollingReviewNote() if navigator.userAgent.toLowerCase().indexOf("mobile") == -1
+  removeActiveIconProviders()
+  #geocodeLatitideAndLongtitude()
+  validatePreferredTimings()
+  loadChannels()
+  
+  $('[data-toggle="popover"]').popover()
+  $('[data-toggle="tooltip"]').tooltip()
 
-	$('[data-toggle="popover"]').popover()
-	$('[data-toggle="tooltip"]').tooltip()
   #
   #
 	# # For Search Filters
 	# # This is custom pagination, as it needs to be hidden
 	# # and See More btn should appear instead
-	if $(".has_packages").length
-		$(".pagination").css("margin", "0px 0px")
-		$(".pagination").hide()
+  if $(".has_packages").length
+    $(".pagination").css("margin", "0px 0px")
+    $(".pagination").hide()

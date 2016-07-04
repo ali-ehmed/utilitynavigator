@@ -12,6 +12,7 @@
 //
 //= require jquery
 //= require jquery.turbolinks
+//= require turbolinks
 //= require jquery_ujs
 //= require bootstrap-notify
 //= require bootstrap-sprockets
@@ -22,8 +23,6 @@
 //= require jasny-bootstrap.min
 
 //= require_tree .
-
-// require turbolinks
 
 $(document).ready(function(){
 	// Notify

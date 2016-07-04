@@ -314,19 +314,20 @@ $(document).ready(function () {
 	}
 
 	// Tinymce Editor
-	tinymce.init({
-	  selector: '.package-editor',
-	  height: 180,
-	  plugins: [
-	    'advlist autolink lists link image charmap print preview anchor',
-	    'searchreplace visualblocks code fullscreen',
-	    'insertdatetime media table contextmenu paste code'
-	  ],
-	  toolbar: 'insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image',
-		color_picker_callback: function(callback, value) {
-	    callback('#FF00FF');
-	  }
-	});
+	if(document.getElementsByClassName("package-editor").length)
+		tinymce.init({
+		  selector: '.package-editor',
+		  height: 180,
+		  plugins: [
+		    'advlist autolink lists link image charmap print preview anchor',
+		    'searchreplace visualblocks code fullscreen',
+		    'insertdatetime media table contextmenu paste code'
+		  ],
+		  toolbar: 'insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image',
+			color_picker_callback: function(callback, value) {
+		    callback('#FF00FF');
+		  }
+		});
 
 	$("a#approval_statuses").closest("li").css("border-bottom", "solid 5px #ebebeb");
 });
