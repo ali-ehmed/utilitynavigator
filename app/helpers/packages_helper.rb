@@ -1,4 +1,6 @@
 module PackagesHelper
+  NO_OF_TELEVISIONS = (1..4)
+
   def get_package_type filters
     case filters.length
     when 1

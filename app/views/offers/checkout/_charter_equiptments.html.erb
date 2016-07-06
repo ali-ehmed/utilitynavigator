@@ -2,48 +2,10 @@
 	<% case product.name.downcase %>
 	<% when "cable" %>
 		<% fields = get_in_hash(@package_bundles.find_by_product_id(product.id).checkout_fields) %>
-		<%#= fields %>
+
+		<!-- Television Items & Details -->
 		<%= render partial: "offers/checkout/shared/televisions", locals: { fields: fields } %>
 
-		<!-- Details -->
-		<h4>
-			(<a role="button" data-toggle="collapse" href="#collapseDetailsTV" aria-expanded="false" aria-controls="collapseExample">Television Equitpments Description</a>)
-		</h4>
-		<div class="collapse" id="collapseDetailsTV">
-		  <div class="well">
-		    <ol>
-		    	<li>
-		    		<strong>DVR Box &amp; Service</strong>
-		    		<p>
-		    			<small>
-		    				DVR Box &amp; Service - Record your favorite shows and movies anytime you want, when you want to watch it - all in stunning HD.
-		    			</small>
-		    		</p>
-		    		<p>
-		    			<small>
-		    				DVR Service - Reinvent the way you watch TV on your schedule. Pause, record and rewind live TV. Automatically record single shows or an entire series. Record two shows at once or record one while you watch another.
-		    			</small>
-		    		</p>
-		    	</li>
-		    	<li>
-		    		<strong>HD Box</strong>
-		    		<p>
-		    			<small>
-		    				HD BOX - Watch Charter TV in stunning High Definition (Works on both newer HDTVs and older non HDTVs).
-		    			</small>
-		    		</p>
-		    	</li>
-		    	<li>
-		    		<strong>SD Box</strong>
-		    		<p>
-		    			<small>
-		    				SD BOX - Watch Charter TV in Standard Definition (For older, non HDTVs only).
-		    			</small>
-		    		</p>
-		    	</li>
-		    </ol>
-		  </div>
-		</div>
 		<!-- Digital Tier 1  -->
 		<% if fields["digital_tier_1"]["50_additional_channels"].present? %>
 			<h4>Digital Tier 1</h4>

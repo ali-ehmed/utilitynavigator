@@ -1,4 +1,4 @@
-<% (1..4).each do |count_num_of_tvs| %>
+<% PackagesHelper::NO_OF_TELEVISIONS.each do |count_num_of_tvs| %>
   <!-- Pulling out matched elements from Provider Channels -->
   <% matched_elems = provider_televisions(count_num_of_tvs).select_matched(fields.keys) %>
 
@@ -34,10 +34,11 @@
         <% end %>
       <% end %>
     </ul>
-  <% else %>
-    <div class="alert alert-danger">
-      There no <strong>television equiptments</strong> in this package
-    </div>
-    <% break %>
+    <% if count_num_of_tvs == PackagesHelper::NO_OF_TELEVISIONS.last %>
+      <h4>
+        (<a role="button" data-toggle="collapse" href="#collapseDetailsTV" aria-expanded="false" aria-controls="collapseExample">Television Equitpments Description</a>)
+      </h4>
+      <%= render partial: "offers/checkout/shared/#{@package.provider.acronym}_tv_details" %>
+    <% end %>
   <% end %>
 <% end %>

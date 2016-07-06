@@ -3,42 +3,8 @@
 	<% when "cable" %>
 		<% fields = get_in_hash(@package_bundles.find_by_product_id(product.id).checkout_fields) %>
 		<%#= fields %>
-
+		<!-- Television Items & Details -->
 		<%= render partial: "offers/checkout/shared/televisions", locals: { fields: fields } %>
-		<!-- Details -->
-		<h4>
-			(<a role="button" data-toggle="collapse" href="#collapseDetailsTV" aria-expanded="false" aria-controls="collapseExample">Television Equitpments Description</a>)
-		</h4>
-		<div class="collapse" id="collapseDetailsTV">
-		  <div class="well">
-		    <ol>
-		    	<li>
-		    		<strong>Enhanced DVR Box &amp; Service</strong>
-		    		<p>
-		    			<small>
-		    				Record and play programs on just one TV, up to 6 programs at once. With 1 TB of storage, you can store up to 150+ hours of HD programming. Manage recordings away from home with TWC TV&reg;.
-		    			</small>
-		    		</p>
-		    	</li>
-		    	<li>
-		    		<strong>HD Box</strong>
-		    		<p>
-		    			<small>
-		    				Watch programming in high definition and digital programming. Access to the Guide, Start Over&reg;, Look Back&reg;, Parental Controls, On Demand and Pay Per View
-		    			</small>
-		    		</p>
-		    	</li>
-		    	<li>
-		    		<strong>DTA Box</strong>
-		    		<p>
-		    			<small>
-		    				Watch Standard channels that are in your subscribed TV Plan
-		    			</small>
-		    		</p>
-		    	</li>
-		    </ol>
-		  </div>
-		</div>
 
 		<!-- More Fun with More Entertainment  -->
 		<% if fields["more_fun_with_more_entertainment_items"].downcase == "required" %>

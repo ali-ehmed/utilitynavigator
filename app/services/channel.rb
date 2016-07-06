@@ -28,6 +28,8 @@ class Channel
 			end
 		end
 
+		channel_provider_types = channel_provider_types.compact
+
 		(2.upto(@excel.last_row)).each do |row_id|
 			row = Hash[[header, @excel.row(row_id)].transpose]
 			is_present = false
@@ -37,8 +39,9 @@ class Channel
 				# then just set the channel type in the channel type keys and return present
 				channels_name.select do |channel|
 					if channel["channel"] == row["channel_name"]
-
-						channel[row["channel_type"].downcase.tr(" ", "_")] = row["channel_type"]
+						if row["channel_type"].present?
+							channel[row["channel_type"].downcase.tr(" ", "_")] = row["channel_type"]
+						end
 						is_present = true
 					end
 				end
@@ -59,8 +62,10 @@ class Channel
 				end
 
 				# setting the channel type for the first channel
+				if row["channel_type"].present?
+					provider_hash[row["channel_type"].downcase.tr(" ", "_")] = row["channel_type"]
+				end
 
-				provider_hash[row["channel_type"].downcase.tr(" ", "_")] = row["channel_type"]
 				channels_name << provider_hash
 			end
 		end

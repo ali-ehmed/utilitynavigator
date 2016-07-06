@@ -2,65 +2,9 @@
 	<% case product.name.downcase %>
 	<% when "cable" %>
 		<% fields = get_in_hash(@package_bundles.find_by_product_id(product.id).checkout_fields) %>
-		<%#= fields %>
 
+		<!-- Television Items & Details -->
 		<%= render partial: "offers/checkout/shared/televisions", locals: { fields: fields } %>
-
-		<!-- Details -->
-		<h4>
-			(<a role="button" data-toggle="collapse" href="#collapseDetailsTV" aria-expanded="false" aria-controls="collapseExample">Television Equitpments Description</a>)
-		</h4>
-		<div class="collapse" id="collapseDetailsTV">
-		  <div class="well">
-		    <ol>
-		    	<li>
-		    		<strong>Contour Record 6 HD-DVR</strong>
-		    		<p>
-		    			<small>
-		    				Record 6 HD-DVR Receiver - Record 6 shows at once and store 1,000 with the Contour Record 6 HD-DVR Receiver. Store all of your favorites, watch recorded shows on any TV in the house, start watching a recorded show in one room and resume watching it in another. All with one DVR. Record 6 Whole Home DVR Service - Record 6 Whole Home DVR Service is required to use your Record 6 Whole Home DVR.
-		    			</small>
-		    		</p>
-		    	</li>
-		    	<li>
-		    		<strong>Contour HD-DVR Receiver</strong>
-		    		<p>
-		    			<small>
-		    				Contour HD-DVR Receiver - Automatically record a game, event or show, multiple episodes or an entire season of your favorite series. Pause and rewind live TV. Record one show while watching another or record two shows at once. The Contour DVR has up to 6 times the storage of our standard HD-DVR. Schedule your DVR from anywhere, anytime using your mobile device.
-		    			</small>
-		    		</p>
-		    		<p>
-		    			<small>
-		    				Record 2 DVR Service - DVR (Digital Video Recorder) Service is required to use your Record 2 HD-DVR Receiver.
-		    			</small>
-		    		</p>
-		    	</li>
-		    	<li>
-		    		<strong>Contour HD Receiver</strong>
-		    		<p>
-		    			<small>
-		    				Add up to 7 additional HD Receivers to your Contour Record 6 DVR Receiver and get our advanced program guide with personalized recommendations plus the ability to pause, record or watch recorded programs on any TV in your home.
-		    			</small>
-		    		</p>
-		    	</li>
-		    	<li>
-		    		<strong>Mini Box</strong>
-		    		<p>
-		    			<small>
-		    				N/A
-		    			</small>
-		    		</p>
-		    	</li>
-		    	<li>
-		    		<strong>Cable Card</strong>
-		    		<p>
-		    			<small>
-		    				A CableCARD is a digital cable decoder that's about the size of a credit card. It fits directly into a slot on select digital-cable-ready TVs. Renting this box-free alternative lets you watch digital channels without a set-top box. Please note: This requires a CableCARD ready device (such as a TiVo) or CableCARD ready Television set.
-		    			</small>
-		    		</p>
-		    	</li>
-		    </ol>
-		  </div>
-		</div>
 
 		<!-- Premiumns  -->
 		<%= render partial: "offers/checkout/shared/cox/premiums", locals: { fields: fields } %>
