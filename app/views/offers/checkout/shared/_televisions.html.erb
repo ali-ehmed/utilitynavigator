@@ -20,7 +20,7 @@
         <% if value.present? %>
           <li>
             <% if value.downcase == "included" %>
-              <p><%= custom_tv_names(key) %> (<%= value.capitalize %>)</p>
+              <p><%= custom_tv_names(key, value) %></p>
 
             <% else %>
               <div class="checkbox" style="padding-left: 5px;">

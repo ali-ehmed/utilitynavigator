@@ -65,7 +65,12 @@ module PackagesHelper
       str = "Cable Card"
     end
 
-    return "#{str} ($#{price} #{is_monthly})"
+    if price.is_number?
+      price_value = number_to_currency(price) + " " + is_monthly
+    else
+      price_value = "Included"
+    end
+    return "#{str} (#{price_value})"
   end
 
   def channel_provider_names(provider)

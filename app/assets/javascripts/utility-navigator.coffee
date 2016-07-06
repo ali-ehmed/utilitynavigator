@@ -170,10 +170,10 @@ loadChannels = ->
     $link.html '<i class=\'fa fa-spinner fa-spin\'></i> Loading Channels'
     $.get('/load_channels', { provider: $link.data('provider') }, (data) ->
     ).done(->
-      $link.html 'CHANNEL COMPARISON'
+      $link.html 'Channel List'
       false
     ).fail ->
-      $link.html 'CHANNEL COMPARISON'
+      $link.html 'Channel List'
       console.log 'Something went wrong'
       false
   return

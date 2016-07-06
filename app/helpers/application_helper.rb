@@ -8,7 +8,7 @@ module ApplicationHelper
 	end
 
 	def get_in_hash(fields)
-		return {} if fields.blank? or !fields.any?
+		return {} if fields.blank?
 		hash = fields.gsub("=>", ":")
  		return JSON.parse(hash)
 	end

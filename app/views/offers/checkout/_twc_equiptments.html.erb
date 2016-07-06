@@ -41,7 +41,7 @@
 		</div>
 
 		<!-- More Fun with More Entertainment  -->
-		<% if fields["more_fun_with_more_entertainment"].present? %>
+		<% if fields["more_fun_with_more_entertainment_items"].downcase == "required" %>
 			<h4>More Fun with More Entertainment</h4>
 			<ul>
 				<% fields["more_fun_with_more_entertainment"].each do |key, val| %>
@@ -84,7 +84,7 @@
 		<% end %>
 
 		<!-- More Entertainment for every one  -->
-		<% if fields["more_fun_for_everyone"].present? %>
+		<% if fields["more_fun_for_everyone_items"].downcase == "required" %>
 			<h4>More Entertainment for Everyone</h4>
 			<ul>
 				<% fields["more_fun_for_everyone"].each do |key, val| %>
@@ -132,32 +132,30 @@
 		<% end %>
 
 		<!-- More Spanish Entertainment for every one  -->
-		<% if fields["more_spanish_entertainment_for_everyone"].present? %>
+		<% if fields["more_spanish_entertainment_for_everyone_items"].downcase == "required" %>
 			<h4>More Spanish Entertainment for Everyone</h4>
 			<ul>
-				<% if fields["more_spanish_entertainment_for_everyone"]["spanish_programming"].present? %>
-					<li>
-						<% if fields["more_spanish_entertainment_for_everyone"]["spanish_programming"].downcase == "included" %>
-							<p>
-								Spanish Programming (<%= fields["more_spanish_entertainment_for_everyone"]["spanish_programming"] %>)
-							</p>
-						<% else %>
-						<div class="checkbox">
-							<%= check_box_tag :spanish_programming, false, false, {:class => "styled", data: { price: fields["more_spanish_entertainment_for_everyone"]["spanish_programming"] }, onchange: "calculateEquiptmentCosts(this);"}  %>
-							<label class="label-checkbox">
-								Spanish Programming ($<%= fields["more_spanish_entertainment_for_everyone"]["spanish_programming"] %> Monthly)
-							</label>
-						</div>
-						<% end %>
+				<li>
+					<% if fields["more_spanish_entertainment_for_everyone"]["spanish_programming"].downcase == "included" %>
+						<p>
+							Spanish Programming (<%= fields["more_spanish_entertainment_for_everyone"]["spanish_programming"] %>)
+						</p>
+					<% else %>
+					<div class="checkbox">
+						<%= check_box_tag :spanish_programming, false, false, {:class => "styled", data: { price: fields["more_spanish_entertainment_for_everyone"]["spanish_programming"] }, onchange: "calculateEquiptmentCosts(this);"}  %>
+						<label class="label-checkbox">
+							Spanish Programming ($<%= fields["more_spanish_entertainment_for_everyone"]["spanish_programming"] %> Monthly)
+						</label>
+					</div>
+					<% end %>
 
-						<a role="button" data-toggle="collapse" href="#collapse_spanish_programming" aria-expanded="false" aria-controls="collapseExample" class="view_more">View Details</a>
-						<div class="collapse" id="collapse_spanish_programming">
-							<p class="well">
-								More than 40 Spanish-language channels, including Discovery Espanol, ESPN Deportes HD and Mun2.
-							</p>
-						</div>
-					</li>
-				<% end %>
+					<a role="button" data-toggle="collapse" href="#collapse_spanish_programming" aria-expanded="false" aria-controls="collapseExample" class="view_more">View Details</a>
+					<div class="collapse" id="collapse_spanish_programming">
+						<p class="well">
+							More than 40 Spanish-language channels, including Discovery Espanol, ESPN Deportes HD and Mun2.
+						</p>
+					</div>
+				</li>
 			</ul>
 		<% end %>
 

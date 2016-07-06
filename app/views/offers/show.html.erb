@@ -65,7 +65,7 @@
 										<%= render partial: "shared/promotions", locals: { package: package } %>
 										<% if package.package_bundles.map(&:product).map(&:name).include?("Cable") %>
 											<br />
-											<a href="#" class="channel-comparison-link" data-provider="<%= channel_provider_names(package.provider.try("name")) %>">CHANNEL COMPARISON</a>
+											<a href="#" class="channel-comparison-link" data-provider="<%= channel_provider_names(package.provider.try("name")) %>">Channel List</a>
 										<% end %>
 										<br /><br />
 										<%= link_to "CHOOSE THIS PLAN", offer_checkout_path(package, Package.checkout_steps.first.to_s), class: "btn btn-warning btn-lg choose-plan-btn" %>
