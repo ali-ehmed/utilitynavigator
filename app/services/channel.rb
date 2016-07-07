@@ -12,8 +12,8 @@ class Channel
 
 		# getting all the providers in array
 		providers = Array.new
-		@excel.column(3).each do |provider_1|
-			providers << provider_1 unless providers.include?(provider_1)
+		@excel.column(3).each do |excel_provider|
+			providers << excel_provider unless providers.include?(excel_provider)
 		end
 
 		return [] unless providers.include?(provider)

@@ -1,12 +1,12 @@
 <%# Rails flash messages styled for Bootstrap 3.0 Notify Plugin %>
 <script type="text/javascript">
-	$(document).ready(function(){
+	$(document).on("page:change", function() {
 		<% flash.each do |name, msg| %>
   		<% if msg.is_a?(String) %>
   			$.notify({
 					// options
 					icon: "glyphicon <%= name.to_s == 'notice' ? 'glyphicon-ok' : 'glyphicon-warning-sign'%>",
-					title: "<strong><%= name.to_s == 'notice' ? 'Success' : 'Error'%>: </strong>",	
+					title: "<strong><%= name.to_s == 'notice' ? 'Success' : 'Error'%>: </strong>",
 					message: '<%= msg.html_safe %>'
 				},{
 					element: 'body',
