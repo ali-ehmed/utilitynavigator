@@ -1,8 +1,8 @@
 <%# Rails flash messages styled for Bootstrap 3.0 Notify Plugin %>
-<script type="text/javascript">
-	$(document).on("page:change", function() {
-		<% flash.each do |name, msg| %>
-  		<% if msg.is_a?(String) %>
+<% flash.each do |name, msg| %>
+	<% if msg.is_a?(String) %>
+		<script type="text/javascript">
+			$(document).on("ready", function() {
   			$.notify({
 					// options
 					icon: "glyphicon <%= name.to_s == 'notice' ? 'glyphicon-ok' : 'glyphicon-warning-sign'%>",
@@ -25,7 +25,8 @@
 					},
 					delay: 8000
 				});
-  		<% end %>
-		<% end %>
-	});
-</script>
+
+			});
+		</script>
+	<% end %>
+<% end %>
