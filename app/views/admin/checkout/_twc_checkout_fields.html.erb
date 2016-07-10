@@ -35,16 +35,6 @@
 
 						<%= ff.text_field "dta_#{count}", style: "display: none;width: calc(78% - 22px);", onblur: "$packages.packagePriceValidation(this);", class: "admin_checkout_price" %>
 					</li>
-					<% if Package::CABLE_TV.last == cable_tv %>
-						<li>
-							<label for="provider_name" class="label">
-								4th TV Install
-							</label>
-							<%= ff.select "checkout_select", options_for_select(["Include", "Not Include", "Add Price"]), {prompt: "--Select--"}, class: "package_select_field", onchange: "$packages.addPriceField(this);" %>
-
-							<%= ff.text_field "4th_tv_install_#{count}", style: "display: none;width: calc(78% - 22px);", onblur: "$packages.packagePriceValidation(this);", class: "admin_checkout_price" %>
-						</li>
-					<% end %>
 				</ol>
 			<% end %>
 		</li>

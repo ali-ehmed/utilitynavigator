@@ -2,24 +2,29 @@
 	<h4><strong>Cox Service Protection Plan</strong></h4>
 	<ul>
 		<li>
-			<div class="checkbox">
-        <%= check_box_tag :cox_service_protection_plan, false, false, {:class => "styled", data: { price: @package.protection_plan_service.to_f }, onchange: "calculateEquiptmentCosts(this);"}  %>
-        <label class="label-checkbox">
-           Cox Service Protection Plan, ($<%= @package.protection_plan_service.to_f %> Monthly)
-        </label>
-        <br />
-        <a role="button" data-toggle="collapse" href="#collaspecox_service_protection_plan" aria-expanded="false" aria-controls="collapseExample" class="view_more">View Details</a>
-				<div class="collapse" id="collaspecox_service_protection_plan">
-	        <div class="well">
-	        	<p>
-	          	Get peace of mind knowing that the wiring for your Cox TV, Internet and Phone service is protected.
-	          </p>
-	          <p>
-	          	Cox Service Protection Plan (CSPP) covers the repair of all cabling and phone wiring in your home, including outlets and jacks, and inspection of your home wiring to ensure that it is up to Cox standards. CSPP covers replacing and repairing defective cable industry standard wiring (coax, splitters, fittings and telephone wiring), running from the outside of the home to the back of the digital receiver, TV, modem or telephone outlet. CSPP does not cover customer education calls, failed self-activations, and substandard wiring or splitters. Examples of customer education that is not "included" in CSPP service include TV on the wrong input, setup of non-Cox equipment, and incorrect hookup after moving or adding new equipment. Some restrictions apply.
-	          </p>
-	        </div>
+			<% if @package.protection_plan_service.downcase == "included" %>
+				<p>
+					Cox Service Protection Plan (Included)
+				</p>
+			<% else %>
+				<div class="checkbox">
+	        <%= check_box_tag :cox_service_protection_plan, false, false, {:class => "styled", data: { price: @package.protection_plan_service.to_f }, onchange: "calculateEquiptmentCosts(this);"}  %>
+	        <label class="label-checkbox">
+	           Cox Service Protection Plan, ($<%= @package.protection_plan_service.to_f %> Monthly)
+	        </label>
 	      </div>
-      </div>
+			<% end %>
+			<a role="button" data-toggle="collapse" href="#collaspecox_service_protection_plan" aria-expanded="false" aria-controls="collapseExample" class="view_more">View Details</a>
+			<div class="collapse" id="collaspecox_service_protection_plan">
+				<div class="well">
+					<p>
+						Get peace of mind knowing that the wiring for your Cox TV, Internet and Phone service is protected.
+					</p>
+					<p>
+						Cox Service Protection Plan (CSPP) covers the repair of all cabling and phone wiring in your home, including outlets and jacks, and inspection of your home wiring to ensure that it is up to Cox standards. CSPP covers replacing and repairing defective cable industry standard wiring (coax, splitters, fittings and telephone wiring), running from the outside of the home to the back of the digital receiver, TV, modem or telephone outlet. CSPP does not cover customer education calls, failed self-activations, and substandard wiring or splitters. Examples of customer education that is not "included" in CSPP service include TV on the wrong input, setup of non-Cox equipment, and incorrect hookup after moving or adding new equipment. Some restrictions apply.
+					</p>
+				</div>
+			</div>
 		</li>
 	</ul>
 <% end %>

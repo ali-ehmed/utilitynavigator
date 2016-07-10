@@ -1,3 +1,24 @@
+# == Schema Information
+#
+# Table name: packages
+#
+#  id                          :integer          not null, primary key
+#  provider_id                 :integer
+#  package_type_id             :integer
+#  package_name                :string
+#  package_description         :text
+#  price_info                  :string
+#  price                       :string
+#  monthly_fee_after_promotion :string
+#  promotion_disclaimer        :string
+#  created_at                  :datetime         not null
+#  updated_at                  :datetime         not null
+#  promotions                  :text
+#  protection_plan_service     :string
+#  lock_rates_agreement        :string
+#  plan_details                :text
+#
+
 module PackagesHelper
   NO_OF_TELEVISIONS = (1..4)
 
@@ -21,7 +42,6 @@ module PackagesHelper
 			"dvr_box_#{count_num}",
 			"additional_hd_#{count_num}",
 			"dta_#{count_num}",
-			"4th_tv_install_#{count_num}",
 			"sd_box_#{count_num}",
 			"contour_record_dvr_#{count_num}",
 			"contour_hd_dvr_#{count_num}",
@@ -37,12 +57,16 @@ module PackagesHelper
   # returning a different label
   def custom_tv_names(name, price)
     is_monthly = "Monthly"
+    one_time = ""
 
     name = name.split("_")
     name.pop # eliminating last elem
     name = name.join("_")
 
-    is_monthly = "" if name == "4th_tv_install"
+    # if name == "4th_tv_install"
+    #   is_monthly = ""
+    #   one_time = " <em>(One Time Fee)</em>"
+    # end
 
     case name
     when "dvr_box"
@@ -51,8 +75,6 @@ module PackagesHelper
       str = "HD Box"
     when "dta"
       str = "DTA Box"
-    when "4th_tv_install"
-      str = "4th Outlet Activation"
     when "sd_box"
       str = "SD Box"
     when "contour_record_dvr"
@@ -72,7 +94,7 @@ module PackagesHelper
     else
       price_value = "Included"
     end
-    return "#{str} (#{price_value})"
+    return ("#{str} (#{price_value})"  + one_time).html_safe
   end
 
   def channel_provider_names(provider)
@@ -103,10 +125,14 @@ module PackagesHelper
       if selected_option == "Add Price"
         hidden_class = ""
         text_box_value = field_val
+      elsif selected_option.blank?
+        selected_option = "Not Include"
+      else
+        selected_option = "Include"
       end
 
       html << %{
-        #{form.select "checkout_select", options_for_select(select_options_non_subfields, selected_option), {prompt: "--Select--"}, class: "package_select_field", onchange: "$packages.addPriceField(this);"}
+        #{form.select "checkout_select", options_for_select(select_options_non_subfields.map(&:first), selected_option), {prompt: "--Select--"}, class: "package_select_field", onchange: "$packages.addPriceField(this);"}
         #{form.text_field field_key.to_s, style: "#{hidden_class}width: calc(78% - 22px);", onblur: "$packages.packagePriceValidation(this);", class: "admin_checkout_price", value: text_box_value}
       }
     elsif select_options_subfields.map(&:last).include?(selected_option)
@@ -115,10 +141,12 @@ module PackagesHelper
 
       if selected_option == "Required"
         hidden_class =  ""
+      else
+        selected_option = "Not Include"
       end
 
       html << %{
-        #{form.select field_key.to_s, options_for_select(select_options_subfields, field_val), {prompt: "--Select--"}, class: "package_select_field", onchange: "$packages.setRequiredFields(this);"}
+        #{form.select field_key.to_s, options_for_select(select_options_subfields.map(&:first), selected_option), {prompt: "--Select--"}, class: "package_select_field", onchange: "$packages.setRequiredFields(this);"}
       }
       if hash_field_value.present?
         form.fields_for hash_field_name.to_sym do |nested_form|

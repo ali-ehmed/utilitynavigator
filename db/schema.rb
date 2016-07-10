@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160701233306) do
+ActiveRecord::Schema.define(version: 20160707155228) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -68,11 +68,23 @@ ActiveRecord::Schema.define(version: 20160701233306) do
     t.text     "address"
     t.string   "state"
     t.string   "zip"
-    t.time     "preferred_time"
     t.datetime "created_at",     null: false
     t.datetime "updated_at",     null: false
     t.string   "time_zone"
+    t.time     "preferred_time"
     t.date     "preferred_date"
+  end
+
+  create_table "installations", force: :cascade do |t|
+    t.string   "wifi_installation"
+    t.string   "outlet_installation"
+    t.string   "fourth_tv_installation"
+    t.string   "installation_price"
+    t.string   "self_installation"
+    t.string   "boolean"
+    t.integer  "package_id"
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
   end
 
   create_table "orders", force: :cascade do |t|
@@ -112,7 +124,6 @@ ActiveRecord::Schema.define(version: 20160701233306) do
     t.string   "price_info"
     t.string   "price"
     t.string   "monthly_fee_after_promotion"
-    t.string   "installation_price"
     t.string   "promotion_disclaimer"
     t.datetime "created_at",                  null: false
     t.datetime "updated_at",                  null: false
@@ -120,7 +131,6 @@ ActiveRecord::Schema.define(version: 20160701233306) do
     t.string   "protection_plan_service"
     t.string   "lock_rates_agreement"
     t.text     "plan_details"
-    t.boolean  "self_installation"
   end
 
   create_table "product_provider_preferences", force: :cascade do |t|

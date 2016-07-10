@@ -3,7 +3,7 @@ class Offers::CheckoutController < ApplicationController
 	include ApplicationHelper
 
 	before_action :set_package, only: [:show, :installation_fields, :update]
-	# before_action :installation_fields, only: [:show]
+	before_action :set_installation, only: [:show]
 	before_action :exclude_params, only: [:show, :update]
 
 	steps(*Package.checkout_steps)
@@ -55,11 +55,7 @@ class Offers::CheckoutController < ApplicationController
 		@equiptments = session[:checkout_form_params]
 	end
 
-	def installation_fields
-		@charter_installation = @package.package_bundles.joins(:product).where("products.name = 'Internet'")
-														  .first.try(:checkout_fields) if @package.provider.name == Provider::CHARTER_SPECTRUM
-
-	  @cox_installation = @package.package_bundles.joins(:product).where("products.name = 'Phone'")
-														  .first.try(:checkout_fields) if @package.provider.name == Provider::COX
+	def set_installation
+		@installation = @package.installation
 	end
 end

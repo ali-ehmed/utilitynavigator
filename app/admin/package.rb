@@ -7,8 +7,12 @@ ActiveAdmin.register Package do
     selectable_column
     column :package_name
     column :price
-    column :installation_price
-		column :self_installation
+    column :installation_price do |package|
+			package.installation.try("installation_price")
+		end
+		column :self_installation do |package|
+			package.installation.try("self_installation") == "t" ? "Yes" : "No"
+		end
     column :provider do |package|
     	package.try(:provider).try(:name)
     end
@@ -31,7 +35,12 @@ ActiveAdmin.register Package do
       attributes_table do
 	      row :price_info
 	      row :price
-	      row :installation_price
+				row :installation_price do |package|
+					package.installation.try("installation_price")
+				end
+				row :self_installation do |package|
+					package.installation.try("self_installation")
+				end
 	      row :package_description do |package|
 		    	package.package_description.html_safe
 		    end
@@ -112,9 +121,11 @@ ActiveAdmin.register Package do
 
 	controller do
 		before_action :proceed_package_incompletion, only: [:show, :edit, :update]
+		before_action :set_products, only: [:new, :create]
 
 		def new
 			@package = Package.new
+			@package.build_installation
 			@url = admin_packages_path
 			@http_method = :post
 		end
@@ -137,7 +148,9 @@ ActiveAdmin.register Package do
 
 				redirect_to admin_checkout_path(:package_bundles, @package.id), notice: Package::SECOND_STEP
 			else
-				redirect_to new_admin_package_path(package: initialize_params), flash: { alert: @package.errors.full_messages.map { |msg| content_tag(:li, msg) }.join.html_safe }
+				render :new
+				flash[:alert] = @package.errors.full_messages.map { |msg| content_tag(:li, msg) }.join.html_safe
+				# redirect_to new_admin_package_path(package: initialize_params), flash: { alert: @package.errors.full_messages.map { |msg| content_tag(:li, msg) }.join.html_safe }
 			end
 		end
 
@@ -161,6 +174,10 @@ ActiveAdmin.register Package do
 
 		private
 
+		def set_products
+			@products = Product.all.map{|p| {id: p.id, name: p.name}}
+		end
+
 		def proceed_package_incompletion
 			if resource.package_bundles.map(&:field).any? == false
 				redirect_to admin_checkout_path(:package_bundles, resource.id), notice: Package::INCOMPLETE_PACKAGE_BUNDLES
@@ -171,7 +188,9 @@ ActiveAdmin.register Package do
 
 		def initialize_params
 			params.require(:package).permit(:provider_id, :package_type_id, :price, :price_info, :package_description,
-																			:package_name, :promotions, :promotion_disclaimer, :plan_details, :monthly_fee_after_promotion, :installation_price)
+																			:package_name, :promotions, :promotion_disclaimer, :plan_details,
+																			:monthly_fee_after_promotion, :lock_rates_agreement, :protection_plan_service,
+																			installation_attributes: [:installation_price, :wifi_installation, :self_installation, :outlet_installation, :fourth_tv_installation])
 		end
 	end
 
@@ -184,7 +203,11 @@ ActiveAdmin.register Package do
 	member_action :update_equiptment_items, method: :put do
 		@package = Package.find(params[:id])
 		@package_bundle = @package.package_bundles.find_by_product_id(params[:product_id])
-		@package_bundle.update_attribute(:checkout_fields, params[@package_bundle.product.name.downcase.to_sym])
+
+
+		excluded_params = exclude_garbage_fields(params[params[:product_name].underscore.to_sym])
+
+		@package_bundle.update_attribute(:checkout_fields, excluded_params)
 
 		redirect_to edit_admin_package_path(@package.id), notice: "Package Equiptment Items Updated"
 	end

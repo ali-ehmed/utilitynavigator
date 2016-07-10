@@ -3,18 +3,16 @@
 		Package Installation <span class="checkout_required">(Required)</span>
 	</h4>
 </div>
-<% unless @package.installation_price.downcase == "included" %>
-	<h4>
-		<small><a href="javascript:void(0);" onclick="resetSelectedItem(this);">Reset selected item</a></small>
-	</h4>
-<% end %>
+<h4>
+	<small><a href="javascript:void(0);" onclick="resetSelectedItem(this);">Reset selected item</a></small>
+</h4>
 <ul>
 	<li>
-		<% unless @package.installation_price.downcase == "free" or @package.installation_price.downcase == "included" %>
+		<% unless @installation.installation_price.downcase == "included" %>
 			<div class="checkbox" style="padding-left: 5px;">
-				<%= radio_button_tag :installation, false, false, {id: "installation", data: { price: @package.installation_price, installation: true }, onchange: "calculateEquiptmentCosts(this);"}  %>
+				<%= radio_button_tag :installation, false, false, {id: "installation", data: { price: @installation.installation_price, installation: true }, onchange: "calculateEquiptmentCosts(this);"}  %>
         <label class="label-checkbox" for="installation">
-          Schedule an appointment for a technician to install my services ($<%= @package.installation_price %> - <em>One time charges</em>) 
+          Schedule an appointment for a technician to install my services ($<%= @installation.installation_price %> - <em>One time charges</em>) 
         </label>
       </div>
     <% else %>
@@ -24,7 +22,7 @@
     <% end %>
 	</li>
 
-	<% if @package.self_installation.present? %>
+	<% if @installation.self_installation == "t" %>
 		<li>
 			<div class="checkbox" style="padding-left: 5px;">
 				<%= radio_button_tag :installation, false, false, {id: "self_installation", data: { price: 0, installation: true }, onchange: "calculateEquiptmentCosts(this);"}  %>
@@ -44,59 +42,70 @@
 	<% end %>
 
   <!-- <hr /> -->
-  <!-- CHARTER Installation -->
-  <!-- <% if @package.provider.name == Provider::CHARTER_SPECTRUM %>
-    <% fields = get_in_hash(@charter_installation) %>
+  <!-- TWC Installation -->
+  <% if @installation.fourth_tv_installation.present? %>
     <li>
-      <% if fields["wifi_installation"].present? %>
-        <% if fields["wifi_installation"].downcase == "included" %>
-          WiFi Installation Service is included in this package
-        <% else %>
-          <div class="checkbox">
-            <%= check_box_tag :wifi_installation, false, false, {:class => "styled", data: { price: fields["wifi_installation"].to_f, installation: true }, onchange: "calculateEquiptmentCosts(this);"}  %>
-            <label class="label-checkbox" for="self_installation">
-              Schedule an appointment for a technician to install my WiFi services ($<%= fields["wifi_installation"].to_f %> - <em>One time charges</em>)
-            </label>
-          </div>
-        <% end %>
+			<h4>Fourth TV Installation</h4>
+      <% if @installation.fourth_tv_installation.downcase == "included" %>
+        Fourth TV Installation (Included)
+      <% else %>
+        <div class="checkbox">
+          <%= check_box_tag :fourth_tv_installation, false, false, {id: "fourth_tv_installation", :class => "styled", data: { price: @installation.fourth_tv_installation.to_f, installation: true }, onchange: "calculateEquiptmentCosts(this);"}  %>
+          <label class="label-checkbox" for="fourth_tv_installation">
+            Fourth TV Installation ($<%= @installation.fourth_tv_installation.to_f %> - <em>One time charges</em>)
+          </label>
+        </div>
       <% end %>
     </li>
-  <% end %> -->
+  <% end %>
 
-  <!-- COX Installation -->
-  <!-- <% if @package.provider.name == Provider::COX %>
-  	<% fields = get_in_hash(@cox_installation) %>
-  	<li> -->
-      <!-- Telephone outlet installation -->
-      <!-- <% if fields["telephone_outlet_installation"].present? and fields["telephone_outlet_installation"]["outlet_installation"].present? %> -->
-      	<!-- Outlet Installation -->
-				<!-- <h4>
-					Telephone Outlet(s) Installation
-					<p>
-						<small>
-							Do you need any additional Telephone Outlets for your home?
-						</small>
-					</p>
-				</h4>
-				<% if fields["telephone_outlet_installation"]["outlet_installation"].downcase == "included" %>
-					<label class="label-checkbox">
-						 Outlet Installation, (Included)
-					</label>
-				<% else %>
-          <div class="checkbox">
-            <%= check_box_tag :outlet_installation, false, false, {:class => "styled", data: { price: fields["telephone_outlet_installation"]["outlet_installation"], installation: true }, onchange: "calculateEquiptmentCosts(this);"}  %>
-            <label class="label-checkbox">
-               Outlet Installation, ($<%= fields["telephone_outlet_installation"]["outlet_installation"] %> - <em>One time charges</em>)
-            </label>
-          </div>
-				<% end %>
-				<a role="button" data-toggle="collapse" href="#collaspeoutlet_install" aria-expanded="false" aria-controls="collapseExample" class="view_more">View Details</a>
-				<div class="collapse" id="collaspeoutlet_install">
-					<p class="well">
-						Installation of additional phone jack wired and installed
-					</p>
-				</div> -->
-      <!-- <% end %>
+	<!-- CHARTER Installation -->
+  <% if @installation.wifi_installation.present? %>
+    <li>
+			<h4>WiFi Installation</h4>
+      <% if @installation.wifi_installation.downcase == "included" %>
+        WiFi Installation Service is included in this package
+      <% else %>
+        <div class="checkbox">
+          <%= check_box_tag :wifi_installation, false, false, {id: "wifi_installation", :class => "styled", data: { price: @installation.wifi_installation.to_f, installation: true }, onchange: "calculateEquiptmentCosts(this);"}  %>
+          <label class="label-checkbox" for="wifi_installation">
+            Schedule an appointment for a technician to install my WiFi services ($<%= @installation.wifi_installation.to_f %> - <em>One time charges</em>)
+          </label>
+        </div>
+      <% end %>
+    </li>
+  <% end %>
+
+	<!-- COX Installation -->
+  <% if @installation.outlet_installation.present? %>
+  	<li>
+    	<!-- Outlet Installation -->
+			<h4>
+				Telephone Outlet(s) Installation
+				<p>
+					<small>
+						Do you need any additional Telephone Outlets for your home?
+					</small>
+				</p>
+			</h4>
+			<% if @installation.outlet_installation.downcase == "included" %>
+				<label class="label-checkbox">
+					 Outlet Installation, (Included)
+				</label>
+			<% else %>
+        <div class="checkbox">
+          <%= check_box_tag :outlet_installation, false, false, {id: "outlet_installation", :class => "styled", data: { price: @installation.outlet_installation.to_f, installation: true }, onchange: "calculateEquiptmentCosts(this);"}  %>
+          <label class="label-checkbox" for="outlet_installation">
+             Outlet Installation, ($<%= @installation.outlet_installation.to_f %> - <em>One time charges</em>)
+          </label>
+        </div>
+			<% end %>
+			<a role="button" data-toggle="collapse" href="#collaspe_outlet_install" aria-expanded="false" aria-controls="collapseExample" class="view_more">View Details</a>
+			<div class="collapse" id="collaspe_outlet_install">
+				<p class="well">
+					Installation of additional phone jack wired and installed
+				</p>
+			</div>
   	</li>
-  <% end %> -->
+  <% end %>
 </ul>

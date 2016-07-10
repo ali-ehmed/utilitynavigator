@@ -67,10 +67,10 @@ window.$packages = {
 		if(isNaN($elem.val()) === true) {
 			console.log(isNaN($elem.val()));
 			$elem.after($packages.errorTemplate("Price must be a demical value", $elem));
-			window.validPackageForm = false;
+			$packages.disableSubmission();
 		} else {
 			$elem.next().remove();
-			window.validPackageForm = true;
+			$packages.enableSubmission();
 		}
 	},
 	addPriceField: function(elem) {
@@ -307,7 +307,7 @@ $(document).ready(function () {
 
 	// Initially products checkboxes are disabled for packages
 	if($("#package_package_type_id").val() == "") {
-		// window.validPackageForm = false;
+		$packages.disableSubmission();
 		$("fieldset.package-products").css("background-color", "rgb(191, 191, 191)");
   	$("fieldset.package-products").css("cursor", "no-drop");
 		$("fieldset.package-products *").attr("disabled", "disabled").off('click');

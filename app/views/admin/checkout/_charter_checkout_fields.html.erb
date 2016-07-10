@@ -5,12 +5,6 @@
 				<h3><%= cable_tv %></h3>
 				<% count += 1 %>
 				<ol>
-					<!-- <li>
-						<label for="is_required" class="label">
-							Is Required
-						</label>
-						<%#= ff.select "is_required_#{count}", options_for_select(["Required", "Optional", "Not Include"]) %>
-					</li> -->
 					<li>
 						<label for="provider_name" class="label">
 							DVR Box &amp; Service
@@ -119,14 +113,6 @@
 			<%= ff.select "checkout_select", options_for_select(["Include", "Not Include", "Add Price"]), {prompt: "--Select--"}, class: "package_select_field", onchange: "$packages.addPriceField(this);" %>
 
 			<%= ff.text_field "wifi", style: "display: none;width: calc(78% - 22px);", onblur: "$packages.packagePriceValidation(this);", class: "admin_checkout_price" %>
-		</li>
-		<li>
-			<label class="label">
-				Wifi Installation
-			</label>
-			<%= ff.select "checkout_select", options_for_select(["Include", "Not Include", "Add Price"]), {prompt: "--Select--"}, class: "package_select_field", onchange: "$packages.addPriceField(this);" %>
-
-			<%= ff.text_field "wifi_installation", style: "display: none;width: calc(78% - 22px);", onblur: "$packages.packagePriceValidation(this);", class: "admin_checkout_price" %>
 		</li>
 	<% end %>
 <% else %>

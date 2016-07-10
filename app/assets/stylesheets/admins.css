@@ -1,6 +1,6 @@
 div.nested_fields_admin_preview {
-	width: 55%;
-  overflow: auto;
+	width: 57%;
+  overflow: scroll;
 }
 fieldset.package-products {
 	padding: 11px 0px 11px 0px;
@@ -50,9 +50,9 @@ table td.fields, th.fields {
   margin-top: 15px;
 }
 
-/*form input[type=text], form input[type=password], form input[type=email], form input[type=number], form input[type=url], form input[type=tel], form input[type=date], form textarea {
-  width: calc(100% - 22px);
-}*/
+form input[type=text], form input[type=password], form input[type=email], form input[type=number], form input[type=url], form input[type=tel], form input[type=date], form textarea {
+  width: calc(79% - 22px);
+}
 
 .package_content_alignment {
 	width: calc(81.4% - 22px);

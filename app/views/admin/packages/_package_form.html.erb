@@ -3,57 +3,85 @@
 		<legend><span>General Details of Package</span></legend>
 		<ol>
 			<li class="string input optional stringish" id="package_name_input">
-				<%= f.input :package_name, input_html: { value: params[:package] ? params[:package][:package_name] : @package.try(:package_name) } %>
+				<%= f.input :package_name %>
 			</li>
 			<li class="string input optional stringish">
 				<%= f.label :package_description %>
-				<%= f.input :package_description, label: false, :wrapper_html => { :class => "package_content_alignment" }, input_html: { class: "package-editor", value: params[:package] ? params[:package][:package_description] : @package.try(:package_description) } %>
+				<%= f.input :package_description, label: false, :wrapper_html => { :class => "package_content_alignment" }, input_html: { class: "package-editor" } %>
 			</li>
 			<li class="string input optional stringish">
 				<%= f.label :plan_details %>
-				<%= f.input :plan_details, label: false, :wrapper_html => { :class => "package_content_alignment" }, input_html: { class: "package-editor", value: params[:package] ? params[:package][:plan_details] : @package.try(:plan_details) } %>
+				<%= f.input :plan_details, label: false, :wrapper_html => { :class => "package_content_alignment" }, input_html: { class: "package-editor" } %>
 			</li>
 			<li class="string input optional stringish" id="package_price_info_input">
-				<%= f.input :price_info, input_html: { onblur: "$packages.packageCharacterLengthValidation(this, 72);", value: params[:package] ? params[:package][:price_info] : @package.try(:price_info) } %>
+				<%= f.input :price_info, input_html: { onblur: "$packages.packageCharacterLengthValidation(this, 72);" } %>
 				<strong>Hint: </strong>Price Info should not be more than 70 characters
 			</li>
 			<li class="string input optional stringish" id="package_price_input">
-				<%= f.input :price, input_html: { onblur: "$packages.packagePriceValidation(this);", value: params[:package] ? params[:package][:price] : @package.try(:price) } %>
+				<%= f.input :price, input_html: { onblur: "$packages.packagePriceValidation(this);" } %>
 			</li>
 			<li class="string input optional stringish" id="package_monthly_fee_after_promotion_input">
-				<%= f.input :monthly_fee_after_promotion, input_html: { onblur: "$packages.packageCharacterLengthValidation(this, 50);", value: params[:package] ? params[:package][:monthly_fee_after_promotion] : @package.try(:monthly_fee_after_promotion) } %>
+				<%= f.input :monthly_fee_after_promotion, input_html: { onblur: "$packages.packageCharacterLengthValidation(this, 50);" } %>
 				<strong>Hint: </strong>Monthly Fee Text should not be more than 70 characters
-			</li>
-			<li class="string input optional stringish" id="package_installation_price_input">
-				<%= f.input :installation_price, input_html: { onblur: "$packages.packagePriceValidation(this);", value: params[:package] ? params[:package][:installation_price] : @package.try(:installation_price) } %>
-			</li>
-			<li class="string input optional stringish" id="package_self_installation_input">
-				<%= f.input :self_installation, :as => :select, :collection => [["Include", true], ["Not Include", false]], selected: params[:package] ? params[:package][:self_installation] : @package.try(:self_installation) %>
 			</li>
 			<li class="string input optional stringish">
 				<%= f.label :promotions %>
-				<%= f.input :promotions, label: false, :wrapper_html => { :class => "package_content_alignment" }, input_html: { class: "package-editor", value: params[:package] ? params[:package][:promotions] : @package.try(:promotions) } %>
+				<%= f.input :promotions, label: false, :wrapper_html => { :class => "package_content_alignment" }, input_html: { class: "package-editor" } %>
 			</li>
 		</ol>
 	</fieldset>
 	<fieldset class="inputs">
+		<legend><span>Installation</span></legend>
+		<%= f.simple_fields_for :installation do |p|  %>
+			<ol class="choices-group">
+				<li>
+					<%= p.input :installation_price %>
+				</li>
+				<li>
+					<%= p.input :self_installation, as: :select, :collection => [["Include", "t"], ["Not Include", "f"]], prompt: false %>
+				</li>
+			</ol>
+		<% end %>
+	</fieldset>
+	<% unless @package.new_record? %>
+		<fieldset class="inputs">
+			<legend><span>Other Details</span></legend>
+			<%= f.simple_fields_for :installation do |p|  %>
+				<ol class="choices-group">
+					<% case @package.provider.name %>
+					<% when Provider::COX %>
+						<li>
+							<%= fields_editing_html(p, "outlet_installation", p.object.outlet_installation) %>
+						</li>
+						<li>
+							<%= fields_editing_html(f, "protection_plan_service", f.object.protection_plan_service) %>
+						</li>
+						<li>
+							<%= fields_editing_html(f, "lock_rates_agreement", f.object.lock_rates_agreement) %>
+						</li>
+					<% when Provider::CHARTER_SPECTRUM %>
+						<li>
+							<%= fields_editing_html(p, "wifi_installation", p.object.wifi_installation) %>
+						</li>
+					<% when Provider::TIME_WARNER %>
+						<li>
+							<%= fields_editing_html(p, "fourth_tv_installation", p.object.fourth_tv_installation) %>
+						</li>
+					<% end %>
+				</ol>
+			<% end %>
+		</fieldset>
+	<% end %>
+	<fieldset class="inputs">
 		<legend><span>Select Provider &amp; Package Type</span></legend>
 		<ol>
-			<% if @package.new_record? %>
-				<li>
-					<%= f.association :provider,:as => :select,:include_blank => "--Select--", input_html: { onchange: "$packages.validatingProvider(this);" } %>
-				</li>
-				<li>
-					<%= f.association :package_type,:as => :select,:include_blank => "--Select--", input_html: { onchange: "$packages.enableProducts(this);" } %>
-				</li>
-			<% else %>
-				<li>
-					<%= f.association :provider,:as => :select,:include_blank => "--Select--", input_html: { onchange: "$packages.validatingProvider(this);" }, disabled: true %>
-				</li>
-				<li>
-					<%= f.association :package_type,:as => :select,:include_blank => "--Select--", input_html: { onchange: "$packages.enableProducts(this);" }, disabled: true %>
-				</li>
-			<% end %>
+			<li>
+				<%= f.association :provider, :as => :select,:include_blank => "--Select--", input_html: { onchange: "$packages.validatingProvider(this);" }, disabled: @package.new_record? ? false : true %>
+			</li>
+			<li>
+				<%= f.association :package_type, :as => :select,:include_blank => "--Select--", input_html: { onchange: "$packages.enableProducts(this);" }, disabled: @package.new_record? ? false : true %>
+			</li>
+
 			<li>
 				<fieldset class="choices package-products">
 					<legend class="label"><label>Choose Products</label></legend>
@@ -61,11 +89,11 @@
 						<li class="product-errors"></li>
 
 						<% if @package.new_record? %>
-							<% Product.all.each do |product| %>
+							<% @products.each do |product| %>
 								<li class="choice">
-									<%= check_box_tag "product_ids[]", product.id, false, onchange: "$packages.validatingProducts(this);" %>
+									<%= check_box_tag "product_ids[]", product[:id], params["product_ids"] && params["product_ids"].include?(product[:id].to_s) ? true : false, onchange: "$packages.validatingProducts(this);" %>
 
-									<%= product.name %>
+									<%= product[:name] %>
 								</li>
 							<% end %>
 						<% else %>

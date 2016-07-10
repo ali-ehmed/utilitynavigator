@@ -1,5 +1,5 @@
 <% fields = get_in_hash(@checkout_fields) %>
-<%= form_tag update_equiptment_items_admin_package_path(@package.id, product_id: @package_bundle.product_id), method: :put do %>
+<%= form_tag update_equiptment_items_admin_package_path(@package.id, product_id: @package_bundle.product_id, product_name: @package_bundle.product.name), method: :put do %>
 	<%= fields_for @package_bundle.product.name.downcase.to_sym do |f| %>
 		<fieldset class="inputs">
 			<legend><span>Set items for <%= @package_bundle.product.name %></span></legend>

@@ -149,38 +149,5 @@
 
 		<!-- Telephone no porting -->
 		<%= render partial: "offers/checkout/shared/cox/telephone_no_porting", locals: { fields: fields } %>
-
-		<li>
-			<!-- Telephone outlet installation -->
-			<% if fields["telephone_outlet_installation"].present? and fields["telephone_outlet_installation"]["outlet_installation"].present? %>
-				<!-- Outlet Installation -->
-				<h4>
-					Telephone Outlet(s) Installation
-					<p>
-						<small>
-							Do you need any additional Telephone Outlets for your home?
-						</small>
-					</p>
-				</h4>
-				<% if fields["telephone_outlet_installation"]["outlet_installation"].downcase == "included" %>
-					<label class="label-checkbox">
-						 Outlet Installation, (Included)
-					</label>
-				<% else %>
-					<div class="checkbox">
-						<%= check_box_tag :outlet_installation, false, false, {:class => "styled", data: { price: fields["telephone_outlet_installation"]["outlet_installation"], installation: true }, onchange: "calculateEquiptmentCosts(this);"}  %>
-						<label class="label-checkbox">
-							 Outlet Installation, ($<%= fields["telephone_outlet_installation"]["outlet_installation"] %> - <em>One time charges</em>)
-						</label>
-					</div>
-				<% end %>
-				<a role="button" data-toggle="collapse" href="#collaspeoutlet_install" aria-expanded="false" aria-controls="collapseExample" class="view_more">View Details</a>
-				<div class="collapse" id="collaspeoutlet_install">
-					<p class="well">
-						Installation of additional phone jack wired and installed
-					</p>
-				</div>
-			<% end %>
-		</li>
 	<% end %>
 </div>

@@ -18,6 +18,19 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  # This method Excludes Unnecessary fields from requested params
+  def exclude_garbage_fields(params)
+    params.delete("checkout_select")
+    params
+    params.each do |key, value|
+      if !value.is_a?(String) and value.is_a?(Hash)
+        value.delete("checkout_select")
+      end
+    end
+
+    params
+  end
+
   protected
 
   %w(zip_code user_address broadband_search).each do |method_name|
@@ -34,7 +47,7 @@ class ApplicationController < ActionController::Base
               :home_number, :driver_license,
               :social_security, :four_digit_no,
               :email, :password, :password_confirmation,
-              :current_password, :profile_image) 
+              :current_password, :profile_image)
     }
   end
 

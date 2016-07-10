@@ -17,8 +17,8 @@
 						</p>
 					<% else %>
 						<div class="checkbox">
-		          <%= check_box_tag "50_additional_channels", false, false, {:class => "styled", data: { price: fields["digital_tier_1"]["50_additional_channels"] }, onchange: "calculateEquiptmentCosts(this);"}  %>
-		          <label class="label-checkbox">
+		          <%= check_box_tag "50_additional_channels", false, false, {id: "50_additional_channels", :class => "styled", data: { price: fields["digital_tier_1"]["50_additional_channels"] }, onchange: "calculateEquiptmentCosts(this);"}  %>
+		          <label class="label-checkbox" for="50_additional_channels">
 		            50 additional channels ($<%= fields["digital_tier_1"]["50_additional_channels"] %> Monthly)
 		          </label>
 		        </div>
@@ -44,8 +44,8 @@
 						</p>
 					<% else %>
 						<div class="checkbox">
-		          <%= check_box_tag "50_additional_channels", false, false, {:class => "styled", data: { price: fields["digital_tier_2"]["25_additional_channels"] }, onchange: "calculateEquiptmentCosts(this);"}  %>
-		          <label class="label-checkbox">
+		          <%= check_box_tag "25_additional_channels", false, false, {id: "25_additional_channels",:class => "styled", data: { price: fields["digital_tier_2"]["25_additional_channels"] }, onchange: "calculateEquiptmentCosts(this);"}  %>
+		          <label class="label-checkbox" for="25_additional_channels">
 		            25 additional channels ($<%= fields["digital_tier_2"]["25_additional_channels"] %> Monthly)
 		          </label>
 		        </div>
@@ -61,7 +61,7 @@
 		<% end %>
 
 		<!-- Charter Premium Channels  -->
-		<% if fields["premiums"].present? %>
+		<% if fields["premiums_items"].downcase == "required" %>
 			<h4>Premium Channels</h4>
 			<ul>
 				<% fields["premiums"].each do |key, val| %>
@@ -73,8 +73,8 @@
 								</p>
 							<% else %>
 								<div class="checkbox">
-									<%= check_box_tag key.to_sym, false, false, {:class => "styled", data: { price: val }, onchange: "calculateEquiptmentCosts(this);"}  %>
-									<label class="label-checkbox">
+									<%= check_box_tag key.to_sym, false, false, {id: key, :class => "styled", data: { price: val }, onchange: "calculateEquiptmentCosts(this);"}  %>
+									<label class="label-checkbox" for="<%= key %>">
 										<%= key.humanize %> ($<%= val %> Monthly)
 									</label>
 								</div>
@@ -121,7 +121,7 @@
 		<% end %>
 
 		<!-- International Channels -->
-		<% if fields["international_channels"].present? %>
+		<% if fields["international_channels_items"].downcase == "required" %>
 			<h4>International Channels</h4>
 			<ul>
 
@@ -134,8 +134,8 @@
 								</p>
 							<% else %>
 								<div class="checkbox">
-									<%= check_box_tag key.to_sym, false, false, {:class => "styled", data: { price: val }, onchange: "calculateEquiptmentCosts(this);"}  %>
-									<label class="label-checkbox">
+									<%= check_box_tag key.to_sym, false, false, {id: key, :class => "styled", data: { price: val }, onchange: "calculateEquiptmentCosts(this);"}  %>
+									<label class="label-checkbox" for="<%= key %>">
 										<%= key.humanize %> ($<%= val %> Monthly)
 									</label>
 								</div>
@@ -236,27 +236,6 @@
 				</ul>
 			<% end %>
 		<% end %>
-
-    <% if fields["wifi_installation"].present? %>
-			<h4>WiFi Installation</h4>
-
-			<% if fields["wifi_installation"].downcase == "included" %>
-        <p>
-        	WiFi Installation Service is included in this package
-        </p>
-      <% else %>
-				<ul>
-					<li>
-		        <div class="checkbox">
-		          <%= check_box_tag :wifi_installation, false, false, {:class => "styled", data: { price: fields["wifi_installation"].to_f, installation: true }, onchange: "calculateEquiptmentCosts(this);"}  %>
-		          <label class="label-checkbox" for="self_installation">
-		            Schedule an appointment for a technician to install my WiFi services ($<%= fields["wifi_installation"].to_f %> - <em>One time charges</em>)
-		          </label>
-		        </div>
-					</li>
-				</ul>
-      <% end %>
-    <% end %>
 		<hr />
 	<% else %>
 

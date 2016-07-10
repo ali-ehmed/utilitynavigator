@@ -183,30 +183,6 @@
 
 		<li>
 			<label class="label">
-				Telephone Outlet Installation Additional
-			</label>
-			<%= ff.select :telephone_outlet_installation_items, options_for_select(["Required", "Not Include"]), {prompt: "--Select--"}, onChange: "$packages.setRequiredFields(this);" %>
-		</li>
-
-		<!-- Outlet installation -->
-		<%= ff.fields_for :telephone_outlet_installation do |f| %>
-			<li style="display:none;">
-				<legend><span>Set item for Outlet installation</span></legend>
-				<ol>
-					<li>
-						<label for="provider_name" class="label">
-							Outlet installation
-						</label>
-						<%= f.select "checkout_select", options_for_select(["Include", "Not Include", "Add Price"]), {prompt: "--Select--"}, class: "package_select_field", onchange: "$packages.addPriceField(this);" %>
-
-						<%= f.text_field "outlet_installation", style: "display: none;width: calc(78% - 22px);margin-left:20%;", onblur: "$packages.packagePriceValidation(this);", class: "admin_checkout_price" %>
-					</li>
-				</ol>
-			</li>
-		<% end %>
-
-		<li>
-			<label class="label">
 				Telephone Equipment (EMTA)
 			</label>
 			<%= ff.select :telephone_equiptment_items, options_for_select(["Required", "Not Include"]), {prompt: "--Select--"}, onChange: "$packages.setRequiredFields(this);" %>

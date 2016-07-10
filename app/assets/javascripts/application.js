@@ -11,9 +11,9 @@
 // about supported directives.
 //
 //= require jquery
+//= require jquery_ujs
 //= require jquery.turbolinks
 //= require turbolinks
-//= require jquery_ujs
 //= require bootstrap-notify
 //= require bootstrap-sprockets
 //= require moment
@@ -24,7 +24,7 @@
 
 //= require_tree .
 
-$(document).ready(function(){
+$(document).on("page:change", function() {
 	// Notify
 	$.notifyDefaults({
 		allow_dismiss: true,

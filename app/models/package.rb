@@ -10,11 +10,13 @@
 #  price_info                  :string
 #  price                       :string
 #  monthly_fee_after_promotion :string
-#  installation_price          :string
 #  promotion_disclaimer        :string
 #  created_at                  :datetime         not null
 #  updated_at                  :datetime         not null
 #  promotions                  :text
+#  protection_plan_service     :string
+#  lock_rates_agreement        :string
+#  plan_details                :text
 #
 
 class Package < ActiveRecord::Base
@@ -27,8 +29,11 @@ class Package < ActiveRecord::Base
 	has_many :orders, dependent: :delete_all
 	accepts_nested_attributes_for :orders
 
+	has_one :installation
+	accepts_nested_attributes_for :installation
+
 	attr_accessor :product_ids, :charter_tv_spectrum
-	after_initialize :default_values
+	attr_accessor :checkout_select
 
 	extend PackagesHelper
 
@@ -51,7 +56,8 @@ class Package < ActiveRecord::Base
 
 	validates_presence_of :provider_id,
 												:price, :package_name, :package_description, :price_info, :promotions,
-												:plan_details, :installation_price
+												:plan_details
+	# validates :product_ids, presence: true, on: :create
 
 	validates :price_info, length: { maximum: 80 }
 
@@ -128,9 +134,4 @@ class Package < ActiveRecord::Base
 		  .having("count(distinct products.name) = ?", filters.length)
 		end
 	end
-
-	private
-		def default_values
-			self.self_installation = true
-		end
 end

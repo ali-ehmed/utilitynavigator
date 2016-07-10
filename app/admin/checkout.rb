@@ -15,6 +15,8 @@ ActiveAdmin.register Checkout do
       case step
       when :package_bundles
         @provider_preferences = @provider.product_provider_preferences
+      when :equiptment_items
+        @selected_products = @products.map(&:name)
       end
       render_wizard
     end
@@ -27,7 +29,7 @@ ActiveAdmin.register Checkout do
         bundle_keys_by_product = Array.new
 
         @package.charter_tv_spectrum = params["charter_tv_spectrum"]
-        @package.save
+        @package.save!
 
         for product in @products do
         	@provider_preferences.preferences_of_product(product.id).each do |preference|
@@ -39,7 +41,7 @@ ActiveAdmin.register Checkout do
 
 					package_bundle = @package.package_bundles.find_by_product_id(product)
 					package_bundle.field = bundle_params
-					package_bundle.save
+					package_bundle.save!
         end
       when :equiptment_items
 
@@ -47,8 +49,10 @@ ActiveAdmin.register Checkout do
   			@package.lock_rates_agreement = params["lock_rates_agreement"] || ""
         @package.save
 
+        setup_installation()
+
         for product in @products do
-          equiptment_items = exclude_garbage_fields(params, product)
+          equiptment_items = exclude_garbage_fields(params[product.name.underscore.to_sym])
           package_bundle = @package.package_bundles.find_by_product_id(product)
           package_bundle.checkout_fields = equiptment_items
           logger.debug equiptment_items
@@ -63,15 +67,12 @@ ActiveAdmin.register Checkout do
 
     private
 
-    def exclude_garbage_fields(params, product)
-      params[product.name.underscore.to_sym].delete("checkout_select")
-      params[product.name.underscore.to_sym].each do |key, value|
-        if !value.is_a?(String) and value.is_a?(Hash)
-          value.delete("checkout_select")
-        end
-      end
-
-      params[product.name.underscore.to_sym]
+    def setup_installation
+      installation = @package.installation
+      installation.fourth_tv_installation = params["fourth_tv_install"] || ""
+      installation.wifi_installation = params["wifi_install"] || ""
+      installation.outlet_installation = params["outlet_install"] || ""
+      installation.save
     end
 
     def set_package
