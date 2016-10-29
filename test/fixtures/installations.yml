@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  wifi_installation: MyString
+  outlet_installation: MyString
+  fourth_tv_installation: MyString
+  installation_price: MyString
+  self_installation: MyString
+  package_id: 1
+
+two:
+  wifi_installation: MyString
+  outlet_installation: MyString
+  fourth_tv_installation: MyString
+  installation_price: MyString
+  self_installation: MyString
+  package_id: 1

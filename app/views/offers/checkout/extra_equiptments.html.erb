@@ -1,8 +1,9 @@
 <div id="package_provider" data-provider="<%= @package.provider.acronym %>"></div>
 <div class="extra_equiptments">
 	<div class="container">
-		<!-- offer_checkout_path(@package, Package.checkout_steps.second.to_s) -->
-		<%= form_tag wizard_path, method: :put, id: "extra_equiptments_form" do %>
+		<!-- Checkout Form -->
+		<!-- offer_checkout_path(@package, Package.checkout_steps.second.to_s), method: :get -->
+		<%= form_for @package, url: wizard_path, method: :put, :html => { id: "extra_equiptments_form" } do %>
 			<div class="row">
 				<div class="col-md-9 col-sm-9">
 					<blockquote>
@@ -21,27 +22,12 @@
 								</div>
 								<%= render partial: "#{@package.provider.acronym}_equiptments", locals: { product: product, package: @package } %>
 							<% end %>
-							<div class="bs-callout bs-callout-danger" style="background-color: #E0E0E0;" id="callout-collapse-dependency">
-								<h4 class="setup">
-									Installation <span class="checkout_required">(Required)</span>
-								</h4>
-							</div>
-							<ul>
-								<li>
-									<% unless @package.installation_price.downcase == "free" or @package.installation_price.downcase == "included" %>
-										<div class="checkbox">
-			        				<%= check_box_tag :installation, false, false, {:class => "styled", data: { price: @package.installation_price }, onchange: "calculateEquiptmentCosts(this);"}  %>
-							        <label class="label-checkbox">
-							          Schedule an appointment for a technician to install my services (<%= @package.installation_price %>) 
-							        </label>
-							      </div>
-						      <% else %>
-						      	<label class="label-checkbox">
-						          Schedule an appointment for a technician to install my services (Free) 
-						        </label>
-						      <% end %>
-								</li>
-							</ul>
+
+							<% if @provider.name == Provider::COX %>
+								<%= render partial: "offers/checkout/shared/cox/cox_additional_details" %>
+							<% end %>
+
+							<%= render partial: "installation" %>
 						</div>
 					</div>
 				</div>
@@ -52,7 +38,7 @@
 								<ul class="list-inline">
 									<li>Plan Summary</li>
 									<li class="pull-right">
-										<%= link_to "Change Plan", offers_path %>
+										<%= link_to "Change Plan", offers_path(filters: "tv_filter") %>
 									</li>
 								</ul>
 							</div>
@@ -79,18 +65,17 @@
 											<strong>Installation Price</strong>
 										</li>
 										<li class="pull-right">
-											<% if @package.installation_price.downcase == "free" %>
-									  		Free
-								  		<% else %>
-								  			<%= number_to_currency(@package.installation_price) %>
-								  		<% end %>
+								  		$
+											<%= hidden_field_tag :installation_cost, 0 %>
+											<span class="installation_cost_span">0.00</span>
 										</li>
 									</ul>
+									<em>(One time charges)</em>
 								</li>
 								<li>
 									<ul class="list-inline">
 										<li>
-											<strong>Extra Equiptment Price</strong>
+											<strong>Equiptment Price</strong>
 										</li>
 										<li class="pull-right">
 											$
@@ -123,7 +108,7 @@
 					</div>
 				</div>
 			</div>
-			<%= button_tag "Place Order", type: :submit, class: "btn btn-un btn-lg" %>
+			<%= button_tag "Proceed", type: :submit, class: "btn btn-un btn-lg" %>
 		<% end %>
 	</div>
 </div>

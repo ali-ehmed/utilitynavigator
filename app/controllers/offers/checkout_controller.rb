@@ -2,9 +2,11 @@ class Offers::CheckoutController < ApplicationController
 	include Wicked::Wizard
 	include ApplicationHelper
 
-	before_action :set_package, only: [:show]
+	before_action :set_package, only: [:show, :installation_fields, :update]
+	before_action :set_installation, only: [:show]
+	before_action :exclude_params, only: [:show, :update]
 
-	steps *Package.checkout_steps
+	steps(*Package.checkout_steps)
 
 	def show
 		logger.debug "Step: #{step}"
@@ -16,28 +18,44 @@ class Offers::CheckoutController < ApplicationController
 			rescue Exception
 				redirect_to root_path, flash: { warning: "There was a problem, Please contact Tech Support Team!" }
 			end
-		when "payments"
-			@payment = Payment.new
-			current_user || @payment.build_user 
-			@equiptment_params = params.except(:utf8, :button, :controller, :action, :offer_id, :id)
-			session[:checkout_form_params] = @equiptment_params
+		when "reserve_order"
+			@order = Order.new
+			saved_equiptments
+			current_user || @order.build_user
 		end
 		render_wizard
 	end
-	
+
 	def update
 		logger.debug "Update Step: #{step}"
-		redirect_to root_path, notice: Payment::RESERVED_MESSAGE
+		case step.to_s
+		when "extra_equiptments"
+			session[:checkout_form_params] = @equiptment_params
+			render_wizard @package
+		end
 	end
 
-	def set_package
-  	# @directory_name = @equiptment_params["directory_entered_name"] if @package.provider.cox?
-  	# @transfer_phone_number = @equiptment_params["transfer_phone_number"] if @package.provider.charter?
-  end
-
-	private 
+	private
 
 	def set_package
-		@package = Package.find(params[:offer_id])
+		begin
+			@package = Package.find(params[:offer_id])
+			@provider = @package.provider
+		rescue ActiveRecord::RecordNotFound
+			flash[:error] = "Package not found"
+  		redirect_to offers_path
+		end
+	end
+
+	def exclude_params
+  	@equiptment_params = params.except(:authenticity_token, :utf8, :_method, :action, :controller, :offer_id, :id)
+	end
+
+	def saved_equiptments
+		@equiptments = session[:checkout_form_params]
+	end
+
+	def set_installation
+		@installation = @package.installation
 	end
 end

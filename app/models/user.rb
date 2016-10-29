@@ -40,20 +40,18 @@
 class User < ActiveRecord::Base
   # Include default devise modules. Others available are:
   # :lockable, :timeoutable and :omniauthable
-  devise :database_authenticatable,
-         :recoverable, :rememberable, :trackable, :validatable,
-         :registerable
-         # , :confirmable
+  devise :database_authenticatable, :trackable, :validatable, :registerable
+          #:confirmable, :rememberable, :recoverable
 
-  has_many :payments, dependent: :delete_all
+  has_many :orders, dependent: :delete_all
 
   validates_presence_of :address, :zip_code, :cell_number, :home_number, :date_of_birth, :first_name, :last_name, :address
 
-  validate :validate_social_security
+  # validate :validate_social_security
 
   validates_length_of :zip_code, :minimum => 5, :maximum => 5
 
-  validates_length_of :social_security, :minimum => 9, :maximum => 9
+  # validates_length_of :social_security, :minimum => 9, :maximum => 9
 
   validates_length_of :cell_number, :home_number, :minimum => 10, :maximum => 10
 
@@ -61,11 +59,11 @@ class User < ActiveRecord::Base
   after_initialize :disable_password_on_create
   after_create :generate_password
 
-  has_attached_file :profile_image, styles: { medium: "300x300>", thumb: "100x100>" }, 
-                                    default_url: "user-login.png", 
-                                    :storage => :dropbox,
-                                    :dropbox_credentials => Rails.root.join("config/initializers/dropbox.yml"),
-                                    :dropbox_visibility => 'public'
+  has_attached_file :profile_image, styles: { medium: "300x300#", thumb: "100x100>" }
+                                    # default_url: "user-login.png",
+                                    # :storage => :dropbox,
+                                    # :dropbox_credentials => Rails.root.join("config/initializers/dropbox.yml"),
+                                    # :dropbox_visibility => 'public'
   validates_attachment_content_type :profile_image, content_type: /\Aimage\/.*\Z/
 
   def disable_password_on_create
@@ -102,7 +100,7 @@ class User < ActiveRecord::Base
     rand_string = generate_random_string
 
     attributes = {
-      :password => rand_string, 
+      :password => rand_string,
       :password_confirmation => rand_string
     }
 
@@ -114,16 +112,16 @@ class User < ActiveRecord::Base
   end
 
   def card_number
-    return "" if payments.blank?
-    payments.last.card_last4.split(//).first(4).join 
+    return "" if orders.blank? or orders.last.card_last4.blank?
+    orders.last.card_last4.split(//).first(4).join
   end
 
   def card_expiry
-    return "" if payments.blank?
-    "#{payments.last.card_exp_month}-#{payments.last.card_exp_year}"
+    return "" if orders.blank?
+    "#{orders.last.card_exp_month}-#{orders.last.card_exp_year}"
   end
 
-  def orders
-    payments.joins(:package).includes(:package)
+  def reserved_orders
+    orders.joins(:package).includes(:package)
   end
 end

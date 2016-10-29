@@ -1,5 +1,5 @@
 class Checkout < ApplicationMailer
-	default from: "test@designhenge.com" 
+	default from: "orders@utilitynavigators.com" 
   # Subject can be set in your I18n file at config/locales/en.yml
   # with the following lookup:
   #
@@ -22,13 +22,13 @@ class Checkout < ApplicationMailer
     @user = user
     @greeting = "Hi #{@user.full_name}"
     @pwd = pwd
-    mail to: @user.email, subject: "Password Instructions"
+    mail from: "no-reply@utilitynavigators.com", to: @user.email, subject: "Password Instructions"
   end
 
   def user_order_approval(order, user)
     @user = user
     @greeting = "Hi #{@user.full_name}"
     @order = order
-    mail to: @user.email, subject: "Order Status"
+    mail from: "no-reply@utilitynavigators.com", to: @user.email, subject: "Order Status"
   end
 end

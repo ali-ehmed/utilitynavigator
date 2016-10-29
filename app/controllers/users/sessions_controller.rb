@@ -6,6 +6,13 @@ class Users::SessionsController < Devise::SessionsController
   # GET /resource/sign_in
   respond_to :json
 
+  # def new
+  #   self.resource = resource_class.new(sign_in_params)
+  #   clean_up_passwords(resource)
+  #   yield resource if block_given?
+  #   render template: "landings/index"
+  # end
+
   def create
     self.resource = warden.authenticate!(auth_options)
     flash[:notice] = "Logged in successfully"

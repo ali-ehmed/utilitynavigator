@@ -1,0 +1,18 @@
+<!-- Long Distance -->
+<%= ff.fields_for :long_distance do |f| %>
+	<li style="display:none;">
+		<legend><span>Set items for Long Distance</span></legend>
+		<ol>
+			<% %w(simply_5_long_distance cox_long_distance).each do |fields| %>
+				<li>
+					<label for="provider_name" class="label">
+						<%= fields.humanize %>
+					</label>
+					<%= f.select "checkout_select", options_for_select(["Include", "Not Include", "Add Price"]), {prompt: "--Select--"}, class: "package_select_field", onchange: "$packages.addPriceField(this);" %>
+
+					<%= f.text_field fields.to_sym, style: "display: none;width: calc(78% - 22px);margin-left:20%;", onblur: "$packages.packagePriceValidation(this);", class: "admin_checkout_price" %>
+				</li>
+			<% end %>
+		</ol>
+	</li>
+<% end %>

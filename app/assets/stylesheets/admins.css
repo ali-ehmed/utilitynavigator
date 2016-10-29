@@ -1,35 +1,24 @@
-
-/*
- *= require froala_editor.min.css
- *= require froala_style.min.css
- *= require font-awesome
- *= require plugins/char_counter.min.css
- *= require plugins/fullscreen.min.css
- *= require plugins/image_manager.min.css
- *= require plugins/image.min.css
- *= require plugins/line_breaker.min.css
- *= require plugins/quick_insert.min.css
- *= require plugins/table.min.css
- */
+div.nested_fields_admin_preview {
+	width: 57%;
+  overflow: scroll;
+}
 fieldset.package-products {
 	padding: 11px 0px 11px 0px;
-  background: rgb(191, 191, 191);
   border-radius: 5px;
-  cursor: no-drop;
 }
 fieldset.package-products > legend {
-  padding-left: 8px;			
+  padding-left: 8px;
 }
 
 .product-validate {
-  border: 2px solid #F56262 !important;
-  padding: 5px 0px 0px 5px !important;
+  border-left: 2px solid #F56262 !important;
+  padding: 3px 0px 2px 5px !important;
   margin-bottom: 5px;
   margin-top: 5px;
   border-radius: 3px;
 }
 li.product-errors {
-	font-size: bold;
+	font-weight: bold;
 }
 
 table td.fields, th.fields {
@@ -59,4 +48,13 @@ table td.fields, th.fields {
 .admin_checkout_price {
   margin-left: 20%;
   margin-top: 15px;
+}
+
+form input[type=text], form input[type=password], form input[type=email], form input[type=number], form input[type=url], form input[type=tel], form input[type=date], form textarea {
+  width: calc(79% - 22px);
+}
+
+.package_content_alignment {
+	width: calc(81.4% - 22px);
+  margin-left: 20%;
 }

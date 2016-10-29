@@ -1,5 +1,5 @@
 class Hash
-  def select_keys(*args)
-    select {|k,v| args.include?(k) }
+  def select_keys(hash)
+    select {|k,v| hash.include?(k) }
   end
 end

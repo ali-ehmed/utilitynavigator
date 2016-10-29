@@ -1,0 +1,61 @@
+<% if @package.protection_plan_service.present? %>
+	<h4><strong>Cox Service Protection Plan</strong></h4>
+	<ul>
+		<li>
+			<% if @package.protection_plan_service.downcase == "included" %>
+				<p>
+					Cox Service Protection Plan (Included)
+				</p>
+			<% else %>
+				<div class="checkbox">
+	        <%= check_box_tag :cox_service_protection_plan, false, false, {:class => "styled", data: { price: @package.protection_plan_service.to_f }, onchange: "calculateEquiptmentCosts(this);"}  %>
+	        <label class="label-checkbox">
+	           Cox Service Protection Plan, ($<%= @package.protection_plan_service.to_f %> Monthly)
+	        </label>
+	      </div>
+			<% end %>
+			<a role="button" data-toggle="collapse" href="#collaspecox_service_protection_plan" aria-expanded="false" aria-controls="collapseExample" class="view_more">View Details</a>
+			<div class="collapse" id="collaspecox_service_protection_plan">
+				<div class="well">
+					<p>
+						Get peace of mind knowing that the wiring for your Cox TV, Internet and Phone service is protected.
+					</p>
+					<p>
+						Cox Service Protection Plan (CSPP) covers the repair of all cabling and phone wiring in your home, including outlets and jacks, and inspection of your home wiring to ensure that it is up to Cox standards. CSPP covers replacing and repairing defective cable industry standard wiring (coax, splitters, fittings and telephone wiring), running from the outside of the home to the back of the digital receiver, TV, modem or telephone outlet. CSPP does not cover customer education calls, failed self-activations, and substandard wiring or splitters. Examples of customer education that is not "included" in CSPP service include TV on the wrong input, setup of non-Cox equipment, and incorrect hookup after moving or adding new equipment. Some restrictions apply.
+					</p>
+				</div>
+			</div>
+		</li>
+	</ul>
+<% end %>
+<% if @package.lock_rates_agreement.present?  %>
+	<h4><strong>Service Agreement</strong> <small><a href="javascript:void(0);" onclick="resetSelectedItem(this);">Reset selected item</a></small></h4>
+	<ul>
+		<li> This term will apply to all selected services. Any change to your service term may alter your package, bundle pricing or discounts. Save more on your monthly cost by selecting a longer service agreement term.
+		</li>
+		<li>
+			<div class="checkbox" style="padding-left: 5px;">
+        <%= radio_button_tag :service_agreement, false, false, {id: "service_agreement_lock_1", data: { price: 0 }, onchange: "calculateEquiptmentCosts(this);"}  %>
+        <label class="label-checkbox" for="service_agreement_lock_1">
+          Don't lock in my rate
+        </label>
+      </div>
+		</li>
+		<li>
+			<div class="checkbox" style="padding-left: 5px;">
+        <%= radio_button_tag :service_agreement, false, false, {id: "service_agreement_lock_2", data: { price: @package.lock_rates_agreement.to_f }, onchange: "calculateEquiptmentCosts(this);"}  %>
+        <label class="label-checkbox" for="service_agreement_lock_2">
+          Lock in my rate for 24 months
+        </label>
+      </div>
+		</li>
+	</ul>
+  <a role="button" data-toggle="collapse" href="#collaspeservice_agreement" aria-expanded="false" aria-controls="collapseExample" class="view_more">View Details</a>
+	<div class="collapse" id="collaspeservice_agreement">
+    <div class="well">
+    	<p>
+    		Price Lock Guarantee lets you lock in the regular rates on Cox TV, Internet and Phone services for 24 months. The rates for your services will not increase above the price lock rate when you agree to keep your main services (TV, Internet and/or Phone) for the 24 months. What's covered and not covered Price Lock Guarantee is offered on TV, Internet and Phone services plus their features, such as a premium channel or voice mail. Price Lock Guarantee does not apply to charges for equipment (such as a receiver or modem), per use items (like a movie rental) and fees for non-services (like taxes and surcharges) which may change.
+    	</p>
+    </div>
+  </div>
+<% end %>

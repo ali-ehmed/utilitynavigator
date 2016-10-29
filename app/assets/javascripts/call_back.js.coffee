@@ -37,15 +37,15 @@ dismissForm = ->
     $(@).find("input[type='submit']").text("Submit")
     $(@).find("input[type='text'],textarea,input[type='email'],input[type='tel']").val("")
 
-$(document).on "ready page:change", ->
+$(document).on "page:change", ->
   dismissForm()
   dt = new Date()
-  
+
   $(".time_fields").datetimepicker
     format: 'hh:mm A'
 
   $(".date_fields").datetimepicker
-    format: 'MM/DD/YYYY'
+    format: 'DD-MM-YYYY'
     minDate: dt
 
   $(".date_fields").find("input[type='text']").val("")

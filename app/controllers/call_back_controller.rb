@@ -1,8 +1,6 @@
 class CallBackController < ApplicationController
 	def create
 		@call_back = CallBack.new call_back_params
-
-		logger.debug "#{@call_back.preferred_time}"
 		# zone = ActiveSupport::TimeZone.new("Central Time (US & Canada)")
 		# Time.now.in_time_zone(zone)
 

@@ -24,5 +24,6 @@ en:
     attributes:
       user:
         base: ""
-      payment:
+      order:
         card_last4: "Card Number"
+      product_ids: "Select Products"

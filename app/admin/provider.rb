@@ -1,6 +1,6 @@
 ActiveAdmin.register Provider do
-	menu :if => proc { current_admin_user.super_admin == true } 
-	actions :all, only: [:show]
+	menu :if => proc { current_admin_user.super_admin == true }
+	actions :all, except: [:new, :delete]
 # See permitted parameters documentation:
 # https://github.com/activeadmin/activeadmin/blob/master/docs/2-resource-customization.md#setting-up-strong-parameters
 #
@@ -18,7 +18,7 @@ ActiveAdmin.register Provider do
     selectable_column
     column :name
     column :created_at
-    # actions
+    actions
   end
 
 	controller do

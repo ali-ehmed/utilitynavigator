@@ -10,25 +10,28 @@
 				<ul class="list-inline">
 					<li class="text-center">
 						<%= image_tag("twc-search.png") %>
-						(<%= @twc.count %>)
+						(<%= @count_twc || 0 %>)
 					</li>
 					<li class="text-center">
 						<%= image_tag("cox-search.png") %>
-						(<%= @cox.count %>)
+						(<%= @count_cox || 0 %>)
 					</li>
 					<li class="text-center">
 						<%= image_tag("charter-search.png") %>
-						(<%= @charter.count %>)
+						(<%= @count_charter || 0 %>)
 					</li>
 				</ul>
 		</div>
 	</div>
 </div>
 <div id="package-details">
+	<!-- Search filters -->
+	<%= render partial: "shared/searched_filters" %>
+
 	<div class="container">
 		<% if @packages.blank? %>
 			<div class="alert alert-danger">
-				<strong>Sorry!</strong> Currently, our packages are not available in your area.
+				<strong>Sorry!</strong> There are no packages available.
 			</div>
 		<% else %>
 			<div class="row">
@@ -46,26 +49,31 @@
 												<div class="form-group"></div>
 												<div class="col-md-8 col-sm-8">
 													<label><%= package.package_name %></label>
+													<br />
 													<%= link_to "Plan Details", "#", class: "detail-link", "data-toggle" => "modal", "data-target" => "#plan_details_#{package.id}" %>
 													<%= render partial: "shared/plan_details", locals: { package: package } %>
 												</div>
 											</div>
 										</div>
-										
+
 
 										<div class="offers-package-desc">
 											<%= package.package_description.blank? ? "N/A" : package.package_description.html_safe %>
 										</div>
-										
+
 										<%= link_to "More Info & Promotions", "#", class: "detail-link", class: "detail-link", "data-toggle" => "modal", "data-target" => "#promotions_#{package.id}" %>
 										<%= render partial: "shared/promotions", locals: { package: package } %>
+										<% if package.package_bundles.map(&:product).map(&:name).include?("Cable") %>
+											<br />
+											<a href="#" class="channel-comparison-link" data-provider="<%= channel_provider_names(package.provider.try("name")) %>">Channel List</a>
+										<% end %>
 										<br /><br />
 										<%= link_to "CHOOSE THIS PLAN", offer_checkout_path(package, Package.checkout_steps.first.to_s), class: "btn btn-warning btn-lg choose-plan-btn" %>
 									</div>
 									<div class="col-md-3 col-sm-3">
 										<div class="price-info">
 											<strong>Starting at</strong>
-											<strong class="price"><%= package.price %></strong>
+											<strong class="price"><%= package.price.present? ? number_to_currency(package.price) : package.price %></strong>
 											per month
 											<br />
 											<strong class="price-information"><%= package.price_info %></strong>
@@ -95,6 +103,7 @@
 			</ul>
 		<% end %>
 	</div>
+
 </div>
 
 <div id="comparison"></div>
@@ -117,4 +126,3 @@
     </div>
   </div>
 </div>
-

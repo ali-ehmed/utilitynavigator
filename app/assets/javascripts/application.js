@@ -12,6 +12,7 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require jquery.turbolinks
 //= require turbolinks
 //= require bootstrap-notify
 //= require bootstrap-sprockets
@@ -20,12 +21,10 @@
 //= require jquery.cookie
 //= require common/constant
 //= require jasny-bootstrap.min
+
 //= require_tree .
 
-
-// 
-
-$(document).ready(function(){
+$(document).on("page:change", function() {
 	// Notify
 	$.notifyDefaults({
 		allow_dismiss: true,

@@ -1,8 +1,11 @@
 Rails.application.routes.draw do
-  resources :payments
+  match '/admin/checkout/:id/packages/:package_id' => 'admin/checkout#show', via: :get, :as => :admin_checkout
+  match '/admin/checkout/:id/packages/:package_id' => 'admin/checkout#update', via: :put
 
-  devise_for :admin_users, ActiveAdmin::Devise.config
-  ActiveAdmin.routes(self)
+  get "sitemap.xml" => "sitemaps#index", :format => "xml", :as => :sitemap
+  resources :orders
+
+  get 'ping' => proc {|env| [200, {}, []] }
 
   resources :offers, only: :index do
     resources :checkout, controller: 'offers/checkout'do
@@ -21,12 +24,17 @@ Rails.application.routes.draw do
   get "/compare_packages" => "landings#compare_packages"
   get "/load_channels" => "landings#load_channels"
 
-  devise_for :users, controllers: { sessions: "users/sessions", :registrations => "users/registrations" }
-  # devise_scope :user do
-  #   get "/" => "landings#index"
-  # end
-  
-  # devise_for :users
+  devise_for :admin_users, ActiveAdmin::Devise.config
+  ActiveAdmin.routes(self)
+
+  # devise_for :users, controllers: { sessions: "users/sessions", :registrations => "users/registrations" }
+  devise_for :users, :skip => [:registrations], controllers: { sessions: "users/sessions", :registrations => "users/registrations" }
+  as :user do
+    get 'users/edit' => 'devise/registrations#edit', :as => 'edit_user_registration'
+    put 'users/:id' => 'devise/registrations#update', :as => 'registration'
+    delete 'users/:id' => 'devise/registrations#destroy', :as => 'destroy_user_registration'
+  end
+
   resources :call_back, only: [:create]
   root to: 'landings#index'
 end

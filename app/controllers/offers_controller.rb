@@ -1,6 +1,7 @@
 class OffersController < ApplicationController
 	@@broadband_providers = []
-	
+	include PackagesHelper
+
 	def show
 		@packages = []
 
@@ -18,15 +19,22 @@ class OffersController < ApplicationController
 			session[:user_address] = user_address
 		end
 
-		@twc = Package.time_warner
-		@charter = Package.charter_spectrum
-		@cox = Package.cox
-
-		logger.debug user_address
-
 		unless broadband_search.to_s == "zero_results"
 			@providers = broadband_search
-			@packages = Package.broadband_providers(@providers).paginate(:page => params[:page], :per_page => 6)
+			@packages = Package.broadband_providers(@providers)
+		end
+
+		if @packages.length > 0
+			# Applying product filters
+			if params[:filters] and params[:filters].present?
+				@packages = @packages.send(params[:filters])
+			end
+
+			@count_twc = @packages.try("time_warner").length
+			@count_charter = @packages.try("charter_spectrum").length
+			@count_cox = @packages.try("cox").length
+
+			@packages = @packages.paginate(:page => params[:page], :per_page => 6)
 		end
 
 		respond_to do |format|
@@ -41,6 +49,7 @@ class OffersController < ApplicationController
 		@results = @address.search_providers(@location)
 
 		logger.debug @results
+
 		if @results == "error".to_sym
 			render json: { status: :error, msg: "There was a problem while fetching data." }
 		else

@@ -1,0 +1,38 @@
+<%= form_tag wizard_path, method: "put" do %>
+	<% for product in @products do %>
+    <% input_value = "" %>
+    <% package_bundle_fields = get_in_hash(@package.package_bundles.find_by_product_id(product).field) %>
+		<% if @provider_preferences.preferences_of_product(product.id).present? %>
+			<fieldset class="inputs">
+				<legend><span><%= product.name %></span></legend>
+				<ol>
+					<% @provider_preferences.preferences_of_product(product.id).each do |preference| %>
+          
+            <% if package_bundle_fields.present? and package_bundle_fields[preference.additional_field_weight.to_field.to_s].present? %>
+              <% input_value = package_bundle_fields[preference.additional_field_weight.to_field.to_s] %>
+            <% end %>
+
+						<li class="string input optional stringish" id="package_name_input">
+							<label for="provider_name" class="label">
+								<%= preference.additional_field_weight.additional_weight %>
+							</label>
+							<% if preference.additional_field_weight.field_type == "Select Multiple" %>
+
+								<%= select_tag "#{preference.additional_field_weight.to_field}[]", options_for_select(preference.additional_field_weight.get_values.map{|m| m}, input_value), prompt: "--Select #{preference.additional_field_weight.additional_weight.pluralize}--", multiple: true %>
+
+							<% elsif preference.additional_field_weight.field_type == "Select" %>
+
+								<%= select_tag preference.additional_field_weight.to_field, options_for_select(preference.additional_field_weight.get_values.map{|m| m}), prompt: "--Select #{preference.additional_field_weight.additional_weight.humanize}--", value: input_value %>
+
+							<% else %>
+								<%= text_field_tag preference.additional_field_weight.to_field, preference.additional_field_weight.to_field, value: input_value %>
+							<% end %>
+						</li>
+					<% end %>
+				</ol>
+			</fieldset>
+		<% end %>
+	<% end %>
+	<%= button_tag "Next", type: :submit %>
+	<%= link_to "Cancel", admin_packages_path %>
+<% end %>

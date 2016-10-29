@@ -1,0 +1,40 @@
+<!-- Long distance -->
+
+<% if fields["long_distance"].present? and fields["long_distance"].values.any? &:present? %>
+	<h4>Long Distance</h4>
+	<ul>
+		<% fields["long_distance"].each do |key, val| %>
+			<% if val.present? %>
+				<li>
+					<% if val.downcase == "included" %>
+						<p>
+							<%= key.humanize %> (<%= val %>)
+						</p>
+					<% else %>
+						<div class="checkbox">
+							<%= check_box_tag key.to_sym, false, false, {:class => "styled", data: { price: val }, onchange: "calculateEquiptmentCosts(this);"}  %>
+							<label class="label-checkbox">
+								<%= key.humanize %> ($<%= val %><% if key == "simply_5_long_distance" then " Monthly" end %>)
+							</label>
+						</div>
+					<% end %>
+
+					<!-- Custom Description -->
+					<a role="button" data-toggle="collapse" href="#collapse_<%= key %>" aria-expanded="false" aria-controls="collapseExample" class="view_more">View Details</a>
+					<div class="collapse" id="collapse_<%= key %>">
+						<% case key %>
+						<% when "simply_5_long_distance" %>
+							<p class="well">
+								Talk it up with friends and family across the country for just 5 cents per minute - far less than the standard long distance rate!
+							</p>
+						<% when "cox_long_distance" %>
+							<p class="well">
+								With Cox Long Distance, you pay just <strong>(<%= val.downcase == "included" ? "Included" : "$#{val}/min" %>)</strong>.
+							</p>
+						<% end %>
+					</div>
+				</li>
+			<% end %>
+		<% end %>
+	</ul>
+<% end %>

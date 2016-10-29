@@ -6,31 +6,36 @@
         <h4 class="modal-title" id="myModalLabel">Channel List</h4>
       </div>
       <div class="modal-body">
-        
-        <table class="table table-striped">
-          <thead>
-            <tr>
-              <th>Channels</th>
-              <% channel_names.each do |name| %>
-                <th><%= name %></th>
-              <% end %>
-            </tr>
-          </thead>
-          <tbody>
-            <% channels.each do |channel| %>
+        <% if channels.present? %>
+          <table class="table table-striped">
+            <thead>
               <tr>
-                <td><%= channel["channel"] %></td>
+                <th>Channels</th>
                 <% channel_names.each do |name| %>
-                  <% if channel[name.downcase.tr(" ", "_")] == name %>
-                    <td><i class="fa fa-check-circle-o"></i></td>
-                  <% else %>
-                    <td>---</td>
-                  <% end %>
+                  <th style="font-size: 12px;"><%= name %></th>
                 <% end %>
               </tr>
-            <% end %>
-          </tbody>
-        </table>
+            </thead>
+            <tbody>
+              <% channels.each do |channel| %>
+                <tr>
+                  <td><%= channel["channel"] %></td>
+                  <% channel_names.each do |name| %>
+                    <% if channel[name.downcase.tr(" ", "_")] == name %>
+                      <td><i class="fa fa-check-circle-o"></i></td>
+                    <% else %>
+                      <td>---</td>
+                    <% end %>
+                  <% end %>
+                </tr>
+              <% end %>
+            </tbody>
+          </table>
+        <% else %>
+          <div class="alert alert-danger">
+            There are channels for <strong><%= provider_name %></strong>
+          </div>
+        <% end %>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-un" data-dismiss="modal">Close</button>

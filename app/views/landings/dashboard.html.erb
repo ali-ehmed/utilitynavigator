@@ -2,12 +2,16 @@
 	<a href="#" class="profile_img">
     <img src="<%= image_path current_user.profile_image.url(:medium) %>" alt="..." class="img-circle">
   </a>
-	
-	<span class="name"><%= current_user.full_name %></span>
-	<br />
-	<%= link_to edit_user_registration_path, class: "edit-profile" do %>
-		<i class="glyphicon glyphicon-pencil"></i> Edit Profile
- 	<% end %>
+
+	<p class="name">
+		<%= current_user.full_name %>
+	</p>
+
+	<p class="text-center">
+		<%= link_to edit_user_registration_path, class: "edit-profile" do %>
+			<i class="glyphicon glyphicon-pencil"></i> Edit Profile
+	 	<% end %>
+	</p>
 </div>
 
 <div class="container">
@@ -39,7 +43,7 @@
 		</div>
 		<div class="col-md-9">
 			<h3>My Orders</h3>
-			<% if current_user.orders.present? %>
+			<% if current_user.reserved_orders.present? %>
 				<table class="table table-striped">
 					<thead>
 						<tr>
@@ -50,11 +54,11 @@
 							<th>Status</th>
 							<th>Placed at</th>
 						</tr>
-						<% current_user.orders.each do |order| %>
+						<% current_user.reserved_orders.each do |order| %>
 							<tr>
 								<td><%= order.package.id %></td>
 								<td class="col-md-2"><%= order.package.package_name %></td>
-								<td><%= order.package.package_description.html_safe %></td>
+								<td><%= order.package.package_description.truncate(300).html_safe %></td>
 								<td><%= order.total_cost.blank? ? "N/A" : number_to_currency(order.total_cost) %></td>
 								<td>
 									<div class="label label-<%= status_label(order.status) %>">

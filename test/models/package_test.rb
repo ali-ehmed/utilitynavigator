@@ -10,11 +10,13 @@
 #  price_info                  :string
 #  price                       :string
 #  monthly_fee_after_promotion :string
-#  installation_price          :string
 #  promotion_disclaimer        :string
 #  created_at                  :datetime         not null
 #  updated_at                  :datetime         not null
 #  promotions                  :text
+#  protection_plan_service     :string
+#  lock_rates_agreement        :string
+#  plan_details                :text
 #
 
 require 'test_helper'

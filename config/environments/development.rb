@@ -44,7 +44,7 @@ Rails.application.configure do
 
   config.action_mailer.default_url_options = { port: 3000 }
 
-  config.action_mailer.delivery_method = :letter_opener
+  # config.action_mailer.delivery_method = :letter_opener
 
   # config.action_mailer.delivery_method = :smtp
   # config.action_mailer.perform_deliveries = true
@@ -59,5 +59,16 @@ Rails.application.configure do
   #   :openssl_verify_mode => 'none'
   # }
 
-  config.admin_notifications_email = ["test@designhenge.com"]
+  config.action_mailer.smtp_settings = {
+    address: "smtp.office365.com",
+    port: 25,
+    authentication: "login",
+    enable_starttls_auto: true,
+    user_name: "orders@utilitynavigators.com",
+    password: "BeHappy2016#",
+    :openssl_verify_mode => 'none'
+  }
+
+  config.application_url = "utilitynavigators.com"
+  config.admin_notifications_email = ["ali.ahmed.cs2014@gmail.com", "afaqamir46@gmail.com"]
 end

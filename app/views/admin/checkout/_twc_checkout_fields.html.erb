@@ -1,0 +1,133 @@
+<% if product.name.downcase == :cable.to_s %>
+	<%= fields_for :cable do |ff| %>
+		<li class="string input optional stringish" id="package_name_input">
+			<% Package::CABLE_TV.each_with_index do |cable_tv, count| %>
+				<h3><%= cable_tv %></h3>
+				<% count += 1 %>
+				<ol>
+					<!-- <li>
+						<label for="is_required" class="label">
+							Is Required
+						</label>
+						<%#= ff.select "is_required_#{count}", options_for_select(["Required", "Optional", "Not Include"]) %>
+					</li> -->
+					<li>
+						<label for="<%= cable_tv.underscore %>" class="label">
+							Enhanced DVR Box
+						</label>
+						<%= ff.select "checkout_select", options_for_select(["Include", "Not Include", "Add Price"]), {prompt: "--Select--"}, class: "package_select_field", onchange: "$packages.addPriceField(this);" %>
+
+						<%= ff.text_field "dvr_box_#{count}", style: "display: none;width: calc(78% - 22px);", onblur: "$packages.packagePriceValidation(this);", class: "admin_checkout_price" %>
+					</li>
+					<li>
+						<label for="provider_name" class="label">
+							Primary HD Box
+						</label>
+						<%= ff.select "checkout_select", options_for_select(["Include", "Not Include", "Add Price"]), {prompt: "--Select--"}, class: "package_select_field", onchange: "$packages.addPriceField(this);" %>
+
+						<%= ff.text_field "additional_hd_#{count}", style: "display: none;width: calc(78% - 22px);", onblur: "$packages.packagePriceValidation(this);", class: "admin_checkout_price" %>
+					</li>
+					<li>
+						<label for="provider_name" class="label">
+							DTA
+						</label>
+						<%= ff.select "checkout_select", options_for_select(["Include", "Not Include", "Add Price"]), {prompt: "--Select--"}, class: "package_select_field", onchange: "$packages.addPriceField(this);" %>
+
+						<%= ff.text_field "dta_#{count}", style: "display: none;width: calc(78% - 22px);", onblur: "$packages.packagePriceValidation(this);", class: "admin_checkout_price" %>
+					</li>
+				</ol>
+			<% end %>
+		</li>
+		<li>
+			<label class="label">
+				More Fun with More Entertainment
+			</label>
+			<%= ff.select :more_fun_with_more_entertainment_items, options_for_select(["Required", "Not Include"]), {prompt: "--Select--"}, onChange: "$packages.setRequiredFields(this);" %>
+		</li>
+		<%= render partial: "admin/packages/shared/twc/items_for_more_entertainment", locals: { ff: ff } %>
+		<li>
+			<label class="label">
+				More Fun for Every one
+			</label>
+			<%= ff.select :more_fun_for_everyone_items, options_for_select(["Required", "Not Include"]), {prompt: "--Select--"}, onChange: "$packages.setRequiredFields(this);" %>
+		</li>
+		<%= render partial: "admin/packages/shared/twc/items_for_more_fun", locals: { ff: ff } %>
+		<li>
+			<label class="label">
+				More spanish entertainment for everyone
+			</label>
+			<%= ff.select :more_spanish_entertainment_for_everyone_items, options_for_select(["Required", "Not Include"]), {prompt: "--Select--"}, onChange: "$packages.setRequiredFields(this);" %>
+		</li>
+		<%= render partial: "admin/packages/shared/twc/items_for_more_spanish_entertainment", locals: { ff: ff } %>
+		<li>
+			<label class="label">
+				EPIX Offer
+			</label>
+			<%= ff.select "checkout_select", options_for_select(["Include", "Not Include", "Add Price"]), {prompt: "--Select--"}, class: "package_select_field", onchange: "$packages.addPriceField(this);" %>
+
+			<%= ff.text_field :epix_offer, style: "display: none;width: calc(78% - 22px);", onblur: "$packages.packagePriceValidation(this);", class: "admin_checkout_price" %>
+		</li>
+	<% end %>
+<% elsif product.name.downcase == :internet.to_s %>
+	<%= fields_for :internet do |ff| %>
+		<li>
+			<label class="label">
+				Modem
+			</label>
+			<%= ff.select "checkout_select", options_for_select(["Include", "Not Include", "Add Price"]), {prompt: "--Select--"}, class: "package_select_field", onchange: "$packages.addPriceField(this);" %>
+
+			<%= ff.text_field :modem, style: "display: none;width: calc(78% - 22px);", onblur: "$packages.packagePriceValidation(this);", class: "admin_checkout_price" %>
+		</li>
+		<li>
+			<label class="label">
+				WIFI
+			</label>
+			<%= ff.select "checkout_select", options_for_select(["Include", "Not Include", "Add Price"]), {prompt: "--Select--"}, class: "package_select_field", onchange: "$packages.addPriceField(this);" %>
+
+			<%= ff.text_field :wifi, style: "display: none;width: calc(78% - 22px);", onblur: "$packages.packagePriceValidation(this);", class: "admin_checkout_price" %>
+		</li>
+	<% end %>
+<% else %>
+	<%= fields_for :phone do |ff| %>
+		<li>
+			<label class="label">
+				New phone number
+			</label>
+			<%= ff.select "checkout_select", options_for_select(["Include", "Not Include", "Add Price"]), {prompt: "--Select--"}, class: "package_select_field", onchange: "$packages.addPriceField(this);" %>
+
+			<%= ff.text_field :new_phone_number, style: "display: none;width: calc(78% - 22px);", onblur: "$packages.packagePriceValidation(this);", class: "admin_checkout_price" %>
+		</li>
+		<li>
+			<label class="label">
+				Transfer phone number
+			</label>
+			<%= ff.select "checkout_select", options_for_select(["Include", "Not Include", "Add Price"]), {prompt: "--Select--"}, class: "package_select_field", onchange: "$packages.addPriceField(this);" %>
+
+			<%= ff.text_field :transfer_phone_number, style: "display: none;width: calc(78% - 22px);", onblur: "$packages.packagePriceValidation(this);", class: "admin_checkout_price" %>
+		</li>
+		<li>
+			<label class="label">
+				Voice Mail
+			</label>
+			<%= ff.select "checkout_select", options_for_select(["Include", "Not Include", "Add Price"]), {prompt: "--Select--"}, class: "package_select_field", onchange: "$packages.addPriceField(this);" %>
+
+			<%= ff.text_field :voice_mail, style: "display: none;width: calc(78% - 22px);", onblur: "$packages.packagePriceValidation(this);", class: "admin_checkout_price" %>
+		</li>
+		<li>
+			<label class="label">
+				International one price
+			</label>
+			<%= ff.select "checkout_select", options_for_select(["Include", "Not Include", "Add Price"]), {prompt: "--Select--"}, class: "package_select_field", onchange: "$packages.addPriceField(this);" %>
+
+			<%= ff.text_field :international_one_price, style: "display: none;width: calc(78% - 22px);", onblur: "$packages.packagePriceValidation(this);", class: "admin_checkout_price" %>
+		</li>
+		<li>
+			<label class="label">
+				Global penny plan
+			</label>
+			<%= ff.select "checkout_select", options_for_select(["Include", "Not Include", "Add Price"]), {prompt: "--Select--"}, class: "package_select_field", onchange: "$packages.addPriceField(this);" %>
+
+			<%= ff.text_field :global_penny_plan, style: "display: none;width: calc(78% - 22px);", onblur: "$packages.packagePriceValidation(this);", class: "admin_checkout_price" %>
+		</li>
+	<% end %>
+<% end %>

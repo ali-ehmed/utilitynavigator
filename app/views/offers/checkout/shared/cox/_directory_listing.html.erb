@@ -1,0 +1,121 @@
+<!-- Directory Listing -->
+
+<% if fields["directory_listing"].present? and fields["directory_listing"].values.any? &:present? %>
+	<h4>
+		Directory Listing <span class="checkout_required">(Required)</span> <small><a href="javascript:void(0);" onclick="resetSelectedItem(this);">Reset selected item</a></small>
+		<p>
+			<small>
+				How would you like your name to appear in the phone directory? Don't worry, you'll have a chance to review and make edits on the Order Summary page.
+			</small>
+		</p>
+	</h4>
+
+	<ul>
+
+		<!-- Published directory listing -->
+		<% if fields["directory_listing"]["published_directory_listing"].present? %>
+			<li>
+				<% if fields["directory_listing"]["published_directory_listing"].downcase == "included" %>
+					<p>
+						Published Directory Listing (Inlcuded)
+					</p>
+				<% else %>
+					<div class="checkbox" style="padding-left: 5px;">
+	          <%= radio_button_tag :directory_listing, false, false, {:id => "directory_listing", data: { price: fields["directory_listing"]["published_directory_listing"] }, onchange: "calculateEquiptmentCosts(this);"}  %>
+	          <label class="label-checkbox" for="directory_listing">
+	            Published Directory Listing, ($<%= fields["directory_listing"]["published_directory_listing"] %> Monthly)
+	          </label>
+	        </div>
+				<% end %>
+				<a role="button" data-toggle="collapse" href="#collaspe_published_directory_listing" aria-expanded="false" aria-controls="collapseExample" class="view_more">View Details</a>
+				<div class="collapse" id="collaspe_published_directory_listing">
+					<p class="well">
+						Show my name, number and address in the White Pages and 411 listing
+					</p>
+				</div>
+			</li>
+		<% end %>
+
+		<!-- Name and number only directoy listing -->
+		<% if fields["directory_listing"]["name_and_number_only_directory_listing"].present? %>
+			<li>
+				<% if fields["directory_listing"]["name_and_number_only_directory_listing"].downcase == "included" %>
+						<p>
+							Name and Number Only Directory Listing (Inlcuded)
+						</p>
+				<% else %>
+					<div class="checkbox" style="padding-left: 5px;">
+	          <%= radio_button_tag :directory_listing, false, false, {:id => "name_and_number", data: { price: fields["directory_listing"]["name_and_number_only_directory_listing"] }, onchange: "calculateEquiptmentCosts(this);"}  %>
+	          <label class="label-checkbox" for="name_and_number">
+	            Name and Number Only Directory Listing, ($<%= fields["directory_listing"]["name_and_number_only_directory_listing"] %> Monthly)
+	          </label>
+	        </div>
+				<% end %>
+				<a role="button" data-toggle="collapse" href="#collaspe_name_and_number_only_directory_listing" aria-expanded="false" aria-controls="collapseExample" class="view_more">View Details</a>
+				<div class="collapse" id="collaspe_name_and_number_only_directory_listing">
+					<p class="well">
+						Show my name, number and address in the White Pages and 411 listing
+					</p>
+				</div>
+			</li>
+		<% end %>
+
+		<!-- Name and number in  411 directory listing -->
+		<% if fields["directory_listing"]["name_and_number_in_411_directory_listing"].present? %>
+			<li>
+				<% if fields["directory_listing"]["name_and_number_in_411_directory_listing"].downcase == "included" %>
+					<p>
+						Name and Number in 411 Directory Listing (Inlcuded)
+					</p>
+				<% else %>
+					<div class="checkbox" style="padding-left: 5px;">
+	          <%= radio_button_tag :directory_listing, false, false, {:id => "name_and_number_411", data: { price: fields["directory_listing"]["name_and_number_in_411_directory_listing"] }, onchange: "calculateEquiptmentCosts(this);"}  %>
+	          <label class="label-checkbox" for="name_and_number_411">
+	            Name and Number in 411 Directory Listing, ($<%= fields["directory_listing"]["name_and_number_in_411_directory_listing"] %> Monthly)
+	          </label>
+	        </div>
+				<% end %>
+				<a role="button" data-toggle="collapse" href="#collaspe_name_and_number_in_411_directory_listing" aria-expanded="false" aria-controls="collapseExample" class="view_more">View Details</a>
+				<div class="collapse" id="collaspe_name_and_number_in_411_directory_listing">
+					<p class="well">
+						Show just my name and number in the 411 Listing
+					</p>
+				</div>
+			</li>
+		<% end %>
+
+		<!-- Non published directory listing -->
+		<% if fields["directory_listing"]["non_published_directory_listing"].present? %>
+			<li>
+				<% if fields["directory_listing"]["non_published_directory_listing"].downcase == "included" %>
+					<p>
+						Non Published Directory Listing (Included)
+					</p>
+				<% else %>
+					<div class="checkbox" style="padding-left: 5px;">
+	          <%= radio_button_tag :directory_listing, false, false, {:id => "non_published_directory", data: { price: fields["directory_listing"]["non_published_directory_listing"] }, onchange: "calculateEquiptmentCosts(this);"}  %>
+	          <label class="label-checkbox" for="non_published_directory">
+	            Non Published Directory Listing, ($<%= fields["directory_listing"]["non_published_directory_listing"] %> Monthly)
+	          </label>
+	        </div>
+				<% end %>
+				<a role="button" data-toggle="collapse" href="#collaspe_non_published_directory_listing" aria-expanded="false" aria-controls="collapseExample" class="view_more">View Details</a>
+				<div class="collapse" id="collaspe_non_published_directory_listing">
+					<p class="well">
+						Don't list me in the White Pages or 411 Listing
+					</p>
+				</div>
+			</li>
+		<% end %>
+
+		<% if fields["directory_name"].downcase == 'required' %>
+			<li>
+				<label>Enter Name:</label>
+				<%= text_field_tag :directory_entered_name, params[:directory_entered_name], class: "form-control" %>
+				<p>
+					What name would you like your directory listing to be under?
+				</p>
+			</li>
+		<% end %>
+	</ul>
+<% end %>

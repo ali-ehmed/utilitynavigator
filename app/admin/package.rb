@@ -7,7 +7,12 @@ ActiveAdmin.register Package do
     selectable_column
     column :package_name
     column :price
-    column :installation_price
+    column :installation_price do |package|
+			package.installation.try("installation_price")
+		end
+		column :self_installation do |package|
+			package.installation.try("self_installation") == "t" ? "Yes" : "No"
+		end
     column :provider do |package|
     	package.try(:provider).try(:name)
     end
@@ -30,7 +35,12 @@ ActiveAdmin.register Package do
       attributes_table do
 	      row :price_info
 	      row :price
-	      row :installation_price
+				row :installation_price do |package|
+					package.installation.try("installation_price")
+				end
+				row :self_installation do |package|
+					package.installation.try("self_installation")
+				end
 	      row :package_description do |package|
 		    	package.package_description.html_safe
 		    end
@@ -43,24 +53,47 @@ ActiveAdmin.register Package do
 		    end
 		    row :monthly_fee_after_promotion
     	end
-    
+
     package.package_bundles.each do |bundle|
     	hash = bundle.field.gsub("=>", ":")
 	 		requirements = JSON.parse(hash)
 
-    	unless requirements.blank?
-	    	panel bundle.product.name do
-
-	    		table_for bundle do
+			unless requirements.blank?
+				panel bundle.product.name do
+					h3 do
+						"Product Bundles"
+					end
+					table_for bundle do
 				 		requirements.keys.map do |key|
 				 			column key, class: "fields" do
 				 				if requirements[key].kind_of?(Array) then requirements[key].join(", ") else requirements[key] end
 				 			end
 				 		end
-		      end
-
-	  		end
-	  	end
+					end
+					h3 do
+						"Checkout Fields"
+					end
+					attributes_table_for bundle do
+				 		JSON.parse(bundle.checkout_fields.gsub("=>", ":")).each do |key, value|
+				 			row key, class: "fields" do
+								if !value.is_a?(String) and value.is_a?(Hash)
+									div class: "nested_fields_admin_preview"	do
+										table_for bundle do
+											value.each do |checkout_key, checkout_value|
+												column checkout_key, class: "fields" do
+													checkout_value.blank? ? "N/A" : checkout_value
+												end
+											end
+										end
+									end
+								else
+				 					value.blank? ? "N/A" : value
+								end
+				 			end
+				 		end
+					end
+				end
+			end
     end
   end
 
@@ -87,57 +120,38 @@ ActiveAdmin.register Package do
   end
 
 	controller do
+		before_action :proceed_package_incompletion, only: [:show, :edit, :update]
+		before_action :set_products, only: [:new, :create]
+
+		def new
+			@package = Package.new
+			@package.build_installation
+			@url = admin_packages_path
+			@http_method = :post
+		end
+
 		def create
-			unlock_package_params = ActiveSupport::HashWithIndifferentAccess.new(session[:package_params])
-			@package = Package.new(unlock_package_params)
-
-			package_bundle_params = session[:package_bundles_params]
-
-			@package.charter_tv_spectrum = package_bundle_params["charter_tv_spectrum"]
+			@package = Package.new(initialize_params)
 
 			if @package.save
 				@product_ids = params[:product_ids].map(&:to_i)
 				@products = Product.where("id in (?)", @product_ids)
-				@provider = Provider.find(@package.provider_id)
 
-				@provider_preferences = @provider.product_provider_preferences
-
-				for product in @products do
-					bundle_keys_by_product = Array.new
-					@provider_preferences.preferences_of_product(product.id).each do |preference|
-						bundle_keys_by_product << preference.additional_field_weight.to_field.to_s
-					end
-
-					bundle_params = "" 
-					bundle_params = package_bundle_params.select {|k,v| bundle_keys_by_product.include?(k) }
-					# params.select_keys(bundle_keys_by_product)
-
-					@package.package_bundles.build do |package_bundle|
-						package_bundle.product_id = product.id
-						package_bundle.field = bundle_params
-						case product.name.downcase
-						when "cable"
-							package_bundle.checkout_fields = params[:cable]
-						when "internet"
-							package_bundle.checkout_fields = params[:internet]
-						else
-							package_bundle.checkout_fields = params[:phone]
-						end
-						package_bundle.save
-					end
+				@products.each do |product|
+					product.package_bundles.create(package_id: @package.id)
 				end
 
+				if @package.provider.product_provider_preferences.blank?
+					redirect_to new_admin_package_path(package: initialize_params), flash: { alert: Package::NULL_PREFERENCES }
+					return
+				end
 
-				redirect_to admin_packages_path, notice: "Package Created"
+				redirect_to admin_checkout_path(:package_bundles, @package.id), notice: Package::SECOND_STEP
 			else
-				render :product_bundles, flash: { alert: "Something went wrong while creating a new package" }
+				render :new
+				flash[:alert] = @package.errors.full_messages.map { |msg| content_tag(:li, msg) }.join.html_safe
+				# redirect_to new_admin_package_path(package: initialize_params), flash: { alert: @package.errors.full_messages.map { |msg| content_tag(:li, msg) }.join.html_safe }
 			end
-		end
-
-		def new
-			@package = Package.new
-			@url = product_bundles_admin_packages_path
-			@http_method = :post
 		end
 
 		def edit
@@ -153,58 +167,48 @@ ActiveAdmin.register Package do
 				redirect_to admin_packages_path, notice: "Pakage Updated"
 			else
 				flash[:alert] = "Review errors below"
-				
+
 				render :edit
+			end
+		end
+
+		private
+
+		def set_products
+			@products = Product.all.map{|p| {id: p.id, name: p.name}}
+		end
+
+		def proceed_package_incompletion
+			if resource.package_bundles.map(&:field).any? == false
+				redirect_to admin_checkout_path(:package_bundles, resource.id), notice: Package::INCOMPLETE_PACKAGE_BUNDLES
+			elsif resource.package_bundles.map(&:checkout_fields).any? == false
+				redirect_to admin_checkout_path(:equiptment_items, resource.id), notice: Package::INCOMPLETE_EQUIPTMENT_ITEMS
 			end
 		end
 
 		def initialize_params
 			params.require(:package).permit(:provider_id, :package_type_id, :price, :price_info, :package_description,
-																			:package_name, :promotions, :promotion_disclaimer, :monthly_fee_after_promotion, :installation_price)
+																			:package_name, :promotions, :promotion_disclaimer, :plan_details,
+																			:monthly_fee_after_promotion, :lock_rates_agreement, :protection_plan_service,
+																			installation_attributes: [:installation_price, :wifi_installation, :self_installation, :outlet_installation, :fourth_tv_installation])
 		end
 	end
 
-	# permit_params :provider_id
-
-	collection_action :product_bundles, method: :post do
-		# @params = params[:package]
-		params.except(:promotions)
-
-		@package = Package.new(initialize_params)
-		logger.debug "--#{initialize_params}"
-
-		if !@package.valid?
-			redirect_to new_admin_package_path, flash: { alert: "Review errors" }
-			return
-		end
-
-		session[:package_params] = params[:package]
-
-		@product_ids = params[:product_ids].map(&:to_i)
-		@products = Product.where("id in (?)", @product_ids)
-		@provider = Provider.find(params[:package][:provider_id])
-
-		@provider_preferences = @provider.product_provider_preferences
-
-		if @provider_preferences.blank?
-			redirect_to new_admin_package_path, flash: { alert: "There are no preferences present for #{@provider.name}" }
-			return
-		end
-
-	 	respond_to do |format|
-			format.html
-		end
+	member_action :edit_equiptment_items, method: :get do
+		@package = Package.find(params[:id])
+		@package_bundle = @package.package_bundles.find_by_product_id(params[:product_id])
+		@checkout_fields = @package_bundle.checkout_fields
 	end
 
+	member_action :update_equiptment_items, method: :put do
+		@package = Package.find(params[:id])
+		@package_bundle = @package.package_bundles.find_by_product_id(params[:product_id])
 
-	collection_action :ordering_items, method: :get do
-		session[:package_bundles_params] = params
-		@product_ids = params[:product_ids].map(&:to_i)
-		@products = Product.where("id in (?)", @product_ids)
-		@provider = Provider.find(params[:provider_id])
 
-		respond_to do |format|
-			format.html
-		end
+		excluded_params = exclude_garbage_fields(params[params[:product_name].underscore.to_sym])
+
+		@package_bundle.update_attribute(:checkout_fields, excluded_params)
+
+		redirect_to edit_admin_package_path(@package.id), notice: "Package Equiptment Items Updated"
 	end
 end

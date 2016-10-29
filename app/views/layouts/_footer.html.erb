@@ -1,3 +1,7 @@
+<!-- Listing Channels -->
+<div class="channels">
+</div>
+
 <!-- Footer -->
 <footer>
 	<div class="well application-footer">
@@ -11,7 +15,6 @@
 					</p>
 					<strong>&copy; 2016 Utility Navigator. All Rights Reserved</strong>
 				</div>
-				
 			</div>
 			<div class="col-md-9">
 				<div class="row">
@@ -26,16 +29,28 @@
 				</div>
 				<hr />
 				<ul class="list-inline providers-link">
-					<li><a href="/twc">TWS</a></li>
-					<li><a href="/cox">COX</a></li>
-					<li><a href="/charter_spectrum">CHARTER</a></li>
-					<li class="pull-right"><a href="http://designhenge.com/" style="color: #7E7E7E;">Powered By <strong>Design Henge</strong></a></li>
+					<li><a href="/twc">TWC</a></li>
+					<li><a href="/cox">COX</a>
+					<li><a href="/charter_spectrum">Charter Spectrum</a></li>
+					<li><a href="<%= page_path('privacy_policy') %>">Privacy Policy</a></li>
+					<li><a href="<%= page_path('terms_conditions') %>">Terms &amp; Conditions</a></li>
+					<li class="pull-right" style="border-right: 0px;">
+						<a href="http://designhenge.com/" style="color: #7E7E7E;" target="_blank">Powered By <strong>Design Henge</strong></a>
+					</li>
+					<li class="pull-right" style="padding: 0px;border-right: 1px solid;" id="seal" data-toggle="tooltip" data-placement="top" title="Click to Verify - This site chose Symantec SSL for secure e-commerce and confidential communications.">
+
+						<!-- Norton seal without www -->
+						<script type="text/javascript" src="https://seal.websecurity.norton.com/getseal?host_name=utilitynavigators.com&amp;size=XS&amp;use_flash=NO&amp;use_transparent=YES&amp;lang=en"></script>
+
+						<!-- Norton seal for www -->
+						<script type="text/javascript" src="https://seal.websecurity.norton.com/getseal?host_name=www.utilitynavigators.com&amp;size=XS&amp;use_flash=NO&amp;use_transparent=YES&amp;lang=en"></script>
+					</li>
 				</ul>
 			</div>
 		</div>
 	</div>
 </footer>
 
+
 <%= render partial: "shared/call_back_form" %>
 <%= render partial: "shared/login" %>
-

@@ -1,0 +1,44 @@
+<% PackagesHelper::NO_OF_TELEVISIONS.each do |count_num_of_tvs| %>
+  <!-- Pulling out matched elements from Provider Channels -->
+  <% matched_elems = provider_televisions(count_num_of_tvs).select_matched(fields.keys) %>
+
+  <!-- Seleting the matched elements -->
+  <% tv_items = fields.select {|k,v| matched_elems.include?(k) } %>
+  <% if tv_items.values.any? &:present? %>
+    <h4>Configure your <%= count_num_of_tvs.ordinalize %> TV
+
+      <% if count_num_of_tvs == 1 %>
+        <span class="checkout_required">(Required)</span>
+      <% end %>
+
+      <small><a href="javascript:void(0);" onclick="resetSelectedItem(this);">Reset selected item</a></small>
+    </h4>
+
+    <ul>
+      <% tv_items.each_with_index do |(key, value), index| %>
+        <% count = index + 1 %>
+        <% if value.present? %>
+          <li>
+            <% if value.downcase == "included" %>
+              <p><%= custom_tv_names(key, value) %></p>
+
+            <% else %>
+              <div class="checkbox" style="padding-left: 5px;">
+                <%= radio_button_tag "#{count_num_of_tvs.ordinalize}_tv_#{count}", false, false, {id: "#{count_num_of_tvs.ordinalize}_tv_#{count}", data: { price: value }, onchange: "calculateEquiptmentCosts(this);"}  %>
+                <label class="label-checkbox" for="<%= count_num_of_tvs.ordinalize %>_tv_<%= count %>">
+                  <%= custom_tv_names(key, value) %>
+                </label>
+              </div>
+            <% end %>
+          </li>
+        <% end %>
+      <% end %>
+    </ul>
+    <% if count_num_of_tvs == PackagesHelper::NO_OF_TELEVISIONS.last %>
+      <h4>
+        (<a role="button" data-toggle="collapse" href="#collapseDetailsTV" aria-expanded="false" aria-controls="collapseExample">Television Equitpments Description</a>)
+      </h4>
+      <%= render partial: "offers/checkout/shared/#{@package.provider.acronym}_tv_details" %>
+    <% end %>
+  <% end %>
+<% end %>

@@ -3,18 +3,15 @@
     <%= render partial: "shared/search_deals" %>
   </div>
   <div class="desktop-view">
-    <div id="myCarousel" class="carousel slide">  
+    <%= render partial: "shared/search_deals" %>
+    <div id="myCarousel" class="carousel slide">
       <div class="carousel-inner">
         <div class="item active">
           <!--<img src="img/slider/Fotolia_30977559_XS.jpg" alt="slide 1">-->
           <%= image_tag("twc-banner.png", class: "slider-img") %>
           <div class="container">
             <div class="carousel-caption">
-              <div class="row">
-                <div class="col-md-6" style="margin-left: -8.3%;">
-                  <%= render partial: "shared/search_deals" %>    
-                </div>
-              </div>
+              <!-- Caption -->
             </div>
           </div>
           <!-- Hot Offers TWC Start -->
@@ -36,11 +33,7 @@
           <%= image_tag("cox-banner.png", class: "slider-img") %>
           <div class="container">
             <div class="carousel-caption">
-              <div class="row">
-                <div class="col-md-6" style="margin-left: -8.3%;">
-                  <%= render partial: "shared/search_deals" %>
-                </div>
-              </div>
+              <!-- Caption -->
             </div>
           </div>
           <!-- Hot Offers COX Start -->
@@ -62,11 +55,7 @@
           <%= image_tag("charter-banner.png", class: "slider-img") %>
           <div class="container">
             <div class="carousel-caption">
-              <div class="row">
-                <div class="col-md-6" style="margin-left: -8.3%;">
-                  <%= render partial: "shared/search_deals" %>
-                </div>
-              </div>
+             <!-- Caption -->
             </div>
           </div>
           <!-- Hot Offers CHARTER Start -->
@@ -87,7 +76,7 @@
       </div>
       <!-- Controls -->
       <a class="left carousel-control" href="#myCarousel" data-slide="prev"><span class="fa fa-chevron-left fa-2x"></span></a>
-      <a class="right carousel-control" href="#myCarousel" data-slide="next"><span class="fa fa-chevron-right fa-2x"></span></a>  
+      <a class="right carousel-control" href="#myCarousel" data-slide="next"><span class="fa fa-chevron-right fa-2x"></span></a>
     </div>
   </div>
   <!-- /.carousel -->

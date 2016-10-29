@@ -10,30 +10,55 @@
 #  price_info                  :string
 #  price                       :string
 #  monthly_fee_after_promotion :string
-#  installation_price          :string
 #  promotion_disclaimer        :string
 #  created_at                  :datetime         not null
 #  updated_at                  :datetime         not null
 #  promotions                  :text
+#  protection_plan_service     :string
+#  lock_rates_agreement        :string
+#  plan_details                :text
 #
 
 class Package < ActiveRecord::Base
 	belongs_to :provider
 	belongs_to :package_type
 
-	has_many :package_bundles
+	has_many :package_bundles, dependent: :delete_all
 	accepts_nested_attributes_for :package_bundles
 
-	has_many :payments, dependent: :delete_all
-	accepts_nested_attributes_for :payments
+	has_many :orders, dependent: :delete_all
+	accepts_nested_attributes_for :orders
+
+	has_one :installation
+	accepts_nested_attributes_for :installation
 
 	attr_accessor :product_ids, :charter_tv_spectrum
+	attr_accessor :checkout_select
+
+	extend PackagesHelper
 
 	cattr_accessor :checkout_steps do
-		[:extra_equiptments, :payments]
+		[:extra_equiptments, :reserve_order]
 	end
 
-	validates_presence_of :provider_id
+	SINGLE_PLAY = "Single play"
+	DOUBLE_PLAY = "Double play"
+	TRIPLE_PLAY = "Triple play"
+
+	NULL_PREFERENCES = "There are no preferences present for this package"
+	SECOND_STEP = "Please provide items for package bundles"
+	FINAL_STEP = "Package has been created successfully"
+	INCOMPLETE_PACKAGE_BUNDLES = "Please provide all information of this package"
+	INCOMPLETE_EQUIPTMENT_ITEMS = "Please provide the equiptment items for this package"
+
+	# Length of packages displaying bottom on provider pages
+	PACKAGE_PER_PAGE_LENGTH = 3
+
+	validates_presence_of :provider_id,
+												:price, :package_name, :package_description, :price_info, :promotions,
+												:plan_details
+	# validates :product_ids, presence: true, on: :create
+
 	validates :price_info, length: { maximum: 80 }
 
 	after_create :set_promotion_disclaimer
@@ -42,12 +67,42 @@ class Package < ActiveRecord::Base
 	scope :charter_spectrum, -> { joins(:provider).where("providers.name = 'Charter Spectrum'") }
 	scope :cox, -> { joins(:provider).where("providers.name = 'COX'") }
 
-	scope :phone_filter, -> { joins(:package_bundles => :product).where("products.name LIKE '%Phone%'") }
-	scope :internet_filter, -> { joins(:package_bundles => :product).where("products.name LIKE '%Internet%'") }
-	scope :tv_filter, -> { joins(:package_bundles => :product).where("products.name LIKE '%Cable%'") }
-	scope :bundle_filter, -> { joins(:package_type).where("package_types.name LIKE '%Single%' or package_types.name LIKE '%Double%' or package_types.name LIKE '%Triple%'") }
+	scope :grouped_packages, -> { joins(:package_type, :package_bundles => :product) }
 
-	scope :broadband_providers, -> (providers) { joins(:provider).where("providers.name in (?)", providers).order("created_at desc") }
+	scope :phone_filter, -> { grouped_packages
+														.where("products.name iLIKE '%Phone%' and package_types.name = ?", SINGLE_PLAY)
+														.low_price_packages
+	 												}
+	scope :internet_filter, -> 	{ grouped_packages
+																.where("products.name iLIKE '%Internet%' and package_types.name = ?", SINGLE_PLAY)
+																.low_price_packages
+															}
+	scope :tv_filter, -> 	{ grouped_packages
+													.where("products.name iLIKE '%Cable%' and package_types.name = ?", SINGLE_PLAY)
+													.low_price_packages
+												}
+
+	scope :bundle_filter, -> {
+															joins(:package_type)
+															.where("package_types.name in (?)", [DOUBLE_PLAY, TRIPLE_PLAY])
+															.low_price_packages
+														}
+
+	scope :low_price_packages, -> { order("CAST(coalesce(price, '0') AS double precision) asc") }
+
+	scope :broadband_providers, -> (providers) { grouped_packages.joins(:provider)
+																							 .select("packages.id,
+																							 					package_name,
+																						 						provider_id,
+																						 						plan_details,
+																						 						price_info,
+																						 						price,
+																						 						package_description,
+																						 						promotions")
+																							 .group("packages.id, package_name")
+																							 .where("providers.name in (?)", providers)
+																							 .low_price_packages
+																							}
 
 	CABLE_TV = ["Primary TV", "2nd TV", "3rd TV", "4th TV"]
 
@@ -66,10 +121,17 @@ class Package < ActiveRecord::Base
 	def price_info
 		if read_attribute(:price_info)
 			if read_attribute(:price_info).include?("*")
-				read_attribute(:price_info).split("*")[1].strip 
+				read_attribute(:price_info).split("*")[1].strip
 			else
-				read_attribute(:price_info).strip 
+				read_attribute(:price_info).strip
 			end
+		end
+	end
+
+	class << self
+		def filter_with filters
+			where("products.name in (?) and package_types.name = ?", filters, get_package_type(filters))
+		  .having("count(distinct products.name) = ?", filters.length)
 		end
 	end
 end

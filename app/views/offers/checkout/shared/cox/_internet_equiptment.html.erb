@@ -1,0 +1,78 @@
+<!-- Internet Equiptment -->
+
+<% if fields["internet_equiptment"].present? %>
+	<h4>Internet Equipment <span class="checkout_required">(Required)</span>
+		<!-- <small><a href="javascript:void(0);" onclick="resetSelectedItem(this);">Reset selected item</a></small> -->
+	</h4>
+	<ul>
+		<% fields["internet_equiptment"].each do |key, val| %>
+			<% if val.present? %>
+				<li>
+					<% if val.downcase == "included" %>
+						<p>
+							<%= key.humanize %> (<%= val %>)
+						</p>
+					<% else %>
+						<div class="checkbox">
+							<%= check_box_tag key.to_sym, false, false, {:class => "styled", data: { price: val }, onchange: "calculateEquiptmentCosts(this);"}  %>
+							<label class="label-checkbox">
+								<%= key.humanize %> ($<%= val %> Monthly)
+							</label>
+						</div>
+					<% end %>
+
+					<!-- Custom Description -->
+					<a role="button" data-toggle="collapse" href="#collapse_<%= key %>" aria-expanded="false" aria-controls="collapseExample" class="view_more">View Details</a>
+					<div class="collapse" id="collapse_<%= key %>">
+						<% case key %>
+						<% when "premium_modem" %>
+							<p class="well">
+								Stand-alone cable modem with 16 x 4 channel support for the ability to access the new Ultimate package speeds.
+							</p>
+						<% when "premium_dual_band_internet_and_wifi_modem" %>
+							<p class="well">
+								Combined Internet and Telephone WiFi Modem that utilizes 802.11ac WiFi technology to support the new Ultimate package speeds.
+							</p>
+						<% when "internet_and_wifi_modem_single" %>
+							<p class="well">
+								All-in-one DOCSIS 3.0 modem and Wireless 802.11N Router. The latest home networking technology in one, easy-to-setup device.
+							</p>
+						<% when "internet_and_wifi_modem_dual" %>
+							<p class="well">
+								All-in-one DOCSIS 3.0 modem and wireless router with an additional and less congested channel (5 Ghz) to spread the load of your in-home WiFi traffic. The latest in-home WiFi technology in one, easy-to-setup device. Ideal for home with heavy use of gaming, streaming HD video or online downloading and computer back up. Includes in-home WiFi installation support and ongoing phone support.
+							</p>
+						<% when "wifi_modem_dual_band" %>
+							<p class="well">
+								All-in-one DOCSIS 3.0 Internet modem and wireless router with an additional and less congested channel (5 Ghz) to spread the load of your in-home WiFi traffic. The latest in-home WiFi technology in one, easy-to-setup device. Ideal for home with heavy use of gaming, streaming HD video or online downloading and computer back up.
+							</p>
+						<% when "internet_wifi_and_telephone_modem" %>
+							<p class="well">
+								All-in-one Telephone adapter, DOCSIS 3.0 modem and Wireless 802.11N Router. The latest home networking technology in one, easy-to-setup device.
+							</p>
+						<% when "internet_and_telephone_modem" %>
+							<p class="well">
+								You can use your new Internet-Phone modem to connect to the Internet. Select this option to use the DOCSIS 3 Modem that Cox provides.
+							</p>
+						<% end %>
+					</div>
+				</li>
+			<% end %>
+			<% if fields["internet_equiptment"].except("checkout_select").keys.last.to_s == key.to_s %>
+				<li>
+					<div class="checkbox">
+						<%= check_box_tag :i_own_a_docsis_modem, false, false, {data: { price: 0 }, onchange: "calculateEquiptmentCosts(this);"}  %>
+						<label class="label-checkbox" for="internet_equiptment_3">
+							I own a DOCSIS 3.0 modem, ($0)
+						</label>
+					</div>
+					<a role="button" data-toggle="collapse" href="#collaspe_i_own_a_docsis_modem" aria-expanded="false" aria-controls="collapseExample" class="view_more">View Details</a>
+					<div class="collapse" id="collaspe_i_own_a_docsis_modem">
+						<p class="well">
+							Cox recommends devices using DOCSIS 3.0 technology. DOCSIS 3.0 is the latest and most advanced modem technology, offering the best experience for Internet speeds and service level. If you choose to purchase or use your own modem, we highly recommend you use a DOCSIS 3.0 device in order to achieve our top network speeds.
+						</p>
+					</div>
+				</li>
+			<% end %>
+		<% end %>
+	</ul>
+<% end %>

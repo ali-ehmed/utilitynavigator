@@ -7,9 +7,29 @@ class ApplicationController < ActionController::Base
   include ActionView::Context
 
   before_action :make_action_mailer_use_request_host_and_protocol
+  # before_action :check_domain
   before_action :configure_permitted_parameters, if: :devise_controller?
 
   helper_method :zip_code, :user_address, :broadband_search
+
+  def check_domain
+    unless request.original_url.starts_with? "https://www"
+      redirect_to "https://www.#{UtilityNavigator::Application.config.application_url}#{request.original_fullpath}" if Rails.env.production?
+    end
+  end
+
+  # This method Excludes Unnecessary fields from requested params
+  def exclude_garbage_fields(params)
+    params.delete("checkout_select")
+    params
+    params.each do |key, value|
+      if !value.is_a?(String) and value.is_a?(Hash)
+        value.delete("checkout_select")
+      end
+    end
+
+    params
+  end
 
   protected
 
@@ -21,13 +41,13 @@ class ApplicationController < ActionController::Base
   end
 
   def configure_permitted_parameters
-    devise_parameter_sanitizer.for(:account_update) { |u| 
-      u.permit(:first_name, :last_name, :address, 
-              :zip_code, :cell_number, :date_of_birth, 
-              :home_number, :driver_license, 
+    devise_parameter_sanitizer.for(:account_update) { |u|
+      u.permit(:first_name, :last_name, :address,
+              :zip_code, :cell_number, :date_of_birth,
+              :home_number, :driver_license,
               :social_security, :four_digit_no,
-              :email, :password, :password_confirmation, 
-              :current_password, :profile_image) 
+              :email, :password, :password_confirmation,
+              :current_password, :profile_image)
     }
   end
 

@@ -4,7 +4,7 @@
       <div class="bs-callout bs-callout-danger" id="callout-collapse-dependency">
         <h2>Edit Profile</h2>
       </div>
-      <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
+      <%= simple_form_for(resource, as: resource_name, url: registration_path(resource), html: { method: :put }) do |f| %>
         <%= f.error_notification %>
         <%= validation_errors_notifications(resource) %>
         <div class="panel panel-default">
@@ -43,7 +43,7 @@
               <%= f.input :address, required: true %>
             </div>
           </div>
-        </div>       
+        </div>
 
         <div class="panel panel-default">
           <div class="panel-heading">
@@ -76,11 +76,10 @@
 
       <h3>Cancel my account</h3>
 
-      <p>Unhappy? <%= link_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete %></p>
+      <p>Unhappy? <%= link_to "Cancel my account", destroy_user_registration_path(resource), data: { confirm: "Are you sure?" }, method: :delete %></p>
 
       <%= link_to "Back", :back %>
     </div>
   </div>
-  
-</div>
 
+</div>
