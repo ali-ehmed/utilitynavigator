@@ -26,5 +26,7 @@ module UtilityNavigator
     config.active_record.raise_in_transactional_callbacks = true
     config.assets.precompile += %w(.png)
     config.autoload_paths += %W(#{config.root}/lib)
+
+    config.assets.initialize_on_precompile = false
   end
 end
