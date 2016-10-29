@@ -51,21 +51,21 @@
 					<% case @package.provider.name %>
 					<% when Provider::COX %>
 						<li>
-							<%= fields_editing_html(p, "outlet_installation", p.object.outlet_installation) %>
+							<%= editable_fields(p, "outlet_installation", p.object.outlet_installation) %>
 						</li>
 						<li>
-							<%= fields_editing_html(f, "protection_plan_service", f.object.protection_plan_service) %>
+							<%= editable_fields(f, "protection_plan_service", f.object.protection_plan_service) %>
 						</li>
 						<li>
-							<%= fields_editing_html(f, "lock_rates_agreement", f.object.lock_rates_agreement) %>
+							<%= editable_fields(f, "lock_rates_agreement", f.object.lock_rates_agreement) %>
 						</li>
 					<% when Provider::CHARTER_SPECTRUM %>
 						<li>
-							<%= fields_editing_html(p, "wifi_installation", p.object.wifi_installation) %>
+							<%= editable_fields(p, "wifi_installation", p.object.wifi_installation) %>
 						</li>
 					<% when Provider::TIME_WARNER %>
 						<li>
-							<%= fields_editing_html(p, "fourth_tv_installation", p.object.fourth_tv_installation) %>
+							<%= editable_fields(p, "fourth_tv_installation", p.object.fourth_tv_installation) %>
 						</li>
 					<% end %>
 				</ol>

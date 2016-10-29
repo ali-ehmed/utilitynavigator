@@ -107,7 +107,7 @@ module PackagesHelper
     end
   end
 
-  def fields_editing_html form, field_key, field_val, checkout_fields = {}
+  def editable_fields form, field_key, field_val, checkout_fields = {}
     selected_option = ""
     text_box_value = ""
     hidden_class = "display:none;"
@@ -160,7 +160,7 @@ module PackagesHelper
           hash_field_value.each do |nested_field_key, nested_field_value|
             html << %{
               <li>
-                #{fields_editing_html(nested_form, nested_field_key, nested_field_value)}
+                #{editable_fields(nested_form, nested_field_key, nested_field_value)}
               </li>
             }
           end
